@@ -1,0 +1,41 @@
+<!-- お問い合わせ -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webアプリ画面</title>
+    <!-- Font Awesomeの読み込み -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../static/template_style.css">
+</head>
+<body>
+
+<div class="header">
+    <button class="left-button" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    <a href="home.html" class="title-button">No Name</a>
+    <button class="right-button" onclick="notice_transition()"><i class="fas fa-bell" ></i></button>
+</div>
+
+<!-- サイドバー -->
+<div id="sidebar" class="sidebar">
+    <button class="close-btn" onclick="toggleSidebar()">×</button>
+    <ul>
+        <li><a href="registration.html">登録</a></li>
+        <li><a href="search.html">検索</a></li>
+        <li><a href="mypage.html">マイページ</a></li>    
+        <li><a href="nice.html">いいね</a></li>    
+        <li><a href="enquiry.html">お問合わせ</a></li>    
+    </ul>
+</div>
+
+<!-- メインコンテンツエリア -->
+<div class="main-content">
+    <!-- コンテンツをここに追加 -->
+    <h1>お問い合わせ</h1>
+</div>
+
+<script src="../static/templete_script.js"></script>
+</body>
+</html>
