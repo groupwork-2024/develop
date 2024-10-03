@@ -6,7 +6,7 @@
   width: 100px; /* 矢印の直線部分の幅を100pxに設定 */
   height: 4px; /* 矢印の直線部分の高さを4pxに設定（破線の太さ） */
   margin-top: 29px; /* 矢印の上に29pxの余白を追加 */
-  margin-right: 5%;/*右の余白*/
+  margin-right: 10%;/*右の余白*/
   margin-left: auto;/*左の矢印との余白 ※autoにしないと同じ行として扱われない*/
 
 /* 破線を作成するための線形グラデーションを設定 */
@@ -53,7 +53,7 @@ transform-origin: calc(100% - 1px) 50%; /* 回転の中心を右端に設定 */
   width: 100px; /* 矢印の直線部分の幅を100pxに設定 */
   height: 5px; /* 矢印の直線部分の高さを4pxに設定（破線の太さ） */
   margin-top: 29px; /* 矢印の上に29pxの余白を追加 */
-  margin-left: 5%; /*左の余白*/
+  margin-left: 10%; /*左の余白*/
   margin-right: 50%;/*右の矢印との余白*/
 
 /* 破線を作成するための線形グラデーションを設定 */
@@ -92,3 +92,9 @@ background-color: #000000; /* 矢印の色 */
 transform: rotate(318deg); /* 矢印を45度回転させる */
 transform-origin: 0% 50%; /* 回転の中心を右端に設定 */
 }
+
+.arrow{
+  display: flex;
+  align-items: center;
+}
+
