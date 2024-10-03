@@ -27,6 +27,10 @@ function toggleSidebar() { //サイドバーの表示に関係する関数
   }
 }
 
-function notice_transition(){
+function notice_transition(){ //ベルを押したときの処理でお知らせに飛ぶようにする
   window.location.href="notice.html"
+}
+
+function back(){
+  window.location.href="mypage.html"
 }
