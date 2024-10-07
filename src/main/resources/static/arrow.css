@@ -55,6 +55,7 @@ transform-origin: calc(100% - 1px) 50%; /* 回転の中心を右端に設定 */
   margin-top: 29px; /* 矢印の上に29pxの余白を追加 */
   margin-left: 10%; /*左の余白*/
   margin-right: 50%;/*右の矢印との余白*/
+  margin-top: 40%;
 
 /* 破線を作成するための線形グラデーションを設定 */
 background-image: linear-gradient(to right, /* 背景画像を右方向に線形グラデーションで作成 */
@@ -97,4 +98,13 @@ transform-origin: 0% 50%; /* 回転の中心を右端に設定 */
   display: flex;
   align-items: center;
 }
+
+.arrow a{
+  text-decoration: none; /*下線を消す*/
+  text-align: center;/* 文字をセンター揃えにする */
+  background: none;
+  cursor: pointer;/* マウスポインタ―がいるときマウスポインターの形を変える */
+}
+
+
 
