@@ -75,12 +75,12 @@ function getWeatherDescription(code) {
 
 function getWeatherIcon(code) {
   const iconMap = {
-    0: "./icons/kaisei.png",   
-    1: "./icons/hare.png",   
-    2: "./icons/kumori.png",
-    3: "./icons/ame.png",
+    0: "../img/icons/kaisei.png",   
+    1: "../img/icons/hare.png",   
+    2: "../img/icons/kumori.png",
+    3: "../img/icons/ame.png",
   };
-  return iconMap[code] || "./icons/hare.png"; 
+  return iconMap[code] || "../img/icons/hare.png"; 
 }
       
   //検索欄
