@@ -9,6 +9,8 @@
     <!-- google fonts,css等の読み込み -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../static/template_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../static/home.css">
 </head>
 <body>
 
@@ -33,9 +35,101 @@
 <!-- メインコンテンツエリア -->
 <div class="main-content">
     <!-- コンテンツをここに追加 -->
-    <h1>ホーム画面</h1>
+    <div class="main-content">
+        <!-- Flexコンテナを追加 -->
+        <div class="recommendation-weather">
+            <!-- 左側: おすすめコーデ -->
+            <div class="space">
+                <h2>おすすめコーデ</h2>
+            </div>
+    
+            <!-- 右側: 天気ウィジェット -->
+            <div id="weather">
+                <div id="weather-info">
+                    <p>天気: <span id="weather-description">Loading...</span></p>
+                    <img id="weather-icon" src="" alt="Weather Icon" style="display: none;">
+                </div>
+                <p>気温: <span id="temperature">Loading...</span> °C</p>
+            </div>
+        </div>
+  <!--カルーセル-->
+  <div class="c-carousel">
+    <!-- ①スライドエリア解説 開始 -->
+    <input class="c-carousel__activator-main" type="radio" checked id="carousel-main-1" name="carousel-main">
+    <input class="c-carousel__activator-main" type="radio" id="carousel-main-2" name="carousel-main">
+    <input class="c-carousel__activator-main" type="radio" id="carousel-main-3" name="carousel-main">
+    <input class="c-carousel__activator-main" type="radio" id="carousel-main-4" name="carousel-main">
+    <input class="c-carousel__activator-main" type="radio" id="carousel-main-5" name="carousel-main">
+    <!-- ①スライドエリア解説 終了 -->
+    
+    <div class="c-carousel__main">
+      <!-- ②ボタンエリア解説 開始 -->
+      <div class="c-carousel__main-control">
+        <div class="c-carousel__main-control-item">
+          <label class="c-carousel__btn-next-main" for="carousel-main-2">
+            <img class="c-image-arrow" src="./ico_next_01.svg" alt=""/>
+          </label>
+        </div>
+        <div class="c-carousel__main-control-item">
+          <label class="c-carousel__btn-prev-main" for="carousel-main-1">
+            <img class="c-image-arrow" src="./ico_prev_01.svg" alt=""/>
+          </label>
+          <label class="c-carousel__btn-next-main" for="carousel-main-3">
+            <img class="c-image-arrow" src="./ico_next_01.svg" alt=""/>
+          </label>
+        </div>
+        <div class="c-carousel__main-control-item">
+          <label class="c-carousel__btn-prev-main" for="carousel-main-2">
+            <img class="c-image-arrow" src="./ico_prev_01.svg" alt=""/>
+          </label>
+        </div>
+      </div>
+      <!-- ②ボタンエリア解説 終了 -->
+      <!-- ①スライドエリア解説 開始 -->
+      <div class="c-carousel__main-track">
+        <div class="c-carousel__main-item">
+          <img class="c-carousel__main-image" src="yuru04.jpg" alt=""/>
+        </div>
+        <div class="c-carousel__main-item">
+          <img class="c-carousel__main-image" src="yuru08.jpg" alt=""/>
+        </div>
+        <div class="c-carousel__main-item">
+          <img class="c-carousel__main-image" src="yuru04.jpg" alt=""/>
+        </div>
+        <div class="c-carousel__main-item">
+          <img class="c-carousel__main-image" src="yuru08.jpg" alt=""/>
+        </div>
+        <div class="c-carousel__main-item">
+          <img class="c-carousel__main-image" src="yuru04.jpg" alt=""/>
+        </div>
+      </div>
+      <!-- ①スライドエリア解説 終了 -->
+    </div>
+  </div>
+  
+  
+  <!--検索欄-->
+    <div class="search-container">
+      <input type="text" class="search-input" placeholder="検索">
+      <button class="search-button">
+        <i class="fa fa-search"></i>
+      </button>
+      <div class="dropdown" id="dropdown">
+        <ul id="searchHistory">
+          <!-- 検索履歴がここに表示される -->
+        </ul>
+      </div>
+    </div>
+  
+        <a href="#" class="button_add">登録</a>
+  
+        <a href="#" class="button_view">一覧</a>
+  
+  </div>
+  
 </div>
 
 <script src="../static/templete_script.js"></script>
+<script src="../static/home.js"></script>
 </body>
 </html>
