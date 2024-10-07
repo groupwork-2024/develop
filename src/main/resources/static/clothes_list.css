@@ -1,0 +1,41 @@
+.icons{
+  border: none;/*下線を表示させない*/
+  background: none;
+  cursor: pointer;
+  white-space: nowrap; /*文字の折り返しをさせない*/
+  float: right;
+  margin-right: 2%;
+  margin-top:10px;
+}
+
+.list_name{
+  font-size: 23px;
+  text-decoration: underline; /*点線のcss*/
+  text-decoration-style: dashed;/*点線のcss*/
+  float: left;
+  margin-left: 5%;
+  margin-top:10px;
+}
+
+.clothes{
+  border:solid;
+  display: flex;
+  margin: 5% 2%;
+  text-align: center;
+  
+}
+
+.clothes_img{
+  width: 30%;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail{
+  white-space: nowrap; /*文字の折り返しをさせない*/
+  width: 20%;
+  text-align: right;
+  margin-left: 3%;
+}
+
+

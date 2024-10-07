@@ -6,46 +6,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webアプリ画面</title>
-    <!-- Font Awesomeの読み込み -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="../static/template_style.css">
-    <link rel="stylesheet" href="../static/arrow.css">
+    <!-- google fonts,css等の読み込み -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../static/back&completion.css">
+    <link rel="stylesheet" href="../static/clothes_list.css">
 </head>
 <body>
 
 <div class="header">
-    <button class="left-button" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    <!--戻るのところ-->
+    <button class="left-button" onclick="back()"><span class="material-icons">arrow_back_ios_new</span></button>
     <a href="home.html" class="title-button">No Name</a>
-    <button class="right-button" onclick="notice_transition()"><i class="fas fa-bell" ></i></button>
-</div>
+    <a class="right_area">　</a>
 
-<!-- サイドバー -->
-<div id="sidebar" class="sidebar">
-    <button class="close-btn" onclick="toggleSidebar()">×</button>
-    <ul>
-        <li><a href="registration.html">登録</a></li>
-        <li><a href="search.html">検索</a></li>
-        <li><a href="mypage.html">マイページ</a></li>    
-        <li><a href="nice.html">いいね</a></li>    
-        <li><a href="enquiry.html">お問合わせ</a></li>    
-    </ul>
 </div>
-
 <!-- メインコンテンツエリア -->
+<div class="list_header">
+    <a class="list_name">洋服一覧</a>
+    <!--ごみ箱、ソートアイコン-->
+    <a class="icons">
+    <span class="material-icons">swap_vert</span>
+    <span class="material-icons">delete</span>
+    </a>
+</div>
 <div class="main-content">
     <!-- コンテンツをここに追加 -->
-    <h1>洋服一覧画面</h1>
-    <!-- ここの部分に内容を記入 -->
-    <a-row class="arrow"> <!-- 矢印の部分-->
-        <a-col class="left_arrow">
-            <span class="left_arrow_text">戻る</span>
-        </a-col>
-        <a-col class="right_arrow">
-            <span class="right_arrow_text">進む</span>
-        </a-col>
-    </a-row>
-    
+    <div class="clothes"><!--枠線-->
+        <figure class="clothes_img"><!--洋服の画像挿入-->
+            <img src="" alt="clothes img">
+        </figure>
+        <div class="detail"> <!--洋服の詳細-->
+            <br>名前:</br>
+            <br>収納場所:</br>
+            <br>
+            <div class="tag">
+                <a>タグ表示部分</a>
+            </div>
+            </br>
+        </div>
+    </div>
 </div>
+
 
 <script src="../static/templete_script.js"></script>
 </body>
