@@ -10,9 +10,9 @@ function toggleSidebar() { //サイドバーの表示に関係する関数
       // document.querySelectorAll：すべての <li> 要素を取得
       const listItems = document.querySelectorAll('li');
       // 各 <li> 要素に対して display: none を設定(表示を消す作業)
-       listItems.forEach(item => {
+      listItems.forEach(item => {
           item.style.display = 'none';
-       });
+      });
   } 
   //サイドバーを開く作業
   else {
@@ -23,7 +23,7 @@ function toggleSidebar() { //サイドバーの表示に関係する関数
       //各 <li> 要素に対して display: block を設定(表示を元に戻す作業)
       listItems.forEach(item => {
           item.style.display = 'block';
-       });
+      });
   }
 }
 

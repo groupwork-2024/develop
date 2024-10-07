@@ -57,6 +57,7 @@ body, html {
   transition: 0.3s; /* アニメーション */
   padding-top: 60px;
   color: white;
+  z-index: 1000;
 }
 
 .sidebar ul {
