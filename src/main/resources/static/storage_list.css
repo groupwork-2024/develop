@@ -1,0 +1,107 @@
+.cp_ipselect06 {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 2em 21px;
+}
+.cp_ipselect06 .cp_sl06 {
+  position: relative;
+  width: 130%; /*下線の長さ*/
+  height: 40px;/*高さ*/
+  cursor: pointer;
+  z-index: 1;
+  /* 標準のスタイルを無効にしborder-bottomを設定 */
+  border: none;
+  appearance: none;
+  outline: none;
+  background: transparent;
+  border-radius: 0;
+  border-bottom: 1px solid #666666;
+  text-align: center;
+}
+/*プルダウンの三角を設定*/
+.cp_ipselect06::after {
+  position: absolute;
+  right: -30%; /*場所の指定*/
+  content: '';
+  width: 14px; /*三角形の形*/
+  height: 8px; /*三角形の形*/
+  background: #666666;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+/*選択した際の動き:セレクト下のライン*/
+.cp_sl06_selectbar {
+  position: relative;
+  display: inline-block;
+  width: 130%;
+}
+.cp_sl06_selectbar:before,
+.cp_sl06_selectbar:after {
+  bottom: 1px;
+  content: '';
+  width: 0;
+  height: 2px;
+  position: absolute;
+  background: #da3c41;
+  transition: 0.2s ease all;
+}
+.cp_sl06_selectbar:before {
+  left: 50%;
+}
+.cp_sl06_selectbar:after {
+  right: 50%;
+}
+/*focus時の設定*/
+.cp_ipselect06 .cp_sl06:focus {
+  border-bottom: 1px solid transparent;
+}
+.cp_sl06:focus ~ .cp_sl06_selectbar:before,
+.cp_sl06:focus ~ .cp_sl06_selectbar:after {
+  width: 50%;
+}
+
+.icons{
+  border: none;
+  background: none;
+  cursor: pointer;
+  white-space: nowrap; /*文字の折り返しをさせない*/
+  margin-left:auto;
+}
+
+.list_header{
+  display: flex;
+  align-items: center;
+  margin-top: -2%;
+}
+
+.clothes_img img{
+  /* border:solid; */
+  width: 180px;
+  height: 150px;
+  object-fit:fill;
+}
+
+.clothes_img{
+  /* border:solid; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border:solid;
+  margin: auto;
+  padding: 2%;
+}
+
+.detail{
+  /* border:solid; */
+  white-space: nowrap; /*文字の折り返しをさせない*/
+  width: 300px;
+  height: 150px;
+  text-align: left;
+  margin-left: 5%;
+}
+
+.clothes{
+  display: none;
+}
