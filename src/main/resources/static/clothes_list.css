@@ -21,21 +21,25 @@
   border:solid;
   display: flex;
   margin: 5% 2%;
-  text-align: center;
-  
-}
-
-.clothes_img{
-  width: 30%;
-  align-items: center;
+  padding: 2% 2%;
   justify-content: center;
 }
 
+.clothes_img img{
+  /* border:solid; */
+  width: 180px;
+  height: 150px;
+  object-fit:fill;
+  margin:2%;
+}
+
 .detail{
+  /* border:solid; */
   white-space: nowrap; /*文字の折り返しをさせない*/
-  width: 20%;
-  text-align: right;
-  margin-left: 3%;
+  width: 180px;
+  height: 150px;
+  text-align: left;
+  margin:2%;
 }
 
 
