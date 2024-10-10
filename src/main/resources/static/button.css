@@ -1,0 +1,30 @@
+/*ボタン開始*/
+/* ボタンのスタイル */
+.button a{
+  text-align: center;
+  border: none;/*下線を表示させない*/
+  text-decoration: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 450px;
+  height: 64px;
+  padding: 8px 24px;
+  margin-bottom: 20px;
+  font-family: sans-serif;
+  font-size: 16px;
+  color: #000000;
+  text-align: center;
+  overflow-wrap: anywhere;
+  background-color: #ff0000;  /*わかりやすいように仮で赤にしてあります*/
+  border-radius: 32px; /* (buttonの高さ / 2) の値 */
+}
+
+.button a:hover{
+  background: rgb(117,188,255);
+    background: linear-gradient(270deg, rgba(117,188,255,1) 0%, rgba(62,159,252,1) 100%);
+}
+
+/*ボタン終了*/
