@@ -8,13 +8,14 @@ body, html {
   overflow-x: hidden; /* 横スクロールを防ぐ */
 }
 
-.header {
+.header  {
   display: flex;
   justify-content: space-between; /* 子要素を左右の端に配置 */
   align-items: center; /* 子要素を垂直中央に配置 */
   padding: 10px 20px;
   background-color: #f0f0f0;
   border-bottom: 1px solid #ccc;
+  text-decoration: none; /* 下線を消す */
 }
 
 .title-button {
