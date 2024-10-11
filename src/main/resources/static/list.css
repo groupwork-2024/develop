@@ -68,6 +68,19 @@
   cursor: pointer;
   white-space: nowrap; /*文字の折り返しをさせない*/
   margin-left:auto;
+  margin-right: 10px;
+}
+
+.list_name{
+  font-size: 23px;
+  text-decoration: underline; /*点線のcss*/
+  text-decoration-style: dashed;/*点線のcss*/
+  margin-left: 10px;
+}
+
+.icons ,.list_name{
+  margin-top: 25px;
+  text-align: center;
 }
 
 .list_header{
@@ -102,6 +115,3 @@
   margin-left: 5%;
 }
 
-.clothes{
-  display: none;
-}
