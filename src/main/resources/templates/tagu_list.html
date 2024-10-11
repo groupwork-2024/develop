@@ -1,0 +1,45 @@
+<!-- タグ一覧画面 -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webアプリ画面</title>
+    <!-- google fonts,css等の読み込み -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../static/back&completion.css">
+    <link rel="stylesheet" href="../static/list.css">
+</head>
+<body>
+
+<div class="header">
+    <!--戻るのところ-->
+    <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
+    <a href="home.html" class="title-button">No Name</a>
+    <a class="right_area">　</a>
+
+</div>
+<!-- メインコンテンツエリア -->
+<div class="list_header">
+    <a class="list_name">タグ一覧</a>
+    <!--ごみ箱、ソートアイコン-->
+    <a class="icons">
+    <span class="material-icons">swap_vert</span>
+    <span class="material-icons">delete</span>
+    </a>
+</div>
+<div class="main-content">
+    <!-- コンテンツをここに追加 -->
+    <div class="clothes"><!--枠線-->
+        <figure class="clothes_img"><!--画像挿入-->
+            <div class=detail>
+                <br>タグ名</br>
+            </div>
+        </figure>
+    </div>
+</div>
+
+<script src="../static/templete_script.js"></script>
+</body>
+</html>
