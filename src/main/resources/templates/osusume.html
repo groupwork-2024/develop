@@ -1,0 +1,90 @@
+<!-- ホーム画面 -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おすすめコーデ</title>
+    <!-- google fonts,css等の読み込み -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../static/template_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../static/home.css">
+    <link rel="stylesheet" href="../static/osusume.css">
+</head>
+<body>
+
+<div class="header">
+    <button class="left-button" onclick="toggleSidebar()"><span class="material-icons">menu_open</span></button>
+    <a href="home.html" class="title-button">No Name</a>
+    <button class="right-button" onclick="notice_transition()"><span class="material-icons">notifications</span></button>
+</div>
+
+<!-- サイドバー -->
+<div id="sidebar" class="sidebar">
+    <button class="close-btn" onclick="toggleSidebar()">×</button>
+    <ul>
+        <li><a href="registration.html">登録</a></li>
+        <li><a href="search.html">検索</a></li>
+        <li><a href="mypage.html">マイページ</a></li>    
+        <li><a href="nice.html">いいね</a></li>    
+        <li><a href="enquiry.html">お問合わせ</a></li>    
+    </ul>
+</div>
+
+<!-- メインコンテンツエリア -->
+<div class="main-content">
+    <!-- コンテンツをここに追加 -->
+
+    <div class="container">
+        <div class="photo-grid">
+            <div class="photo photo-1">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Fashion Model 1">
+            </div>
+            <div class="photo photo-2">
+                <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Fashion Model 2">
+            </div>
+        </div>
+        <div class="item-grid">
+            <div class="item">
+                <div class="icon">👕</div>
+                <p class="label">トップス</p>
+                <p class="brand">ZARA</p>
+                <div class="details">
+                    <p>ホワイトブラウス</p>
+                    <p>¥5,990</p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="icon">👖</div>
+                <p class="label">ボトムス</p>
+                <p class="brand">Levi's</p>
+                <div class="details">
+                    <p>ブラックジーンズ</p>
+                    <p>¥12,800</p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="icon">👟</div>
+                <p class="label">シューズ</p>
+                <p class="brand">Nike</p>
+                <div class="details">
+                    <p>エアマックス</p>
+                    <p>¥15,000</p>
+                </div>
+            </div>
+            <div class="item">
+                <div class="icon">🧢</div>
+                <p class="label">アクセサリー</p>
+                <p class="brand">Ray-Ban</p>
+                <div class="details">
+                    <p>サングラス</p>
+                    <p>¥18,500</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
