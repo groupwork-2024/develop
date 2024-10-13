@@ -1,0 +1,121 @@
+<!-- ホーム画面 -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おすすめコーデ</title>
+    <!-- google fonts,css等の読み込み -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../static/template_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../static/register.css">
+    <link rel="stylesheet" href="../static/back&completion.css">
+</head>
+<body>
+
+<div class="header">
+    <button class="left-button" onclick="toggleSidebar()"><span class="material-icons">menu_open</span></button>
+    <a href="home.html" class="title-button">No Name</a>
+    <button class="right-button" onclick="notice_transition()"><span class="material-icons">notifications</span></button>
+</div>
+
+<!-- サイドバー -->
+<div id="sidebar" class="sidebar">
+    <button class="close-btn" onclick="toggleSidebar()">×</button>
+    <ul>
+        <li><a href="registration.html">登録</a></li>
+        <li><a href="search.html">検索</a></li>
+        <li><a href="mypage.html">マイページ</a></li>    
+        <li><a href="nice.html">いいね</a></li>    
+        <li><a href="enquiry.html">お問合わせ</a></li>    
+    </ul>
+</div>
+
+<!-- メインコンテンツエリア -->
+<div class="main-content">
+    <!-- コンテンツをここに追加 -->
+
+    <main>
+        <div class="form-container">
+            <h2 class="form-title">アカウント登録</h2>
+            
+            <div class="form-group">
+                <label class="form-label">ユーザー名</label>
+                <input type="text" class="form-input" />
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">性別</label>
+                <select class="form-select">
+                    <option>女</option>
+                    <option>男</option>
+                    <option>その他</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">年齢</label>
+                <input type="number" class="form-input" />
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">住所</label>
+                <input type="text" class="form-input" />
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">メールアドレス</label>
+                <input type="email" class="form-input" />
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">メールアドレス(確認用)</label>
+                <input type="email" class="form-input" />
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">パスワード</label>
+                <input type="password" class="form-input" />
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">パスワード(確認用)</label>
+                <input type="password" class="form-input" />
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">身長</label>
+                <input type="number" class="form-input" placeholder="cm" />
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">体系</label>
+                <div class="body-type">
+                    <div class="body-type-option">
+                        <div class="body-type-image"></div>
+                        <label>ぽっちゃり</label>
+                    </div>
+                    <div class="body-type-option">
+                        <div class="body-type-image"></div>
+                        <label>標準</label>
+                    </div>
+                    <div class="body-type-option">
+                        <div class="body-type-image"></div>
+                        <label>細身</label>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="completion">
+                <a>登録</a>
+        </div>
+    
+        </div>
+    </main>
+    <script src="../static/templete_script.js"></script>
+    <script src="../static/home.js"></script>
+
+</body>
+</html>
