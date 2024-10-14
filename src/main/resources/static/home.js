@@ -1,5 +1,46 @@
-const slides = document.querySelectorAll(".c-carousel__activator-main");
-let currentSlide = 0;
+  //カルーセル
+  document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.querySelector('.carousel');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const images = carousel.querySelectorAll('img');
+
+    let currentIndex = 0;
+    const totalImages = images.length;
+
+    function showImage(index) {
+        carousel.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % totalImages;
+        showImage(currentIndex);
+    }
+
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+        showImage(currentIndex);
+    }
+
+    nextBtn.addEventListener('click', nextImage);
+    prevBtn.addEventListener('click', prevImage);
+
+    // 自動切り替え
+    let autoSlide = setInterval(nextImage, 5000);
+
+    // マウスオーバーで自動切り替えを停止
+    carousel.addEventListener('mouseenter', () => {
+        clearInterval(autoSlide);
+    });
+
+    // マウスアウトで自動切り替えを再開
+    carousel.addEventListener('mouseleave', () => {
+        autoSlide = setInterval(nextImage, 5000);
+    });
+
+    // 初期表示
+    showImage(currentIndex);
+});
 
 setInterval(() => {
   currentSlide = (currentSlide + 1) % slides.length;
