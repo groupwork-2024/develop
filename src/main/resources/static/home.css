@@ -177,10 +177,6 @@ h2:after {
   padding: 10px;
 }
 
-.search-button i {
-  font-size: 18px;
-}
-
 .dropdown {
   display: none; /* 初期状態では非表示 */
   position: absolute;
