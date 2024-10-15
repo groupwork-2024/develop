@@ -1,206 +1,180 @@
 .main-content{
-    display: grid;
-    place-content: center;
-  }
+  display: grid;
+  place-content: center;
+}
 
 .space{
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 /* レイアウト用 */
 .recommendation-weather {
-  display: flex; /* Flexboxで一列に並べる */
-  justify-content: space-between; /* 左右に要素を配置 */
-  align-items: flex-start; /* 上側で揃える */
-  margin-bottom: 10px; /* カルーセルとの余白を調整 */
+display: flex; /* Flexboxで一列に並べる */
+justify-content: space-between; /* 左右に要素を配置 */
+align-items: flex-start; /* 上側で揃える */
+margin-bottom: 10px; /* カルーセルとの余白を調整 */
 }
 
 /* おすすめコーデ */
 h2 {
-  position: relative;
-  padding: 1rem .5rem;
+position: relative;
+padding: 1rem .5rem;
 }
 
 h2:after {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  content: '';
-  background-image: -webkit-gradient(linear, left top, right top, from(#fa709a), to(#fee140));
-  background-image: -webkit-linear-gradient(left, #fa709a 0%, #fee140 100%);
-  background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 5px;
+content: '';
+background-image: -webkit-gradient(linear, left top, right top, from(#fa709a), to(#fee140));
+background-image: -webkit-linear-gradient(left, #fa709a 0%, #fee140 100%);
+background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
 }
 
 /* 天気ウィジェット */
 #weather {
-  border: 2px solid black;
-  padding: 0px;
-  width: 180px;
-  height: 80px;
-  text-align: center;
-  margin: 0; /* 余白をリセット */
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column; 
-  justify-content: center;
+border: 2px solid black;
+padding: 0px;
+width: 180px;
+height: 80px;
+text-align: center;
+margin: 0; /* 余白をリセット */
+border-radius: 8px;
+display: flex;
+flex-direction: column; 
+justify-content: center;
 }
 
 /* 文字間隔 */
 #weather-info {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px; /* Space between the icon and the text */
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 5px; /* Space between the icon and the text */
 }
 
 #weather img {
-  width: 30px; /* Adjust the size of the weather icon */
-  height: 30px;
+width: 30px; /* Adjust the size of the weather icon */
+height: 30px;
 }
 
 #temperature {
-  margin-top: 5px; /* Add space above the temperature */
-  font-size: 14px;
+margin-top: 5px; /* Add space above the temperature */
+font-size: 14px;
 }
 
 #weather-description {
-  font-size: 14px;
+font-size: 14px;
 }
 
 /*カルーセル開始*/
-.c-carousel {
-  position: relative;
-  width: 420px;
-  margin: 0 auto;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-}
-.c-carousel__activator-main {
-  position: absolute;
-  z-index: -1;
-  opacity: 0;
-}
-.c-carousel__main {
-  overflow: hidden;
-  position: relative;
-}
-.c-carousel__main-track {
-  display: flex;
-  white-space: nowrap;
-  transition: transform 0.3s ease-out;
-}
-.c-carousel__main-item {
-  flex-shrink: 0;
-  width: 100%;
-}
-.c-carousel__main-image {
-  display: block;
-  width: 100%;
-}
-.c-carousel__main-control-item {
-  display: none;
-}
-.c-carousel__btn-prev-main, .c-carousel__btn-next-main {
-  position: absolute;
-  top: 50%;
-  right: 16px;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  transform: translateY(-50%);
-  background-color: #000;
-  border-radius: 50%;
-  transition: opacity 0.3s;
-  cursor: pointer;
-}
-.c-carousel__btn-prev-main {
-  right: auto;
-  left: 16px;
+.carousel-container {
+position: relative;
+width: 600px;
+height: 400px;
+overflow: hidden;
+margin-bottom: 20px;
 }
 
-/* For automatic carousel */
-.c-carousel__main-track {
-  transition: transform 0.5s ease;
+.carousel {
+display: flex;
+transition: transform 0.5s ease-in-out;
 }
 
-/* Slide positions */
-.c-carousel__activator-main:nth-child(1):checked ~ .c-carousel__main .c-carousel__main-track {
-  transform: translateX(calc(-100% * 0));
+.carousel img {
+width: 600px;
+height: 400px;
+object-fit: cover;
 }
-.c-carousel__activator-main:nth-child(2):checked ~ .c-carousel__main .c-carousel__main-track {
-  transform: translateX(calc(-100% * 1));
+
+.nav-btn {
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+background-color: rgba(0, 0, 0, 0.5);
+color: white;
+border: none;
+padding: 10px 15px;
+cursor: pointer;
+font-size: 16px;
 }
-.c-carousel__activator-main:nth-child(3):checked ~ .c-carousel__main .c-carousel__main-track {
-  transform: translateX(calc(-100% * 2));
+
+#prevBtn {
+left: 10px;
 }
-.c-carousel__activator-main:nth-child(4):checked ~ .c-carousel__main .c-carousel__main-track {
-  transform: translateX(calc(-100% * 3));
+
+#nextBtn {
+right: 10px;
 }
-.c-carousel__activator-main:nth-child(5):checked ~ .c-carousel__main .c-carousel__main-track {
-  transform: translateX(calc(-100% * 4));
-}
+
 /*カルーセル終了*/
 
+main {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
 
 /*検索欄*/
 
 .search-container {
-  display: flex;
-  align-items: center;
-  border-bottom: 2px solid #000;
-  width: 500px;
-  margin-bottom: 40px;
-  position: relative; /* ドロップダウンの位置を調整するため */
+display: flex;
+align-items: center;
+border-bottom: 2px solid #000;
+width: 500px;
+margin-bottom: 20px;
+position: relative; /* ドロップダウンの位置を調整するため */
 }
 
 .search-input {
-  border: none;
-  outline: none;
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
+border: none;
+outline: none;
+width: 100%;
+padding: 10px;
+font-size: 16px;
 }
 
 .search-input::placeholder {
-  color: #aaa;
+color: #aaa;
 }
 
 .search-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
+background: none;
+border: none;
+cursor: pointer;
+padding: 10px;
+}
+
+.search-button i {
+font-size: 18px;
 }
 
 .dropdown {
-  display: none; /* 初期状態では非表示 */
-  position: absolute;
-  top: 100%; /* 検索欄の下に表示 */
-  left: 0;
-  right: 0;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  max-height: 150px;
-  overflow-y: auto;
-  z-index: 1;
+display: none; /* 初期状態では非表示 */
+position: absolute;
+top: 100%; /* 検索欄の下に表示 */
+left: 0;
+right: 0;
+background-color: #fff;
+border: 1px solid #ddd;
+max-height: 150px;
+overflow-y: auto;
+z-index: 1;
 }
 
 .dropdown ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+list-style: none;
+margin: 0;
+padding: 0;
 }
 
 .dropdown ul li {
-  padding: 10px;
-  cursor: pointer;
+padding: 10px;
+cursor: pointer;
 }
 
 .dropdown ul li:hover {
-  background-color: #f0f0f0;
+background-color: #f0f0f0;
 }

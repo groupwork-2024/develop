@@ -54,62 +54,22 @@
             </div>
         </div>
   <!--カルーセル-->
-  <div class="c-carousel">
-    <!-- ①スライドエリア解説 開始 -->
-    <input class="c-carousel__activator-main" type="radio" checked id="carousel-main-1" name="carousel-main">
-    <input class="c-carousel__activator-main" type="radio" id="carousel-main-2" name="carousel-main">
-    <input class="c-carousel__activator-main" type="radio" id="carousel-main-3" name="carousel-main">
-    <input class="c-carousel__activator-main" type="radio" id="carousel-main-4" name="carousel-main">
-    <input class="c-carousel__activator-main" type="radio" id="carousel-main-5" name="carousel-main">
-    <!-- ①スライドエリア解説 終了 -->
-    
-    <div class="c-carousel__main">
-      <!-- ②ボタンエリア解説 開始 -->
-      <div class="c-carousel__main-control">
-        <div class="c-carousel__main-control-item">
-          <label class="c-carousel__btn-next-main" for="carousel-main-2">
-            <img class="c-image-arrow" src="./ico_next_01.svg" alt=""/>
-          </label>
-        </div>
-        <div class="c-carousel__main-control-item">
-          <label class="c-carousel__btn-prev-main" for="carousel-main-1">
-            <img class="c-image-arrow" src="./ico_prev_01.svg" alt=""/>
-          </label>
-          <label class="c-carousel__btn-next-main" for="carousel-main-3">
-            <img class="c-image-arrow" src="./ico_next_01.svg" alt=""/>
-          </label>
-        </div>
-        <div class="c-carousel__main-control-item">
-          <label class="c-carousel__btn-prev-main" for="carousel-main-2">
-            <img class="c-image-arrow" src="./ico_prev_01.svg" alt=""/>
-          </label>
-        </div>
+  <div id="app">
+    <div class="carousel-container">
+      <div class="carousel">
+        <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1018/600/400" alt="写真1"></a>
+        <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1015/600/400" alt="写真2"></a>
+        <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1019/600/400" alt="写真3"></a>
+        <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1016/600/400" alt="写真4"></a>
+        <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1020/600/400" alt="写真5"></a>
       </div>
-      <!-- ②ボタンエリア解説 終了 -->
-      <!-- ①スライドエリア解説 開始 -->
-      <div class="c-carousel__main-track">
-        <div class="c-carousel__main-item">
-          <img class="c-carousel__main-image" src="..\img\yuru04.jpg" alt=""/>
-        </div>
-        <div class="c-carousel__main-item">
-          <img class="c-carousel__main-image" src="..\img\yuru08.jpg" alt=""/>
-        </div>
-        <div class="c-carousel__main-item">
-          <img class="c-carousel__main-image" src="..\img\yuru04.jpg" alt=""/>
-        </div>
-        <div class="c-carousel__main-item">
-          <img class="c-carousel__main-image" src="..\img\yuru08.jpg" alt=""/>
-        </div>
-        <div class="c-carousel__main-item">
-          <img class="c-carousel__main-image" src="..\img\yuru04.jpg" alt=""/>
-        </div>
-      </div>
-      <!-- ①スライドエリア解説 終了 -->
-    </div>
+      <button id="prevBtn" class="nav-btn">⇐</button>
+      <button id="nextBtn" class="nav-btn">⇒</button>
   </div>
   
   
   <!--検索欄-->
+  <main>
     <div class="search-container">
       <input type="text" class="search-input" placeholder="検索">
       <button class="search-button" onclick>
@@ -129,7 +89,7 @@
       <a href="list_select.html">一覧</a>
     </div>
   </div>
-
+</main>
 </div>
 
 <script src="../static/templete_script.js"></script>
