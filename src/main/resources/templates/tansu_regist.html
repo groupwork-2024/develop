@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>タンス新規登録</title>
+    <!-- Font Awesomeの読み込み -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../static/template_style.css">
+    <link rel="stylesheet" href="../static/back&completion.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../static/tansu_regist.css">
+</head>
+<body>
+
+<div class="header">
+    <button class="left-button" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    <a href=".html" class="title-button">No Name</a>
+    <button class="right-button"><i class="fas fa-bell"></i></button>
+</div>
+
+<!-- サイドバー -->
+<div id="sidebar" class="sidebar">
+    <button class="close-btn" onclick="toggleSidebar()">×</button>
+    <ul>
+        <li><a href=".html">登録</a></li>
+        <li><a href=".html">検索</a></li>
+        <li><a href=".html">マイページ</a></li>    
+        <li><a href=".html">いいね</a></li>    
+        <li><a href=".html">お問合わせ</a></li>    
+    </ul>
+</div>
+
+<!-- メインコンテンツエリア -->
+
+<div id="app">
+    <div class="header">
+      <button id="back-button" class="back-button">＜</button>
+      <h1>タンス登録</h1>
+    </div>
+    <div class="input-section">
+      <label for="name">1 名前：</label>
+      <input type="text" id="name" name="name">
+    </div>
+    <div class="input-section">
+      <label for="levels">2 段数：</label>
+      <input type="number" id="levels" name="levels" min="1" max="10">
+    </div>
+    <div class="design-section">
+      <div id="parts-container">
+        <div class="part" draggable="true" data-type="divider">｜</div>
+        <div class="part" draggable="true" data-type="square">□</div>
+      </div>
+      <div id="tansu-container"></div>
+    </div>
+    <div id="trash" class="trash">ゴミ箱</div>
+
+  </div>
+
+  <div class="completion">
+    <a>完了</a>
+</div>
+
+</main>
+
+<script src="../static/templete_script.js"></script>
+<script src="../static/tansu_regist.js"></script>
+</body>
+</html>
