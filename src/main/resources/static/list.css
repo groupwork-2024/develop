@@ -90,24 +90,19 @@
 }
 
 .clothes_img img{
-  /* border:solid; */
   width: 180px;
   height: 150px;
-  object-fit:fill;
+  object-fit:cover;
 }
 
 .clothes_img{
-  /* border:solid; */
+  border: none;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  border:solid;
   margin: auto;
-  padding: 2%;
+  padding: 0;
 }
 
 .detail{
-  /* border:solid; */
   white-space: nowrap; /*文字の折り返しをさせない*/
   width: 300px;
   height: 150px;
@@ -115,3 +110,48 @@
   margin-left: 5%;
 }
 
+.clothes {
+  border: none; /* これで枠線を消す */
+  margin: 0; 
+  background-color: #e7e7e7;
+}
+
+.detail_en{
+  white-space: nowrap; /*文字の折り返しをさせない*/
+  width: 300px;
+  height: 150px;
+  text-align: left;
+  margin-left: 5%;
+  padding-left: 5%;
+  display: none; /* 非表示設定 */
+}
+
+.detail_en button, .detail_en a {
+  color: black;
+  font-size: 16px;
+  background-color: #e7e7e7;
+  border: none;
+  text-decoration: none;
+  padding: 8px 12px; /* paddingを少し大きく */
+  margin-left: 20px; /* ボタンとリンクの間にスペース */
+  margin-top: 10px;
+  cursor: pointer; /* カーソルをポインタに */
+}
+
+.detail_en a {
+  display: inline-block; /* リンクをボックスとして扱う */
+}
+
+.clothse_button{
+  padding: 10px 20px;
+  background-color: #f7f7f7;
+  border: none;
+  border-radius: 5px;
+}
+
+.detail_url{
+  cursor: pointer; /* カーソルをポインタに */
+  border: none;
+  text-decoration: none;
+  color: black;
+}
