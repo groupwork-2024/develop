@@ -11,29 +11,36 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Clothes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    /*Storegeのmodelできるまでコメントアウト
+    @ManyToOne
+    @JoinColumn(name = "storage_id")
+    private Storege storege;
+    */
 
     @Column(nullable = false, length = 255)
-    private String password;
-
-    @Column(nullable = false, unique = true, length = 255)
-    private String email;
+    private String name;
 
     @Column(length = 255)
-    private String body_type;
+    private String brand_name;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
     @Lob
     @Column(columnDefinition = "BLOB")
-    private byte[] userIcon;
+    private byte[] image_data;
 
-    private Integer age;
-
-    private Integer height;
-
-    private Integer gender;
+    @Column(nullable = false)
+    private Boolean favorite = false;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
