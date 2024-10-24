@@ -20,7 +20,7 @@ public class Storage {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User userId;
+    private User user;
 
     @Column(nullable = false, length = 20)
     @Enumerated(EnumType.STRING)

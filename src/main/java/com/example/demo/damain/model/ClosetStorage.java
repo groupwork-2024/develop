@@ -14,7 +14,7 @@ public class ClosetStorage {
     @Id
     @OneToOne
     @JoinColumn(name = "storage_id", nullable = false)
-    private Storage storageId;
+    private Storage storage;
 
     @Column(nullable = false, length = 50)
     private Integer hunger_content;

@@ -14,7 +14,7 @@ public class DrawerStorage {
     @Id
     @OneToOne
     @JoinColumn(name = "storage_id", nullable = false)
-    private Storage storageId;
+    private Storage storage;
 
     @Column(nullable = false, length = 10)
     private Integer drawer_content;//段数
