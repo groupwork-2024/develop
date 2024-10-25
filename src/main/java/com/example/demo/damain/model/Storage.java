@@ -22,15 +22,12 @@ public class Storage {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(nullable = false, length = 20)
+    @Column(name = "storage_type",nullable = false, length = 20)
     @Enumerated(EnumType.STRING)
-    private StorageType type;
+    private StorageType storageType;
 
     @Column(length = 200)
     private String name;
-
-    private Integer hangerCount;
-    private Integer drawerCount;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;

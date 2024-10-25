@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class Clothes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -28,14 +28,14 @@ public class Clothes {
     @Column(nullable = false, length = 255)
     private String name;
 
-    @Column(length = 255)
-    private String brand_name;
+    @Column(length = 255, name = "brand_name")
+    private String brandName;
 
     @Column(columnDefinition = "TEXT")
     private String description;
 
     @Lob
-    @Column(columnDefinition = "BLOB")
+    @Column(name = "image_data", columnDefinition = "LONGBLOB")
     private byte[] image_data;
 
     @Column(nullable = false)
