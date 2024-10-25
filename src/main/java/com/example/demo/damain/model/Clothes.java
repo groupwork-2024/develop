@@ -21,11 +21,9 @@ public class Clothes {
     @JoinColumn(name = "user_id")
     private User user;
 
-    /*Storegeのmodelできるまでコメントアウト
     @ManyToOne
     @JoinColumn(name = "storage_id")
-    private Storege storege;
-    */
+    private Storage storage;
 
     @Column(nullable = false, length = 255)
     private String name;

@@ -4,28 +4,23 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "tags")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Tag {
+@NoArgsConstructor
+public class ClosetStorage {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @Column(nullable = false, unique = true, length = 255)
-    private String name;
+    @OneToOne
+    @JoinColumn(name = "storage_id", nullable = false)
+    private Storage storage;
 
     @Column(nullable = false, length = 50)
-    private String color;
+    private Integer hunger_content;
+
+    @Column(columnDefinition = "jsonb")
+    private String shelfLayout;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
@@ -45,4 +40,3 @@ public class Tag {
     }
 
 }
-

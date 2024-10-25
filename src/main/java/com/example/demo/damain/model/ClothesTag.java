@@ -17,9 +17,9 @@ public class ClothesTag {
 
     @ManyToOne
     @JoinColumn(name = "clothes_id", nullable = false)
-    private Clothes clothesId;
+    private Clothes clothes;
 
     @ManyToOne
     @JoinColumn(name = "tag_id", nullable = false)
-    private Tag tagId;
+    private Tag tag;
 }
