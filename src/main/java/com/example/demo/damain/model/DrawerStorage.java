@@ -16,10 +16,10 @@ public class DrawerStorage {
     @JoinColumn(name = "storage_id", nullable = false)
     private Storage storage;
 
-    @Column(nullable = false, length = 10)
-    private Integer drawer_content;//段数
+    @Column(nullable = false, length = 10, name ="drawer_count")
+    private Integer drawerCount;//段数
 
-    @Column(columnDefinition = "jsonb")
+    @Column(columnDefinition = "json")
     private String shelfLayout;
 
     @Column(name = "created_at", updatable = false)

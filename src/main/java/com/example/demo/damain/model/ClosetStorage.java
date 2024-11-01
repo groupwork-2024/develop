@@ -17,9 +17,9 @@ public class ClosetStorage {
     private Storage storage;
 
     @Column(nullable = false, length = 50)
-    private Integer hunger_content;
+    private Integer hanger_count;
 
-    @Column(columnDefinition = "jsonb")
+    @Column(columnDefinition = "json")
     private String shelfLayout;
 
     @Column(name = "created_at", updatable = false)
