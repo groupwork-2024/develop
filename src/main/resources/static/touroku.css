@@ -98,8 +98,6 @@ body, html {
     
 }
 
-
-
 .button-40 {
     display: flex;
     justify-content: center;
@@ -169,4 +167,8 @@ body, html {
 .button-42:hover {
     transform: translateY(-2px);
     box-shadow: 0 7px 10px rgb(0 0 0 / 15%);
+}
+
+.button-40,.button-41,.button-42{
+    text-decoration: none; /* ホバー時に下線を消す */
 }

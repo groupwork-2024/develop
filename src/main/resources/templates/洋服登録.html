@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webアプリ画面</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- google fonts,css等の読み込み -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="..\static\youhukutouroku.css">
     <link rel="stylesheet" href="..\static\back&completion.css">
     
@@ -13,20 +14,9 @@
 <body>
 
 <div class="header">
-    <button class="left-button" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
-    <a href=".html" class="title-button">No Name</a>
-    <button class="right-button"><i class="fas fa-bell"></i></button>
-</div>
-
-<div id="sidebar" class="sidebar">
-    <button class="close-btn" onclick="toggleSidebar()">×</button>
-    <ul>
-        <li><a href=".html">登録</a></li>
-        <li><a href=".html">検索</a></li>
-        <li><a href=".html">マイページ</a></li>    
-        <li><a href=".html">いいね</a></li>    
-        <li><a href=".html">お問合わせ</a></li>    
-    </ul>
+    <button class="left-button" onclick="history.back()()"><span class="material-icons">arrow_back_ios_new</span></button>
+    <a href="home.html" class="title-button">No Name</a>
+    <a class="right_area">　</a>
 </div>
 
 <div class="main-content">
@@ -74,61 +64,42 @@
             </abbr>
         </div>
     </div>
-
     
     <div id="modal" class="modal">
-       <div class="modal-content">
-         <span class="close-btn">&times;</span>
-          <h2>タグ追加登録</h2>
-
-          <label for="label-name">名前:</label>
-          <input type="text" id="label-name" placeholder="タグの名前を入力">
-
-          <h3>色を選択:</h3>
-          <div id="colorPalette" class="color-palette"></div>
-
-          <input type="color" id="customColorPicker">
-
-        
-          <span class="close-btn" onclick="closeModal()">&times;</span>
-
-          <button onclick="saveLabel()">登録</button>
-       </div>
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>タグ追加登録</h2>
+            <label for="label-name">名前:</label>
+            <input type="text" id="label-name" placeholder="タグの名前を入力">
+            <h3>色を選択:</h3>
+            <div id="colorPalette" class="color-palette"></div>
+            <input type="color" id="customColorPicker">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <button onclick="saveLabel()">登録</button>
+        </div>
     </div>
-
-   <div id="labelDisplay"></div>
-
-
-  
-   <div class="completion">
+    <div id="labelDisplay"></div>
+    <div class="completion">
     <a>完了</a>
-   </div>
-
-  </div>
-
-  <div id="screen2" style="display: none;">
+    </div>
+</div>
+    <div id="screen2" style="display: none;">
 
     <!-- 2枚目の画面の内容 -->
     
-    
-  <div id="screen2" style="display: none;">
+    <div id="screen2" style="display: none;">
     <h2>確認画面</h2>
     <div id="reviewName"></div>
     
+    <div id="reviewBrand"></div>
     
-  <div id="reviewBrand"></div>
-    
-  <div id="reviewLocation"></div>
+    <div id="reviewLocation"></div>
     <div id="reviewMemo"></div>
     <div id="reviewTags"></div>
-  
     <!-- 登録ボタン -->
     
-   
-  <button onclick="registerData()">登録</button>
-  </div>
+    <button onclick="registerData()">登録</button></div>
 
-    
 <script src="..\static\youhukutouroku.js"></script>
 </body>
 </html>
