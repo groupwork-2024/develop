@@ -1,5 +1,5 @@
 const cp_sl06 = document.querySelector(".cp_sl06"); //最初のclassの取得
-const clothes = document.querySelectorAll(".clothes"); 
+const clothes = document.querySelectorAll(".clothse_button"); 
 const detail =  document.querySelector(".detail");
 
 //初期値の設定
