@@ -123,38 +123,5 @@ function getWeatherIcon(code) {
   };
   return iconMap[code] || "../img/icons/hare.png"; 
 }
-      
-  //検索欄
-document.addEventListener('DOMContentLoaded', function () {
-    const searchInput = document.getElementById('searchInput');
-    const dropdown = document.getElementById('dropdown');
-    const searchHistoryList = document.getElementById('searchHistory');
-  
-    // サンプルの検索履歴
-    const searchHistory = ['Apple', 'Banana', 'Cherry', 'Date', 'Eggfruit'];
-  
-    // 検索履歴を表示
-    function showSearchHistory() {
-      searchHistoryList.innerHTML = ''; // リストをリセット
-      searchHistory.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = item;
-        li.addEventListener('click', () => {
-          searchInput.value = item;
-          dropdown.style.display = 'none'; // リストを非表示にする
-        });
-        searchHistoryList.appendChild(li);
-      });
-      dropdown.style.display = 'block'; // ドロップダウンを表示
-    }
-  
-    // 入力欄がフォーカスされたときに履歴を表示
-    searchInput.addEventListener('focus', showSearchHistory);
-  
-    // 入力欄の外がクリックされた場合、履歴を非表示にする
-    document.addEventListener('click', function (event) {
-      if (!searchInput.contains(event.target) && !dropdown.contains(event.target)) {
-        dropdown.style.display = 'none';
-      }
-    });
-  });
+
+
