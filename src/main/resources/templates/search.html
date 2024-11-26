@@ -10,32 +10,32 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../static/back&completion.css">
     <link rel="stylesheet" href="../static/list.css">
-    <link rel="stylesheet" href="../static/home.css">
+    <link rel="stylesheet" href="../static/search.css">
+    <link rel="stylesheet" href="../static/template_style.css">
 </head>
 <body>
 
 <div class="header">
     <!--戻るのところ-->
-    <button class="left-button" onclick="history.back()()"><span class="material-icons">arrow_back_ios_new</span></button>
+    <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
     <a href="home.html" class="title-button">No Name</a>
     <a class="right_area">　</a>
 </div>
 
-<!-- 検索ボックス -->
-<div class="search-container">
-    <input type="text" class="search-input" placeholder="検索" id="searchInput">
-    <button class="search-button" onclick="performSearch()">
-        <span class="material-icons">search</span>
-    </button>
-    <div class="dropdown" id="dropdown">
-        <ul id="searchHistory">
-        <!-- 検索履歴がここに表示される -->
-        </ul>
-    </div>
-</div>
-
 <!-- メインコンテンツエリア -->
 <div class="list_header">
+    <!-- 検索ボックス -->
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="検索" id="searchInput">
+        <button class="search-button" onclick="performSearch()">
+            <span class="material-icons">search</span>
+        </button>
+        <div class="dropdown" id="dropdown">
+            <ul id="searchHistory">
+            <!-- 検索履歴がここに表示される -->
+            </ul>
+        </div>
+    </div>
     <div class="cp_ipselect06"> <!--セレクトボックス-->
         <select class="cp_sl06" required>
         <option value="1" selected>洋服　　</option>
@@ -47,7 +47,6 @@
     <div class="icons">
         <!--ごみ箱、ソートアイコン-->
         <span class="material-icons">swap_vert</span>
-        <span class="material-icons">delete</span>
     </div>
 </div>
 <div class="main-content" id="itemsList">

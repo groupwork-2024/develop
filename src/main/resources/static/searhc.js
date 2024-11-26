@@ -6,7 +6,8 @@ const searchTermFromUrl = urlParams.get('query'); // 'query'パラメータを�
 const items = [
     { id: 1, name: "クローゼット", location: "リビング", tags: ["収納", "洋服"] },
     { id: 2, name: "タンス", location: "寝室", tags: ["収納"] },
-    { id: 3, name: "収納袋", location: "倉庫", tags: ["収納", "布"] }
+    { id: 3, name: "収納袋", location: "倉庫", tags: ["収納", "布"] },
+    { id: 4, name: "洋服", location: "クローゼット", tags: ["夏", "ワンピース"] }
 ];
 
 // アイテムをHTMLに表示する関数
@@ -97,7 +98,6 @@ function performSearch(query) {
         alert("検索語を入力してください");
     }
 }
-
 
 // ページ読み込み時に履歴を表示
 updateSearchHistory();

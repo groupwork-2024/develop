@@ -35,16 +35,11 @@
 
 <!-- メインコンテンツエリア -->
 <div class="main-content">
-    <!-- コンテンツをここに追加 -->
     <div class="main-content">
-        <!-- Flexコンテナを追加 -->
         <div class="recommendation-weather">
-            <!-- 左側: おすすめコーデ -->
             <div class="space">
                 <h2>おすすめコーデ</h2>
             </div>
-    
-            <!-- 右側: 天気ウィジェット -->
             <div id="weather">
                 <div id="weather-info">
                     <p>天気: <span id="weather-description">Loading...</span></p>
@@ -53,46 +48,45 @@
                 <p>気温: <span id="temperature">Loading...</span> °C</p>
             </div>
         </div>
-  <!--カルーセル-->
-  <div id="app">
-    <div class="carousel-container">
-      <div class="carousel">
-        <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1018/600/400" alt="写真1"></a>
-        <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1015/600/400" alt="写真2"></a>
-        <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1019/600/400" alt="写真3"></a>
-        <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1016/600/400" alt="写真4"></a>
-        <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1020/600/400" alt="写真5"></a>
-      </div>
-      <button id="prevBtn" class="nav-btn">⇐</button>
-      <button id="nextBtn" class="nav-btn">⇒</button>
-  </div>
-  
-  
-  <!--検索欄-->
-  <main>
-    <div class="search-container">
-      <input type="text" class="search-input" placeholder="検索" id="searchInput">
-      <button class="search-button" onclick="performSearch()">
-        <span class="material-icons">search</span>
-      </button>
-      <div class="dropdown" id="dropdown">
-        <ul id="searchHistory">
-          <!-- 検索履歴がここに表示される -->
-        </ul>
-      </div>
+    <!--カルーセル-->
+        <div id="app">
+            <div class="carousel-container">
+                <div class="carousel">
+                    <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1018/600/400" alt="写真1"></a>
+                    <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1015/600/400" alt="写真2"></a>
+                    <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1019/600/400" alt="写真3"></a>
+                    <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1016/600/400" alt="写真4"></a>
+                    <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1020/600/400" alt="写真5"></a>
+                </div>
+                <button id="prevBtn" class="nav-btn">⇐</button>
+                <button id="nextBtn" class="nav-btn">⇒</button>
+            </div>
+        
+            <!--検索欄-->
+            <main>
+                <div class="search-container">
+                    <form action="search.html" method="GET" class="searchForm">
+                        <input type="text" class="search-input" id="searchInput" name="query" placeholder="検索" required autocomplete="off">
+                        <button class="search-button" type="submit"><span class="material-icons">search</span></button>
+                        <div class="dropdown" id="dropdown">
+                            <ul id="searchHistory">
+                                <!-- 検索履歴がここに表示される -->
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+                <div class="button">
+                    <a href="登録画面_洋服&収納.html">登録</a>
+                </div>
+                <div class="button">
+                    <a href="list_select.html">一覧</a>
+                </div>
+            </main>
+        </div>
     </div>
-    <div class="button">
-      <a href="登録画面_洋服&収納.html">登録</a>
-    </div>
-    <div class="button">
-      <a href="list_select.html">一覧</a>
-    </div>
-  </div>
-</main>
-</div>
 
 <script src="../static/templete_script.js"></script>
 <script src="../static/home.js"></script>
-<script src="../static/searhc.js"></script>
+
 </body>
 </html>

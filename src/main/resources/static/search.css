@@ -1,0 +1,92 @@
+
+/*検索位置*/
+.search-container {
+  display: flex;
+  flex-basis: 60%;
+  border-bottom: 2px solid #000;
+  width: 60%;
+  margin-left: 5%;
+  margin-bottom: 20px;
+  position: relative;
+  }
+  
+  /*検索欄とボタンを含めた場所のところ*/
+  .searchForm{
+    display: flex;
+    flex-basis: 100%;
+  }
+  
+  /*検索欄のところ*/
+  .search-input {
+    display: flex;
+    flex-basis: 90%;
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  /*押したら下のバーの色が変わる*/
+  .search-input::placeholder {
+  color: #aaa;
+  }
+  
+  /*検索ボタンのところ*/
+  .search-button {
+  display: flex;
+  flex-basis: 10%;
+  padding: 5px 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  }
+  
+  /*ドロップダウンの部分*/
+  .dropdown {
+  display: none; /* 初期状態では非表示 */
+  position: absolute;
+  top: 100%; /* 検索欄の下に表示 */
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 1;
+  }
+  
+  .dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  }
+  
+  .dropdown ul li {
+  padding: 10px;
+  cursor: pointer;
+  }
+  
+  .dropdown ul li:hover {
+  background-color: #f0f0f0;
+  }
+
+  .list_header{
+    display: flex;
+    align-items: flex-end;
+    height: 10%;
+  }
+
+  .cp_ipselect06{
+    display: flex;
+    flex-basis: 10%;
+    margin-left: 10%;
+    margin-bottom: 20px;
+  }
+  
+  .icons{
+    display: flex;
+    flex-basis: 5%;
+    margin-bottom: 20px;
+  }
