@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+body{
+    background-color:rgb(255, 254, 240);
+}
+
+.user-data{
+    color:#432;
+    /*横並びにして中央ぞろえ*/
+    display: flex;
+    align-items: center;
+}
+
+#icon{
+    width: 25vw;
+    height: 25vw;
+    border-radius: 50%;    /*円形にするために半径を50%に設定*/
+    object-fit: cover;      /*画像が切り取られても全体をカバー*/
+    margin-left: 30%;
+    margin-top: 15%;
+    margin-right: 20vw;
+}
+
+#user,#allcolor{
+    margin:0;
+}
+
+.select-color{
+    padding: 0;
+    margin-top: 0;
+}
+
+.circle{
+    font-size: 60px;
+    border: none;
+    background: none; /* ボタン背景を消去 */
+    cursor: pointer;
+    color: #007BFF; /* アイコンの色 */  
+}

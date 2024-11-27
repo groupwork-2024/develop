@@ -1,41 +1,53 @@
 <!-- マイページ -->
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webアプリ画面</title>
-    <!-- google fonts,css等の読み込み -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../static/template_style.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 最新のレンダリングエンジンを使用するように -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- 表示領域を設定し、デバイスの幅に合わせてページを表示して初期ズームレベルを1.0（100%） -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Webアプリ画面</title>
+        <!-- google fonts,css等の読み込み -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="../static/template_style.css">
+        <link rel="stylesheet" href="../static/mypage.css">
+    </head>
 
-<div class="header">
-    <button class="left-button" onclick="toggleSidebar()"><span class="material-icons">menu_open</span></button>
-    <a href="home.html" class="title-button">No Name</a>
-    <button class="right-button" onclick="notice_transition()"><span class="material-icons">notifications</span></button>
-</div>
+    <body>
+        <!-----------------ヘッダー------------------->
+        <div class="header">
+            <button class="left-button" onclick="toggleSidebar()"><span class="material-icons">menu_open</span></button>
+            <a href="home.html" class="title-button">No Name</a>
+            <button class="right-button" onclick="notice_transition()"><span class="material-icons">notifications</span></button>
+        </div>
 
-<!-- サイドバー -->
-<div id="sidebar" class="sidebar">
-    <button class="close-btn" onclick="toggleSidebar()">×</button>
-    <ul>
-        <li><a href="registration.html">登録</a></li>
-        <li><a href="search.html">検索</a></li>
-        <li><a href="mypage.html">マイページ</a></li>    
-        <li><a href="nice.html">いいね</a></li>    
-        <li><a href="enquiry.html">お問合わせ</a></li>    
-    </ul>
-</div>
+        <!-----------------サイドバー------------------>
+        <div id="sidebar" class="sidebar">
+            <button class="close-btn" onclick="toggleSidebar()">×</button>
+            <ul>
+                <li><a href="registration.html">登録</a></li>
+                <li><a href="search.html">検索</a></li>
+                <li><a href="mypage.html">マイページ</a></li>    
+                <li><a href="nice.html">いいね</a></li>    
+                <li><a href="enquiry.html">お問合わせ</a></li>    
+            </ul>
+        </div>
 
-<!-- メインコンテンツエリア -->
-<div class="main-content">
-    <!-- コンテンツをここに追加 -->
-    <h1>マイページ</h1>
-</div>
+        <!----------------メインコンテンツエリア----------------->
+        <div class="user-data">
+            <h1>
+                <img id="icon" src="../img/yuru04.jpg" alt="アイコン表示されるはず">
+            </h1>    
+            <div class="topleft">
+                <h2 id="username">user名</h2>
+                <div id="select-color">
+                    <h3 id="allcolor">フレームカラー</h3>
+                    <button class="circle" onclick=""><span>●</span></button>
+                </div>
+            </div>
+        </div>
 
-<script src="../static/templete_script.js"></script>
-</body>
+        <script src="../static/templete_script.js"></script>
+    </body>
 </html>
