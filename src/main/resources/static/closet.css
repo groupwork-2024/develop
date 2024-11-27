@@ -1,0 +1,355 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden; /* 横スクロールを防ぐ */
+    box-sizing: border-box;
+    background-color: rgb(231, 230, 230);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between; /* 子要素を左右の端に配置 */
+    align-items: center; /* 子要素を垂直中央に配置 */
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+}
+
+.title-button {
+    margin: 0;
+    font-size: 20px;
+    flex: 1; /* タイトル部分が中央に来るように広げる */
+    text-align: center; /* タイトルを中央に配置 */
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #007BFF; /* ボタンの色 */
+    text-decoration: none; /* 下線を消す */
+}
+
+.title-button:hover {
+    color: #0056b3; /* ホバー時の色変更 */
+    text-decoration: none; /* ホバー時に下線を消す */
+}
+
+.left-button, .right-button {
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    background: none; /* ボタン背景を消去 */
+    cursor: pointer;
+    color: #007BFF; /* アイコンの色 */
+}
+
+.left-button:hover, .right-button:hover {
+    color: #0056b3; /* ホバー時の色変更 */
+}
+
+.sidebar {
+    height: 100%;
+    width: 0; /* 初期状態で非表示 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden; /* 横スクロールを防ぐ */
+    transition: 0.3s; /* アニメーション */
+    padding-top: 60px;
+    color: white;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li a {
+    display: block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none; /* 下線を消す */
+}
+
+.sidebar ul li a:hover {
+    background-color: #575757; /* ホバー時の背景色 */
+}
+
+.sidebar .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    border: none;
+    background: none;
+    color: white;
+    cursor: pointer;
+}
+
+.main-content {
+    padding: 20px;
+}
+
+.container {
+    width: 90%;               /* 幅をウィンドウに対して柔軟に */
+    max-width: 600px;         /* 最大幅を設定 */
+    margin: 0 auto;
+    text-align: center;
+    border: 1px solid #000;
+    padding: 10px;            /* コンテンツに余白を追加 */
+    background-color: #fff;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 左右に配置 */
+    padding: 10px;
+    border-bottom: 1px solid #000;
+    background-color: #f4f4f4;
+}
+
+.back-button {
+    font-size: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+h1 {
+    font-size: 18px;
+    margin: 0;
+    flex: 1; /* 左右の余白を伸ばす */
+    text-align: center; /* タイトルを中央揃え */
+}
+
+/* フォームのレイアウト調整 */
+form {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* 要素間のスペース */
+    background-color: #ffffff;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* ボタンと入力欄のスペース */
+}
+
+.input-container input {
+    flex: 1; /* 入力欄を広げる */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.info-button {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    border: 1px solid #000;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* プレビューエリアのレイアウト */
+.closet-preview {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid #000;
+    margin: 20px auto;
+    width: 100%;
+    min-height: 200px; /* 最小高さ */
+    padding: 10px;
+}
+
+/* ハンガースタイル */
+.hanger {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    margin: 5px;
+}
+
+/* フッター */
+footer {
+    border-top: 1px solid #000;
+    padding: 10px;
+}
+
+.submit-button {
+    width: 100%; /* 幅を全体に広げる */
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+/* レスポンシブ設定 */
+@media (max-width: 600px) {
+    .container {
+        width: 95%; /* スマホ画面に合わせる */
+    }
+
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 16px;
+    }
+
+    .submit-button {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 400px) {
+    .input-container {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .info-button {
+        width: 25px;
+        height: 25px;
+        font-size: 14px;
+    }
+
+    .closet-preview {
+        gap: 5px;
+    }
+
+    .hanger {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/*.closet-preview {
+    display: flex;         /* 横並びに配置 */
+   /* flex-wrap: wrap;       /* 折り返しを有効にする */
+   /* justify-content: center; /* 中央揃え */
+   /* gap: 10px;             /* ハンガー間のスペース */
+   /* border: 1px solid #000;
+    height: auto;          /* 自動で高さを調整 */
+   /* margin: 20px auto;
+    position: relative;
+    width: 100%;           /* 幅を広げて横並びスペースを確保 */
+   /* max-width: 300px;      /* 必要に応じて制限 */
+/*}
+*/
+/* プレビューエリア */
+.closet-preview {
+    position: relative; /* 絶対配置の基準 */
+    width: 300px;       /* 横幅 */
+    height: 400px;      /* 高さ */
+    border: 1px solid #000;
+    margin: 20px auto;
+    overflow: hidden;   /* はみ出した部分を隠す */
+    background-color: #f9f9f9; /* 背景色 */
+}
+
+/* ハンガー */
+.hanger {
+    position: absolute;
+    width: 120px; /* ハンガー画像の幅 */
+    height: 80px; /* ハンガー画像の高さ */
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* 服 */
+.clothes {
+    position: absolute;
+    width: 100px; /* 服画像の幅 */
+    height: 140px; /* 服画像の高さ */
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: -1; /* ハンガーの下に配置 */
+}
+
+
+.submit-button {
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+/* モーダル背景 */
+#modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* 背景を半透明に */
+    z-index: 999;
+  }
+  
+  /* モーダル本体 */
+  #modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 400px;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 1000;
+  }
+  
+  /* 非表示用 */
+  .hidden {
+    display: none;
+  }
+  
+  /* モーダル内部のコンテンツ */
+  .modal-content {
+    text-align: center;
+  }
+  
+  .modal-content h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .modal-content p {
+    margin-bottom: 20px;
+  }
+  
+  .modal-content select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .modal-content button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .modal-content button:hover {
+    background-color: #0056b3;
+  }
+  

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クローゼット登録</title>
+    <link rel="stylesheet" href="closet.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <button class="back-button">←</button>
+            <h1>クローゼット登録</h1>
+        </header>
+        <main>
+            <form>
+                <label for="name">名前:</label>
+                <div class="input-container">
+                    <input type="text" id="name" name="name">
+                    <button class="info-button">?</button>
+                </div>
+                
+                <label for="hanger-count">ハンガーの個数:</label>
+                <div class="input-container">
+                    <input type="number" id="hanger-count" name="hanger-count">
+                    <button class="info-button">?</button>
+                </div>
+            </form>
+            <div class="closet-preview">
+                <div class="hanger"></div>
+            </div>
+        </main>
+        <footer>
+            <button class="submit-button">完了</button>
+        </footer>
+        <script src="closet.js"></script>
+    </div>
+</body>
+</html>
