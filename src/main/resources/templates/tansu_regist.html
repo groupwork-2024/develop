@@ -17,29 +17,14 @@
   <div class="header">
     <!--戻るのところ-->
     <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
-    <a href="home.html" class="title-button">No Name</a>
+    <a href="home.html" class="title-button">タンス登録</a>
     <a class="right_area">　</a>
 </div>
 
-<!-- サイドバー -->
-<div id="sidebar" class="sidebar">
-    <button class="close-btn" onclick="toggleSidebar()">×</button>
-    <ul>
-        <li><a href=".html">登録</a></li>
-        <li><a href=".html">検索</a></li>
-        <li><a href=".html">マイページ</a></li>    
-        <li><a href=".html">いいね</a></li>    
-        <li><a href=".html">お問合わせ</a></li>    
-    </ul>
-</div>
 
 <!-- メインコンテンツエリア -->
 
 <div id="app">
-    <div class="header">
-      <button id="back-button" class="back-button">＜</button>
-      <h1>タンス登録</h1>
-    </div>
     <div class="input-section">
       <label for="name">1 名前：</label>
       <input type="text" id="name" name="name">
@@ -60,7 +45,8 @@
   </div>
 
   <div class="completion">
-    <a id="complete-button">完了</a>
+    <button class="complete-button">完了</button>
+  </div>
 </div>
 
 </main>

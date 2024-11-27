@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
             hanger.className = "hanger";
             hanger.style.top = `${i * 40}px`;  // ハンガーの縦位置
             hanger.style.left = `${i * 20}px`; // ハンガーの横位置
-            hanger.style.backgroundImage = "url('file.png')"; // ハンガー画像
+            hanger.style.backgroundImage = "url('../img/file.png')"; // ハンガー画像
 
            
 

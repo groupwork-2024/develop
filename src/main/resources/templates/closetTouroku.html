@@ -4,26 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>クローゼット登録</title>
-    <link rel="stylesheet" href="closet.css">
+    <!-- google fonts,css等の読み込み -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="..\static\closet.css">
+    <link rel="stylesheet" href="..\static\back&completion.css">
 </head>
 <body>
+    <!--ヘッダー部分-->
+    <div class="header">
+        <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
+        <a href="home.html" class="title-button">タンス登録</a>
+        <a class="right_area">　</a>
+    </div>
+
+    <!--メインの部分-->
     <div class="container">
-        <header>
-            <button class="back-button">←</button>
-            <h1>クローゼット登録</h1>
-        </header>
         <main>
             <form>
                 <label for="name">名前:</label>
                 <div class="input-container">
                     <input type="text" id="name" name="name">
-                    <button class="info-button">?</button>
+                    <button class="info-button">
+                        <span class="material-icons">
+                        help_outline
+                        </span>
+                    </button>
                 </div>
                 
                 <label for="hanger-count">ハンガーの個数:</label>
                 <div class="input-container">
                     <input type="number" id="hanger-count" name="hanger-count">
-                    <button class="info-button">?</button>
+                    <button class="info-button">
+                        <span class="material-icons">
+                        help_outline
+                        </span>
+                    </button>
                 </div>
             </form>
             <div class="closet-preview">
@@ -31,9 +46,11 @@
             </div>
         </main>
         <footer>
-            <button class="submit-button">完了</button>
+            <div class="completion">
+                <button class="submit-button">完了</button>
+            </div>
         </footer>
-        <script src="closet.js"></script>
+        <script src="..\static\closet.js"></script>
     </div>
 </body>
 </html>
