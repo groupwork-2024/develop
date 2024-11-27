@@ -44,7 +44,14 @@ body, html {
 }
 
 /* .completionが完了のボタン関連のcss */
-.completion a{
+.completion{
+  display: flex;
+  flex-basis: 100%;
+}
+
+.completion button{
+  display: flex;
+  flex-basis: 100%;
   text-decoration: none; /* ホバー時に下線を消す */
   text-align:center;
   background: #eee;
@@ -62,14 +69,15 @@ body, html {
   text-decoration: none;
   transition: 0.3s ease-in-out;
   font-weight: 500;
+  border:none;
 }
 
-.completion a:hover{
+.completion button:hover{
   background: #333;
   color:#FFF;
 }
 
-.completion a::after{
+.completion button::after{
   content: '';
   width: 5px;
   height: 5px;
@@ -83,7 +91,7 @@ body, html {
   transition: 0.3s ease-in-out;
 }
 
-.completion a:hover:after {
+.completion button:hover:after {
   border-color: #FFF;
 }
 

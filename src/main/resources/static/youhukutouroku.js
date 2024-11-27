@@ -1,3 +1,4 @@
+//タグ登録関係
 let colorOptions = ['#ff0000', '#00ff00', '#0000ff', '#ff00ff']; // 初期の色
 let selectedColor = null;
 
@@ -131,79 +132,29 @@ let mainScreenData = {
     memo: "",
     tags: []
 };
-  
-  // 完了ボタンがクリックされたときの処理
-document.getElementById("completeButton").addEventListener("click", function (event) {
-    event.preventDefault(); // ページのリロードを防ぐ
-    console.log("完了ボタンがクリックされました"); // この行でクリックイベントの確認
 
-    // メイン画面からデータを取得
-    mainScreenData.name = document.getElementById("name").value;
-    mainScreenData.brand = document.getElementById("brand").value;
-    mainScreenData.location = document.getElementById("location").value;
-    mainScreenData.memo = document.getElementById("memo").value;
+// 完了ボタンが押されたときの処理
+//確認画面の表示
+//モーダル要素を取得
+var reviwModal = document.getElementById("reviewModalScreen");
+//モーダルを開くボタンを取得
+var reviwbtn = document.getElementById("review-modal-button");
+//モーダルを閉じるアイコンを取得
+var span = document.getElementById("reviwCloseBtn");
 
-    // タグ情報も取得（すでに表示されているものを利用）
-    mainScreenData.tags = Array.from(document.querySelectorAll("#labelDisplay .tag")).map(tag => {
-        return { name: tag.textContent, color: tag.style.backgroundColor };
-    });
-
-    // 確認画面にデータを表示
-    displayReviewScreen();
-
-    // メイン画面を非表示にして確認画面を表示
-    document.getElementById("screen1").style.display = "none";
-    document.getElementById("screen2").style.display = "block";
-});
-
-  
-  // 確認画面にデータを表示する関数
-function displayReviewScreen() {
-    console.log("確認画面にデータを表示"); // デバッグ用のログ
-
-    document.getElementById("reviewName").textContent = `名前: ${mainScreenData.name}`;
-    document.getElementById("reviewBrand").textContent = `ブランド名: ${mainScreenData.brand}`;
-    document.getElementById("reviewLocation").textContent = `収納場所: ${mainScreenData.location}`;
-    document.getElementById("reviewMemo").textContent = `メモ: ${mainScreenData.memo}`;
-    
-    const reviewTags = document.getElementById("reviewTags");
-    reviewTags.innerHTML = ''; // タグ表示をクリア
-  
-    mainScreenData.tags.forEach(tag => {
-        const tagElement = document.createElement("span");
-        tagElement.textContent = tag.name;
-        tagElement.style.backgroundColor = tag.color;
-        tagElement.classList.add("tag-style");
-        reviewTags.appendChild(tagElement);
-    });
+//ボタンがクリックされたとき、モーダルを表示
+reviwbtn.onclick = function(){
+    reviwModal.style.display="flex";
 }
 
-  
-  
-  // 登録ボタンがクリックされたときの処理
-function registerData() {
-    // ここで登録処理を実行（例: サーバーにデータを送信）
-  
-    alert("データが登録されました！");
-    
-    // 必要に応じてメイン画面に戻す処理
-    document.getElementById("screen1").style.display = "block";
-    document.getElementById("screen2").style.display = "none";
+//×を押したとき、閉じる
+span.onclick=function(){
+    reviwModal.style.display="none";
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const completeButton = document.getElementById("completeButton");
-
-    // ボタンが存在するか確認する
-    if (completeButton) {
-        completeButton.addEventListener("click", function (event) {
-            event.preventDefault(); // ページリロードを防止
-            console.log("完了ボタンがクリックされました"); // デバッグ用
-        });
-    } else {
-        console.log("完了ボタンが見つかりませんでした"); // デバッグ用
+//モーダルの範囲外が押された場合も閉じる
+window.onclick = function(event){
+    if(event.target == reviwModal){
+        reviwModal.style.display="none";
     }
-});
-
-
-  
+}
