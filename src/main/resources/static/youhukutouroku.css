@@ -286,6 +286,7 @@ form input:focus, form textarea:focus {
 
 .capture{
     background-color: transparent;
+    border: none;
 }
 
 /* ＋ボタンのスタイル */
