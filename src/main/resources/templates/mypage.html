@@ -35,19 +35,100 @@
         </div>
 
         <!----------------メインコンテンツエリア----------------->
-        <div class="user-data">
-            <h1>
-                <img id="icon" src="../img/yuru04.jpg" alt="アイコン表示されるはず">
-            </h1>    
-            <div class="topleft">
-                <h2 id="username">user名</h2>
-                <div id="select-color">
-                    <h3 id="allcolor">フレームカラー</h3>
-                    <button class="circle" onclick=""><span>●</span></button>
+        <main class="main-content">
+            <!----------------プロフィール部分-------------------->
+            <section class="profile-section">
+                <!--アイコン部分-->
+                <div class="profile-circle">
+                    <img id="profile-image" src="" alt="プロフィール画像">
+                    <button class="plus-buttom" onclick="document.getElementById('file-input').click()">＋</button>
+                    <input id="file-input" type="file" accept="image/*" style="display: none;" onchange="iconImage(event)">
                 </div>
-            </div>
-        </div>
+                <!--その他ユーザー名など-->
+                <div class="profile-others">
+                    <p>ユーザー名：</p>
+                    <p>フレームカラー</p>
+                    <!--色の選択-->
+                    <div class="select-color">
+                        <button class="color-btn red" data-color="red"></button>
+                        <button class="color-btn orange" data-color="orange"></button>
+                        <button class="color-btn yellow" data-color="yellow"></button>
+                        <button class="color-btn blue" data-color="blue"></button>
+                    </div>
+                </div>
+            </section>
+
+            <!----------------一覧表示選択ボタン-------------------->
+            <nav class="tab-list">
+                <button class="tab youhuku active"><span id="icon" class="material-icons">checkroom</span></button>
+                <button class="tab closet"><span id="icon" class="material-icons">blinds</span></button>
+                <button class="tab tag"><span id="icon" class="material-icons">sell</span></button>
+            </nav>
+
+            <!----------------洋服・収納・タグの一覧------------------->            
+            <!--洋服の一覧を表示-->
+            <section id="youhuku-grid" class="item-grid">
+                <div class="youhuku-item">
+                    <img src="../img/youfuku_test.png" alt="洋服1"> 
+                  </div>
+                  <div class="youhuku-item">
+                    <img src="../img/youfuku_test.png" alt="洋服2">
+                  </div>
+                  <div class="youhuku-item">
+                    <img src="../img/youfuku_test.png" alt="洋服3">
+                  </div>
+                  <div class="youhuku-item">
+                    <img src="../img/youfuku_test.png" alt="洋服4">
+                  </div>
+                  <div class="youhuku-item">
+                    <img src="../img/youfuku_test.png" alt="洋服5">
+                  </div>
+                  <div class="youhuku-item">
+                    <img src="../img/youfuku_test.png" alt="洋服6">
+                  </div>
+                  <div class="youhuku-item">
+                    <img src="../img/youfuku_test.png" alt="洋服7">
+                  </div>
+                  <div class="youhuku-item">
+                    <img src="../img/youfuku_test.png" alt="洋服8">
+                  </div>
+            </section>
+
+            <!--収納の一覧を表示-->
+            <section id="closet-grid" class="item-grid">
+                <div class="closet-item">
+                    <img src="../img/clothes.png" alt="収納1"> 
+                  </div>
+                  <div class="closet-item">
+                    <img src="../img/clothes.png" alt="収納2">
+                  </div>
+                  <div class="closet-item">
+                    <img src="../img/clothes.png" alt="収納3">
+                  </div>
+                  <div class="closet-item">
+                    <img src="../img/clothes.png" alt="収納4">
+                  </div>
+                  <div class="closet-item">
+                    <img src="../img/clothes.png" alt="収納5">
+                  </div>
+                  <div class="closet-item">
+                    <img src="../img/clothes.png" alt="収納6">
+                  </div>
+                  <div class="closet-item">
+                    <img src="../img/clothes.png" alt="収納7">
+                  </div>
+                  <div class="closet-item">
+                    <img src="../img/clothes.png" alt="収納8">
+                  </div>
+            </section>
+
+            <!--タグの一覧を表示-->
+            <section id="tag-grid" class="item-grid">
+                <p>タグはまだ登録されていません。</p>
+            </section>
+        </main>
 
         <script src="../static/templete_script.js"></script>
+        <script src="../static/mypage.js"></script>
     </body>
 </html>
