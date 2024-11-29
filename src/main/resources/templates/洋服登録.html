@@ -15,80 +15,134 @@
     <!--ヘッダー部分-->
     <div class="header">
         <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
-        <a href="home.html" class="title-button">No Name</a>
+        <a class="title-button">洋服登録</a>
         <a class="right_area">　</a>
     </div>
 
     <div class="main-content">
-        <div id="screen1">
-            <div class="form-group-a">
-                <label for="name" class="label">名前:</label>
-                <input type="text" id="name" class="underline" placeholder="例:">
-            </div>
-            <!--写真アップロード-->
-            <div class="image-upload-container">
-                <input type="file" id="file-upload" accept="image/*" style="display: none;" onchange="previewImage(event)"> 
-                <div class="preview-container">
-                <img id="image-preview" class="image-preview" src="" alt="Image Preview" style="display: none;">
-                </div>
-                <a href="#" onclick="document.getElementById('file-upload').click(); return false;" class="btn-real-dent"> 
-                    <i class="fa fa-plus"></i>
-                </a>
-            </div>
-            <!--詳細追加-->
-            <div class="form-group-b">
-                <label for="name" class="label">ブランド名 :</label>
-                <input type="text" id="brandname" class="underline">
-                <label for="name" class="label">収納場所  :</label>
-                <input type="text" id="where" class="underline">
-                <label for="name" class="label">その他：</label>
-                <textarea name="other" id="other" rows="3" cols="50" maxlength="150" placeholder="メモを記入します。"></textarea>
-            </div>
+        <!--フォーム-->
+        <form id="reviewForm">
+            <!--名前-->
+            <label for="name">名前</label>
+            <input type="text" id="name" name="name" required>
 
-            <div class="form-group-e">
-                <!--タグ追加-->
-                <label for="name" class="label">タグ：</label>
-                <div class="label-container">
-                    <div class="label-display" id="labelDisplay"></div>
-                    <abbr class="btn-real-dents" id="openModalButton"> 
-                        <i class="fa fa-plus"></i>
-                    </abbr>
-                </div>
-            </div>
+            <!-- 写真 -->
+            <label for="image">写真</label>
+            <div class="image-container">
+                <!--ファイル選択-->
+                <input type="file" id="image" name="image" accept="image/*" capture="camera" onchange="previewImage()" style="display: none;">
 
-            <!--タグ追加-->
-            <div id="modal" class="modal">
-                <div class="modal-content">
-                    <h2>タグ追加登録</h2>
-                    <label for="label-name">名前:</label>
-                    <input type="text" id="label-name" placeholder="タグの名前を入力">
-                    <h3>色を選択:</h3>
-                    <div id="colorPalette" class="color-palette"></div>
-                    <input type="color" id="customColorPicker">
-                    <span class="close-btn" onclick="closeModal()">&times;</span>
-                    <button onclick="saveLabel()">登録</button>
+                <!--画像プレビュー-->
+                <div class="imagePreviewContainer">
+                    <!-- 初期画像を指定 -->
+                    <img id="imagePreview" src="../img/youfuku_test.png" alt="画像プレビュー" style="max-width: 100%; max-height: 200px;">
                 </div>
-            </div>
 
-            <!--登録完了ボタン 確認画面を見れるボタン-->
-            <div class="completion">
-                <button id="review-modal-button" class="reviewModalButton">
-                    完了
+                <!--写真を撮れるボタン-->
+                <button type="button" id="addPhoto" class="addPhoto" aria-label="カメラを起動" onclick="openCamera()">
+                    <span class="material-icons">
+                        add_a_photo
+                    </span>
                 </button>
+
+                <!-- ＋ボタン -->
+                <button type="button" id="addImageButton" class="add-image-button">
+                    <span class="material-icons">
+                        add_circle_outline
+                    </span>
+                </button>
+
+                <!-- カメラを表示するためのビデオとキャンバス -->
+                <video id="video" style="display: none;" width="320" height="240" autoplay></video>
+                <canvas id="canvas" style="display: none;"></canvas>
+                <button type="button" id="capture" style="display: none;" onclick="captureImage()">撮影</button>
             </div>
+
+            <!--その他詳細情報-->
+            <label for="brand">ブランド</label>
+            <input type="text" id="brand" name="brand">
+
+            <label for="location">収納場所</label>
+            <input type="text" id="location" name="location">
+
+            <label for="memo">メモ</label>
+            <textarea id="memo" name="memo" rows="1" cols="50" maxlength="150" placeholder="例:オーバーサイズ"></textarea>
+
+            <label for="tags">タグ</label>
+            <div class="label-container">
+                <div class="label-display" id="labelDisplay"></div>
+                <span class="material-icons" id="tagOpenButton">
+                    add_circle_outline
+                </span>
+            </div>
+
+            <!--タグ追加のモーダル-->
+            <div id="tagmodal" class="tagmodal">
+                <div class="tagModalContent">
+                    <span class="TagClose" id="TagCloseModalButton">&times;</span>
+
+                    <h2>タグ追加登録</h2>
+
+                    <!-- タグ名入力フィールド -->
+                    <label for="TagName">タグの名前</label>
+                    <input type="text" id="tagInput" placeholder="例:お気に入り" required>
+
+                    <h3>色を選択</h3>
+
+                    <!-- プリセットカラー -->
+                    <div id="colorPalette" class="color-palette">
+                    <!-- プリセットカラーが並ぶエリア -->
+                        <button class="color-btn" style="background-color: #FF6347;" data-color="#FF6347"></button> 
+                        <button class="color-btn" style="background-color: #4682B4;" data-color="#4682B4"></button> 
+                        <button class="color-btn" style="background-color: #32CD32;" data-color="#32CD32"></button> 
+                        <button class="color-btn" style="background-color: #FFD700;" data-color="#FFD700"></button>
+
+                        <!-- 追加ボタン -->
+                        <button type="button" id="addColorBtn" class="add-color-btn">
+                            <span class="material-icons">add_circle_outline</span> <!-- ＋ボタン -->
+                        </button>
+                    </div>
+
+                    <!-- カラーパレット表示エリア（隠れている） -->
+                    <div id="colorPickerContainer" class="color-picker-container" style="display:none;">
+                        <!-- カスタムカラー選択 -->
+                        <input type="color" id="customColorPicker" value="#000000">
+                        <button type="button" id="addSelectedColorBtn">
+                            色を追加
+                        </button>
+                    </div>
+
+                    <!-- 色の追加エリア（選んだ色を表示） -->
+                    <div id="colorDisplayArea" class="color-display-area">
+                        <!-- ここに色が追加される -->
+                    </div>
+
+                    <!-- タグ登録ボタン -->
+                    <button id="addTagButton">登録</button>
+                </div>
+            </div>
+
+        </form>
+
+        <!--登録完了ボタン 確認画面を見れるボタン-->
+        <div class="completion">
+            <button id="review-modal-button" class="reviewModalButton" onclick="openReviewModal()">
+                完了
+            </button>
         </div>
 
+
         <!-- 確認画面の表示 -->
-        <div id="reviewModalScreen" class="reviewModal">
+        <div id="reviewModal" class="reviewModal">
             <div class="reviewModalContent">
                 <span id="reviwCloseBtn">&times;</span>
                 <h3>確認画面</h3>
-                <div id="reviewName" class="reviewName">名前: </div>
-                <div id="reviewImage" class="reviewImage">写真: </div>
-                <div id="reviewTags" class="reviewTags">タグ: </div>
-                <div id="reviewBrand" class="reviewBrand">ブランド: </div>
-                <div id="reviewLocation" class="reviewLocation">収納場所: </div>
-                <div id="reviewMemo" class="reviewMemo">メモ: </div>
+                <div id="reviewName" class="reviewName">名前 </div>
+                <div id="reviewImage" class="reviewImage">写真 </div>
+                <div id="reviewTags" class="reviewTags">タグ </div>
+                <div id="reviewBrand" class="reviewBrand">ブランド </div>
+                <div id="reviewLocation" class="reviewLocation">収納場所 </div>
+                <div id="reviewMemo" class="reviewMemo">メモ </div>
                 <!-- 登録ボタン -->
                 <button onclick="registerData()">登録</button>
             </div>
