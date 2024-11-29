@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Storage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
