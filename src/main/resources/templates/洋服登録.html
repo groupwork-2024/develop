@@ -55,7 +55,11 @@
                 <!-- カメラを表示するためのビデオとキャンバス -->
                 <video id="video" style="display: none;" width="320" height="240" autoplay></video>
                 <canvas id="canvas" style="display: none;"></canvas>
-                <button type="button" id="capture" style="display: none;" onclick="captureImage()">撮影</button>
+                <button type="button" id="capture" class="capture" style="display: none;" onclick="captureImage()">
+                    <span class="material-icons">
+                        camera
+                    </span>
+                </button>
             </div>
 
             <!--その他詳細情報-->

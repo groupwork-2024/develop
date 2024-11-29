@@ -284,6 +284,10 @@ form input:focus, form textarea:focus {
     border: none;;
 }
 
+.capture{
+    background-color: transparent;
+}
+
 /* ＋ボタンのスタイル */
 .add-image-button {
     display: flex;
