@@ -1,128 +1,91 @@
-  //カルーセル
-  document.addEventListener('DOMContentLoaded', function() {
-    const carousel = document.querySelector('.carousel');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const images = carousel.querySelectorAll('img');
-
-    let currentIndex = 0;
-    const totalImages = images.length;
-
-    function showImage(index) {
-        carousel.style.transform = `translateX(-${index * 100}%)`;
-    }
-
-    function nextImage() {
-        currentIndex = (currentIndex + 1) % totalImages;
-        showImage(currentIndex);
-    }
-
-    function prevImage() {
-        currentIndex = (currentIndex - 1 + totalImages) % totalImages;
-        showImage(currentIndex);
-    }
-
-    nextBtn.addEventListener('click', nextImage);
-    prevBtn.addEventListener('click', prevImage);
-
-    // 自動切り替え
-    let autoSlide = setInterval(nextImage, 5000);
-
-    // マウスオーバーで自動切り替えを停止
-    carousel.addEventListener('mouseenter', () => {
-        clearInterval(autoSlide);
-    });
-
-    // マウスアウトで自動切り替えを再開
-    carousel.addEventListener('mouseleave', () => {
-        autoSlide = setInterval(nextImage, 5000);
-    });
-
-    // 初期表示
-    showImage(currentIndex);
-});
-
-setInterval(() => {
-  currentSlide = (currentSlide + 1) % slides.length;
-  slides[currentSlide].checked = true;
-}, 3000); // 3000 milliseconds = 3 seconds
-
-
-//天気
-
+// Geolocation APIが使用可能か確認
+// 現在地情報を取得し、成功時には位置情報を処理する関数(showPosition)を呼び出し、
+// 失敗時にはエラー処理関数(showError)を呼び出す。
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(showPosition, showError);
-} else {
-  alert("Geolocation is not supported by this browser.");
+} 
+else {
+  // Geolocation APIがサポートされていない場合に警告を表示
+  alert("Geolocation APIがサポートされていない");
 }
 
+// 現在地取得が成功した場合に実行される関数
+// 緯度(latitude)と経度(longitude)を取得し、天気情報を取得する関数(getWeather)に渡す。
 function showPosition(position) {
-  const lat = position.coords.latitude;
-  const lon = position.coords.longitude;
-  getWeather(lat, lon);
+  const lat = position.coords.latitude; // 緯度を取得
+  const lon = position.coords.longitude; // 経度を取得
+  getWeather(lat, lon); // 天気情報を取得する関数を呼び出し
 }
 
+// 現在地取得が失敗した場合に実行されるエラー処理関数
+// エラーの種類に応じたメッセージをアラートで表示する。
 function showError(error) {
   switch (error.code) {
-    case error.PERMISSION_DENIED:
-      alert("User denied the request for Geolocation.");
+    case error.PERMISSION_DENIED: // ユーザーが位置情報取得を拒否した場合
+      alert("位置情報取得を拒否しました");
       break;
-    case error.POSITION_UNAVAILABLE:
-      alert("Location information is unavailable.");
+    case error.POSITION_UNAVAILABLE: // 位置情報が取得できなかった場合
+      alert("位置情報が取得できませんでした");
       break;
-    case error.TIMEOUT:
-      alert("The request to get user location timed out.");
+    case error.TIMEOUT: // 位置情報取得がタイムアウトした場合
+      alert("位置情報取得がタイムアウトしました");
       break;
-    case error.UNKNOWN_ERROR:
-      alert("An unknown error occurred.");
+    case error.UNKNOWN_ERROR: // その他の不明なエラーが発生した場合
+      alert("不明なエラーが発生しました");
       break;
   }
 }
 
+// 天気情報を取得する関数
+// 引数として緯度(lat)と経度(lon)を受け取り、Open-Meteo APIを使用して天気データを取得する。
 function getWeather(lat, lon) {
-  const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+  const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`; // APIのエンドポイントを生成
 
+  // fetchを使用してAPIリクエストを送信
   fetch(apiUrl)
-    .then(response => response.json())
+    .then(response => response.json()) // レスポンスをJSON形式に変換
     .then(data => {
-      const temp = data.current_weather.temperature;
-      const weatherCode = data.current_weather.weathercode;
-      displayWeather(temp, weatherCode);
+      // APIから返された天気情報を取得
+      const temp = data.current_weather.temperature; // 現在の気温
+      const weatherCode = data.current_weather.weathercode; // 天気のコード
+      displayWeather(temp, weatherCode); // 取得した情報を画面に表示する関数を呼び出し
     })
-    .catch(error => console.error('Error fetching weather data:', error));
+    .catch(error => {
+      // APIリクエストが失敗した場合にエラーをログに出力
+      console.error('Error fetching weather data:', error);
+    });
 }
 
+// 天気情報を画面に表示する関数
+// 気温(temp)と天気コード(weatherCode)を受け取り、HTML要素に反映する。
 function displayWeather(temp, weatherCode) {
-  const weatherDescription = getWeatherDescription(weatherCode);
-  const weatherIcon = getWeatherIcon(weatherCode);
+  const weatherIcon = getWeatherIcon(weatherCode); // 天気コードに基づいた天気アイコンのURLを取得
 
-  document.getElementById('weather-description').textContent = weatherDescription;
+  // 気温をHTMLに表示
   document.getElementById('temperature').textContent = temp;
 
-  const iconElement = document.getElementById('weather-icon');
-  iconElement.src = weatherIcon;
-  iconElement.style.display = 'block';
+  // 天気アイコンをHTMLに表示
+  const iconElement = document.getElementById('weather-icon'); // アイコン要素を取得
+  iconElement.src = weatherIcon; // アイコンの画像ソースを設定
+  iconElement.style.display = 'block'; // アイコンを表示
 }
 
-function getWeatherDescription(code) {
-  const weatherMap = {
-    0: "快晴",
-    1: "晴れ",
-    2: "曇り",
-    3: "雨",
-  };
-  return weatherMap[code] || "晴れ";
-}
-
+// 天気コードに基づいて天気アイコンのURLを返す関数
 function getWeatherIcon(code) {
   const iconMap = {
-    0: "../img/icons/kaisei.png",   
-    1: "../img/icons/hare.png",   
-    2: "../img/icons/kumori.png",
-    3: "../img/icons/ame.png",
+    0: "../img/icons/kaisei.png",   // 天気コード0: 快晴アイコン
+    1: "../img/icons/hare.png",    // 天気コード1: 晴れアイコン
+    2: "../img/icons/kumori.png",  // 天気コード2: 曇りアイコン
+    3: "../img/icons/ame.png",     // 天気コード3: 雨アイコン
   };
-  return iconMap[code] || "../img/icons/hare.png"; 
+  return iconMap[code] || "../img/icons/hare.png"; // 指定されたコードが存在しない場合は晴れアイコンを返す
 }
+
+
+//カルーセル
+
+
+
 
 //検索
 // 検索履歴をローカルストレージに保存する関数
