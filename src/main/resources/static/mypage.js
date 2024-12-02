@@ -18,7 +18,7 @@ document.querySelectorAll('.tab').forEach(tab => {
       //すべての一覧を非表示にする
       document.querySelectorAll('.item-grid').forEach(section => section.style.display = 'none');
   
-      // 3. クリックされたタブに対応する一覧を表示
+      //クリックされたタブに対応する一覧を表示
       if (tab.classList.contains('youhuku')) {
         document.getElementById('youhuku-grid').style.display = 'grid';
       } 
@@ -60,6 +60,11 @@ document.querySelectorAll('.color-btn').forEach(button => {
       // すべてのタブアイコンの色を変更
       document.querySelectorAll('#icon').forEach(icon => {
         icon.style.color = selectedColor; // タブの色を選択された色に変更
+      });
+
+      //アイコン写真の＋ボタンの色を変える
+      document.querySelectorAll('.plus-buttom').forEach(plus => {
+        plus.style.backgroundColor = selectedColor; // タブの色を選択された色に変更
       });
     });
   });

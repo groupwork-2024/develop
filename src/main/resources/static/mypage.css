@@ -42,7 +42,7 @@ body{
     height: 24px;
     border: none;
     border-radius: 50%;
-    background-color: #000;
+    background-color:darkslategray;
     color: #fff;
     cursor: pointer;
 }
