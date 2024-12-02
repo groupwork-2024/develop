@@ -1,53 +1,58 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden; /* 横スクロールを防ぐ */
-    box-sizing: border-box;
-    background-color: rgb(231, 230, 230);
-}
-
-/*タンス登録*/
-.container {
-    width: 90%;               /* 幅をウィンドウに対して柔軟に */
-    max-width: 600px;         /* 最大幅を設定 */
-    margin: 0 auto;
-    margin-top: 3%;
-    text-align: center;
-    border: 1px solid #000;
-    padding: 10px;            /* コンテンツに余白を追加 */
-    background-color: #fff;
-}
-
 /* フォームのレイアウト調整 */
 form {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* 要素間のスペース */
-    background-color: #ffffff;
+    max-width: 70%;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    text-align: left;
+}
+
+/* フォームのラベルのスタイル */
+form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+/* フォームの入力エリアのスタイル */
+form input{
+    width: 100%;
+    padding: 10px;
+    resize: none;
+    outline: none; 
+    gap: 10px;
+}
+
+/* フォーカス時のスタイル（選択時に下線を変更） */
+.input-container:focus-within{
+    border: none;
+    width: 100%;
+    border-bottom: 2px solid #ea512fce;
+    border-radius: 1px; 
+    box-shadow: none; /* フォーカス時の影を消す */
+    outline: none; /* フォーカス時のアウトラインも消す */
 }
 
 /* 入力場所のレイアウト */
 .input-container {
     display: flex;
-    align-items: center;
-    gap: 10px; /* ボタンと入力欄のスペース */
+    width: 100%;
+    border: none;
+    padding: 10px;
+    padding-bottom: 0;
+    border-bottom: 1.5px solid #929292;
+    border-radius: 1px;
+    resize: none;
+    outline: none; 
+    margin-bottom: 15px;
+    gap: 10px; 
 }
 
-.input-container input {
-    flex: 1; /* 入力欄を広げる */
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+/* 入力欄のスタイル */
+form input{
+    border: none;
 }
 
 /* ?のところ */
 .info-button {
-    width: 30px;
-    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -76,63 +81,6 @@ form {
     height: 50px;
     position: relative;
     margin: 5px;
-}
-
-/* フッター */
-footer {
-    border-top: 1px solid #000;
-    padding: 10px;
-}
-
-.submit-button {
-    width: 100%; /* 幅を全体に広げる */
-    padding: 10px;
-    background-color: #000;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-/* レスポンシブ設定 */
-@media (max-width: 600px) {
-    .container {
-        width: 95%; /* スマホ画面に合わせる */
-    }
-
-    header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    h1 {
-        font-size: 16px;
-    }
-
-    .submit-button {
-        padding: 15px;
-    }
-}
-
-@media (max-width: 400px) {
-    .input-container {
-        flex-direction: column;
-        gap: 5px;
-    }
-
-    .info-button {
-        width: 25px;
-        height: 25px;
-        font-size: 14px;
-    }
-
-    .closet-preview {
-        gap: 5px;
-    }
-
-    .hanger {
-        width: 40px;
-        height: 40px;
-    }
 }
 
 /* プレビューエリア */
@@ -165,68 +113,231 @@ footer {
     z-index: -1; /* ハンガーの下に配置 */
 }
 
-
-/* モーダル背景 */
-#modal-overlay {
+/*確認画面関連*/
+/* モーダルの基本スタイル */
+.reviewModal {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* 背景を半透明に */
-    z-index: 999;
-  }
-  
-  /* モーダル本体 */
-  #modal {
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景 */
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+  /* モーダルコンテンツ */
+.reviewModalContent {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
-    max-width: 400px;
-    background: #fff;
+    background-color: white;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    z-index: 1000;
-  }
-  
-  /* 非表示用 */
-  .hidden {
-    display: none;
-  }
-  
-  /* モーダル内部のコンテンツ */
-  .modal-content {
+    border-radius: 8px;
+    width: 60%;
+    height:auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: auto;
     text-align: center;
-  }
-  
-  .modal-content h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .modal-content p {
-    margin-bottom: 20px;
-  }
-  
-  .modal-content select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 20px;
-  }
-  
-  .modal-content button {
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
+}
+
+/* モーダルを閉じる×ボタン */
+#reviwCloseBtn {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
     cursor: pointer;
-  }
-  
-  .modal-content button:hover {
-    background-color: #0056b3;
-  }
-  
+    color: #FFF;
+    top:-5%;
+    right: -5%;
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    border: #333;
+    border-radius: 50%;
+}
+
+/* "確認画面"のレイアウト */
+.reviewModalContent h3 {
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+
+/* モーダルの中のdivの間隔設定 */
+.reviewModalContent div {
+    margin-bottom: 15px;
+}
+
+/* モーダルの中の登録ボタン */
+.reviewModalContent button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* 登録ボタンの上にカーソルがきたとき */
+.reviewModalContent button:hover {
+    background-color: rgb(32, 244, 9);
+}
+
+/* クローゼットの画像のサイズを変更 */
+.reviewModalContent img {
+    max-width: 100%;  /* 画像の最大幅を親要素に合わせる */
+    max-height: 70vh; /* 画像の最大高さを画面の70%に制限 */
+    object-fit: contain;  /* 画像のアスペクト比を保ちながら収める */
+}
+
+/* 確認完了後モーダルのスタイル */
+.registerModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+/* 確認完了後モーダルの中のスタイル */
+.registreContent {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 60%;
+    height:auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 登録後のaタグのスタイル */
+.registreContent a{
+    text-decoration:underline;
+    color:#000;
+    border-color: #818181;
+}
+
+/* カルーセルコンテナ */
+.closet-carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+/* カルーセル */
+.closet-carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* カルーセルのスライド */
+.closet-slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* 画像のスタイル */
+.closet-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* 右、左の矢印レイアウト */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    background-color: transparent;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+/* セレクトボックス関連 */
+.cp_ipselect06 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 2em 21px;
+}
+
+.cp_ipselect06 .cp_sl06 {
+    position: relative;
+    width: 130%; /*下線の長さ*/
+    cursor: pointer;
+    z-index: 1;
+    /* 標準のスタイルを無効にしborder-bottomを設定 */
+    border: none;
+    appearance: none;
+    outline: none;
+    background: transparent;
+    border-radius: 0;
+    border-bottom: 1px solid #666666;
+    text-align: center;
+}
+
+/*プルダウンの三角を設定*/
+.cp_ipselect06::after {
+    position: absolute;
+    right: -30%; /*場所の指定*/
+    content: '';
+    width: 14px; /*三角形の形*/
+    height: 8px; /*三角形の形*/
+    background: #666666;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+/*選択した際の動き:セレクト下のライン*/
+.cp_sl06_selectbar {
+    position: relative;
+    display: inline-block;
+    width: 130%;
+}
+
+.cp_sl06_selectbar:before,
+.cp_sl06_selectbar:after {
+    bottom: 1px;
+    content: '';
+    width: 0;
+    height: 2px;
+    position: absolute;
+    background: #da3c41;
+    transition: 0.2s ease all;
+}
+
+/*focus時の設定*/
+.cp_ipselect06 .cp_sl06:focus {
+    border-bottom: 1px solid transparent;
+}
+
+.cp_sl06:focus ~ .cp_sl06_selectbar:before,
+.cp_sl06:focus ~ .cp_sl06_selectbar:after {
+    width: 50%;
+}

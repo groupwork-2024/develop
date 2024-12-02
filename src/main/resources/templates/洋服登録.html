@@ -36,9 +36,25 @@
                 <div class="imagePreviewContainer">
                     <!-- 初期画像を指定 -->
                     <img id="imagePreview" src="../img/youfuku_test.png" alt="画像プレビュー" style="max-width: 100%; max-height: 200px;">
+                    <!--写真撮影のときの画面-->
+                    <video id="video" style="display: none; max-width: 100%; height:200px;" autoplay></video>
+                </div>
+                <div class="camerabtns">
+                    <!-- カメラ停止用の×ボタン -->
+                    <button type="button" id="stopCameraButton" style="display: none;" onclick="stopCamera()">
+                        <span class="material-icons">
+                            cancel
+                        </span>
+                    </button>
+                    <!--撮影をするボタン-->
+                    <button type="button" id="capture" class="capture" style="display: none;" onclick="captureImage()">
+                        <span class="material-icons">
+                            camera
+                        </span>
+                    </button>
                 </div>
 
-                <!--写真を撮れるボタン-->
+                <!--写真を起動するボタン-->
                 <button type="button" id="addPhoto" class="addPhoto" aria-label="カメラを起動" onclick="openCamera()">
                     <span class="material-icons">
                         add_a_photo
@@ -53,13 +69,8 @@
                 </button>
 
                 <!-- カメラを表示するためのビデオとキャンバス -->
-                <video id="video" style="display: none;" width="320" height="240" autoplay></video>
                 <canvas id="canvas" style="display: none;"></canvas>
-                <button type="button" id="capture" class="capture" style="display: none;" onclick="captureImage()">
-                    <span class="material-icons">
-                        camera
-                    </span>
-                </button>
+                
             </div>
 
             <!--その他詳細情報-->
@@ -135,20 +146,28 @@
             </button>
         </div>
 
-
         <!-- 確認画面の表示 -->
         <div id="reviewModal" class="reviewModal">
             <div class="reviewModalContent">
                 <span id="reviwCloseBtn">&times;</span>
                 <h3>確認画面</h3>
-                <div id="reviewName" class="reviewName">名前 </div>
-                <div id="reviewImage" class="reviewImage">写真 </div>
-                <div id="reviewTags" class="reviewTags">タグ </div>
-                <div id="reviewBrand" class="reviewBrand">ブランド </div>
-                <div id="reviewLocation" class="reviewLocation">収納場所 </div>
-                <div id="reviewMemo" class="reviewMemo">メモ </div>
+                <div id="reviewName" class="reviewName"></div>
+                <div id="reviewImage" class="reviewImage"></div>
+                <div id="reviewTags" class="reviewTags"></div>
+                <div id="reviewBrand" class="reviewBrand"></div>
+                <div id="reviewLocation" class="reviewLocation"></div>
+                <div id="reviewMemo" class="reviewMemo"></div>
                 <!-- 登録ボタン -->
                 <button onclick="registerData()">登録</button>
+            </div>
+        </div>
+
+        <!--確認完了後、登録完了メッセージ-->
+        <div id="registerModal" class="registerModal" style="display:none;">
+            <div class="registreContent">
+                <h3>登録が完了しました</h3>
+                <a href="洋服登録.html">続けて登録</a>
+                <a href="home.html">ホームへ</a>
             </div>
         </div>
     </div>

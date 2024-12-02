@@ -9,23 +9,21 @@ const colorButtons = document.querySelectorAll('.color-btn');
 const labelDisplay = document.getElementById('labelDisplay');
 const reviewModalButton = document.getElementById('review-modal-button');
 
-let selectedColor = '#000000';  // 初期カラーは黒
-
-// モーダルを開く
+// 確認モーダルを開く
 openModalButton.addEventListener('click', function() {
     tagmodal.style.display = 'flex';
     reviewModalButton.disabled = true;  // 完了ボタンを無効化
     reviewModalButton.style.display='none';
 });
 
-// モーダルを閉じる
+// 確認モーダルを閉じる
 closeModalButton.addEventListener('click', function() {
     tagmodal.style.display = 'none';
     reviewModalButton.disabled = false;  // 完了ボタンを有効化
     reviewModalButton.style.display='flex';
 });
 
-// モーダル外をクリックしたらモーダルを閉じる
+// 確認モーダル外をクリックしたらモーダルを閉じる
 window.addEventListener('click', function(event) {
     if (event.target === tagmodal) {
         tagmodal.style.display = 'none';
@@ -128,7 +126,6 @@ function addColorToDisplay(color) {
     colorDisplayArea.appendChild(colorBox);
 }
 
-
 // 画像関連
 // 画像プレビューを表示する関数
 function previewImage() {
@@ -186,13 +183,11 @@ function openReviewModal() {
     }
 
     // モーダルを表示
-    document.getElementById('reviewModal').style.display = 'block';
+    document.getElementById('reviewModal').style.display = 'flex';
 }
 
 // モーダルを取得
 var reviwModal = document.getElementById("reviewModal");
-// モーダルを開くボタンを取得
-var reviwbtn = document.getElementById("review-modal-button");
 // モーダルを閉じるアイコンを取得
 var span = document.getElementById("reviwCloseBtn");
 
@@ -208,61 +203,118 @@ window.onclick = function(event) {
     }
 }
 
-// 登録ボタンの仮処理
-function registerData() {
-    alert('データが登録されました！');
-    closeReviewModal();
-}
-
-// モーダルを閉じる関数
+// 確認画面を閉じる
 function closeReviewModal() {
-    reviwModal.style.display = "none";
+    const reviewModal = document.getElementById('reviewModal');
+    reviewModal.style.display = 'none';
 }
 
-// カメラを起動する関数
+//完了確認メッセージ関連
+// 登録データを登録後に完了メッセージを表示
+function registerData() {
+    const reviewModal = document.getElementById('reviewModal');
+    const registerModal = document.getElementById('registerModal');
+
+    // 確認画面を非表示にする
+    reviewModal.style.display = 'none';
+
+    // 登録完了メッセージを表示
+    registerModal.style.display = 'flex';
+}
+
+// 「登録完了」メッセージを閉じて、次の画面に移動
+function closeRegisterModal() {
+    const registerModal = document.getElementById('registerModal');
+    registerModal.style.display = 'none';
+}
+
+// カメラ起動用の関数
 function openCamera() {
-    // カメラを起動
+    const video = document.getElementById('video');
+    const fileInput = document.getElementById('addImageButton'); // ファイル入力ボタン
+    const addPhotoButton = document.getElementById('addPhoto'); // カメラ起動ボタン
+    const imagePreview = document.getElementById('imagePreview'); // 画像プレビューの要素
+    const stopCameraButton = document.getElementById('stopCameraButton'); // ×ボタン
+
+    // カメラ起動
     navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function(stream) {
-            var video = document.getElementById('video');
-            video.style.display = 'block';  // ビデオ要素を表示
+        .then(function (stream) {
             video.srcObject = stream;
-            document.getElementById('capture').style.display = 'block';  // 撮影ボタンを表示
+            video.style.display = 'flex'; // カメラの映像を表示
+            imagePreview.style.display = 'none'; // 画像プレビューを非表示
+            stopCameraButton.style.display='flex'; //×ボタンを表示
+            fileInput.disabled = true; // ファイル選択ボタンを無効化
+            fileInput.style.display='none'; // ファイル選択ボタンを非表示
+            addPhotoButton.disabled = true; // カメラ起動ボタンを無効化（重複起動防止）
+            addPhotoButton.style.display='none'; // カメラ起動ボタンを非表示
+	        document.getElementById('capture').style.display = 'block';  // 撮影ボタンを表示
         })
-        .catch(function(error) {
-            alert('カメラを開けませんでした。');
-            console.error(error);
+        .catch(function (error) {
+            console.error('カメラの取得に失敗しました:', error);
         });
 }
 
-// 撮影した画像をキャンバスに描画してプレビューを表示
+// 撮影処理
 function captureImage() {
-    var video = document.getElementById('video');
-    var canvas = document.getElementById('canvas');
-    var context = canvas.getContext('2d');
-    var imagePreview = document.getElementById('imagePreview');
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const context = canvas.getContext('2d');
 
-    // キャンバスのサイズをビデオと同じに設定
+    // 撮影した画像をキャンバスに描画
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
-
-    // ビデオから画像を描画
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    // キャンバスの画像をプレビューに表示
-    var dataUrl = canvas.toDataURL('image/png');
-    imagePreview.src = dataUrl;
+    // 画像プレビュー表示
+    const imagePreview = document.getElementById('imagePreview');
+    imagePreview.src = canvas.toDataURL('image/png');
+    imagePreview.style.display = 'flex'; // 撮影した画像をプレビューとして表示
+    video.style.display = 'none'; // カメラ映像を非表示
 
-    // カメラを停止
-    var stream = video.srcObject;
-    var tracks = stream.getTracks();
-    tracks.forEach(function(track) {
-        track.stop();  // ストリームを停止
-    });
+    // カメラストリームを停止
+    const stream = video.srcObject;
+    const tracks = stream.getTracks();
+    tracks.forEach(track => track.stop());
 
-    // ビデオを非表示にする
+    // カメラ停止後、ファイル選択ボタンを再度有効化
+    const fileInput = document.getElementById('addImageButton');
+    const addPhotoButton = document.getElementById('addPhoto');
+    const stopCameraButton = document.getElementById('stopCameraButton'); // ×ボタン
+    fileInput.disabled = false;
+    fileInput.style.display='flex';
+    addPhotoButton.disabled = false
+    addPhotoButton.style.display='flex';
+	document.getElementById('capture').style.display = 'none';  // 撮影ボタンを非表示
+    stopCameraButton.style.display='none'; //×ボタンを非表示
+}
+
+// カメラ停止用
+function stopCamera() {
+    const video = document.getElementById('video');
+    const stopCameraButton = document.getElementById('stopCameraButton'); // ×ボタン
+    const imagePreview = document.getElementById('imagePreview');
+    const fileInput = document.getElementById('addImageButton');
+    const addPhotoButton = document.getElementById('addPhoto');
+    const capture = document.getElementById('capture');
+
+    // カメラストリームを停止
+    const stream = video.srcObject;
+    const tracks = stream.getTracks();
+    tracks.forEach(track => track.stop());
+
+    // カメラ映像を非表示
     video.style.display = 'none';
-    document.getElementById('capture').style.display = 'none';
+    imagePreview.style.display = 'flex'; // 画像プレビューを再表示
+
+    // ×ボタンと撮影ボタンを非表示
+    stopCameraButton.style.display = 'none';
+    capture.style.display='none';
+
+    // ファイル選択ボタンとカメラ起動ボタンを再表示
+    fileInput.disabled = false;
+    addPhotoButton.disabled = false;
+    fileInput.style.display='flex';
+    addPhotoButton.style.display='flex';
 }
 
 // 画像を選択した際のプレビュー

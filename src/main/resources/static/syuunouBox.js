@@ -1,36 +1,9 @@
-function toggleSidebar() {
-    //document.getElementById:HTML内の特定の要素を取得するためのメソッド
-    //const:再代入できない変数を宣言するためのもの
-    const sidebar = document.getElementById('sidebar'); 
-
-    //サイドバーを閉じる作業
-    if (sidebar.style.width === '250px') {
-        sidebar.style.width = '0';
-
-        // document.querySelectorAll：すべての <li> 要素を取得
-        const listItems = document.querySelectorAll('li');
-        // 各 <li> 要素に対して display: none を設定(表示を消す作業)
-         listItems.forEach(item => {
-            item.style.display = 'none';
-         });
-    } 
-    //サイドバーを開く作業
-    else {
-        sidebar.style.width = '250px';
-
-        // すべての <li> 要素を取得
-        const listItems = document.querySelectorAll('li');
-        //各 <li> 要素に対して display: block を設定(表示を元に戻す作業)
-        listItems.forEach(item => {
-            item.style.display = 'block';
-         });
-    }
-}
-
 // 写真リスト
-const photos = ["https://thumb.ac-illust.com/bb/bb155844e2d3b16f4342bad7a96e8847_w.jpeg", 
-                "photo2.jpg", 
-                "photo3.jpg"];
+const photos = [
+    "https://thumb.ac-illust.com/bb/bb155844e2d3b16f4342bad7a96e8847_w.jpeg",
+    "photo2.jpg", 
+    "photo3.jpg"
+];
 let currentPhotoIndex = 0;
 
 // 写真を切り替える関数
@@ -55,4 +28,55 @@ function nextPhoto() {
 function selectPhoto(index) {
     currentPhotoIndex = index;
     showPhoto(currentPhotoIndex);
+}
+
+// フォームの内容をモーダルに表示
+// モーダル内に画像を表示
+function openReviewModal() {
+    const name = document.getElementById('name').value;
+
+    // フォームの内容をモーダルに表示
+    document.getElementById('reviewName').innerText = `名前: ${name}`;
+
+    // モーダルを表示
+    document.getElementById('reviewModal').style.display = 'flex';
+}
+
+// モーダルを取得
+var reviewModal = document.getElementById("reviewModal");
+// モーダルを閉じるアイコンを取得
+var closeBtn = document.getElementById("reviwCloseBtn");
+
+// ×を押したとき、閉じる
+closeBtn.onclick = closeReviewModal;
+
+// モーダルの範囲外が押された場合も閉じる
+window.onclick = function(event) {
+    if (event.target == reviewModal) {
+        closeReviewModal();
+    }
+}
+
+// 確認画面を閉じる
+function closeReviewModal() {
+    reviewModal.style.display = 'none';
+}
+
+//完了確認メッセージ関連
+// 登録データを登録後に完了メッセージを表示
+function registerData() {
+    const reviewModal = document.getElementById('reviewModal');
+    const registerModal = document.getElementById('registerModal');
+
+    // 確認画面を非表示にする
+    reviewModal.style.display = 'none';
+
+    // 登録完了メッセージを表示
+    registerModal.style.display = 'flex';
+}
+
+// 「登録完了」メッセージを閉じて、次の画面に移動
+function closeRegisterModal() {
+    const registerModal = document.getElementById('registerModal');
+    registerModal.style.display = 'none';
 }
