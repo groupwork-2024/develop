@@ -36,7 +36,7 @@ public class Clothes {
 
     @Lob
     @Column(name = "image_data", columnDefinition = "LONGBLOB")
-    private byte[] image_data;
+    private byte[] imageData;
 
     @Column(nullable = false)
     private Boolean favorite = false;
@@ -46,6 +46,9 @@ public class Clothes {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @Transient
+    private String imageDataString; // Base64エンコード用の一時フィールド
 
     @PrePersist
     protected void onCreate() {

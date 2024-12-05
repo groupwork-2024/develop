@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clothes</title>
+</head>
+<body>
+<table>
+    <tr th:each="clothes : ${clothesList}">
+        <td th:text="${clothes.user.name}"></td>
+        <td th:text="${clothes.brandName}"></td>
+        <td th:text="${clothes.description}"></td>
+        <td th:text="${clothes.storage.name}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
