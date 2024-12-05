@@ -1,3 +1,98 @@
+/* タグ一覧画面関連 */
+.tagListmodal{
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* タグ一覧モーダル */
+.tagListmodalContent{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 8px;
+    width: 60%;
+    height:auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color:white; /* 半透明の背景 */
+}
+
+/* タグ一覧モーダル閉じるボタンのスタイル */
+.TagListClose{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #FFF;
+    top:-5%;
+    right: -5%;
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    border: #333;
+    border-radius: 50%;
+}
+
+/* タグ追加へのボタン */
+#addTagOpenButton{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* タグ追加のボタンにカーソルが来たとき */
+#addTagOpenButton:hover {
+    background-color: rgb(32, 244, 9);
+}
+
+/* タグ表示エリア */
+.tagList{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* 各タグのスタイル */
+.tag {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+/* 削除ボタン */
+.delete-btn {
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 0 5px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+
+/* タグ一覧画面関連 ここまで*/
+
 /* タグ追加画面関連 */
 .tagmodal{
     display: none;
@@ -9,13 +104,13 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-/* タグの+のボタンレイアウト */
+/* タグ追加の+のボタンレイアウト */
 #tagOpenButton{
     background-color: transparent;
     border: none;
 }
 
-/* タグモーダルのスタイル */
+/* タグ追加モーダルのスタイル */
 .tagModalContent{
     display: flex;
     flex-direction: column;
@@ -32,14 +127,14 @@
     background-color:white; /* 半透明の背景 */
 }
 
-/* タグモーダル内のスタイル */
+/* タグ追加モーダル内のスタイル */
 #tagInput{
     display: flex;
     flex-basis: 80%;
     width: 90%;
 }
 
-/* タグモーダル閉じるボタンのスタイル */
+/* タグ追加モーダル閉じるボタンのスタイル */
 .TagClose{
     position: absolute;
     display: flex;

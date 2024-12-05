@@ -24,7 +24,7 @@
         <form id="reviewForm">
             <!--名前-->
             <label for="name">名前</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name">
 
             <!-- 写真 -->
             <label for="image">写真</label>
@@ -91,6 +91,24 @@
                 </span>
             </div>
 
+            <!--タグ一覧のモーダル-->
+            <div id="tagListmodal" class="tagListmodal">
+                <div class="tagListmodalContent">
+                    <span class="TagListClose" id='TagListClose'>
+                        &times;
+                    </span>
+
+                    <h2>タグ一覧</h2>
+
+                    <!--タグ表示画面-->
+                    <div class="tagList">
+                    </div>
+
+                    <!-- タグ追加ボタン -->
+                    <button id="addTagOpenButton">追加</button>
+                </div>
+            </div>
+
             <!--タグ追加のモーダル-->
             <div id="tagmodal" class="tagmodal">
                 <div class="tagModalContent">
@@ -114,7 +132,9 @@
 
                         <!-- 追加ボタン -->
                         <button type="button" id="addColorBtn" class="add-color-btn">
-                            <span class="material-icons">add_circle_outline</span> <!-- ＋ボタン -->
+                            <span class="material-icons">
+                                add_circle_outline
+                            </span> <!-- ＋ボタン -->
                         </button>
                     </div>
 
@@ -133,7 +153,7 @@
                     </div>
 
                     <!-- タグ登録ボタン -->
-                    <button id="addTagButton">登録</button>
+                    <button type="submit" id="addTagButton">登録</button>
                 </div>
             </div>
 

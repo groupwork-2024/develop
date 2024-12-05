@@ -1,6 +1,13 @@
+//タグ一覧関連
+const taglistmodal = document.getElementById('tagListmodal');
+const tagListClose = document.getElementById('TagListClose');
+const addTagOpenButton = document.getElementById('addTagOpenButton');
+
+//＋ボタンを取得
+const openModalButton = document.getElementById('tagOpenButton');
+
 // タグ追加関連
 const tagmodal = document.getElementById('tagmodal');
-const openModalButton = document.getElementById('tagOpenButton');
 const closeModalButton = document.getElementById('TagCloseModalButton');
 const addTagButton = document.getElementById('addTagButton');
 const tagInput = document.getElementById('tagInput');
@@ -9,21 +16,45 @@ const colorButtons = document.querySelectorAll('.color-btn');
 const labelDisplay = document.getElementById('labelDisplay');
 const reviewModalButton = document.getElementById('review-modal-button');
 
-// 確認モーダルを開く
+// タグ一覧モーダルを開く
 openModalButton.addEventListener('click', function() {
-    tagmodal.style.display = 'flex';
+    taglistmodal.style.display = 'flex';
     reviewModalButton.disabled = true;  // 完了ボタンを無効化
     reviewModalButton.style.display='none';
 });
 
-// 確認モーダルを閉じる
+// タグ一覧モーダルを閉じる
+tagListClose.addEventListener('click', function() {
+    taglistmodal.style.display = 'none';
+    reviewModalButton.disabled = false;  // 完了ボタンを有効化
+    reviewModalButton.style.display='flex';
+});
+
+// タグ一覧モーダル外をクリックしたらモーダルを閉じる
+window.addEventListener('click', function(event) {
+    if (event.target === taglistmodal) {
+        taglistmodal.style.display = 'none';
+        reviewModalButton.disabled = false;  // 完了ボタンを有効化
+        reviewModalButton.style.display='flex';
+    }
+});
+
+// タグ追加モーダルを開く
+addTagOpenButton.addEventListener('click', function() {
+    tagmodal.style.display = 'flex';
+    taglistmodal.style.display = 'none';
+    reviewModalButton.disabled = true;  // 完了ボタンを無効化
+    reviewModalButton.style.display='none';
+});
+
+// タグ追加モーダルを閉じる
 closeModalButton.addEventListener('click', function() {
     tagmodal.style.display = 'none';
     reviewModalButton.disabled = false;  // 完了ボタンを有効化
     reviewModalButton.style.display='flex';
 });
 
-// 確認モーダル外をクリックしたらモーダルを閉じる
+// タグ追加モーダル外をクリックしたらモーダルを閉じる
 window.addEventListener('click', function(event) {
     if (event.target === tagmodal) {
         tagmodal.style.display = 'none';
@@ -32,6 +63,7 @@ window.addEventListener('click', function(event) {
     }
 });
 
+//カラーパレット関連
 // プリセットカラーの選択
 colorButtons.forEach(button => {
     button.addEventListener('click', function() {
@@ -47,21 +79,112 @@ customColorPicker.addEventListener('input', function() {
 
 // タグ追加ボタンがクリックされたとき
 document.getElementById('addTagButton').addEventListener('click', function() {
-    const tagName = document.getElementById('tagInput').value; // タグ名を取得
-    const selectedColor = document.getElementById('customColorPicker').value; // カスタムカラーを取得
+    const tagName = document.getElementById('tagInput').value.trim(); // タグ名を取得
+    //色の取得
+    const color = getSelectedColor();
 
-    if (tagName) {
-        addTagToDisplay(tagName, selectedColor); // タグを表示エリアに追加
-        document.getElementById('tagInput').value = ''; // 入力フィールドをクリア
-        document.getElementById('customColorPicker').value = '#000000'; // カラー選択をリセット
+    if (!tagName) {
+        alert("タグの名前を追加してください")
+        return;
     }
+
+    //タグを追加
+    addtagToList(tagName,color);
+
+    // タグをlocalStorageに保存
+    saveTagToLocalStorage(tagName, color);
+
+    //タグ追加モーダルを閉じる
+    tagmodal.style.display = 'none';
+
+    //タグ一覧モーダルを表示する
+    taglistmodal.style.display = 'none';
+
+    //タグ名入力をリセット
+    document.getElementById("tagInput").value = '';
+
 });
 
-// カラーパレットの色が選択されたとき
+// タグをタグ一覧に追加する関数
+function addTagToList(tagName, color) {
+    const tagList = document.querySelector('.tagList'); // タグ一覧を取得
+
+    if (!tagList) {
+        console.error("タグ一覧の場所が見つかりませんでした。");
+        return;
+    }
+
+    // 新しいタグ要素を作成
+    const tagDiv = document.createElement('div');
+    tagDiv.classList.add('tag');
+    tagDiv.style.backgroundColor = color;  // 選択した色をタグの背景色に設定
+
+    // タグ名を表示するためのspan要素を作成
+    const tagNameElement = document.createElement('span');
+    tagNameElement.textContent = tagName;
+    tagDiv.appendChild(tagNameElement);
+
+    // 削除ボタンを作成
+    const deleteBtn = document.createElement('button');
+    deleteBtn.classList.add('delete-btn');
+    deleteBtn.textContent = '×';
+    deleteBtn.addEventListener('click', function() {
+        tagList.removeChild(tagDiv); // タグを削除
+        removeTagFromLocalStorage(tagName); // localStorageから削除
+    });
+
+    tagDiv.appendChild(deleteBtn);
+    tagList.appendChild(tagDiv);  // タグ一覧に追加
+}
+
+// タグをlocalStorageに保存する関数
+function saveTagToLocalStorage(tagName, color) {
+    let tags = JSON.parse(localStorage.getItem('tags')) || [];  // 保存されているタグを取得（なければ空の配列）
+    tags.push({ name: tagName, color: color });  // 新しいタグを追加
+    localStorage.setItem('tags', JSON.stringify(tags));  // localStorageに保存
+}
+
+// タグをlocalStorageから削除する関数
+function removeTagFromLocalStorage(tagName) {
+    let tags = JSON.parse(localStorage.getItem('tags')) || [];  // 保存されているタグを取得
+    tags = tags.filter(tag => tag.name !== tagName);  // 削除したいタグを除外
+    localStorage.setItem('tags', JSON.stringify(tags));  // 更新されたタグを保存
+}
+
+// ページが読み込まれたときにタグを表示する処理
+window.addEventListener('DOMContentLoaded', function() {
+    // localStorageから保存されたタグを取得
+    console.log('DOMContentLoaded event fired'); 
+    const storedTags = JSON.parse(localStorage.getItem('tags')) || [];  // もし保存されていなければ空の配列
+    console.log(storedTags);  // localStorageから取得したタグが正しいか確認
+
+    // 保存されたタグをタグ一覧に追加
+    storedTags.forEach(tag => {
+        addTagToList(tag.name, tag.color);  // タグをUIに追加する関数
+    });
+});
+
+// プリセットカラーまたはカスタムカラーの取得
+function getSelectedColor() {
+    // プリセットカラーを選択した場合
+    const presetColor = document.querySelector('.color-btn.selected');
+    if (presetColor) {
+        return presetColor.getAttribute('data-color');  // プリセットカラーを返す
+    }
+
+    // カスタムカラーが選ばれている場合
+    const customColor = document.getElementById('customColorPicker').value;
+    return customColor;
+}
+
+// プリセットカラーの選択を管理
 document.querySelectorAll('.color-btn').forEach(function(button) {
     button.addEventListener('click', function() {
-        const selectedColor = button.getAttribute('data-color');
-        document.getElementById('customColorPicker').value = selectedColor; // カラーをカスタムカラー選択に反映
+        // すべてのプリセットカラーから選択状態を解除
+        document.querySelectorAll('.color-btn').forEach(function(btn) {
+            btn.classList.remove('selected');
+        });
+        button.classList.add('selected');  // 選択されたカラーにselectedクラスを追加
     });
 });
 
@@ -103,8 +226,8 @@ document.querySelectorAll('.color-btn').forEach(function(button) {
 
 // 「色を追加」ボタンをクリックしたとき
 document.getElementById('addSelectedColorBtn').addEventListener('click', function() {
-    const selectedColor = document.getElementById('customColorPicker').value;
-    addColorToDisplay(selectedColor);
+    const selectedColor = document.getElementById('customColorPicker').value; // カスタムカラーを取得
+    addColorToDisplay(selectedColor); //カラーパレットに追加
     document.getElementById('colorPickerContainer').style.display = 'none'; // カラーパレットを非表示にする
 });
 
@@ -119,7 +242,7 @@ function addColorToDisplay(color) {
 
     // 色ボックスをクリックしたときに色をフォームに反映
     colorBox.addEventListener('click', function() {
-        alert(`選択された色: ${color}`); // ここで必要な処理（フォームに反映など）を実行できます
+        alert(`選択された色: ${color}`); 
     });
 
     // 色ボックスをプリセットカラーの後ろに追加
@@ -330,3 +453,5 @@ function previewImage() {
         reader.readAsDataURL(file);
     }
 }
+
+//タグのデータベース関連
