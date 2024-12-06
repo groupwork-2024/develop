@@ -1,174 +1,33 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden; /* 横スクロールを防ぐ */
+html {
     background-color: rgb(231, 230, 230);
-    
-}
-
-.header {
-    display: flex;
-    justify-content: space-between; /* 子要素を左右の端に配置 */
-    align-items: center; /* 子要素を垂直中央に配置 */
-    padding: 10px 20px;
-    background-color: #f0f0f0;
-    border-bottom: 1px solid #ccc;
-}
-
-.title-button {
-    margin:0;
-    font-size: 20px;
-    flex: 1; /* タイトル部分が中央に来るように広げる */
-    text-align: center; /* タイトルを中央に配置 */
-    border: none;
-    background: none;
-    cursor: pointer;
-    color: #007BFF; /* ボタンの色 */
-    text-decoration: none; /* 下線を消す */
-}
-
-.title-button:hover {
-    color: #0056b3; /* ホバー時の色変更 */
-    text-decoration: none; /* ホバー時に下線を消す */
-}
-
-.left-button, .right-button {
-    padding: 8px;
-    font-size: 16px;
-    border: none;
-    background: none; /* ボタン背景を消去 */
-    cursor: pointer;
-    color: #007BFF; /* アイコンの色 */
-}
-
-.left-button:hover, .right-button:hover {
-    color: #0056b3; /* ホバー時の色変更 */
-}
-
-.sidebar {
-    height: 100%;
-    width: 0; /* 初期状態で非表示 */
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden; /* 横スクロールを防ぐ */
-    transition: 0.3s; /* アニメーション */
-    padding-top: 60px;
-    color: white;
-}
-
-.sidebar ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.sidebar ul li a {
-    display: block;
-    padding: 10px 20px;
-    color: white;
-    text-decoration: none; /* 下線を消す */
-}
-
-.sidebar ul li a:hover {
-    background-color: #575757; /* ホバー時の背景色 */
-}
-
-.sidebar .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 30px;
-    border: none;
-    background: none;
-    color: white;
-    cursor: pointer;
 }
 
 .main-content {
     display: flex;
     justify-content: center; /* 水平方向の中央揃え */
     align-items: center; /* 垂直方向の中央揃え */
-    height: 100vh; /* 画面全体の高さに合わせる */
-    flex-direction: column; /* ボタンを縦に並べる */
-    gap: 20px; /* ボタンの間に余白を追加 */
-    
+    flex-direction: column; /* ボタンを縦に並べる */ 
 }
 
-.button-40 {
+.button{
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    width: 450px;
-    height: 130px;
-    margin: 0 auto;
-    padding: .9em 2em;
+    width: 350px;
+    height: 100px;
+    margin-top: 20px;
     border: none;
     border-radius: 5px;
     box-shadow: 0 7px 10px rgb(0 0 0 / 10%);
     background-color: #fff;
     color: #333;
-    font-size: 1em;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+/* ボタンにホバーしたときのスタイル */
+.button:hover {
+    transform: translateY(-2px); /* ボタンが少し上に動くように設定（ホバー時に浮き上がる効果） */
+    box-shadow: 0 7px 10px rgb(0 0 0 / 15%); /* 影の強さを強くして、ボタンが浮き上がった感じにする */
     transition: transform .3s, box-shadow .3s;
-    
-}
-
-.button-40:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 7px 10px rgb(0 0 0 / 15%);
-}
-
-.button-41 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 450px;
-    height: 130px;
-    margin: 0 auto;
-    padding: .9em 2em;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 7px 10px rgb(0 0 0 / 10%);
-    background-color: #fff;
-    color: #333;
-    font-size: 1em;
-    transition: transform .3s, box-shadow .3s;
-}
-
-.button-41:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 7px 10px rgb(0 0 0 / 15%);
-}
-
-.button-42 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 450px;
-    height: 130px;
-    margin: 0 auto;
-    padding: .9em 2em;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 7px 10px rgb(0 0 0 / 10%);
-    background-color: #fff;
-    color: #333;
-    font-size: 1em;
-    transition: transform .3s, box-shadow .3s;
-}
-
-
-.button-42:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 7px 10px rgb(0 0 0 / 15%);
-}
-
-.button-40,.button-41,.button-42{
-    text-decoration: none; /* ホバー時に下線を消す */
 }
