@@ -81,9 +81,45 @@ function getWeatherIcon(code) {
   return iconMap[code] || "../img/icons/hare.png"; // 指定されたコードが存在しない場合は晴れアイコンを返す
 }
 
-
 //カルーセル
+// 変数の初期化
+let currentSlideIndex = 0;  // スライドのインデックス
+const slideInterval=5000;   //5秒間隔
 
+// カルーセル
+function moveSlide(step) {
+  const slides = document.querySelectorAll('.osusume-slide');
+  const totalSlides = slides.length;
+
+  // スライドのインデックスを更新
+  currentSlideIndex += step;
+
+  // インデックスが範囲外にならないように調整
+  if (currentSlideIndex < 0) {
+      currentSlideIndex = totalSlides - 1;
+  } 
+  else if (currentSlideIndex >= totalSlides) {
+      currentSlideIndex = 0;
+  }
+
+  // スライドを動かす
+  const carousel = document.querySelector('.osusume-carousel');
+  carousel.style.transform = `translateX(${-currentSlideIndex * 100}%)`;
+}
+
+// 「次へ」「前へ」ボタンのクリックイベントに渡す
+document.querySelector('.prev').addEventListener('click', (event) => moveSlide(-0.5));
+document.querySelector('.next').addEventListener('click', (event) => moveSlide(0.5));
+
+// 初期設定で最初のスライドを表示
+document.addEventListener("DOMContentLoaded", () => {
+  moveSlide(0); // 最初のスライドを表示
+  
+  // 自動的にスライドを進める
+  setInterval(() => {
+    moveSlide(1);  // 次のスライドに進む
+  }, slideInterval); // 5秒ごとに次のスライド
+});
 
 
 

@@ -29,21 +29,69 @@
   display: flex;
   align-items: center;
   white-space: nowrap; /*折り返ししない*/
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   color: #333;
-  
+  margin-right: 8px;
 }
 
 /*天気アイコン*/
 #weather-icon{
-  width: 30px; 
-  height: 30px;
+  width: 40px; 
+  height: 40px;
   margin-right: 10px;
 }
 
-/*カルーセル*/
 
+
+/*カルーセル*/
+/* カルーセルコンテナ */
+.closet-carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+/* カルーセル */
+.osusume-carousel {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* カルーセルのスライド */
+.osusume-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* 画像のスタイル */
+.osusume-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* 右、左の矢印レイアウト */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  background-color: transparent;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
 
 
 
@@ -62,6 +110,7 @@ main {
   border-bottom: 2px solid #000;
   width: 350px;
   margin-bottom: 20px;
+  margin-top: 20px;
   position: relative; /* ドロップダウンの位置を調整するため */
   justify-content: center;
 }
