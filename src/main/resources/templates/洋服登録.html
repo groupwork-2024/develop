@@ -85,50 +85,58 @@
 
             <label for="tags">タグ</label>
             <div class="label-container">
-                <div class="label-display" id="labelDisplay"></div>
+                <div class="label-display" id="labelDisplay">
+                    <!--ここの部分にタグが表示される-->
+                </div>
                 <span class="material-icons" id="tagOpenButton">
                     add_circle_outline
                 </span>
             </div>
 
             <!--タグ一覧のモーダル-->
-            <div id="tagListmodal" class="tagListmodal">
+            <div id="tagListmodal" class="tagListmodal" role="dialog" aria-labelledby="tagListModalTitle">
                 <div class="tagListmodalContent">
-                    <span class="TagListClose" id='TagListClose'>
+                    <span class="TagListClose" id='TagListClose' aria-label="Close">
                         &times;
                     </span>
-
                     <h2>タグ一覧</h2>
 
                     <!--タグ表示画面-->
-                    <div class="tagList">
-                    </div>
+                    <div id="tagListDisplay" class="tag-list"></div>
 
-                    <!-- タグ追加ボタン -->
-                    <button id="addTagOpenButton">追加</button>
+                    <div class="tagAddButtons">
+                        <!-- タグ登録ボタン -->
+                        <button id="addButton">登録</button>
+
+                        <!-- タグ追加ボタン -->
+                        <button id="addTagOpenButton">追加</button>
+                    </div>
                 </div>
             </div>
 
             <!--タグ追加のモーダル-->
-            <div id="tagmodal" class="tagmodal">
+            <div id="tagmodal" class="tagmodal" role="dialog" aria-labelledby="modalTitle">
                 <div class="tagModalContent">
-                    <span class="TagClose" id="TagCloseModalButton">&times;</span>
+                    <span class="TagClose" id="TagCloseModalButton" aria-label="Close">&times;</span>
 
                     <h2>タグ追加登録</h2>
 
                     <!-- タグ名入力フィールド -->
                     <label for="TagName">タグの名前</label>
-                    <input type="text" id="tagInput" placeholder="例:お気に入り" required>
+                    <input type="text" id="tagInput" placeholder="例:お気に入り">
 
                     <h3>色を選択</h3>
 
                     <!-- プリセットカラー -->
                     <div id="colorPalette" class="color-palette">
                     <!-- プリセットカラーが並ぶエリア -->
-                        <button class="color-btn" style="background-color: #FF6347;" data-color="#FF6347"></button> 
-                        <button class="color-btn" style="background-color: #4682B4;" data-color="#4682B4"></button> 
-                        <button class="color-btn" style="background-color: #32CD32;" data-color="#32CD32"></button> 
-                        <button class="color-btn" style="background-color: #FFD700;" data-color="#FFD700"></button>
+                        <div class="color-btn" style="background-color: #FF6347;" data-color="#FF6347"></div> 
+                        <div class="color-btn" style="background-color: #4682B4;" data-color="#4682B4"></div> 
+                        <div class="color-btn" style="background-color: #32CD32;" data-color="#32CD32"></div> 
+                        <div class="color-btn" style="background-color: #FFD700;" data-color="#FFD700"></div>
+                        <div id="colorDisplayArea" class="colorDisplayArea">
+                            <!-- ここに色が表示される -->
+                        </div>
 
                         <!-- 追加ボタン -->
                         <button type="button" id="addColorBtn" class="add-color-btn">
@@ -147,13 +155,8 @@
                         </button>
                     </div>
 
-                    <!-- 色の追加エリア（選んだ色を表示） -->
-                    <div id="colorDisplayArea" class="color-display-area">
-                        <!-- ここに色が追加される -->
-                    </div>
-
                     <!-- タグ登録ボタン -->
-                    <button type="submit" id="addTagButton">登録</button>
+                    <button id="addTagButton" type="button">登録</button>
                 </div>
             </div>
 
