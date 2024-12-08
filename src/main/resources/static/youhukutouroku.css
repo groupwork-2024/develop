@@ -87,6 +87,7 @@
     margin-bottom: 5px;
     cursor: pointer;
     width: auto;
+    white-space: nowrap;
 }
 
 /* タグが選択された状態 */
@@ -111,7 +112,7 @@
     height: auto; /* 高さを自動調整 */
     min-height: 50px;  /* 最低限の高さを設定 */
     width: 100%; /* 幅を100%に */
-    box-sizing: border-box;  /* パディングやマージンが幅に影響しないように */
+    box-sizing: border-box;  
 }
 
 /* 登録画面の各タグに対するもの */
@@ -128,10 +129,53 @@
     padding-left: 30px;  /* 矢印のスペースを確保 */
     box-sizing: border-box; /* パディングとボーダーをサイズに含める */
     height: 40px;           /* タグの高さを一定に設定 */
+    white-space: nowrap;
 }
 
 /* 矢印部分を作成 */
 .addtag .arrow {
+    content: '';
+    position: absolute;
+    left: -13px;  /* 矢印がタグの左側に出るように */
+    top: 50%;
+    transform: translateY(-50%);  /* 垂直方向に中央揃え */
+    border-top: 20px solid transparent;   /* 上の辺 */
+    border-bottom: 20px solid transparent;/* 下の辺 */
+    border-right: 15px solid #4CAF50 ; /* 矢印の色をここで変更 */
+}
+
+/* 確認画面のタグ表示部分 */
+.reviewTags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 5px;
+    padding-right: 20px;
+    height: auto; /* 高さを自動調整 */
+    min-height: 20px;  /* 最低限の高さを設定 */
+    width: 100%; /* 幅を100%に */
+    box-sizing: border-box;  
+}
+
+/* 確認画面のタグ部分 */
+.rvtag{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    padding: 5px 10px;  /* タグのサイズ */
+    color: white;
+    font-size: 16px;      /* フォントサイズ */
+    border-radius: 4px;
+    position: relative;
+    padding-left: 10px;  /* 矢印のスペースを確保 */
+    box-sizing: border-box; /* パディングとボーダーをサイズに含める */
+    height: 40px;           /* タグの高さを一定に設定 */
+    white-space: nowrap;
+}
+
+/* 確認画面のタグの矢印部分 */
+.rvarrow{
     content: '';
     position: absolute;
     left: -13px;  /* 矢印がタグの左側に出るように */
@@ -334,9 +378,6 @@ input[type="color"] {
     border-color: #000;  /* ホバー時に枠線が黒くなる */
 }
 
-
-
-
 /* 登録ボタン */
 #addTagButton {
     background-color: #4CAF50;
@@ -376,6 +417,7 @@ input[type="color"] {
     width: 60%;
     height:auto;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
 }
 
 /* モーダルを閉じる×ボタン */
@@ -403,9 +445,36 @@ input[type="color"] {
     text-align: center;
 }
 
+/* タグと画像を横並びにするコンテナ */
+.reviewContent {
+    display: flex;  /* 横並びにする */
+    align-items: center;  /* 画像とタグを垂直方向で中央揃え */
+    margin-bottom: 10px;
+}
+
+/* 画像部分 */
+.reviewImage {
+    margin-right: 15px;  /* 画像とタグの間隔 */
+    max-width: 150px;  /* 画像の最大幅を指定 */
+}
+
+.reviewImage img {
+    max-width: 100%;
+    max-height: 150px;  /* 画像の最大高さを指定 */
+}
+
+/* タグ部分 */
+.reviewTags {
+    font-size: 16px;
+    color: #333;
+    display: flex;
+    flex-wrap: wrap;  /* 複数タグがある場合に折り返し */
+}
+
 /* モーダルの中のdivの間隔設定 */
 .reviewModalContent div {
     margin-bottom: 15px;
+    text-align: left;
 }
 
 /* モーダルの中の登録ボタン */
@@ -557,4 +626,6 @@ form input:focus, form textarea:focus {
     text-decoration:underline;
     color:#000;
     border-color: #818181;
+    margin-bottom: 5px;
+    font-size: 16px;
 }

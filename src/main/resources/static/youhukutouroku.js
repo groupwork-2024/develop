@@ -132,7 +132,7 @@ addButton.addEventListener('click', function(event) {
         // メイン画面にタグを表示
         displayLabelInMain(tagName,tagColor);  
         //タグ一覧モーダルを閉じる
-        closeModal('tagListmodal');  // 完了ボタンを有効化
+        //closeModal('tagListmodal'); 
         
     } else {
         alert('タグを選択してください。');
@@ -335,14 +335,18 @@ function openReviewModal() {
     const location = document.getElementById('location').value;
     const memo = document.getElementById('memo').value;
     const imagePreviewModal = document.getElementById('reviewImage');
-    const tags = Array.from(labelDisplay.children).map(tag => tag.textContent).join(', '); // タグを取得
+    const tags = Array.from(labelDisplay.children).map(tag => {
+        return {
+            name: tag.textContent.replace('cancel', '').trim(),
+            color: tag.style.backgroundColor  // 色も取得
+        };
+    });
 
     // フォームの内容をモーダルに表示
-    document.getElementById('reviewName').innerText = `名前: ${name}`;
-    document.getElementById('reviewTags').innerText = `タグ: ${tags}`;
-    document.getElementById('reviewBrand').innerText = `ブランド: ${brand}`;
-    document.getElementById('reviewLocation').innerText = `収納場所: ${location}`;
-    document.getElementById('reviewMemo').innerText = `メモ: ${memo}`;
+    document.getElementById('reviewName').innerHTML = `名前<br>${name}`;
+    document.getElementById('reviewBrand').innerHTML = `ブランド<br>${brand}`;
+    document.getElementById('reviewLocation').innerHTML = `収納場所<br>${location}`;
+    document.getElementById('reviewMemo').innerHTML = `メモ<br>${memo}`;
 
     // 画像の表示
     if (imageFile) {
@@ -352,11 +356,43 @@ function openReviewModal() {
         }
         reader.readAsDataURL(imageFile);
     } else {
-        imagePreviewModal.innerText = '画像なし';
+        imagePreviewModal.innerHTML = '画像なし';
     }
+
+    // タグの表示
+    const reviewTagsContainer = document.getElementById('reviewTags');
+    reviewTagsContainer.innerHTML = '';  // 前のタグをリセット
+
+    tags.forEach(tag => {
+        const tagElement = document.createElement('div');
+        tagElement.textContent = tag.name;  // タグ名
+        tagElement.style.backgroundColor = tag.color;  // タグ色
+        tagElement.classList.add('rvtag');  // スタイルクラスを追加
+
+        // 左向き矢印の作成
+        const arrowElement = document.createElement('div');
+        // 矢印専用のクラスを追加
+        arrowElement.classList.add('rvarrow');  
+        // 矢印の色をタグの色に
+        arrowElement.style.borderRightColor = tag.color;   
+
+        tagElement.appendChild(arrowElement);
+        reviewTagsContainer.appendChild(tagElement);
+    });
 
     // モーダルを表示
     document.getElementById('reviewModal').style.display = 'flex';
+}
+
+// フォームをリセットする関数
+function resetForm() {
+    document.getElementById('name').value = '';
+    document.getElementById('image').value = '';
+    document.getElementById('brand').value = '';
+    document.getElementById('location').value = '';
+    document.getElementById('memo').value = '';
+    // タグリストのリセットも行う
+    labelDisplay.innerHTML = '';  // タグ一覧をクリア
 }
 
 // モーダルを取得
@@ -393,6 +429,8 @@ function registerData() {
 
     // 登録完了メッセージを表示
     registerModal.style.display = 'flex';
+
+    resetForm();
 }
 
 // 「登録完了」メッセージを閉じて、次の画面に移動
@@ -503,5 +541,3 @@ function previewImage() {
         reader.readAsDataURL(file);
     }
 }
-
-//タグのデータベース関連
