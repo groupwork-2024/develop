@@ -18,13 +18,13 @@ public class RegisterController {
     @RequestMapping(method = RequestMethod.GET)
     public String sectionMenu(@PathVariable Long userId,
                               Model model) {
-        return "登録画面_洋服&収納";
+        return "choice_storage";
     }
     @RequestMapping(method = RequestMethod.GET, value="/clothes")
     public String getUserClothes(@PathVariable Long userId,
                                  Model model){
         model.addAttribute("userId", userId);
-        return "洋服登録";
+        return "add_clothes";
     }
     @RequestMapping(method = RequestMethod.POST, value="/clothes")
     public void addClothes(@PathVariable Long userId){
