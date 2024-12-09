@@ -1,182 +1,351 @@
-#app {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
-  }
-  
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-bottom: 1em;
-  }
-  
-  .back-button {
-    position: absolute;
-    left: 0;
-    background: none;
-    border: none;
-    font-size: 1.5em;
-    cursor: pointer;
-    padding: 5px 10px;
-  }
-  
-  h1 {
-    font-size: 2.5em;
-    line-height: 1.1;
-    margin: 0;
-  }
-  
-  .input-section {
-    margin-bottom: 1em;
-    text-align: left;
-  }
-  
-  label {
-    display: inline-block;
-    width: 80px;
-    font-weight: bold;
-  }
-  
-  input {
-    width: 200px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .design-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2em;
-  }
-  
-  #parts-container {
-    width: 100%;
-    padding: 10px;
-    background-color: #e0e0e0;
-    border-radius: 8px;
-    margin-bottom: 1em;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .part {
-    margin: 0 10px;
-    padding: 10px 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    cursor: move;
-    font-size: 1.5em;
-  }
-  
-  #tansu-container {
-    width: 100%;
-    min-height: 300px;
-    background-color: #fff;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-  }
-  
-  .tansu-level {
-    height: 50px;
-    margin: 5px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
-    justify-content: center;
-  }
-  
-  .dropped-part {
-    width: 40px;
-    height: 40px;
-    margin: 0 5px;
-    background-color: #d0d0d0;
-    border: 1px solid #999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2em;
-    cursor: move;
-  }
-  
-  .trash {
-    margin-top: 1em;
-    padding: 10px;
-    background-color: #ff6b6b;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-    
-  button {
-    margin-top: 1em;
-    padding: 10px 20px;
-    font-size: 1em;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  /* 確認画面用のスタイル */
-#confirmation-screen {
-  max-width: 600px;
-  margin: 0 auto;
+/* タンス作成レイアウト関連 */
+/* タンス作成場所 */
+.design-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2em;
 }
-
-.confirmation-item {
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-.confirmation-item h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #666;
-}
-
-.confirmation-item p {
-  font-size: 24px;
-  margin: 0;
+  
+/* タンス作成の素材表示場所 */
+#parts-container {
+  width: 100%;
   padding: 10px;
-  border-bottom: 1px solid var(--input-border-color);
+  background-color: #e0e0e0;
+  border: #818181;
+  border-radius: 10px;
+  margin-bottom: 2%;
+  display: flex;
+  justify-content: center;
 }
 
-.tansu-preview {
-  width: 100%;
-  max-width: 300px;
-  margin: 30px auto;
-}
-
-.tansu-svg {
-  width: 100%;
-  height: auto;
-}
-
-footer {
-  text-align: center;
-  margin-top: 40px;
-}
-
-#complete, #done-button {
-  background-color: var(--button-bg-color);
-  color: var(--button-text-color);
-  border: none;
-  padding: 10px 40px;
-  font-size: 18px;
-  cursor: pointer;
+/* 素材のレイアウト */
+.part {
+  display: flex;
+  height: 100%;
+  width: 40%;
+  justify-content: center;
+  margin: 0 2%;
+  padding: 2% 2%;
+  background-color: #fff;
+  border: 1px solid #ccc;
   border-radius: 4px;
+  cursor: move;
 }
+
+/* 素材がタンス内の段に配置された後の見た目 */
+.dropped-part {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 100%;
+  background-color: #ffffff;
+  cursor: move;
+}
+
+/* 各段の文字のレイアウト */
+.backStr{
+  position: absolute;
+  display: inline-block;
+  text-align: center;
+  height: 20px;
+  width: 20px;
+  padding: 1%;
+  border: 2px solid #4d4d4d;
+  border-radius: 50%;
+  white-space:nowrap;
+  color         : rgba(78, 78, 78, 0.8);
+}
+
+/* タンスの形の作成場所 */
+#tansu-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 300px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+}
+
+/* タンスの各段のレイアウト */
+.tansu-level {
+  position: relative;
+  height: 50px;
+  margin:0% 4%;
+  background-color: #f0f0f0;
+  border: 1px solid #8c8c8c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 引き出しのレイアウト */
+.square{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: #ffffff;
+  border: 2px solid #000;
+  border-radius: 8px;
+}
+
+/* ごみ箱について */
+.trash {
+  margin-top: 1em;
+  padding: 10px;
+  background-color: #ff6b6b;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* セレクトボックス関連 */
+.cp_ipselect06 {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 2em 21px;
+}
+
+.cp_ipselect06 .cp_sl06 {
+  position: relative;
+  width: 130%; /*下線の長さ*/
+  cursor: pointer;
+  z-index: 1;
+  /* 標準のスタイルを無効にしborder-bottomを設定 */
+  border: none;
+  appearance: none;
+  outline: none;
+  background: transparent;
+  border-radius: 0;
+  border-bottom: 1px solid #666666;
+  text-align: center;
+}
+
+/*プルダウンの三角を設定*/
+.cp_ipselect06::after {
+  position: absolute;
+  right: -30%; /*場所の指定*/
+  content: '';
+  width: 14px; /*三角形の形*/
+  height: 8px; /*三角形の形*/
+  background: #666666;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+/*選択した際の動き:セレクト下のライン*/
+.cp_sl06_selectbar {
+  position: relative;
+  display: inline-block;
+  width: 130%;
+}
+
+.cp_sl06_selectbar:before,
+.cp_sl06_selectbar:after {
+  bottom: 1px;
+  content: '';
+  width: 0;
+  height: 2px;
+  position: absolute;
+  background: #da3c41;
+  transition: 0.2s ease all;
+}
+
+/*focus時の設定*/
+.cp_ipselect06 .cp_sl06:focus {
+  border-bottom: 1px solid transparent;
+}
+
+.cp_sl06:focus ~ .cp_sl06_selectbar:before,
+.cp_sl06:focus ~ .cp_sl06_selectbar:after {
+  width: 50%;
+}
+
+/* セレクトボックス関連ここまで */
+
+/*確認画面関連*/
+/* モーダルの基本スタイル */
+.reviewModal {
+  display: none;          /* 初期状態では非表示 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景 */
+  z-index: 1000;
+}
+
+/* モーダルコンテンツ */
+.reviewModalContent {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 60%;
+  height:auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* モーダルを閉じる×ボタン */
+#reviwCloseBtn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #FFF;
+  top:-5%;
+  right: -5%;
+  width: 40px;
+  height: 40px;
+  background-color: #333;
+  border: #333;
+  border-radius: 50%;
+}
+
+/* "確認画面"のレイアウト */
+.reviewModalContent h3 {
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+/* モーダルの中のdivの間隔設定 */
+.reviewModalContent div {
+  margin-bottom: 15px;
+}
+
+/* モーダルの中の登録ボタン */
+.reviewModalContent button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* 登録ボタンの上にカーソルがきたとき */
+.reviewModalContent button:hover {
+  background-color: rgb(32, 244, 9);
+}
+
+/* 確認画面関連ここまで */
+
+/* 確認完了後の画面関連 */
+/* 確認完了後モーダルのスタイル */
+.registerModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+/* 確認完了後モーダルの中のスタイル */
+.registreContent {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 60%;
+  height:auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 登録後のaタグのスタイル */
+.registreContent a{
+  text-decoration:underline;
+  color:#000;
+  border-color: #818181;
+}
+
+/* 確認完了後の画面関連ここまで */
+
+/* フォーム関連 */
+/* フォームのレイアウト調整 */
+form {
+  max-width: 70%;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+  text-align: left;
+}
+
+/* フォームのラベルのスタイル */
+form label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+/* フォームの入力エリアのスタイル */
+form input{
+  width: 100%;
+  padding: 10px;
+  resize: none;
+  outline: none; 
+  gap: 10px;
+}
+
+/* フォーカス時のスタイル（選択時に下線を変更） */
+.input-container:focus-within{
+  border: none;
+  width: 100%;
+  border-bottom: 2px solid #ea512fce;
+  border-radius: 1px; 
+  box-shadow: none; /* フォーカス時の影を消す */
+  outline: none; /* フォーカス時のアウトラインも消す */
+}
+
+/* 入力場所のレイアウト */
+.input-container {
+  display: flex;
+  width: 100%;
+  border: none;
+  padding: 10px;
+  padding-bottom: 0;
+  border-bottom: 1.5px solid #929292;
+  border-radius: 1px;
+  resize: none;
+  outline: none; 
+  margin-bottom: 15px;
+  gap: 10px; 
+}
+
+/* 入力欄のスタイル */
+form input{
+  border: none;
+}
+
+/* ?のところ */
+.info-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  filter: brightness(50%) contrast(50%)
+}
+
+/* フォーム関連ここまで */
