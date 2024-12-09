@@ -47,38 +47,40 @@
     </div>
 
     <!-- コーデ写真をカルーセルで表示 -->
-    <div class="closet-carousel-container">
-        <div class="osusume-carousel">
-            <div class="osusume-slide">
-                <a href="osusume.html"><img src="https://picsum.photos/id/1018/600/400" alt="写真1" class="osusume-image"></a>
+    <div class="carousel-container">
+        <div class="carousel">
+            <div class="carousel-track">
+                <div class="carousel-slide">
+                    <a href="osusume.html"><img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b" alt="Fashion Item 1" loading="lazy"></a>
+                </div>
+                <div class="carousel-slide">
+                    <a href="osusume.html"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d" alt="Fashion Item 2" loading="lazy"></a>
+                </div>
+                <div class="carousel-slide">
+                    <a href="osusume.html"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f" alt="Fashion Item 3" loading="lazy"></a>
+                </div>
+                <div class="carousel-slide">
+                    <a href="osusume.html"><img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c" alt="Fashion Item 4" loading="lazy"></a>
+                </div>
+                <div class="carousel-slide">
+                    <a href="osusume.html"><img src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc" alt="Fashion Item 5" loading="lazy"></a>
+                </div>
             </div>
-            <div class="osusume-slide">
-                <a href="osusume.html"><img src="https://picsum.photos/id/1015/600/400" alt="写真2" class="osusume-image"></a>
-            </div>
-            <div class="osusume-slide">
-                <a href="osusume.html"><img src="https://picsum.photos/id/1019/600/400" alt="写真3" class="osusume-image"></a>
-            </div>
-            <div class="osusume-slide">
-                <a href="osusume.html"><img src="https://picsum.photos/id/1016/600/400" alt="写真4" class="osusume-image"></a>
-            </div>
-            <div class="osusume-slide">
-                <a href="osusume.html"><img src="https://picsum.photos/id/1020/600/400" alt="写真5" class="osusume-image"></a>
-            </div>
-        </div>
 
-        <button class="prev" onclick="moveSlide(-0.5)">
-            <span class="material-icons" style="font-size: 50px;">
-                arrow_circle_left
-            </span>
-        </button>
-                
-        <button class="next" onclick="moveSlide(0.5)">
-            <span class="material-icons" style="font-size: 50px;">
-                arrow_circle_right
-            </span>
-        </button>
+            <button class="carousel-button prev" aria-label="Previous slide">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="carousel-button next" aria-label="Next slide">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+
+            <div class="carousel-dots"></div>
+        </div>
     </div>
-    
 
     <!--検索欄-->
     <main>
