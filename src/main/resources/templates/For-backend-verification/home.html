@@ -25,66 +25,83 @@
 <div id="sidebar" class="sidebar">
     <button class="close-btn" onclick="toggleSidebar()">×</button>
     <ul>
-        <li><a href="registration.html">登録</a></li>
+        <li><a href="登録画面_洋服&収納.html">登録</a></li>
         <li><a href="search.html">検索</a></li>
-        <li><a href="mypage.html">マイページ</a></li>    
-        <li><a href="nice.html">いいね</a></li>    
-        <li><a href="enquiry.html">お問合わせ</a></li>    
+        <li><a href="mypage.html">マイページ</a></li>
+        <li><a href="nice.html">いいね</a></li>
+        <li><a href="register.html">お問合わせ</a></li>
     </ul>
 </div>
 
 <!-- メインコンテンツエリア -->
 <div class="main-content">
-    <div class="main-content">
-        <div class="recommendation-weather">
-            <div class="space">
-                <h2>おすすめコーデ</h2>
-            </div>
-            <div id="weather">
-                <div id="weather-info">
-                    <p>天気: <span id="weather-description">Loading...</span></p>
-                    <img id="weather-icon" src="" alt="Weather Icon" style="display: none;">
-                </div>
-                <p>気温: <span id="temperature">Loading...</span> °C</p>
-            </div>
-        </div>
-    <!--カルーセル-->
-        <div id="app">
-            <div class="carousel-container">
-                <div class="carousel">
-                    <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1018/600/400" alt="写真1"></a>
-                    <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1015/600/400" alt="写真2"></a>
-                    <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1019/600/400" alt="写真3"></a>
-                    <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1016/600/400" alt="写真4"></a>
-                    <a href="../templates/osusume.html"><img src="https://picsum.photos/id/1020/600/400" alt="写真5"></a>
-                </div>
-                <button id="prevBtn" class="nav-btn">⇐</button>
-                <button id="nextBtn" class="nav-btn">⇒</button>
-            </div>
-        
-            <!--検索欄-->
-            <main>
-                <div class="search-container">
-                    <form action="search.html" method="GET" class="searchForm">
-                        <input type="text" class="search-input" id="searchInput" name="query" placeholder="検索" required autocomplete="off">
-                        <button class="search-button" type="submit"><span class="material-icons">search</span></button>
-                        <div class="dropdown" id="dropdown">
-                            <ul id="searchHistory">
-                                <!-- 検索履歴がここに表示される -->
-                            </ul>
-                        </div>
-                    </form>
-                </div>
-                <div class="button">
-                    <a href="登録画面_洋服&収納.html">登録</a>
-                </div>
-                <div class="button">
-                    <a th:href="@{/section/{userId}(userId=${userId})}">一覧</a>
-                </div>
-            </main>
+    <!--おすすめコーデラベル＆天気-->
+    <div class="upper-part">
+        <p id="label">おすすめコーデ</p>
+        <!--天気アイコンを表示-->
+        <div class="weather">
+            <img id="weather-icon" src="" alt="Weather Icon" style="display: none;">
+            <!-- 気温を表示 -->
+            <p><span id="temperature">Loading...</span> °C</p>
         </div>
     </div>
+
+    <!-- コーデ写真をカルーセルで表示 -->
+    <div class="closet-carousel-container">
+        <div class="osusume-carousel">
+            <div class="osusume-slide">
+                <a href="osusume.html"><img src="https://picsum.photos/id/1018/600/400" alt="写真1" class="osusume-image"></a>
+            </div>
+            <div class="osusume-slide">
+                <a href="osusume.html"><img src="https://picsum.photos/id/1015/600/400" alt="写真2" class="osusume-image"></a>
+            </div>
+            <div class="osusume-slide">
+                <a href="osusume.html"><img src="https://picsum.photos/id/1019/600/400" alt="写真3" class="osusume-image"></a>
+            </div>
+            <div class="osusume-slide">
+                <a href="osusume.html"><img src="https://picsum.photos/id/1016/600/400" alt="写真4" class="osusume-image"></a>
+            </div>
+            <div class="osusume-slide">
+                <a href="osusume.html"><img src="https://picsum.photos/id/1020/600/400" alt="写真5" class="osusume-image"></a>
+            </div>
+        </div>
+
+        <button class="prev" onclick="moveSlide(-0.5)">
+            <span class="material-icons" style="font-size: 50px;">
+                arrow_circle_left
+            </span>
+        </button>
+
+        <button class="next" onclick="moveSlide(0.5)">
+            <span class="material-icons" style="font-size: 50px;">
+                arrow_circle_right
+            </span>
+        </button>
+    </div>
+
+
+    <!--検索欄-->
+    <main>
+        <div class="search-container">
+            <form action="search.html" method="GET" class="searchForm">
+                <input type="text" class="search-input" id="searchInput" name="query" placeholder="検索" required autocomplete="off">
+                <button class="search-button" type="submit"><span class="material-icons">search</span></button>
+                <div class="dropdown" id="dropdown">
+                    <ul id="searchHistory">
+                        <!-- 検索履歴がここに表示される -->
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <!--登録 一覧ボタン-->
+        <div class="button">
+            <a href="登録画面_洋服&収納.html">登録</a>
+            <a th:href="@{/section/{userId}(userId=${userId})}">一覧</a>
+        </div>
+    </main>
 </div>
+
 <script th:src="@{/templete_script.js}"></script>
 <script th:src="@{/home.js}"></script>
 </body>
