@@ -83,42 +83,95 @@ function getWeatherIcon(code) {
 
 //カルーセル
 // 変数の初期化
-let currentSlideIndex = 0;  // スライドのインデックス
-const slideInterval=5000;   //5秒間隔
-
-// カルーセル
-function moveSlide(step) {
-  const slides = document.querySelectorAll('.osusume-slide');
-  const totalSlides = slides.length;
-
-  // スライドのインデックスを更新
-  currentSlideIndex += step;
-
-  // インデックスが範囲外にならないように調整
-  if (currentSlideIndex < 0) {
-      currentSlideIndex = totalSlides - 1;
-  } 
-  else if (currentSlideIndex >= totalSlides) {
-      currentSlideIndex = 0;
+class Carousel {
+  constructor(element) {
+      this.carousel = element;
+      this.track = element.querySelector('.carousel-track');
+      this.slides = Array.from(element.querySelectorAll('.carousel-slide'));
+      this.dotsContainer = element.querySelector('.carousel-dots');
+      
+      // Create navigation dots
+      this.createDots();
+      
+      // Set up initial state
+      this.currentIndex = 0;
+      this.slidesCount = this.slides.length;
+      this.track.style.width = `${this.slidesCount * 100}%`;
+      
+      // Bind event handlers
+      this.prevButton = element.querySelector('.prev');
+      this.nextButton = element.querySelector('.next');
+      this.prevButton.addEventListener('click', () => this.prev());
+      this.nextButton.addEventListener('click', () => this.next());
+      
+      // Auto-play functionality
+      this.autoPlayInterval = 5000;
+      this.isAutoPlaying = true;
+      this.startAutoPlay();
+      
+      // Pause on hover
+      this.carousel.addEventListener('mouseenter', () => this.pauseAutoPlay());
+      this.carousel.addEventListener('mouseleave', () => this.startAutoPlay());
+      
+      // Initial update
+      this.updateCarousel();
   }
-
-  // スライドを動かす
-  const carousel = document.querySelector('.osusume-carousel');
-  carousel.style.transform = `translateX(${-currentSlideIndex * 100}%)`;
+  
+  createDots() {
+      this.slides.forEach((_, index) => {
+          const dot = document.createElement('button');
+          dot.classList.add('carousel-dot');
+          dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+          dot.addEventListener('click', () => this.goToSlide(index));
+          this.dotsContainer.appendChild(dot);
+      });
+  }
+  
+  updateCarousel() {
+      // Update slide position
+      this.track.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+      
+      // Update dots
+      const dots = this.dotsContainer.querySelectorAll('.carousel-dot');
+      dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === this.currentIndex);
+      });
+  }
+  
+  goToSlide(index) {
+      this.currentIndex = index;
+      this.updateCarousel();
+  }
+  
+  next() {
+      this.currentIndex = (this.currentIndex + 1) % this.slidesCount;
+      this.updateCarousel();
+  }
+  
+  prev() {
+      this.currentIndex = (this.currentIndex - 1 + this.slidesCount) % this.slidesCount;
+      this.updateCarousel();
+  }
+  
+  startAutoPlay() {
+      if (!this.isAutoPlaying) {
+          this.isAutoPlaying = true;
+          this.autoPlayTimer = setInterval(() => this.next(), this.autoPlayInterval);
+      }
+  }
+  
+  pauseAutoPlay() {
+      if (this.isAutoPlaying) {
+          this.isAutoPlaying = false;
+          clearInterval(this.autoPlayTimer);
+      }
+  }
 }
 
-// 「次へ」「前へ」ボタンのクリックイベントに渡す
-document.querySelector('.prev').addEventListener('click', (event) => moveSlide(-0.5));
-document.querySelector('.next').addEventListener('click', (event) => moveSlide(0.5));
-
-// 初期設定で最初のスライドを表示
-document.addEventListener("DOMContentLoaded", () => {
-  moveSlide(0); // 最初のスライドを表示
-  
-  // 自動的にスライドを進める
-  setInterval(() => {
-    moveSlide(1);  // 次のスライドに進む
-  }, slideInterval); // 5秒ごとに次のスライド
+// Initialize the carousel when the DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  const carouselElement = document.querySelector('.carousel');
+  new Carousel(carouselElement);
 });
 
 
