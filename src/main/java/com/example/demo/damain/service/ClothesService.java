@@ -52,4 +52,15 @@ public class ClothesService {
         }
         return clothesList;
     }
+
+    public List<Clothes> findAllByUserIdAndStorageId(Long userId, Long storageId) {
+        List<Clothes> clothesList = clothesRepository.findAllByUserIdAndStorageId(userId, storageId);
+        for (Clothes clothes : clothesList) {
+            if (clothes.getImageData() != null) {
+                // エンコードして文字列として設定
+                clothes.setImageDataString(Base64.getEncoder().encodeToString(clothes.getImageData()));
+            }
+        }
+        return clothesList;
+    }
 }

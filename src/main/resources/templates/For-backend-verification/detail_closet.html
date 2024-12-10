@@ -1,0 +1,62 @@
+<!--クローゼットの詳細画面-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webアプリ画面</title>
+    <!-- google fonts,css等の読み込み -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/back&completion.css}">
+    <link rel="stylesheet" th:href="@{/list.css}">
+</head>
+<body>
+
+<div class="header">
+    <!--戻るのところ-->
+    <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
+    <a href="home.html" class="title-button">No Name</a>
+    <a class="right_area">　</a>
+</div>
+
+<!-- メインコンテンツエリア -->
+<div class="list_header">
+    <figure class="clothes_img">
+        <img th:src="'data:image/png;base64,' + ${storage.imageDataString}" alt="storage img">
+    </figure>
+    <div class="container">
+        <br class="heder_name">名前:<span th:text="${storage.name}"></span></br>
+    </div>
+    <!--ごみ箱、ソートアイコン-->
+    <a class="icons">
+    <span class="material-icons">swap_vert</span>
+    <span class="material-icons">delete</span>
+    </a>
+</div>
+<div class="main-content">
+    <div th:each="clothes : ${clothesList}" class="clothse_button">
+        <figure class="clothes_img">
+            <img th:src="'data:image/png;base64,' + ${clothes.imageDataString}" alt="clothes img">
+            <div class="detail">
+                <br>名前: <span th:text="${clothes.name}"></span></br>
+                <br>収納場所: <span th:text="${clothes.storage.name}"></span></br>
+                <br>
+                </br>
+            </div>
+        </figure>
+        <div class="detail_en">
+            <br>ブランド名: <span th:text="${clothes.brandName}"></span></br>
+            <br>説明: <span th:text="${clothes.description}"></span></br>
+            <div>
+                <button class="delete_button" th:attr="data-id=${clothes.id}">削除</button>
+                <a th:href="@{/clothes/edit/{id}(id=${clothes.id})}">編集</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/templete_script.js}"></script>
+<script th:src="@{/static/list.js}"></script>
+</body>
+</html>
