@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>タンス新規登録</title>
+    <!-- Font Awesomeの読み込み -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/template_style.css}">
+    <link rel="stylesheet" th:href="@{/back&completion.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/tansu_regist.css}">
+</head>
+<body>
+
+  <div class="header">
+    <!--戻るのところ-->
+    <button class="left-button" onclick="history.back()">
+      <span class="material-icons">
+        arrow_back_ios_new
+      </span>
+    </button>
+    <a class="title-button">タンス登録</a>
+    <a class="right_area">　</a>
+  </div>
+
+  <!-- メインコンテンツエリア -->
+  <div id="content">
+    <form id="closetForm">
+      <label for="name">名前</label>
+      <div class="input-container">
+        <input type="text" id="name" name="name">
+        <button type="button" class="info-button">
+          <span class="material-icons">
+            help_outline
+          </span>
+        </button>
+      </div>
+
+      <label for="levels">段数</label>
+      <div class="input-container">
+        <input type="number" id="levels" name="levels" min="1" max="5">
+        <button type="button" class="info-button">
+          <span class="material-icons">
+            help_outline
+          </span>
+        </button>
+      </div>
+
+      <label for="drawer_max">引き出しの最大数</label>
+      <div class="input-container">
+        <input type="number" id="drawer_max" name="drawer_max" min="1" max="5">
+        <button type="button" class="info-button">
+          <span class="material-icons">
+            help_outline
+          </span>
+        </button>
+      </div>
+
+      <!--タンスのレイアウト位置-->
+      <div class="design-section">
+        <!--素材のエリア-->
+        <div id="parts-container">
+          <div class="part" draggable="true" data-type="square">
+            <span class="square">
+              　　
+            </span>
+          </div>
+        </div>
+
+        <!--タンスの中身のレイアウト-->
+        <div id="tansu-container"></div>
+      </div>
+
+      <div id="trash" class="trash">ゴミ箱</div>
+
+      <!--登録完了ボタン 確認画面を見れるボタン-->
+      <div class="completion">
+        <button id="review-modal-button" class="reviewModalButton" onclick="openReviewModal()">
+          完了
+        </button>
+      </div>
+    </form>
+
+    <!-- 確認画面の表示 -->
+    <div id="reviewModal" class="reviewModal">
+      <div class="reviewModalContent">
+        <span id="reviwCloseBtn">&times;</span>
+        <h3>確認画面</h3>
+        <div id="reviewName" class="reviewName"></div>
+        <div id="reviewLevel" class="reviewLevel"></div>
+        <!-- 登録ボタン -->
+        <button onclick="registerData()">登録</button>
+      </div>
+    </div>
+
+    <!-- 登録完了メッセージ -->
+    <div id="registerModal" class="registerModal" style="display:none;">
+      <div class="registreContent">
+        <h3>登録が完了しました</h3>
+        <a href="choice_storage.html">続けて収納を登録</a>
+
+        <!--セレクトボックス-->
+        <div class="cp_ipselect06">
+          <select class="cp_sl06" required>
+            <option value="1" selected>洋服を収納　</option>
+            <option value="2">新規洋服登録　</option>
+            <option value="3">既存洋服登録　</option>
+          </select>
+          <span class="cp_sl06_selectbar"></span>
+        </div>
+        
+        <a href="home.html">ホームへ</a>
+      </div>
+    </div>
+
+  </div>
+
+<script th:src="@{/templete_script.js}"></script>
+<script th:src="@{/tansu_regist.js}"></script>
+</body>
+</html>
