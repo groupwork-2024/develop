@@ -69,11 +69,11 @@ public class ClothesController {
         // storageTypeに基づいて表示するテンプレートを切り替える
         switch (storageType) {
             case "DRESSER":
-                return "tansu_detail"; // タンス用HTML
+                return "For-backend-verification/detail_dresser"; // タンス用HTML
             case "CLOSET":
-                return "kurozeto_detail"; // クローゼット用HTML
+                return "For-backend-verification/detail_closet"; // クローゼット用HTML
             case "STORAGE_BAG":
-                return "syunoubukuro_detail"; // 収納袋用HTML
+                return "For-backend-verification/detail_storage_bag"; // 収納袋用HTML
             default:
                 return "error_page"; // エラー
         }
