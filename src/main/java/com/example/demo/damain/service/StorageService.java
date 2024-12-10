@@ -1,7 +1,6 @@
 package com.example.demo.damain.service;
 
 import com.example.demo.app.dto.DtoStorage;
-import com.example.demo.damain.model.Clothes;
 import com.example.demo.damain.model.Storage;
 import com.example.demo.damain.model.StorageType;
 import com.example.demo.damain.repository.StorageRepository;
@@ -51,5 +50,9 @@ public class StorageService {
         return storagesList.stream()
                 .map(storage -> new DtoStorage(storage.getId(),storage.getName()))
                 .collect(Collectors.toList());
+    }
+    
+    public Storage addDresser(Storage storage) {
+        return storageRepository.save(storage);
     }
 }

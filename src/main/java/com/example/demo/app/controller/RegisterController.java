@@ -1,9 +1,11 @@
 package com.example.demo.app.controller;
 
 import com.example.demo.app.dto.DtoStorage;
-import com.example.demo.damain.model.Clothes;
 import com.example.demo.damain.service.ClothesService;
 import com.example.demo.damain.service.StorageService;
+import com.example.demo.damain.model.Storage;
+import com.example.demo.damain.model.User;
+import com.example.demo.damain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,9 @@ import java.util.List;
 public class RegisterController {
     @Autowired
     ClothesService clothesService;
+
+    @Autowired
+    UserService userService;
 
     @Autowired
     StorageService storageService;
@@ -56,6 +61,19 @@ public class RegisterController {
     public String addDresser(@PathVariable Long userId,
                                 Model model) {
         return "For-backend-verification/add_dresser";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/storages/dresser")
+    public ResponseEntity<Void> addDresser(@PathVariable Long userId,
+                                           @RequestBody Storage storage,
+                                           Model model) {
+        //Userオブジェクト取得
+        User user = userService.findById(userId);
+        storage.setUser(user);
+
+        //
+        Storage saveDresser = storageService.addDresser(storage);
+        return ResponseEntity.ok().build();
     }
 
     @RequestMapping(method = RequestMethod.GET, value="/storages/closet")
