@@ -1,0 +1,40 @@
+/* 登録画面のタグのところ */
+#labelDisplay {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  height: auto; /* 高さを自動調整 */
+  min-height: 50px;  /* 最低限の高さを設定 */
+  width: 100%; /* 幅を100%に */
+  box-sizing: border-box;  
+}
+
+/* 登録画面の各タグに対するもの */
+.tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2%;
+  padding: 10px 20px;  /* タグのサイズ */
+  color: white;
+  font-size: 16px;      /* フォントサイズ */
+  border-radius: 4px;
+  position: relative;
+  padding-left: 30px;  /* 矢印のスペースを確保 */
+  box-sizing: border-box; /* パディングとボーダーをサイズに含める */
+  height: 40px;           /* タグの高さを一定に設定 */
+  white-space: nowrap;
+}
+
+/* 矢印部分を作成 */
+.tag .arrow {
+  content: '';
+  position: absolute;
+  left: -13px;  /* 矢印がタグの左側に出るように */
+  top: 50%;
+  transform: translateY(-50%);  /* 垂直方向に中央揃え */
+  border-top: 20px solid transparent;   /* 上の辺 */
+  border-bottom: 20px solid transparent;/* 下の辺 */
+  border-right: 15px solid #4CAF50 ; /* 矢印の色をここで変更 */
+}

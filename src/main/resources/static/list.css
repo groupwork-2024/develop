@@ -1,13 +1,15 @@
 .cp_ipselect06 {
   position: relative;
   display: flex;
+  flex-basis: 20%;
   justify-content: center;
   flex-direction: column;
-  margin: 2em 21px;
+  margin-right: -20%;
+  margin-left: auto;
 }
 .cp_ipselect06 .cp_sl06 {
   position: relative;
-  width: 130%; /*下線の長さ*/
+  width: 135%; /*下線の長さ*/
   height: 40px;/*高さ*/
   cursor: pointer;
   z-index: 1;
@@ -35,7 +37,7 @@
 .cp_sl06_selectbar {
   position: relative;
   display: inline-block;
-  width: 130%;
+  width: 133%;
 }
 .cp_sl06_selectbar:before,
 .cp_sl06_selectbar:after {
@@ -63,31 +65,36 @@
 }
 
 .icons{
+  display: flex;
+  flex-basis: 10%;
   border: none;
   background: none;
   cursor: pointer;
   white-space: nowrap; /*文字の折り返しをさせない*/
   margin-left:auto;
   margin-right: 10px;
+  justify-content: center;
 }
 
 .list_name{
-  font-size: 23px;
-  text-decoration: underline; /*点線のcss*/
-  text-decoration-style: dashed;/*点線のcss*/
-  margin-left: 10px;
-}
-
-.icons ,.list_name{
-  margin-top: 25px;
+  /*線の種類（二重線）太さ 色*/
+  display: flex;
+  flex-basis: 20%;
   text-align: center;
+  justify-content: center;
+  font-size: 20px;
+  margin: 0% 3%;
+  padding: 1% 2%;
+  border-bottom: double 5px #FFC778;
 }
 
 .list_header{
   display: flex;
-  align-items: center;
-  margin-top: -2%;
-  padding-top: 30px; 
+  flex-basis: 100%;
+  align-items: flex-end;
+  justify-items: center;
+  text-align: center;
+  padding-top: 2%;
 }
 
 .clothes_img img{
