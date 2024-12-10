@@ -1,19 +1,27 @@
 package com.example.demo.app.controller;
 
+import com.example.demo.damain.model.Storage;
+import com.example.demo.damain.model.User;
 import com.example.demo.damain.service.ClothesService;
+import com.example.demo.damain.service.StorageService;
+import com.example.demo.damain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("register/{userId}")
 public class RegisterController {
     @Autowired
     ClothesService clothesService;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    StorageService storageService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String sectionMenu(@PathVariable Long userId,
@@ -40,6 +48,19 @@ public class RegisterController {
     public String addDresser(@PathVariable Long userId,
                                 Model model) {
         return "For-backend-verification/add_dresser";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/storages/dresser")
+    public ResponseEntity<Void> addDresser(@PathVariable Long userId,
+                                           @RequestBody Storage storage,
+                                           Model model) {
+        //Userオブジェクト取得
+        User user = userService.findById(userId);
+        storage.setUser(user);
+
+        //
+        Storage saveDresser = storageService.addDresser(storage);
+        return ResponseEntity.ok().build();
     }
 
     @RequestMapping(method = RequestMethod.GET, value="/storages/closet")

@@ -43,4 +43,8 @@ public class StorageService {
 
         return storage;
     }
+
+    public Storage addDresser(Storage storage) {
+        return storageRepository.save(storage);
+    }
 }
