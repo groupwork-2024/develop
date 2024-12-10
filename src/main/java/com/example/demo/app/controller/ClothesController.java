@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("section/{userId}")
@@ -52,6 +53,30 @@ public class ClothesController {
         model.addAttribute("storages", storagesByType);
         model.addAttribute("userId", userId);
         return "For-backend-verification/storage_list";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/storages/{storageId}")
+    public String getStorageDetail(@PathVariable Long userId,
+                                   @PathVariable Long storageId,
+                                   @RequestParam(required = false) String storageType,
+                                   Model model) {
+        List<Clothes> getStorageByClothes = clothesService.findAllByUserIdAndStorageId(userId, storageId);
+        Storage getStorage = storageService.findStorageByUserIdAndStorageId(userId, storageId);
+        model.addAttribute("clothesList", getStorageByClothes);
+        model.addAttribute("storage", getStorage);
+
+
+        // storageTypeに基づいて表示するテンプレートを切り替える
+        switch (storageType) {
+            case "DRESSER":
+                return "For-backend-verification/detail_dresser"; // タンス用HTML
+            case "CLOSET":
+                return "For-backend-verification/detail_closet"; // クローゼット用HTML
+            case "STORAGE_BAG":
+                return "For-backend-verification/detail_storage_bag"; // 収納袋用HTML
+            default:
+                return "error_page"; // エラー
+        }
     }
 
 }

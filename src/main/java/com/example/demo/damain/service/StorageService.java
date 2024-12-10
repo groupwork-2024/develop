@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Base64;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class StorageService {
@@ -29,5 +31,16 @@ public class StorageService {
             }
         }
         return storagesList;
+    }
+
+    public Storage findStorageByUserIdAndStorageId(Long userId, Long storageId) {
+        Optional<Storage> optionalStorage = storageRepository.findStorageByUserIdAndId(userId, storageId);
+        Storage storage = optionalStorage.orElseThrow(() ->
+                new NoSuchElementException("Storage not found for userId: " + userId + ", storageId: " + storageId));
+        if (storage.getImageData() != null) {
+            storage.setImageDataString(Base64.getEncoder().encodeToString(storage.getImageData()));
+        }
+
+        return storage;
     }
 }

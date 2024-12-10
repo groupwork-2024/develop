@@ -16,4 +16,5 @@ public interface ClothesRepository extends JpaRepository<Clothes, Integer> {
 
     List<Clothes> findAllByUserIdOrderByCreatedAtDesc(Long userId);
 
+    List<Clothes> findAllByUserIdAndStorageId(Long userId, Long storageId);
 }

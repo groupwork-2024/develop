@@ -7,10 +7,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface StorageRepository extends JpaRepository<Storage, Long> {
     List<Storage> findAllByUserId(Long userId);
 
     List<Storage> findAllByUserIdAndStorageType(Long userId, StorageType storageType);
+
+    Optional<Storage> findStorageByUserIdAndId(Long userId, Long id);
 }
