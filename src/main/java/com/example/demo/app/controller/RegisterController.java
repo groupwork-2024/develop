@@ -18,16 +18,41 @@ public class RegisterController {
     @RequestMapping(method = RequestMethod.GET)
     public String sectionMenu(@PathVariable Long userId,
                               Model model) {
-        return "choice_storage";
+        return "For-backend-verification/choice_register";
     }
     @RequestMapping(method = RequestMethod.GET, value="/clothes")
     public String getUserClothes(@PathVariable Long userId,
                                  Model model){
-        model.addAttribute("userId", userId);
-        return "add_clothes";
+        return "For-backend-verification/add_clothes";
     }
     @RequestMapping(method = RequestMethod.POST, value="/clothes")
     public void addClothes(@PathVariable Long userId){
 
     }
+
+    @RequestMapping(method = RequestMethod.GET, value="/storages")
+    public String choiceStorage(@PathVariable Long userId,
+                                Model model) {
+        return "For-backend-verification/choice_storage";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value="/storages/dresser")
+    public String addDresser(@PathVariable Long userId,
+                                Model model) {
+        return "For-backend-verification/add_dresser";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value="/storages/closet")
+    public String addCloset(@PathVariable Long userId,
+                                Model model) {
+        return "For-backend-verification/add_closet";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value="/storages/bags")
+    public String addStorageBags(@PathVariable Long userId,
+                                Model model) {
+        return "For-backend-verification/add_storage_bag";
+    }
+
+
 }
