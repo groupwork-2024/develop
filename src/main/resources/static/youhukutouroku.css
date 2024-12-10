@@ -50,11 +50,11 @@
     display: flex;
     flex-direction: row;
     text-align: center;
-    /* justify-content:right; */
+    justify-content:right;
 }
 
-/* タグ追加へのボタン */
-.tagAddButtons button{
+/* タグ登録ボタン */
+#addButton{
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -64,9 +64,17 @@
     margin: 3% 2%;
 }
 
-/* タグ追加のボタンにカーソルが来たとき */
-.tagAddButtons button:hover {
+/* タグ登録ボタンにカーソルが来たとき */
+#addButton:hover {
     background-color: rgb(32, 244, 9);
+}
+
+/* タグ追加ボタン */
+#addTagOpenButton{
+    background-color: transparent;
+    border: none;
+    width: 10%;
+    cursor: pointer;
 }
 
 /* タグ表示エリア */
