@@ -1,8 +1,10 @@
 package com.example.demo.damain.service;
 
 import com.example.demo.app.dto.DtoStorage;
+import com.example.demo.damain.model.ClosetStorage;
 import com.example.demo.damain.model.Storage;
 import com.example.demo.damain.model.StorageType;
+import com.example.demo.damain.repository.ClosetStorageRepository;
 import com.example.demo.damain.repository.StorageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ import java.util.stream.Collectors;
 public class StorageService {
     @Autowired
     StorageRepository storageRepository;
+
+    @Autowired
+    ClosetStorageRepository closetStorageRepository;
 
     public List<Storage> findAllStorageByUserId(Long userId) {
         return storageRepository.findAllByUserId(userId);
@@ -52,7 +57,15 @@ public class StorageService {
                 .collect(Collectors.toList());
     }
     
-    public Storage addDresser(Storage storage) {
+    public Storage saveDresser(Storage storage) {
         return storageRepository.save(storage);
+    }
+
+    public Storage saveCloset(Storage storage) {
+        return storageRepository.save(storage);
+    }
+
+    public void saveClosetStorage(ClosetStorage closetStorage) {
+        closetStorageRepository.save(closetStorage);
     }
 }

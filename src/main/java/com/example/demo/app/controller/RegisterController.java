@@ -1,6 +1,9 @@
 package com.example.demo.app.controller;
 
+import com.example.demo.app.dto.DtoCloset;
 import com.example.demo.app.dto.DtoStorage;
+import com.example.demo.damain.model.ClosetStorage;
+import com.example.demo.damain.model.StorageType;
 import com.example.demo.damain.service.ClothesService;
 import com.example.demo.damain.service.StorageService;
 import com.example.demo.damain.model.Storage;
@@ -68,7 +71,7 @@ public class RegisterController {
         storage.setUser(user);
 
         //タンス登録
-        storageService.addDresser(storage);
+        storageService.saveDresser(storage);
         return ResponseEntity.ok().build();
     }
 
@@ -77,6 +80,30 @@ public class RegisterController {
                                 Model model) {
         return "For-backend-verification/add_closet";
     }
+
+    @RequestMapping(method = RequestMethod.POST, value="/storages/closet")
+    public ResponseEntity<Void> addCloset(@PathVariable Long userId,
+                                          Model model,
+                                          @RequestBody DtoCloset closet) {
+        //Userオブジェクト取得
+        User user = userService.findById(userId);
+
+        Storage storage = new Storage();
+        storage.setName(closet.getName());
+        storage.setStorageType(StorageType.CLOSET);
+        storage.setImageData(closet.getImageData());
+        storage.setUser(user);
+        Storage saveStorage = storageService.saveCloset(storage);
+
+        ClosetStorage closetStorage = new ClosetStorage();
+        closetStorage.setStorage(saveStorage);
+        closetStorage.setHanger_count(closet.getHangerCount());
+        storageService.saveClosetStorage(closetStorage);
+
+        return ResponseEntity.ok().build();
+    }
+
+
 
     @RequestMapping(method = RequestMethod.GET, value="/storages/bags")
     public String addStorageBags(@PathVariable Long userId,
