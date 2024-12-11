@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
+@RequestMapping("register/{userId}")
 public class RegisterController {
     @Autowired
     UserService userService;

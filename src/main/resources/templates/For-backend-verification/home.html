@@ -11,7 +11,6 @@
     <link rel="stylesheet" th:href="@{/template_style.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" th:href="@{/home.css}">
-    <link rel="stylesheet" th:href="@{/button.css}">
 </head>
 <body>
 
@@ -25,11 +24,11 @@
 <div id="sidebar" class="sidebar">
     <button class="close-btn" onclick="toggleSidebar()">×</button>
     <ul>
-        <li><a href="登録画面_洋服&収納.html">登録</a></li>
+        <li><a href="choice_register.html">登録</a></li>
         <li><a href="search.html">検索</a></li>
         <li><a href="mypage.html">マイページ</a></li>
         <li><a href="nice.html">いいね</a></li>
-        <li><a href="register.html">お問合わせ</a></li>
+        <li><a href="enquiry.html">お問合わせ</a></li>
     </ul>
 </div>
 
@@ -79,7 +78,6 @@
         </button>
     </div>
 
-
     <!--検索欄-->
     <main>
         <div class="search-container">
@@ -97,12 +95,16 @@
         <!--登録 一覧ボタン-->
         <div class="button">
             <a th:href="@{/register/{userId}(userId=${userId})}">登録</a>
+        </div>
+        <div class="button">
             <a th:href="@{/section/{userId}(userId=${userId})}">一覧</a>
         </div>
     </main>
 </div>
 
+
 <script th:src="@{/templete_script.js}"></script>
 <script th:src="@{/home.js}"></script>
+
 </body>
 </html>

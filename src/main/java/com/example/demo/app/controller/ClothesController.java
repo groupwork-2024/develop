@@ -25,7 +25,7 @@ public class ClothesController {
     @RequestMapping(method = RequestMethod.GET)
     public String sectionMenu(@PathVariable Long userId,
                               Model model) {
-        return "For-backend-verification/list_select";
+        return "For-backend-verification/index_choice";
     }
 
     @RequestMapping(method = RequestMethod.GET, value="/clothes")
@@ -42,7 +42,7 @@ public class ClothesController {
         model.addAttribute("clothesList", clothesList);
         model.addAttribute("order", order);
         System.out.println("Storages returned: " + clothesList);
-        return "For-backend-verification/clothes_list";
+        return "For-backend-verification/index_clothes";
     }
 
     @RequestMapping(method = RequestMethod.GET, value="/storages")
@@ -52,7 +52,7 @@ public class ClothesController {
         List<Storage> storagesByType = storageService.getStoragesByUserAndType(storageType, userId);
         model.addAttribute("storages", storagesByType);
         model.addAttribute("userId", userId);
-        return "For-backend-verification/storage_list";
+        return "For-backend-verification/index_storage";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/storages/{storageId}")

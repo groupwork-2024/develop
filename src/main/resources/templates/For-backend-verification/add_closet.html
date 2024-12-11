@@ -10,6 +10,7 @@
     <link rel="stylesheet" th:href="@{/back&completion.css}">
 </head>
 <body>
+    <input type="hidden" id="userId" th:value="${userId}">
     <!--ヘッダー部分-->
     <div class="header">
         <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
@@ -44,13 +45,13 @@
             <div class="closet-carousel-container">
                 <div class="closet-carousel">
                     <div class="closet-slide">
-                        <img src="../img/clothes.png" alt="クローゼット1" class="closet-image">
+                        <img th:src="@{/img/clothes.png}" alt="クローゼット1" class="closet-image">
                     </div>
                     <div class="closet-slide">
-                        <img src="../img/clothes2.png" alt="クローゼット2" class="closet-image">
+                        <img th:src="@{/img/clothes2.png}" alt="クローゼット2" class="closet-image">
                     </div>
                     <div class="closet-slide">
-                        <img src="../img/clothes3.jpg" alt="クローゼット3" class="closet-image">
+                        <img th:src="@{/img/clothes3.jpg}" alt="クローゼット3" class="closet-image">
                     </div>
                     <!-- 追加のクローゼットデザインをここに入れる -->
                 </div>

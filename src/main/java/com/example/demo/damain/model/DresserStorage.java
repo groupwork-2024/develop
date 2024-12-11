@@ -13,7 +13,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class DresserStorage {
     @Id
+    private Long storageId;
+
     @OneToOne
+    @MapsId
     @JoinColumn(name = "storage_id", nullable = false)
     private Storage storage;
 
