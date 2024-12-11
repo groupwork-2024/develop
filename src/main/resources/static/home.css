@@ -121,14 +121,6 @@ main {
   justify-content: center;
 }
 
-.button{
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 10px 0;
-  width: 280px;
-  margin-right: 45px;
-}
 
 /*検索欄のところ*/
 .search-input {
@@ -184,4 +176,31 @@ cursor: pointer;
 
 .dropdown ul li:hover {
 background-color: #f0f0f0;
+}
+
+/*ボタンデザイン*/
+.button a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  height: 100px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.button{
+  margin-top: 20px;
+  box-shadow: 0 7px 10px rgb(0 0 0 / 10%);
+}
+
+/* ボタンにホバーしたときのスタイル */
+.button:hover {
+  transform: translateY(-2px); /* ボタンが少し上に動くように設定（ホバー時に浮き上がる効果） */
+  box-shadow: 0 7px 10px rgb(0 0 0 / 15%); /* 影の強さを強くして、ボタンが浮き上がった感じにする */
+  transition: transform .3s, box-shadow .3s;
 }
