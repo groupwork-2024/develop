@@ -15,11 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("register/{userId}")
 public class RegisterController {
-    @Autowired
-    ClothesService clothesService;
-
     @Autowired
     UserService userService;
 
