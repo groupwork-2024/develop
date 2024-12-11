@@ -2,12 +2,15 @@ package com.example.demo.damain.service;
 
 import com.example.demo.app.dto.DtoStorage;
 import com.example.demo.damain.model.ClosetStorage;
+import com.example.demo.damain.model.DresserStorage;
 import com.example.demo.damain.model.Storage;
 import com.example.demo.damain.model.StorageType;
 import com.example.demo.damain.repository.ClosetStorageRepository;
+import com.example.demo.damain.repository.DresserStorageRepository;
 import com.example.demo.damain.repository.StorageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Base64;
 import java.util.List;
@@ -22,6 +25,9 @@ public class StorageService {
 
     @Autowired
     ClosetStorageRepository closetStorageRepository;
+
+    @Autowired
+    DresserStorageRepository dresserStorageRepository;
 
     public List<Storage> findAllStorageByUserId(Long userId) {
         return storageRepository.findAllByUserId(userId);
@@ -49,23 +55,26 @@ public class StorageService {
         return storage;
     }
 
-    public List<DtoStorage> getUserStorage(Long userId){
+    public List<DtoStorage> getUserStorage(Long userId) {
         List<Storage> storagesList = storageRepository.findAllByUserId(userId);
 
         return storagesList.stream()
-                .map(storage -> new DtoStorage(storage.getId(),storage.getName()))
+                .map(storage -> new DtoStorage(storage.getId(), storage.getName()))
                 .collect(Collectors.toList());
     }
-    
-    public Storage saveDresser(Storage storage) {
+
+    @Transactional
+    public Storage saveStorage(Storage storage) {
         return storageRepository.save(storage);
     }
 
-    public Storage saveCloset(Storage storage) {
-        return storageRepository.save(storage);
-    }
-
+    @Transactional
     public void saveClosetStorage(ClosetStorage closetStorage) {
         closetStorageRepository.save(closetStorage);
+    }
+
+    @Transactional
+    public void saveDresserStorage(DresserStorage dresserStorage) {
+        dresserStorageRepository.save(dresserStorage);
     }
 }

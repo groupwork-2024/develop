@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "drawer_storage")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DrawerStorage {
+public class DresserStorage {
     @Id
     @OneToOne
     @JoinColumn(name = "storage_id", nullable = false)
