@@ -87,9 +87,9 @@ function registerData() {
 
                 // 登録完了メッセージを表示
                 registerModal.style.display = 'flex';
-                alert('登録が完了しました');
+                console.log('登録が完了しました');
             } else {
-                alert('エラーが発生しました');
+                console.log('エラーが発生しました');
             }
         })
         .catch(error => console.error('Error:', error));

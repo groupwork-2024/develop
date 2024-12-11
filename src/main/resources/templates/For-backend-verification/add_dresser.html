@@ -15,7 +15,6 @@
 <body>
 
   <div class="header">
-    <input type="hidden" id="userId" th:value="${userId}">
     <!--戻るのところ-->
     <button class="left-button" onclick="history.back()">
       <span class="material-icons">
@@ -28,6 +27,7 @@
 
   <!-- メインコンテンツエリア -->
   <div id="content">
+    <input type="hidden" id="userId" th:value="${userId}">
     <form id="closetForm">
       <label for="name">名前</label>
       <div class="input-container">
@@ -119,6 +119,6 @@
   </div>
 
 <script th:src="@{/templete_script.js}"></script>
-<script th:src="@{/tansu_regist.js}"></script>
+<script th:src="@{/For-backend-verification/tansu_regist.js}"></script>
 </body>
 </html>
