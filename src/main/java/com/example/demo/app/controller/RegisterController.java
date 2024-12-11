@@ -71,8 +71,8 @@ public class RegisterController {
         User user = userService.findById(userId);
         storage.setUser(user);
 
-        //
-        Storage saveDresser = storageService.addDresser(storage);
+        //タンス登録
+        storageService.addDresser(storage);
         return ResponseEntity.ok().build();
     }
 

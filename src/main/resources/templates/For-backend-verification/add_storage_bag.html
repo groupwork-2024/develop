@@ -20,6 +20,7 @@
 
     <!-- メインコンテンツエリア -->
     <div class="main-content">
+        <input type="hidden" id="userId" th:value="${userId}">
         <form id="syunouForm">
             <label for="name">名前</label>
             <div class="input-container">
@@ -85,6 +86,6 @@
 
 
     <script th:src="@{/templete_script.js}"></script>
-    <script th:src="@{/syuunouBox.js}"></script>
+    <script th:src="@{/For-backend-verification/syuunouBox.js}"></script>
 </body>
 </html>
