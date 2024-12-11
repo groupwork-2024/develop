@@ -1,5 +1,6 @@
 package com.example.demo.damain.service;
 
+import com.example.demo.app.dto.DtoStorage;
 import com.example.demo.damain.model.Clothes;
 import com.example.demo.damain.model.Storage;
 import com.example.demo.damain.model.StorageType;
@@ -11,6 +12,7 @@ import java.util.Base64;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class StorageService {
@@ -40,7 +42,14 @@ public class StorageService {
         if (storage.getImageData() != null) {
             storage.setImageDataString(Base64.getEncoder().encodeToString(storage.getImageData()));
         }
-
         return storage;
+    }
+
+    public List<DtoStorage> getUserStorage(Long userId){
+        List<Storage> storagesList = storageRepository.findAllByUserId(userId);
+
+        return storagesList.stream()
+                .map(storage -> new DtoStorage(storage.getId(),storage.getName()))
+                .collect(Collectors.toList());
     }
 }
