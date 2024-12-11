@@ -1,36 +1,57 @@
-// タンスのレベル（段）を生成する関数
-function generateTansuLevels(levels) {
+// セレクトボックスの要素を取得
+const storageTypeSelect = document.getElementById('storageType');
+// 数の入力値
+const levelsInput = document.getElementById('levels');
+
+// 初期処理: セレクトボックスの選択肢に基づいて処理を切り替える
+storageTypeSelect.addEventListener('change', function() {
+  handleStorageTypeInput(storageTypeSelect.value);
+});
+
+//セレクトボックスで選択されたものによって制限を変える
+function handleStorageTypeInput(storageType) {
+  if (storageType === 'levels') {
+    levelsInput.setAttribute('min', '1');
+    levelsInput.setAttribute('max', '10');
+  } else if (storageType === 'drawers') {
+    levelsInput.setAttribute('min', '1');
+    levelsInput.setAttribute('max', '5');
+  }
+
+  levelsInput.value = ''; // 入力フィールドをリセット
   const tansuContainer = document.getElementById('tansu-container');
   tansuContainer.innerHTML = ''; // タンスコンテナをクリア
+}
 
-  //各段を生成
-  for (let i = 0; i < levels; i++) {
-    const tansuLevel  = document.createElement('div');
-    tansuLevel.classList.add('tansu-level');
-    tansuLevel.innerHTML = `<span class="backStr">${i + 1}</span>`;
-    tansuLevel.addEventListener('dragover', allowDrop);
-    tansuLevel.addEventListener('drop', drop);
-    tansuContainer.appendChild(tansuLevel);
+// ボタンのクリックイベント: 情報ボタンをクリックしたときの動作
+document.getElementById('infoButton').addEventListener('click', function() {
+    const selectedValue = storageTypeSelect.value;
+
+    if (selectedValue === 'levels') {
+        alert("段数は1から10の範囲で指定できます。");
+    } else if (selectedValue === 'drawers') {
+        alert("引き出しの最大数は1から5の範囲で指定できます。");
+    }
+});
+
+//タンスの棚等の生成関連
+function generateTansuLayout(count, isLevel) {
+  const tansuContainer = document.getElementById('tansu-container');
+  tansuContainer.innerHTML = '';  // タンスコンテナをクリア
+
+  tansuContainer.style.display = 'flex';
+  tansuContainer.style.flexDirection = isLevel ? 'column' : 'row';
+
+  for (let i = 0; i < count; i++) {
+      const tansuPart = document.createElement('div');
+      tansuPart.classList.add('tansu-level');
+      tansuPart.innerHTML = `<span class="backStr">${i + 1}</span>`;
+      tansuPart.addEventListener('dragover', allowDrop);
+      tansuPart.addEventListener('drop', drop);
+      tansuContainer.appendChild(tansuPart);
   }
 }
 
-// タンスの引き出しの最大数
-const drawer_max = document.getElementById("drawer_max");
-
-// レイアウト部分に表示させる
-function generateTansudrawer(){
-  const tansuContainer = document.getElementById('tansu-container');
-  tansuContainer.innerHTML = ''; // タンスコンテナをクリア
-
-  //各行？を生成
-  for(let i = 0; i < drawer_max; i++){
-    const tansuDrawer = document.createElement('div');
-    tansuDrawer.classList.add('tansu-drawer');
-    tansuDrawer.innerHTML = `${i + 1}</span>`;
-    tansuContainer.appendChild(tansuDrawer);
-  }
-  
-}
 
 // ドラッグ開始時の処理
 function drag(event) {
@@ -62,7 +83,7 @@ function drop(event) {
       } else {
         droppedPart = document.createElement('div');
         droppedPart.className = 'dropped-part';
-        droppedPart.textContent = data === 'square' ? '□' : '｜';
+        droppedPart.textContent = '　　';
         droppedPart.draggable = true;
         droppedPart.dataset.type = data;
         droppedPart.id = 'part-' + Date.now();
@@ -88,18 +109,20 @@ function trashDrop(event) {
 // イベントリスナーの設定
 //確認画面でのタンスレイアウト
 document.addEventListener('DOMContentLoaded', () => {
-  const levelsInput = document.getElementById('levels');
   const partsContainer = document.getElementById('parts-container');
   const trash = document.getElementById('trash');
+  const selectedValue = storageTypeSelect.value;
 
-  //ダンスの段数の表示の処理
-  levelsInput.addEventListener('change', () => {
-    const levels = parseInt(levelsInput.value, 10);
-    if (levels > 0 && levels <= 10) {
-      generateTansuLevels(levels);
-    }
+  // 初期のセレクトボックスの値に基づいて処理を変更
+  storageTypeChenfe(selectedValue);
+
+  // セレクトボックスを変更したとき、情報を再び取得する
+  storageTypeSelect.addEventListener('change', function() {
+    const selectedValue = storageTypeSelect.value;
+    console.log('選択された値:', selectedValue);
+    storageTypeChenfe(selectedValue);
   });
-
+  
   //タンスの素材を追加する処理
   partsContainer.querySelectorAll('.part').forEach(part => {
     part.addEventListener('dragstart', drag);
@@ -110,40 +133,78 @@ document.addEventListener('DOMContentLoaded', () => {
   trash.addEventListener('drop', trashDrop);
 });
 
+function storageTypeChenfe(selectedValue){
+  const levelsInput = document.getElementById('levels');
+  // 既存のイベントリスナーを削除
+  levelsInput.removeEventListener('change', levelsInputChangeHandler);
+  
+  if (selectedValue === 'levels') {
+    // 段数の処理
+    levelsInput.addEventListener('change', levelsInputChangeHandler);
+  } else if (selectedValue === 'drawers') {
+    // 引き出しの処理
+    levelsInput.addEventListener('change', levelsInputChangeHandler);
+  }
+}
+
+// levelsInput の change イベントに対する共通のハンドラ
+function levelsInputChangeHandler() {
+  const levels = parseInt(levelsInput.value, 10);
+  const selectedValue = storageTypeSelect.value;
+
+  if (selectedValue === 'levels') {
+    generateTansuLayout(levels, true); // レベルのレイアウト
+  } else if (selectedValue === 'drawers') {
+    generateTansuLayout(levels, false); // 引き出しのレイアウト
+  }
+}
+
 //確認モーダル
+var reviewModal = document.getElementById("reviewModal");
+var reviewOpenButton = document.getElementById("review-modal-button");
+var span = document.getElementById("reviwCloseBtn");
+
 // 完了ボタンが押された時にモーダルを表示し、フォームデータを表示する
-function openReviewModal() {
+reviewOpenButton.onclick = function(event){
+  event.preventDefault();  // フォーム送信のデフォルト動作を防止
+  event.stopPropagation();  // イベントの伝播を止める
   const name = document.getElementById("name").value;
   const levels = document.getElementById("levels").value;
-  const tansuLayout = document.getElementById("tansu-container").innerHTML; // タンスのレイアウト
+  const tansuContainer = document.getElementById("tansu-container"); // タンスのレイアウト
+  const tansuLayout = tansuContainer.cloneNode(true);  // 複製
+
+  // 複製した要素に新しいIDを設定
+  // 確認画面のタンスのレイアウト部分
+  tansuLayout.id = "review-tansu-layout"; 
 
   // モーダル内にフォームデータを表示
   document.getElementById("reviewName").innerHTML = `名前<br>${name}`;
-  document.getElementById("reviewImage").innerHTML = `段数<br>${levels}`;
-  document.getElementById("reviewTags").innerHTML = `レイアウト<br>${tansuLayout}`;
+  document.getElementById("reviewLevel").innerHTML = `段数<br>${levels}`;
+  document.getElementById("reviewlayout").innerHTML = `レイアウト<br>`;
+
+  // モーダルにレイアウトを追加
+  const reviewLayout = document.getElementById("reviewlayout");
+  reviewLayout.appendChild(tansuLayout);  // 複製したレイアウトを追加
 
   // モーダルを表示
   document.getElementById("reviewModal").style.display = "flex";
+  reviewModal.style.display = "flex";
 }
 
 // モーダルを閉じる処理
-var reviwModal = document.getElementById("reviewModal");
-var span = document.getElementById("reviwCloseBtn");
-
 span.onclick = function() {
-  reviwModal.style.display = "none";
+  reviewModal.style.display = "none";
 }
 
 // モーダル外クリックで閉じる
 window.onclick = function(event) {
-  if (event.target == reviwModal) {
-    reviwModal.style.display = "none";
+  if (event.target == reviewModal) {
+    reviewModal.style.display = "none";
   }
 }
 
 // 登録データを保存し、完了メッセージを表示
 function registerData() {
-  const reviewModal = document.getElementById('reviewModal');
   const registerModal = document.getElementById('registerModal');
 
   // モーダルを非表示に
