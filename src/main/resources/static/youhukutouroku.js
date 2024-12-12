@@ -344,11 +344,17 @@ function openReviewModal() {
         };
     });
 
+    // 入力欄に空白がないかチェック
+    if (name === "" || imageFile === "" || brand === "" || location === " " || memo === "" || tags.length===0) {
+        alert("すべての項目を入力してください");
+        return;  // 空欄があれば処理を中止
+        }
+
     // フォームの内容をモーダルに表示
-    document.getElementById('reviewName').innerHTML = `名前<br>${name}`;
-    document.getElementById('reviewBrand').innerHTML = `ブランド<br>${brand}`;
-    document.getElementById('reviewLocation').innerHTML = `収納場所<br>${location}`;
-    document.getElementById('reviewMemo').innerHTML = `メモ<br>${memo}`;
+    document.getElementById('reviewName').innerHTML = `<a>名前</a><br>${name}`;
+    document.getElementById('reviewBrand').innerHTML = `<a>ブランド</a><br>${brand}`;
+    document.getElementById('reviewLocation').innerHTML = `<a>収納場所</a><br>${location}`;
+    document.getElementById('reviewMemo').innerHTML = `<a>メモ</a><br>${memo}`;
 
     // 画像の表示
     if (imageFile) {
@@ -358,8 +364,11 @@ function openReviewModal() {
         }
         reader.readAsDataURL(imageFile);
     } else {
-        imagePreviewModal.innerHTML = '画像なし';
+        //dimagePreviewModal.innerHTML = '画像なし';
+        alert("すべての項目を入力してください");
+        return;  // 空欄があれば処理を中止
     }
+
 
     // タグの表示
     const reviewTagsContainer = document.getElementById('reviewTags');

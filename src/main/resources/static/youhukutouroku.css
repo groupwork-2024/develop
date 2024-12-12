@@ -461,6 +461,14 @@ input[type="color"] {
     margin-bottom: 10px;
 }
 
+/* 確認画面のラベル的なところのスタイル */
+.reviewModalContent a{
+    font-weight: bold;
+    font-size: 16px;
+    color: #535353;
+}
+
+
 /* 画像部分 */
 .reviewImage {
     margin-right: 15px;  /* 画像とタグの間隔 */

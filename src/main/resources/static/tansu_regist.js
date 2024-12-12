@@ -31,15 +31,21 @@ function handleStorageTypeInput(storageType) {
   tansuContainer.innerHTML = ''; // タンスコンテナをクリア
 }
 
-// ボタンのクリックイベント: 情報ボタンをクリックしたときの動作
-document.getElementById('infoButton').addEventListener('click', function() {
-    const selectedValue = storageTypeSelect.value;
+// 名前フィールドの情報ボタン
+document.getElementById('infoButton-name').addEventListener('click', function() {
+  alert("タンスに名前を付けることができます。\n例: 下着, 靴下, 肌着");
+});
 
-    if (selectedValue === 'levels') {
-        alert("段数は1から10の範囲で指定できます。");
-    } else if (selectedValue === 'drawers') {
-        alert("引き出しの最大数は1から5の範囲で指定できます。");
-    }
+// ボタンのクリックイベント: 情報ボタンをクリックしたときの動作
+document.getElementById('infoButton-levels').addEventListener('click', function() {
+  //段数か引き出しの最大数を選んでいるかを格納する
+  const selectedValue = storageTypeSelect.value;
+
+  if (selectedValue === 'levels') {
+    alert("タンスの段数を入力してください。\n段数は1から10の範囲で指定できます。");
+  } else if (selectedValue === 'drawers') {
+    alert("タンスの幅に対して、一番多い引き出しの個数を入力してください。\n引き出しの最大数は1から5の範囲で指定できます。");
+  }
 });
 
 // 素材をクリックしたときの処理
@@ -271,9 +277,9 @@ reviewOpenButton.onclick = function(event){
   tansuLayout.id = "review-tansu-layout"; 
 
   // モーダル内にフォームデータを表示
-  document.getElementById("reviewName").innerHTML = `名前<br>${name}`;
-  document.getElementById("reviewLevel").innerHTML = `段数<br>${levels}`;
-  document.getElementById("reviewlayout").innerHTML = `レイアウト<br>`;
+  document.getElementById("reviewName").innerHTML = `<a>名前</a><br>${name}`;
+  document.getElementById("reviewLevel").innerHTML = `<a>段数</a><br>${levels}`;
+  document.getElementById("reviewlayout").innerHTML = `<a>レイアウト</a><br>`;
 
   // モーダルにレイアウトを追加
   const reviewLayout = document.getElementById("reviewlayout");

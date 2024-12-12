@@ -45,7 +45,6 @@ function selectPhoto(index) {
     showPhoto(currentPhotoIndex);
 }
 
-
 // フォームの内容をモーダルに表示
 // モーダルを取得
 var reviewModal = document.getElementById("reviewModal");
@@ -58,10 +57,20 @@ reviewOpenButton.onclick = function(event){
     event.preventDefault();  // フォーム送信のデフォルト動作を防止
     event.stopPropagation();  // イベントの伝播を止める
     const name = document.getElementById('name').value;
+    const reviewSyunouImage = document.getElementById('reviewSyunouImage');
+
+    var selectedImageSrc = photos[currentPhotoIndex];
+
+    // 入力欄に空白がないかチェック
+    if (name === "") {
+    alert("すべての項目を入力してください");
+    return;  // 空欄があれば処理を中止
+    }
 
     // フォームの内容をモーダルに表示
-    document.getElementById('reviewName').innerText = `名前: ${name}`;
+    document.getElementById('reviewName').innerHTML = `<a>名前</a><br>${name}`;
 
+    reviewSyunouImage.innerHTML = `<img src="${selectedImageSrc}" alt="Selected Image" class="storageBoxImage">`;
 
     // モーダルを表示
     reviewModal.style.display = 'flex';
@@ -93,3 +102,25 @@ function closeRegisterModal() {
     const registerModal = document.getElementById('registerModal');
     registerModal.style.display = 'none';
 }
+
+// ボタンのクリックイベント: 情報ボタンをクリックしたときの動作
+document.getElementById('infoButton').addEventListener('click', function() {
+    alert("収納ケースに名前を付けることができます。\n例:季節物 夏服用 冬物衣類");
+});
+
+// セレクトボックスで選んだものによって遷移先を変更させる
+const selectOption = document.getElementById('selectOption');
+
+// セレクトボックスの選択肢が変更されたときの処理
+selectOption.addEventListener('change', function() {
+    const selectedValue = selectOption.value;
+
+    setTimeout(function() {
+        if (selectedValue === '2') {
+            window.location.href = 'add_clothes.html'; 
+        } 
+        else if (selectedValue === '3') {
+            window.location.href = 'index_clothes.html';
+        }
+    }, 800); // （0.8秒）後に遷移
+});

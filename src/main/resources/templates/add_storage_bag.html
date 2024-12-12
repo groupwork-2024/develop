@@ -24,7 +24,7 @@
             <label for="name">名前</label>
             <div class="input-container">
                 <input type="text" id="name" name="name">
-                <button type="button" class="info-button">
+                <button type="button" class="info-button" id="infoButton">
                     <span class="material-icons">
                         help_outline
                     </span>
@@ -56,13 +56,13 @@
         </form>
         
         <!-- 確認画面の表示 -->
-        <div id="reviewModal" class="reviewModal" style="display: none;">
+        <div id="reviewModal" class="reviewModal">
             <div class="reviewModalContent">
                 <span id="reviwCloseBtn">&times;</span>
                 <h3>確認画面</h3>
                 <div id="reviewName" class="reviewName"></div>
                 <div id="reviewSyunouImage" class="reviewSyunouImage"></div>
-                <button onclick="registerData()">登録</button>
+                <button type="button" onclick="registerData()">登録</button>
             </div>
         </div>
         
@@ -73,13 +73,12 @@
                 <a href="choice_storage.html">続けて収納を登録</a>
 
                 <!--セレクトボックス-->
-                <div class="cp_ipselect06">
-                    <select class="cp_sl06" required>
+                <div class="select">
+                    <select id="selectOption" >
                         <option value="1" selected>洋服を収納　</option>
                         <option value="2">新規洋服登録　</option>
                         <option value="3">既存洋服登録　</option>
                     </select>
-                    <span class="cp_sl06_selectbar"></span>
                 </div>
                 <a href="home.html">ホームへ</a>
             </div>

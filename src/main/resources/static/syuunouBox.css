@@ -205,6 +205,13 @@ form input{
     margin-bottom: 15px;
 }
 
+/* 確認画面のラベル的なところのスタイル */
+.reviewModalContent a{
+    font-weight: bold;
+    font-size: 16px;
+    color: #535353;
+}
+
 /* モーダルの中の登録ボタン */
 .reviewModalContent button {
     background-color: #4CAF50;
@@ -223,7 +230,7 @@ form input{
 /* クローゼットの画像のサイズを変更 */
 .reviewModalContent img {
     max-width: 100%;  /* 画像の最大幅を親要素に合わせる */
-    max-height: 60%; /* 画像の最大高さを画面の70%に制限 */
+    max-height: 50%; /* 画像の最大高さを画面の50%に制限 */
     object-fit: zoom;  /* 画像のアスペクト比を保ちながら収める */
 }
 
@@ -258,6 +265,18 @@ form input{
 /* 登録後のaタグのスタイル */
 .registreContent a{
     text-decoration:underline;
-    color:#000;
-    border-color: #818181;
+    color:#101010;
+    border: none;
+    border-bottom: 1px solid #535353;
+    margin-bottom: 2%;
+    font-size: 16px;
+    text-decoration-line: none;
+}
+
+/* セレクトボックスのスタイル */
+#selectOption{
+    border: none;
+    border-bottom: 1px solid #535353;
+    margin-bottom: 6px;
+    font-size: 16px;
 }

@@ -175,6 +175,13 @@
   text-align: center;
 }
 
+/* 確認画面のラベル的なところのスタイル */
+.reviewModalContent a{
+  font-weight: bold;
+  font-size: 16px;
+  color: #535353;
+}
+
 /* モーダルの中のdivの間隔設定 */
 .reviewModalContent div {
   margin-bottom: 15px;
