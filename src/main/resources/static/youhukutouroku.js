@@ -111,7 +111,7 @@ function updateTagList() {
     });
 };
 
-// タグ登録ボタンを押したときの処理
+// タグ一覧の登録ボタンを押したときの処理
 addButton.addEventListener('click', function(event) {
     event.preventDefault(); 
     event.stopPropagation();  // イベントの伝播を止める
@@ -126,8 +126,6 @@ addButton.addEventListener('click', function(event) {
     if (selectedTag) {
         // メイン画面にタグを表示
         displayLabelInMain(tagName,tagColor);  
-        //タグ一覧モーダルを開く
-        //openModal('tagListmodal', false);
         
     } else {
         alert('タグを選択してください。');
@@ -261,7 +259,7 @@ addTagButton.addEventListener('click', (event) => {
     resetTagInput();
 
     // タグ一覧のモーダルを開く（必要に応じて）
-    // openModal('tagListmodal', false);
+    openModal('tagListmodal', false);
 
     // モーダルを閉じる
     closeModal('tagmodal');

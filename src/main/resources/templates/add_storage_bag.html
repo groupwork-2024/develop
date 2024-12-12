@@ -7,7 +7,7 @@
     <title>Webアプリ画面</title>
     <!-- google fonts,css等の読み込み -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="..\static\back&completion.css">
+    <link rel="stylesheet" href="../static/back&completion.css">
     <link rel="stylesheet" href="../static/syuunouBox.css">
 </head>
 <body>
@@ -30,23 +30,25 @@
                     </span>
                 </button>
             </div>
+            <!-- カルーセル -->
             <div class="photo-slider">
-                <button class="arrow-button left" onclick="previousPhoto()">&#8249;</button>
+                <button type="button" class="arrow-button left" onclick="previousPhoto()">&#8249;</button>
                 <div class="photo-container">
-                    <img id="slider-photo" src="photo1.jpg" alt="スライド写真">
+                    <img id="slider-photo" src="photo1.jpg" alt="スライド写真1">
                 </div>
-                <button class="arrow-button right" onclick="nextPhoto()">&#8250;</button>
+                <button type="button" class="arrow-button right" onclick="nextPhoto()">&#8250;</button>
             </div>
+
             <!--サンプルの画像の表示-->
             <div class="thumbnail-buttons">
-                <button onclick="selectPhoto(0)"><img src="https://thumb.ac-illust.com/bb/bb155844e2d3b16f4342bad7a96e8847_w.jpeg" alt="Photo 1"></button>
-                <button onclick="selectPhoto(1)"><img src="photo2.jpg" alt="Photo 2"></button>
-                <button onclick="selectPhoto(2)"><img src="photo3.jpg" alt="Photo 3"></button>
+                <button type="button" onclick="selectPhoto(0)"><img src="https://thumb.ac-illust.com/bb/bb155844e2d3b16f4342bad7a96e8847_w.jpeg" alt="Photo 1"></button>
+                <button type="button" onclick="selectPhoto(1)"><img src="photo2.jpg" alt="Photo 2"></button>
+                <button type="button" onclick="selectPhoto(2)"><img src="photo3.jpg" alt="Photo 3"></button>
             </div>
 
             <!--登録完了ボタン 確認画面を見れるボタン-->
             <div class="completion">
-                <button id="review-modal-button" class="reviewModalButton">
+                <button type="button" id="review-modal-button" class="reviewModalButton">
                     完了
                 </button>
             </div>
