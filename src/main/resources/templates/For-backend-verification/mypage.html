@@ -1,0 +1,166 @@
+<!-- マイページ -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <!-- 最新のレンダリングエンジンを使用するように -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- 表示領域を設定し、デバイスの幅に合わせてページを表示して初期ズームレベルを1.0（100%） -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Webアプリ画面</title>
+        <!-- google fonts,css等の読み込み -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" th:href="@{/template_style.css}">
+        <link rel="stylesheet" th:href="@{/mypage.css}">
+    </head>
+
+    <body>
+        <!-----------------ヘッダー------------------->
+        <div class="header">
+            <button class="left-button" onclick="toggleSidebar()"><span class="material-icons">menu_open</span></button>
+            <a href="home.html" class="title-button">No Name</a>
+            <button class="right-button" onclick="notice_transition()"><span class="material-icons">notifications</span></button>
+        </div>
+
+        <!-----------------サイドバー------------------>
+        <div id="sidebar" class="sidebar">
+            <button class="close-btn" onclick="toggleSidebar()">×</button>
+            <ul>
+                <li><a th:href="@{/register/{userId}(userId=${userId})}">登録</a></li>
+                <li><a th:href="@{/others/{userId}/search(userId=${userId})}">検索</a></li>
+                <li><a th:href="@{/others/{userId}/my-page(userId=${userId})}">マイページ</a></li>
+                <li><a th:href="@{/others/{userId}/favorite(userId=${userId})}">いいね</a></li>
+                <li><a th:href="@{/others/{userId}/inquiry(userId=${userId})}">お問合わせ</a></li>
+            </ul>
+        </div>
+
+        <!----------------メインコンテンツエリア----------------->
+        <main class="main-content">
+            <!----------------プロフィール部分-------------------->
+            <section class="profile-section">
+                <!--アイコン部分-->
+                <div class="profile-circle">
+                    <img id="profile-image" src="" alt="プロフィール画像">
+                    <button class="plus-buttom" onclick="document.getElementById('file-input').click()">＋</button>
+                    <input id="file-input" type="file" accept="image/*" style="display: none;" onchange="iconImage(event)">
+                </div>
+                <!--その他ユーザー名など-->
+                <div class="profile-others">
+                    <p>ユーザー名：</p>
+                    <p>フレームカラー</p>
+                    <!--色の選択-->
+                    <div class="select-color">
+                        <button class="color-btn red" data-color="red"></button>
+                        <button class="color-btn orange" data-color="orange"></button>
+                        <button class="color-btn yellow" data-color="yellow"></button>
+                        <button class="color-btn blue" data-color="blue"></button>
+                    </div>
+                </div>
+            </section>
+
+            <!----------------一覧表示選択ボタン-------------------->
+            <nav class="tab-list">
+                <button class="tab youhuku active"><span id="icon" class="material-icons">checkroom</span></button>
+                <button class="tab closet"><span id="icon" class="material-icons">blinds</span></button>
+                <button class="tab tag"><span id="icon" class="material-icons">sell</span></button>
+            </nav>
+
+            <!----------------洋服・収納・タグの一覧------------------->            
+            <!--洋服の一覧を表示-->
+            <section id="youhuku-grid" class="item-grid">
+                <a href="">
+                    <div class="youhuku-item">
+                        <img th:src="@{/img/youfuku_test.png}" alt="洋服1">
+                    </div>    
+                </a>
+                <a href="">
+                    <div class="youhuku-item">
+                        <img th:src="@{/img/youfuku_test.png}" alt="洋服2">
+                    </div>    
+                </a>
+                <a href="">
+                    <div class="youhuku-item">
+                        <img th:src="@{/img/youfuku_test.png}" alt="洋服3">
+                    </div>    
+                </a>
+                <a href="">
+                    <div class="youhuku-item">
+                        <img th:src="@{/img/youfuku_test.png}" alt="洋服4">
+                    </div>    
+                </a>
+                <a href="">
+                    <div class="youhuku-item">
+                        <img th:src="@{/img/youfuku_test.png}" alt="洋服5">
+                    </div>    
+                </a>
+                <a href="">
+                    <div class="youhuku-item">
+                        <img th:src="@{/img/youfuku_test.png}" alt="洋服6">
+                    </div>    
+                </a>
+                <a href="">
+                    <div class="youhuku-item">
+                        <img th:src="@{/img/youfuku_test.png}" alt="洋服7">
+                    </div>    
+                </a>
+                <a href="">
+                    <div class="youhuku-item">
+                        <img th:src="@{/img/youfuku_test.png}" alt="洋服8">
+                    </div>    
+                </a>
+            </section>
+
+            <!--収納の一覧を表示-->
+            <section id="closet-grid" class="item-grid">
+                <a href="detail_closet.html">
+                    <div class="closet-item">
+                        <img th:src="@{/img/clothes.png}" alt="収納1">
+                    </div>    
+                </a>
+                <a href="">
+                    <div class="closet-item">
+                        <img th:src="@{/img/clothes.png}" alt="収納2">
+                    </div>    
+                </a>
+                <a href="">
+                    <div class="closet-item">
+                        <img th:src="@{/img/clothes.png}" alt="収納3">
+                    </div>    
+                </a>
+                <a href="">
+                    <div class="closet-item">
+                        <img th:src="@{/img/clothes.png}" alt="収納4">
+                    </div>    
+                </a>
+                <a href="">
+                    <div class="closet-item">
+                        <img th:src="@{/img/clothes.png}" alt="収納5">
+                    </div>    
+                </a>
+                <a href="">
+                    <div class="closet-item">
+                        <img th:src="@{/img/clothes.png}" alt="収納6">
+                    </div>    
+                </a>
+                <a href="">
+                    <div class="closet-item">
+                        <img th:src="@{/img/clothes.png}" alt="収納7">
+                    </div>    
+                </a>
+                <a href="">
+                    <div class="closet-item">
+                        <img th:src="@{/img/clothes.png}" alt="収納8">
+                    </div>    
+                </a>
+            </section>
+
+            <!--タグの一覧を表示-->
+            <section id="tag-grid" class="item-grid">
+                <p>タグはまだ登録されていません。</p>
+            </section>
+        </main>
+
+        <script th:src="@{/templete_script.js}"></script>
+        <script th:src="@{/mypage.js}"></script>
+    </body>
+</html>
