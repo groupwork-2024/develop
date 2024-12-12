@@ -260,6 +260,12 @@ reviewOpenButton.onclick = function(event){
   const tansuContainer = document.getElementById("tansu-container"); // タンスのレイアウト
   const tansuLayout = tansuContainer.cloneNode(true);  // 複製
 
+  // 入力欄に空白がないかチェック
+  if (name === "" || levels === "" || tansuContainer === "") {
+    alert("すべての項目を入力してください");
+    return;  // 空欄があれば処理を中止
+  }
+
   // 複製した要素に新しいIDを設定
   // 確認画面のタンスのレイアウト部分
   tansuLayout.id = "review-tansu-layout"; 
@@ -293,3 +299,19 @@ function registerData() {
   registerModal.style.display = 'flex';
 }
 
+// セレクトボックスで選んだものによって遷移先を変更させる
+const selectOption = document.getElementById('selectOption');
+
+// セレクトボックスの選択肢が変更されたときの処理
+selectOption.addEventListener('change', function() {
+  const selectedValue = selectOption.value;
+
+  setTimeout(function() {
+    if (selectedValue === '2') {
+      window.location.href = 'add_clothes.html'; 
+    } 
+    else if (selectedValue === '3') {
+      window.location.href = 'index_clothes.html';
+    }
+  }, 800); // （0.8秒）後に遷移
+});

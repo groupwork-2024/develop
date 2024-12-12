@@ -284,8 +284,20 @@
 /* 登録後のaタグのスタイル */
 .registreContent a{
   text-decoration:underline;
-  color:#000;
-  border-color: #818181;
+  color:#101010;
+  border: none;
+  border-bottom: 1px solid #535353;
+  margin-bottom: 2%;
+  font-size: 16px;
+  text-decoration-line: none;
+}
+
+/* セレクトボックスのスタイル */
+#selectOption{
+  border: none;
+  border-bottom: 1px solid #535353;
+  margin-bottom: 6px;
+  font-size: 16px;
 }
 
 /* 確認完了後の画面関連ここまで */
