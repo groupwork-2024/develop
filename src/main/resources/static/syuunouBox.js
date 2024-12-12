@@ -1,15 +1,30 @@
 // 写真リスト
 const photos = [
-    "https://thumb.ac-illust.com/bb/bb155844e2d3b16f4342bad7a96e8847_w.jpeg",
-    "photo2.jpg", 
-    "photo3.jpg"
+    "https://www.komeri.com/images/goods/014/396/16/1439616.jpg",
+    "https://cdn.askul.co.jp/img/product/3L1/502432_3L1.jpg", 
+    "https://jp.daisonet.com/cdn/shop/products/4549131611052_10.jpg?v=1640581210"
 ];
 let currentPhotoIndex = 0;
+
+// 初期表示時に最初の画像をアクティブにする
+window.onload = function() {
+    showPhoto(currentPhotoIndex);
+};
 
 // 写真を切り替える関数
 function showPhoto(index) {
     const sliderPhoto = document.getElementById("slider-photo");
     sliderPhoto.src = photos[index];
+
+    // サンプル画像のボタンにアクティブなクラスを付与
+    const buttons = document.querySelectorAll(".thumbnail-buttons button");
+    buttons.forEach((button, i) => {
+        if (i === index) {
+            button.classList.add("active");  // アクティブなボタンにクラスを追加
+        } else {
+            button.classList.remove("active");  // 他のボタンからはクラスを削除
+        }
+    });
 }
 
 // 前の写真へ
@@ -30,6 +45,7 @@ function selectPhoto(index) {
     showPhoto(currentPhotoIndex);
 }
 
+
 // フォームの内容をモーダルに表示
 // モーダルを取得
 var reviewModal = document.getElementById("reviewModal");
@@ -42,7 +58,6 @@ reviewOpenButton.onclick = function(event){
     event.preventDefault();  // フォーム送信のデフォルト動作を防止
     event.stopPropagation();  // イベントの伝播を止める
     const name = document.getElementById('name').value;
-    const bagImage = document.getElementById('image').value;
 
     // フォームの内容をモーダルに表示
     document.getElementById('reviewName').innerText = `名前: ${name}`;

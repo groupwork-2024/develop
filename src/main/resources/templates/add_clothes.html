@@ -15,13 +15,13 @@
     <!--ヘッダー部分-->
     <div class="header">
         <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
-        <a class="title-button">Fuku Log</a>
+        <a class="title-button">洋服登録</a>
         <a class="right_area">　</a>
     </div>
 
     <div class="main-content">
         <!--フォーム-->
-        <form id="reviewForm">
+        <form onsubmit="return false;" id="reviewForm">
             <!--名前-->
             <label for="name">名前</label>
             <input type="text" id="name" name="name">

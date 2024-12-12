@@ -13,13 +13,13 @@
     <!--ヘッダー部分-->
     <div class="header">
         <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
-        <a class="title-button">Fuku Log</a>
+        <a class="title-button">クローゼット登録</a>
         <a class="right_area">　</a>
     </div>
 
     <!--メインの部分-->
     <div class="container">
-        <form id="closetForm">
+        <form onsubmit="return false;" id="closetForm">
             <label for="name">名前</label>
             <div class="input-container">
                 <input type="text" id="name" name="name" required>
