@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webアプリ画面</title>
+    <title>収納袋登録</title>
     <!-- google fonts,css等の読み込み -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../static/back&completion.css">
@@ -20,7 +20,7 @@
 
     <!-- メインコンテンツエリア -->
     <div class="main-content">
-        <form id="syunouForm">
+        <form onsubmit="return false;" id="syunouForm">
             <label for="name">名前</label>
             <div class="input-container">
                 <input type="text" id="name" name="name">
@@ -30,20 +30,21 @@
                     </span>
                 </button>
             </div>
+            
             <!-- カルーセル -->
             <div class="photo-slider">
                 <button type="button" class="arrow-button left" onclick="previousPhoto()">&#8249;</button>
                 <div class="photo-container">
-                    <img id="slider-photo" src="photo1.jpg" alt="スライド写真1">
+                    <img id="slider-photo" src="https://www.komeri.com/images/goods/014/396/16/1439616.jpg" alt="スライド写真1">
                 </div>
                 <button type="button" class="arrow-button right" onclick="nextPhoto()">&#8250;</button>
             </div>
 
             <!--サンプルの画像の表示-->
             <div class="thumbnail-buttons">
-                <button type="button" onclick="selectPhoto(0)"><img src="https://thumb.ac-illust.com/bb/bb155844e2d3b16f4342bad7a96e8847_w.jpeg" alt="Photo 1"></button>
-                <button type="button" onclick="selectPhoto(1)"><img src="photo2.jpg" alt="Photo 2"></button>
-                <button type="button" onclick="selectPhoto(2)"><img src="photo3.jpg" alt="Photo 3"></button>
+                <button type="button" onclick="selectPhoto(0)"><img src="https://www.komeri.com/images/goods/014/396/16/1439616.jpg" alt="Photo 1"></button>
+                <button type="button" onclick="selectPhoto(1)"><img src="https://cdn.askul.co.jp/img/product/3L1/502432_3L1.jpg" alt="Photo 2"></button>
+                <button type="button" onclick="selectPhoto(2)"><img src="https://jp.daisonet.com/cdn/shop/products/4549131611052_10.jpg?v=1640581210" alt="Photo 3"></button>
             </div>
 
             <!--登録完了ボタン 確認画面を見れるボタン-->
