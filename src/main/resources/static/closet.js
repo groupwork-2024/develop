@@ -62,13 +62,6 @@ span.onclick = function() {
     reviwModal.style.display = "none";
 }
 
-// モーダルの範囲外が押された場合も閉じる
-window.onclick = function(event) {
-    if (event.target == reviwModal) {
-        reviwModal.style.display = "none";
-    }
-}
-
 //完了確認メッセージ関連
 // 登録データを登録後に完了メッセージを表示
 function registerData() {

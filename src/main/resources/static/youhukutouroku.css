@@ -220,6 +220,7 @@
 #tagOpenButton{
     background-color: transparent;
     border: none;
+    cursor: pointer;
 }
 
 /* タグ追加モーダルのスタイル */

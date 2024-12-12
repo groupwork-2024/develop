@@ -45,69 +45,106 @@ function generateTansuLayout(count, isLevel) {
   for (let i = 0; i < count; i++) {
       const tansuPart = document.createElement('div');
       tansuPart.classList.add('tansu-level');
+      //各段に番号をつける
       tansuPart.innerHTML = `<span class="backStr">${i + 1}</span>`;
+      //ドロップを可能にする
       tansuPart.addEventListener('dragover', allowDrop);
+      //ドロップ時の処理
       tansuPart.addEventListener('drop', drop);
+      //タンス表示エリアに追加
       tansuContainer.appendChild(tansuPart);
   }
 }
 
-
 // ドラッグ開始時の処理
 function drag(event) {
-  event.dataTransfer.setData('text', event.target.dataset.type || event.target.textContent);
-  event.dataTransfer.setData('sourceId', event.target.id);
+  // アイテムのIDを設定
+  event.dataTransfer.setData('id', event.target.id);
 }
 
 // ドロップを許可する処理
 function allowDrop(event) {
+  // デフォルトの動作を防止
   event.preventDefault();
 }
 
-// ドロップ時の処理
+// ドロップされたときの処理
 function drop(event) {
   event.preventDefault();
-  const data = event.dataTransfer.getData('text');
-  const sourceId = event.dataTransfer.getData('sourceId');
+
+  // ドロップされたアイテムのIDを取得
+  const itemId = event.dataTransfer.getData('id');
+  
+  // ドラッグされたアイテムを取得
+  const draggedItem = document.getElementById(itemId);
+  
+  // ドロップ先のタンス段を取得
   const targetLevel = event.target.closest('.tansu-level');
 
-  if (targetLevel) {
-    const squareCount = targetLevel.querySelectorAll('.dropped-part[data-type="square"]').length;
-    const dividerCount = targetLevel.querySelectorAll('.dropped-part[data-type="divider"]').length;
+  //段数か引き出しか今選ばれているやつを取得
+  const selectedValue = storageTypeSelect.value;
 
-    if ((data === 'square' && squareCount < 5) || (data === 'divider' && dividerCount < 5) || sourceId) {
-      let droppedPart;
-      if (sourceId) {
-        droppedPart = document.getElementById(sourceId);
-        targetLevel.appendChild(droppedPart);
-      } else {
-        droppedPart = document.createElement('div');
-        droppedPart.className = 'dropped-part';
-        droppedPart.textContent = '　　';
-        droppedPart.draggable = true;
-        droppedPart.dataset.type = data;
-        droppedPart.id = 'part-' + Date.now();
-        droppedPart.addEventListener('dragstart', drag);
-        targetLevel.appendChild(droppedPart);
-      }
+  // ドロップ先がタンス段なら
+  // タンス段にアイテムを追加
+  if (targetLevel) {
+    // アイテムのコピーを作成
+    const newItem = draggedItem.cloneNode(true);  
+    // 不要なクラスを削除
+    newItem.classList.remove('dragging');   
+
+    //選ばれてる奴によってスタイルを変更させる
+    if (selectedValue === 'levels') {
+      // 追加されたアイテムにクラスを付与
+      newItem.classList.add('dropped-part'); 
+      targetLevel.style.flexDirection = 'row';
+    } else if (selectedValue === 'drawers') {
+      // 追加されたアイテムにクラスを付与
+    newItem.classList.add('drawers-dropped-part'); 
+      targetLevel.style.flexDirection = 'column'; 
     }
+
+     // タンス段に追加
+    targetLevel.appendChild(newItem); 
   }
 }
 
 // ゴミ箱にドロップされた時の処理
 function trashDrop(event) {
+  // デフォルトの動作を防ぐ
   event.preventDefault();
-  const sourceId = event.dataTransfer.getData('sourceId');
-  if (sourceId) {
-    const draggedElement = document.getElementById(sourceId);
-    if (draggedElement) {
-      draggedElement.remove();
-    }
+
+  // ドラッグされたアイテムのIDを取得
+  const itemId = event.dataTransfer.getData('id');
+  
+  // アイテムを取得
+  const draggedItem = document.getElementById(itemId);
+
+  // アイテムが存在する場合、削除する
+  if (draggedItem) {
+    draggedItem.remove();  // DOMからアイテムを削除
   }
+  
 }
 
+// ごみ箱のイベントリスナー設定
+document.getElementById('trash').addEventListener('dragover', function(event) {
+  event.preventDefault();
+  this.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';  // ごみ箱の色を変更
+});
+
+document.getElementById('trash').addEventListener('dragleave', function(event) {
+  this.style.backgroundColor = '';  // ごみ箱から離れたら色を元に戻す
+});
+
+document.getElementById('trash').addEventListener('drop', function(event) {
+  event.preventDefault();
+  // ごみ箱にドロップ後に色を元に戻す
+  this.style.backgroundColor = '';
+  // 実際にアイテムを削除
+  trashDrop(event);
+});
+
 // イベントリスナーの設定
-//確認画面でのタンスレイアウト
 document.addEventListener('DOMContentLoaded', () => {
   const partsContainer = document.getElementById('parts-container');
   const trash = document.getElementById('trash');
@@ -187,20 +224,12 @@ reviewOpenButton.onclick = function(event){
   reviewLayout.appendChild(tansuLayout);  // 複製したレイアウトを追加
 
   // モーダルを表示
-  document.getElementById("reviewModal").style.display = "flex";
   reviewModal.style.display = "flex";
 }
 
 // モーダルを閉じる処理
 span.onclick = function() {
   reviewModal.style.display = "none";
-}
-
-// モーダル外クリックで閉じる
-window.onclick = function(event) {
-  if (event.target == reviewModal) {
-    reviewModal.style.display = "none";
-  }
 }
 
 // 登録データを保存し、完了メッセージを表示
