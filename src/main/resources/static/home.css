@@ -30,7 +30,6 @@
   align-items: center;
   white-space: nowrap; /*折り返ししない*/
   font-size: 20px;
-  font-weight: bold;
   color: #333;
   margin-right: 8px;
 }
@@ -186,14 +185,15 @@ background-color: #f0f0f0;
   width: 350px;
   height: 100px;
   border: none;
-  border-radius: 5px;
   background-color: #f0f0f0;
   color: #333;
   font-size: 15px;
   text-decoration: none;
+  border-radius: 50px;
 }
 
 .button{
+  border-radius: 50px;
   margin-top: 20px;
   box-shadow: 0 7px 10px rgb(0 0 0 / 10%);
 }
@@ -204,3 +204,10 @@ background-color: #f0f0f0;
   box-shadow: 0 7px 10px rgb(0 0 0 / 15%); /* 影の強さを強くして、ボタンが浮き上がった感じにする */
   transition: transform .3s, box-shadow .3s;
 }
+
+/* ボタンに押したときのスタイル */
+.button:active {
+  transform: translateY(2px); /* ボタンが少し下に動くように設定（ホバー時に浮き上がる効果） */
+  box-shadow: 0 7px 10px rgb(0 0 0 / 15%); /* 影の強さを強くして、ボタンが浮き上がった感じにする */
+  transition: transform .3s, box-shadow .3s;
+}/*ボタン終了*/
