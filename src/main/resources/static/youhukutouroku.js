@@ -70,6 +70,7 @@ function displayTagList(){
         // クリックで選択
         tagElement.addEventListener('click', () => {
             selectTag(tagElement, tag);  // タグを選択
+            console.log(tag);
         });
 
         tagListDisplay.appendChild(tagElement);
@@ -258,11 +259,11 @@ addTagButton.addEventListener('click', (event) => {
     // タグ入力欄と色選択をリセット
     resetTagInput();
 
-    // タグ一覧のモーダルを開く（必要に応じて）
-    openModal('tagListmodal', false);
-
     // モーダルを閉じる
     closeModal('tagmodal');
+
+    // タグ一覧のモーダルを開く
+    // openModal('tagListmodal', false);
 });
 
 // 色表示エリアを更新

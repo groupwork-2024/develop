@@ -82,6 +82,7 @@
   flex-basis: 20%;
   text-align: center;
   justify-content: center;
+  white-space: nowrap;
   font-size: 20px;
   margin: 0% 3%;
   padding: 1% 2%;
