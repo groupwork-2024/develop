@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webアプリ画面</title>
+    <!-- google fonts,css等の読み込み -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/youhukutouroku.css}">
+    <link rel="stylesheet" th:href="@{/back&completion.css}">
+</head>
+
+<body>
+    <input type="hidden" id="userId" th:value="${userId}">
+    <!--ヘッダー部分-->
+    <div class="header">
+        <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
+        <a class="title-button">洋服登録</a>
+        <a class="right_area">　</a>
+    </div>
+
+    <div class="main-content">
+        <!--フォーム-->
+        <form action="register/{userId}/submitClothes" method="post" id="reviewForm">
+            <!--名前-->
+            <label for="name">名前</label>
+            <input type="text" id="name" name="name">
+
+            <!-- 写真 -->
+            <label for="image">写真</label>
+            <div class="image-container">
+                <!--ファイル選択-->
+                <input type="file" id="image" name="image" accept="image/*" capture="camera" onchange="previewImage()" style="display: none;">
+
+                <!--画像プレビュー-->
+                <div class="imagePreviewContainer">
+                    <!-- 初期画像を指定 -->
+                    <img id="imagePreview" th:src="@{/img/youfuku_test.png}" alt="画像プレビュー" style="max-width: 100%; max-height: 200px;">
+                    <!--写真撮影のときの画面-->
+                    <video id="video" style="display: none; max-width: 100%; height:200px;" autoplay></video>
+                </div>
+                <div class="camerabtns">
+                    <!-- カメラ停止用の×ボタン -->
+                    <button type="button" id="stopCameraButton" style="display: none;" onclick="stopCamera()">
+                        <span class="material-icons">
+                            cancel
+                        </span>
+                    </button>
+                    <!--撮影をするボタン-->
+                    <button type="button" id="capture" class="capture" style="display: none;" onclick="captureImage()">
+                        <span class="material-icons">
+                            camera
+                        </span>
+                    </button>
+                </div>
+
+                <!--写真を起動するボタン-->
+                <button type="button" id="addPhoto" class="addPhoto" aria-label="カメラを起動" onclick="openCamera()">
+                    <span class="material-icons">
+                        add_a_photo
+                    </span>
+                </button>
+
+                <!-- ＋ボタン -->
+                <button type="button" id="addImageButton" class="add-image-button">
+                    <span class="material-icons">
+                        add_circle_outline
+                    </span>
+                </button>
+
+                <!-- カメラを表示するためのビデオとキャンバス -->
+                <canvas id="canvas" style="display: none;"></canvas>
+                
+            </div>
+
+            <!--その他詳細情報-->
+            <label for="brand">ブランド</label>
+            <input type="text" id="brand" name="brand">
+
+            <label for="location">収納場所</label>
+            <select id="location" name="location" required>
+                <option value="">--Select--</option>
+                <!-- データベースから取得したclothesのリストをループ -->
+                <option th:each="item:${items}"
+                        th:value="${item.id}"
+                        th:text="${item.name}">
+                </option>
+            </select>
+
+            <label for="memo">メモ</label>
+            <textarea id="memo" name="memo" rows="1" cols="50" maxlength="150" placeholder="例:オーバーサイズ"></textarea>
+
+            <label for="tags">タグ</label>
+            <div class="label-container">
+                <div class="label-display" id="labelDisplay">
+                    <!--ここの部分にタグが表示される-->
+                </div>
+                <span class="material-icons" id="tagOpenButton">
+                    add_circle_outline
+                </span>
+            </div>
+
+            <!--タグ一覧のモーダル-->
+            <div id="tagListmodal" class="tagListmodal" role="dialog" aria-labelledby="tagListModalTitle">
+                <div class="tagListmodalContent">
+                    <span class="TagListClose" id='TagListClose' aria-label="Close">
+                        &times;
+                    </span>
+                    <h2>タグ一覧</h2>
+
+                    <!--タグ表示画面-->
+                    <div id="tagListDisplay" class="tag-list"></div>
+
+                    <div class="tagAddButtons">
+                        <!-- タグ登録ボタン -->
+                        <button id="addButton">登録</button>
+
+                        <!-- タグ追加ボタン -->
+                        <button id="addTagOpenButton">追加</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--タグ追加のモーダル-->
+            <div id="tagmodal" class="tagmodal" role="dialog" aria-labelledby="modalTitle">
+                <div class="tagModalContent">
+                    <span class="TagClose" id="TagCloseModalButton" aria-label="Close">&times;</span>
+
+                    <h2>タグ追加登録</h2>
+
+                    <!-- タグ名入力フィールド -->
+                    <label for="TagName">タグの名前</label>
+                    <input type="text" id="tagInput" placeholder="例:お気に入り">
+
+                    <h3>色を選択</h3>
+
+                    <!-- プリセットカラー -->
+                    <div id="colorPalette" class="color-palette">
+                    <!-- プリセットカラーが並ぶエリア -->
+                        <div class="color-btn" style="background-color: #FF6347;" data-color="#FF6347"></div> 
+                        <div class="color-btn" style="background-color: #4682B4;" data-color="#4682B4"></div> 
+                        <div class="color-btn" style="background-color: #32CD32;" data-color="#32CD32"></div> 
+                        <div class="color-btn" style="background-color: #FFD700;" data-color="#FFD700"></div>
+                        <div id="colorDisplayArea" class="colorDisplayArea">
+                            <!-- ここに色が表示される -->
+                        </div>
+
+                        <!-- 追加ボタン -->
+                        <button type="button" id="addColorBtn" class="add-color-btn">
+                            <span class="material-icons">
+                                add_circle_outline
+                            </span> <!-- ＋ボタン -->
+                        </button>
+                    </div>
+
+                    <!-- カラーパレット表示エリア（隠れている） -->
+                    <div id="colorPickerContainer" class="color-picker-container" style="display:none;">
+                        <!-- カスタムカラー選択 -->
+                        <input type="color" id="customColorPicker" value="#000000">
+                        <button type="button" id="addSelectedColorBtn">
+                            色を追加
+                        </button>
+                    </div>
+
+                    <!-- タグ登録ボタン -->
+                    <button id="addTagButton" type="button">登録</button>
+                </div>
+            </div>
+
+        </form>
+
+        <!--登録完了ボタン 確認画面を見れるボタン-->
+        <div class="completion">
+            <button id="review-modal-button" class="reviewModalButton" onclick="openReviewModal()">
+                完了
+            </button>
+        </div>
+
+        <!-- 確認画面の表示 -->
+        <div id="reviewModal" class="reviewModal">
+            <div class="reviewModalContent">
+                <span id="reviwCloseBtn">&times;</span>
+                <h3>確認画面</h3>
+                <div id="reviewName" class="reviewName"></div>
+                <div class="reviewContent">
+                    <div id="reviewImage" class="reviewImage"></div>
+                    <div id="reviewTags" class="reviewTags"></div>
+                </div>
+                <div id="reviewBrand" class="reviewBrand"></div>
+                <div id="reviewLocation" class="reviewLocation"></div>
+                <div id="reviewMemo" class="reviewMemo"></div>
+                <!-- 登録ボタン -->
+                <button onclick="registerData()">登録</button>
+            </div>
+        </div>
+
+        <!--確認完了後、登録完了メッセージ-->
+        <div id="registerModal" class="registerModal" style="display:none;">
+            <div class="registreContent">
+                <h3>登録が完了しました</h3>
+                <a href="add_clothes.html">続けて登録</a>
+                <a href="home.html">ホームへ</a>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/templete_script.js}"></script>
+    <script th:src="@{/For-backend-verification/add_clothes.js}"></script>
+</body>
+</html>

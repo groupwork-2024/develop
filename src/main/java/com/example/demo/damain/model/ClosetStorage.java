@@ -7,12 +7,16 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "closet_storage")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClosetStorage {
     @Id
+    private Long storageId;
+
     @OneToOne
+    @MapsId
     @JoinColumn(name = "storage_id", nullable = false)
     private Storage storage;
 
