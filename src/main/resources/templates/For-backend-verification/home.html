@@ -24,11 +24,11 @@
 <div id="sidebar" class="sidebar">
     <button class="close-btn" onclick="toggleSidebar()">×</button>
     <ul>
-        <li><a href="choice_register.html">登録</a></li>
-        <li><a href="search.html">検索</a></li>
-        <li><a href="mypage.html">マイページ</a></li>
-        <li><a href="nice.html">いいね</a></li>
-        <li><a href="enquiry.html">お問合わせ</a></li>
+        <li><a th:href="@{/register/{userId}(userId=${userId})}">登録</a></li>
+        <li><a th:href="@{/others/{userId}/search(userId=${userId})}">検索</a></li>
+        <li><a th:href="@{/others/{userId}/my_page(userId=${userId})}">マイページ</a></li>
+        <li><a th:href="@{/others/{userId}/favorite(userId=${userId})}">いいね</a></li>
+        <li><a th:href="@{/others/{userId}/inquiry(userId=${userID})}">お問合わせ</a></li>
     </ul>
 </div>
 
@@ -101,6 +101,7 @@
         </div>
     </main>
 </div>
+
 
 
 <script th:src="@{/templete_script.js}"></script>
