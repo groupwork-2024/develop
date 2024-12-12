@@ -9,6 +9,7 @@
   
 /* タンス作成の素材表示場所 */
 #parts-container {
+  position: relative;
   width: 100%;
   padding: 10px;
   background-color: #e0e0e0;
@@ -17,6 +18,7 @@
   margin-bottom: 2%;
   display: flex;
   justify-content: center;
+  align-items: flex-end;
 }
 
 /* 素材のレイアウト */
@@ -29,7 +31,7 @@
   background-color: #fff;
   border: 2px solid #2c2c2c;
   border-radius: 8px;
-  cursor: move;
+  cursor: pointer;
 }
 
 /* 素材がタンス内の段に配置された後の見た目 */
@@ -42,7 +44,7 @@
   background-color: #ffffff;
   border: 2px solid #000;
   border-radius: 2%;
-  cursor: move;
+  cursor: pointer;
   padding: auto;
 }
 
@@ -57,7 +59,7 @@
   background-color: #ffffff;
   border: 2px solid #000;
   border-radius: 2%;
-  cursor: move;
+  cursor: pointer;
   padding: auto;
 }
 
@@ -71,16 +73,19 @@
   padding: 1%;
   white-space:nowrap;
   color         : rgba(30, 30, 30, 0.8);
+  cursor: pointer;
 }
 
 /* タンスの形の作成場所 */
 #tansu-container {
   display: flex;
   width: 100%;
+  height: 100%;
   min-height: 300px;
   background-color: #fff;
   border: 2px solid #ccc;
   border-radius: 8px;
+  margin-bottom: 5%;
 }
 
 /* タンスの各段のレイアウト */
@@ -106,17 +111,16 @@
 
 /* ごみ箱について */
 .trash {
-  margin-top: 1em;
-  padding: 10px;
-  background-color: #ff6b6b;
-  color: white;
-  border-radius: 4px;
+  position: absolute;
+  background-color: transparent;
+  color: rgb(69, 69, 69);
+  border: none;
+  padding-bottom: 0;
   cursor: pointer;
-  width: 100px;
-  height: 40px;
   display: flex;
-  align-items: center;
+  flex-basis: 10%;
   justify-content: center;
+  right: 5%;
 }
 
 /*確認画面関連*/
@@ -199,6 +203,7 @@
   background-color: #fff;
   border: 2px solid #ccc;
   border-radius: 8px;
+  cursor: default;
 }
 
 /* 確認画面のタンスの各段のレイアウト */
@@ -210,6 +215,7 @@
   display: flex;
   flex-basis: 100%;
   margin: 0px;
+  cursor: default;
   justify-content: center;
 }
 
@@ -225,8 +231,8 @@
   background-color: #ffffff;
   border: 2px solid #000;
   border-radius: 2%;
-  cursor: move;
   margin: 0px;
+  cursor: default;
 }
 
 /* 段数のときのレイアウト */
@@ -240,8 +246,8 @@
   background-color: #ffffff;
   border: 2px solid #000;
   border-radius: 2%;
-  cursor: move;
   margin: 0px;
+  cursor: default;
 }
 
 /* 確認画面関連ここまで */

@@ -3,6 +3,14 @@ const storageTypeSelect = document.getElementById('storageType');
 // 数の入力値
 const levelsInput = document.getElementById('levels');
 
+// タンスへの素材にIDを追加するカウンタ
+let uniqueIdCounter = 0;
+var tansuData = new Array; 
+const singleItemId = 'square-item';
+
+// 削除モードの状態を管理
+let isDeleteMode = false;
+
 // 初期処理: セレクトボックスの選択肢に基づいて処理を切り替える
 storageTypeSelect.addEventListener('change', function() {
   handleStorageTypeInput(storageTypeSelect.value);
@@ -34,6 +42,89 @@ document.getElementById('infoButton').addEventListener('click', function() {
     }
 });
 
+// 素材をクリックしたときの処理
+function handlePartClick() {
+  console.log(`Selected item with ID: ${singleItemId}`);
+}
+
+
+// 段か追加されたとき、素材も追加する処理
+function FarstPart(targetLevel,levelIndex) {
+  //段数か引き出しか今選ばれているやつを取得
+  const selectedValue = storageTypeSelect.value;
+  
+  if (targetLevel) {
+    // 素材を複製
+    const newItem = document.getElementById(singleItemId).cloneNode(true);
+
+    //選ばれてる奴によってスタイルを変更させる
+    newItem.classList.add(selectedValue === 'levels' ? 'dropped-part' : 'drawers-dropped-part');
+    targetLevel.style.flexDirection = selectedValue === 'levels' ? 'row' : 'column';
+
+    // 段ごとの配列にIDを追加
+    if (!tansuData[levelIndex]) {
+      console.log("配列を生成しました")
+      tansuData[levelIndex] = []; // 配列がなければ作成
+    }
+
+    // 段に素材を追加
+    targetLevel.appendChild(newItem);  
+
+    //配列の個数でアイテムのidを設定
+    newItem.id = tansuData[levelIndex].length;
+
+    //配列にidを追加
+    tansuData[levelIndex].push(newItem.id);
+
+    console.log(`Item ${newItem.id} added to level ${levelIndex + 1}`);
+    console.log(tansuData[levelIndex]);
+  }
+}
+
+// 段をクリックしたとき,素材を追加する処理
+function handleLevelClick(event, levelIndex) {
+  //削除モードのときは何もさせない
+  if(isDeleteMode==true){
+    handleDeliteClick(event, levelIndex);
+    console.log("削除モードなので追加しないです")
+    return;
+  }
+  console.log(isDeleteMode);
+
+  // 素材を追加する対象の段
+  const targetLevel = event.target.closest('.tansu-level');
+
+  //段数か引き出しか今選ばれているやつを取得
+  const selectedValue = storageTypeSelect.value;
+  
+  if (targetLevel) {
+    // 素材を複製
+    const newItem = document.getElementById(singleItemId).cloneNode(true);
+
+    //選ばれてる奴によってスタイルを変更させる
+    newItem.classList.add(selectedValue === 'levels' ? 'dropped-part' : 'drawers-dropped-part');
+    targetLevel.style.flexDirection = selectedValue === 'levels' ? 'row' : 'column';
+
+    if(tansuData[levelIndex].length >= 5){
+      alert("引き出しがこれ以上はいりません");
+      return;
+    }
+
+    // 段に素材を追加
+    targetLevel.appendChild(newItem); 
+
+    //配列の個数でアイテムのidを設定
+    newItem.id = tansuData[levelIndex].length;
+    console.log(newItem.id);
+
+    //配列にidを追加
+    tansuData[levelIndex].push(newItem.id);
+
+    console.log(`Item ${newItem.id} added to level ${levelIndex + 1}`);
+    console.log(tansuData[levelIndex]);
+  }
+}
+
 //タンスの棚等の生成関連
 function generateTansuLayout(count, isLevel) {
   const tansuContainer = document.getElementById('tansu-container');
@@ -46,108 +137,34 @@ function generateTansuLayout(count, isLevel) {
       const tansuPart = document.createElement('div');
       tansuPart.classList.add('tansu-level');
       //各段に番号をつける
-      tansuPart.innerHTML = `<span class="backStr">${i + 1}</span>`;
-      //ドロップを可能にする
-      tansuPart.addEventListener('dragover', allowDrop);
-      //ドロップ時の処理
-      tansuPart.addEventListener('drop', drop);
+      tansuPart.innerHTML = `<span class="backStr">${i + 1}</span>`
+
+      // 段にクリックイベントを追加
+      tansuPart.addEventListener('click', (event) => handleLevelClick(event, i)); 
+
+      // 段ごとのデータ配列を初期化
+      tansuData[`${i}`] = []; // ここで各段の配列を作成
+
+      //段数に一段デフォルトで設定させる関数呼び出し
+      FarstPart(tansuPart,i);
+
       //タンス表示エリアに追加
       tansuContainer.appendChild(tansuPart);
   }
 }
 
-// ドラッグ開始時の処理
-function drag(event) {
-  // アイテムのIDを設定
-  event.dataTransfer.setData('id', event.target.id);
-}
-
-// ドロップを許可する処理
-function allowDrop(event) {
-  // デフォルトの動作を防止
-  event.preventDefault();
-}
-
-// ドロップされたときの処理
-function drop(event) {
-  event.preventDefault();
-
-  // ドロップされたアイテムのIDを取得
-  const itemId = event.dataTransfer.getData('id');
+// 素材をクリックして選択するためのイベント設定
+function initializeParts() {
+  const partsContainer = document.getElementById('parts-container');
   
-  // ドラッグされたアイテムを取得
-  const draggedItem = document.getElementById(itemId);
-  
-  // ドロップ先のタンス段を取得
-  const targetLevel = event.target.closest('.tansu-level');
-
-  //段数か引き出しか今選ばれているやつを取得
-  const selectedValue = storageTypeSelect.value;
-
-  // ドロップ先がタンス段なら
-  // タンス段にアイテムを追加
-  if (targetLevel) {
-    // アイテムのコピーを作成
-    const newItem = draggedItem.cloneNode(true);  
-    // 不要なクラスを削除
-    newItem.classList.remove('dragging');   
-
-    //選ばれてる奴によってスタイルを変更させる
-    if (selectedValue === 'levels') {
-      // 追加されたアイテムにクラスを付与
-      newItem.classList.add('dropped-part'); 
-      targetLevel.style.flexDirection = 'row';
-    } else if (selectedValue === 'drawers') {
-      // 追加されたアイテムにクラスを付与
-    newItem.classList.add('drawers-dropped-part'); 
-      targetLevel.style.flexDirection = 'column'; 
-    }
-
-     // タンス段に追加
-    targetLevel.appendChild(newItem); 
-  }
+  // 素材をクリックした時のイベントリスナーを追加
+  partsContainer.querySelectorAll('.part').forEach(part => {
+    part.addEventListener('click', handlePartClick);
+  });
 }
-
-// ゴミ箱にドロップされた時の処理
-function trashDrop(event) {
-  // デフォルトの動作を防ぐ
-  event.preventDefault();
-
-  // ドラッグされたアイテムのIDを取得
-  const itemId = event.dataTransfer.getData('id');
-  
-  // アイテムを取得
-  const draggedItem = document.getElementById(itemId);
-
-  // アイテムが存在する場合、削除する
-  if (draggedItem) {
-    draggedItem.remove();  // DOMからアイテムを削除
-  }
-  
-}
-
-// ごみ箱のイベントリスナー設定
-document.getElementById('trash').addEventListener('dragover', function(event) {
-  event.preventDefault();
-  this.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';  // ごみ箱の色を変更
-});
-
-document.getElementById('trash').addEventListener('dragleave', function(event) {
-  this.style.backgroundColor = '';  // ごみ箱から離れたら色を元に戻す
-});
-
-document.getElementById('trash').addEventListener('drop', function(event) {
-  event.preventDefault();
-  // ごみ箱にドロップ後に色を元に戻す
-  this.style.backgroundColor = '';
-  // 実際にアイテムを削除
-  trashDrop(event);
-});
 
 // イベントリスナーの設定
 document.addEventListener('DOMContentLoaded', () => {
-  const partsContainer = document.getElementById('parts-container');
-  const trash = document.getElementById('trash');
   const selectedValue = storageTypeSelect.value;
 
   // 初期のセレクトボックスの値に基づいて処理を変更
@@ -160,16 +177,11 @@ document.addEventListener('DOMContentLoaded', () => {
     storageTypeChenfe(selectedValue);
   });
   
-  //タンスの素材を追加する処理
-  partsContainer.querySelectorAll('.part').forEach(part => {
-    part.addEventListener('dragstart', drag);
-  });
-
-  //ごみ箱のときの処理
-  trash.addEventListener('dragover', allowDrop);
-  trash.addEventListener('drop', trashDrop);
+  // 素材をクリックして選択するためのイベント設定
+  initializeParts();
 });
 
+//セレクトボックスを変更したときに行う処理
 function storageTypeChenfe(selectedValue){
   const levelsInput = document.getElementById('levels');
   // 既存のイベントリスナーを削除
@@ -193,6 +205,44 @@ function levelsInputChangeHandler() {
     generateTansuLayout(levels, true); // レベルのレイアウト
   } else if (selectedValue === 'drawers') {
     generateTansuLayout(levels, false); // 引き出しのレイアウト
+  }
+}
+
+// ごみ箱アイコンをクリックした時に削除モードを切り替え
+document.getElementById('trash').addEventListener('click', function() {
+  isDeleteMode = !isDeleteMode;
+  if (isDeleteMode) {
+    console.log('削除モードに入りました');
+    this.style.color = 'red';
+  } else {
+    console.log('削除モードを解除しました');
+    // ごみ箱アイコンを元に戻す
+    this.style.color = 'rgb(69, 69, 69)'; // 元の色に戻す
+  }
+});
+
+//削除モードのときに段をクリックしたときアイテムをけす
+function handleDeliteClick(event, levelIndex){
+  // 素材を削除する対象の段
+  const targetLevel = event.target.closest('.tansu-level');
+  console.log(targetLevel);
+
+  // 段にアイテムが存在する場合
+  if (tansuData[levelIndex].length > 1) {
+    // 段の最後のアイテムを入れる
+    const itemToDelete = targetLevel.children[targetLevel.children.length - 1]; 
+    console.log(itemToDelete);
+
+    // アイテムを削除
+    targetLevel.removeChild(itemToDelete);
+
+    //配列からデータを一つ削除
+    tansuData[levelIndex].pop();
+
+    console.log(tansuData[levelIndex]);
+  }
+  else{
+    alert("これ以上は消せません");
   }
 }
 
