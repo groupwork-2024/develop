@@ -31,31 +31,29 @@ function selectPhoto(index) {
 }
 
 // フォームの内容をモーダルに表示
-// モーダル内に画像を表示
-function openReviewModal() {
-    const name = document.getElementById('name').value;
-
-    // フォームの内容をモーダルに表示
-    document.getElementById('reviewName').innerText = `名前: ${name}`;
-
-    // モーダルを表示
-    document.getElementById('reviewModal').style.display = 'flex';
-}
-
 // モーダルを取得
 var reviewModal = document.getElementById("reviewModal");
 // モーダルを閉じるアイコンを取得
 var closeBtn = document.getElementById("reviwCloseBtn");
+// モーダルを開くボタン
+var reviewOpenButton = document.getElementById("review-modal-button");
+
+reviewOpenButton.onclick = function(event){
+    event.preventDefault();  // フォーム送信のデフォルト動作を防止
+    event.stopPropagation();  // イベントの伝播を止める
+    const name = document.getElementById('name').value;
+    const bagImage = document.getElementById('image').value;
+
+    // フォームの内容をモーダルに表示
+    document.getElementById('reviewName').innerText = `名前: ${name}`;
+
+
+    // モーダルを表示
+    reviewModal.style.display = 'flex';
+}
 
 // ×を押したとき、閉じる
 closeBtn.onclick = closeReviewModal;
-
-// モーダルの範囲外が押された場合も閉じる
-window.onclick = function(event) {
-    if (event.target == reviewModal) {
-        closeReviewModal();
-    }
-}
 
 // 確認画面を閉じる
 function closeReviewModal() {
