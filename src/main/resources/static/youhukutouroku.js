@@ -24,6 +24,7 @@ const colorDisplayArea = document.getElementById('colorDisplayArea');
 
 // タグの選択
 let selectedTag = null;
+let selectedColor = null;
 
 // モーダルを開く共通
 function openModal(modalId, reviewButton) {
@@ -52,13 +53,6 @@ openModalButton.addEventListener('click', function() {
 // タグ一覧モーダルを閉じる
 tagListClose.addEventListener('click', function() {
     closeModal('tagListmodal');  // 完了ボタンを有効化
-});
-
-// タグ一覧モーダル外をクリックしたらモーダルを閉じる
-window.addEventListener('click', function(event) {
-    if (event.target === taglistmodal) {
-        closeModal('tagListmodal');  // 完了ボタンを有効化
-    }
 });
 
 //タグ一覧を表示する
@@ -117,10 +111,11 @@ function updateTagList() {
     });
 };
 
-// タグ登録ボタンを押したときの処理
+// タグ一覧の登録ボタンを押したときの処理
 addButton.addEventListener('click', function(event) {
     event.preventDefault(); 
-
+    event.stopPropagation();  // イベントの伝播を止める
+    
     console.log('登録ボタンがクリックされました');
     console.log('選択されているタグ:', selectedTag); 
 
@@ -131,8 +126,6 @@ addButton.addEventListener('click', function(event) {
     if (selectedTag) {
         // メイン画面にタグを表示
         displayLabelInMain(tagName,tagColor);  
-        //タグ一覧モーダルを閉じる
-        //closeModal('tagListmodal'); 
         
     } else {
         alert('タグを選択してください。');
@@ -201,15 +194,6 @@ closeModalButton.addEventListener('click', function() {
     resetTagInput();
 });
 
-// タグ追加モーダル外をクリックしたらモーダルを閉じる
-window.addEventListener('click', function(event) {
-    if (event.target === tagmodal) {
-        closeModal('tagmodal');
-        //タグ名とカラーのリセット
-        resetTagInput();
-    }
-});
-
 // プリセットカラー選択
 colorPalette.addEventListener('click', (event) => {
     if (event.target.classList.contains('color-btn')) {
@@ -243,25 +227,42 @@ addTagButton.addEventListener('click', (event) => {
     event.preventDefault();  // フォーム送信のデフォルト動作を防止
     event.stopPropagation();  // イベントの伝播を止める
 
+    console.log(`色: ${selectedColor}`);
+
     const tagName = tagInput.value.trim();
     const finalColor = selectedColor || ''; 
 
-    if (tagName && selectedColor) {
-        console.log(`タグ名: ${tagName}, 色: ${selectedColor}`);
-        // タグを配列に追加
-        tags.push({ name: tagName, color: finalColor });
-
-        // 新しいタグを画面に追加
-        addTagToList(tagName, finalColor);
-
-        //タグ名とカラーのリセット
-        resetTagInput();
-
-        // モーダルを閉じる
-        closeModal('tagmodal');
-    } else {
-        alert('タグ名と色を選んでください');
+    // タグ名と色が両方とも選ばれているか確認
+    if (!tagName && !finalColor) {
+        alert('タグ名と色を入力してください');
+        return;  
     }
+    else if (!finalColor) {
+        alert('色を選んでください');
+        return; 
+    }
+    else if (!tagName){
+        alert('タグ名を入力してください');
+        return;  
+    }
+
+    // 両方が有効な場合
+    console.log(`タグ名: ${tagName}, 色: ${selectedColor}`);
+
+    // タグを配列に追加
+    tags.push({ name: tagName, color: finalColor });
+
+    // 新しいタグを画面に追加
+    addTagToList(tagName, finalColor);
+
+    // タグ入力欄と色選択をリセット
+    resetTagInput();
+
+    // タグ一覧のモーダルを開く（必要に応じて）
+    openModal('tagListmodal', false);
+
+    // モーダルを閉じる
+    closeModal('tagmodal');
 });
 
 // 色表示エリアを更新

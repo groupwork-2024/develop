@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,10 +7,10 @@
     <title>タンス新規登録</title>
     <!-- Font Awesomeの読み込み -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../static/template_style.css">
-    <link rel="stylesheet" href="../static/back&completion.css">
+    <link rel="stylesheet" th:href="@{/template_style.css}">
+    <link rel="stylesheet" th:href="@{/back&completion.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="../static/tansu_regist.css">
+    <link rel="stylesheet" th:href="@{/tansu_regist.css}">
 </head>
 <body>
 
@@ -27,6 +27,7 @@
 
   <!-- メインコンテンツエリア -->
   <div id="content">
+    <input type="hidden" id="userId" th:value="${userId}">
     <form id="closetForm">
       <label for="name">名前</label>
       <div class="input-container">
@@ -38,15 +39,20 @@
         </button>
       </div>
 
-      <label for="storageType" class="selectbox">
-        <select id="storageType" name="storageType">
-          <option value="levels">段数</option>
-          <option value="drawers">引き出しの最大数</option>
-        </select>
-      </label>
+      <label for="levels">段数</label>
       <div class="input-container">
-        <input type="number" id="levels" name="levels" min="1" max="10">
-        <button type="button" class="info-button" id="infoButton">
+        <input type="number" id="levels" name="levels" min="1" max="5">
+        <button type="button" class="info-button">
+          <span class="material-icons">
+            help_outline
+          </span>
+        </button>
+      </div>
+
+      <label for="drawer_max">引き出しの最大数</label>
+      <div class="input-container">
+        <input type="number" id="drawer_max" name="drawer_max" min="1" max="5">
+        <button type="button" class="info-button">
           <span class="material-icons">
             help_outline
           </span>
@@ -57,7 +63,7 @@
       <div class="design-section">
         <!--素材のエリア-->
         <div id="parts-container">
-          <div class="part" draggable="true" data-type="square" id="square-item">
+          <div class="part" draggable="true" data-type="square">
             <span class="square">
               　　
             </span>
@@ -72,7 +78,7 @@
 
       <!--登録完了ボタン 確認画面を見れるボタン-->
       <div class="completion">
-        <button id="review-modal-button" class="reviewModalButton" >
+        <button id="review-modal-button" class="reviewModalButton" onclick="openReviewModal()">
           完了
         </button>
       </div>
@@ -85,7 +91,6 @@
         <h3>確認画面</h3>
         <div id="reviewName" class="reviewName"></div>
         <div id="reviewLevel" class="reviewLevel"></div>
-        <div id="reviewlayout" class="reviewlayout"></div>
         <!-- 登録ボタン -->
         <button onclick="registerData()">登録</button>
       </div>
@@ -113,7 +118,7 @@
 
   </div>
 
-<script src="../static/templete_script.js"></script>
-<script src="../static/tansu_regist.js"></script>
+<script th:src="@{/templete_script.js}"></script>
+<script th:src="@{/For-backend-verification/tansu_regist.js}"></script>
 </body>
 </html>

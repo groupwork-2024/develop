@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,8 +7,8 @@
     <title>Webアプリ画面</title>
     <!-- google fonts,css等の読み込み -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../static/back&completion.css">
-    <link rel="stylesheet" href="../static/syuunouBox.css">
+    <link rel="stylesheet" th:href="@{/back&completion.css}">
+    <link rel="stylesheet" th:href="@{/syuunouBox.css}">
 </head>
 <body>
 
@@ -20,35 +20,34 @@
 
     <!-- メインコンテンツエリア -->
     <div class="main-content">
+        <input type="hidden" id="userId" th:value="${userId}">
         <form id="syunouForm">
             <label for="name">名前</label>
             <div class="input-container">
-                <input type="text" id="name" name="name">
+                <input type="text" id="name" name="name" required>
                 <button type="button" class="info-button">
                     <span class="material-icons">
                         help_outline
                     </span>
                 </button>
             </div>
-            <!-- カルーセル -->
             <div class="photo-slider">
-                <button type="button" class="arrow-button left" onclick="previousPhoto()">&#8249;</button>
+                <button class="arrow-button left" onclick="previousPhoto()">&#8249;</button>
                 <div class="photo-container">
-                    <img id="slider-photo" src="photo1.jpg" alt="スライド写真1">
+                    <img id="slider-photo" src="photo1.jpg" alt="スライド写真">
                 </div>
-                <button type="button" class="arrow-button right" onclick="nextPhoto()">&#8250;</button>
+                <button class="arrow-button right" onclick="nextPhoto()">&#8250;</button>
             </div>
-
             <!--サンプルの画像の表示-->
             <div class="thumbnail-buttons">
-                <button type="button" onclick="selectPhoto(0)"><img src="https://thumb.ac-illust.com/bb/bb155844e2d3b16f4342bad7a96e8847_w.jpeg" alt="Photo 1"></button>
-                <button type="button" onclick="selectPhoto(1)"><img src="photo2.jpg" alt="Photo 2"></button>
-                <button type="button" onclick="selectPhoto(2)"><img src="photo3.jpg" alt="Photo 3"></button>
+                <button onclick="selectPhoto(0)"><img src="https://thumb.ac-illust.com/bb/bb155844e2d3b16f4342bad7a96e8847_w.jpeg" alt="Photo 1"></button>
+                <button onclick="selectPhoto(1)"><img src="photo2.jpg" alt="Photo 2"></button>
+                <button onclick="selectPhoto(2)"><img src="photo3.jpg" alt="Photo 3"></button>
             </div>
 
             <!--登録完了ボタン 確認画面を見れるボタン-->
             <div class="completion">
-                <button type="button" id="review-modal-button" class="reviewModalButton">
+                <button id="review-modal-button" class="reviewModalButton" onclick="openReviewModal()">
                     完了
                 </button>
             </div>
@@ -86,7 +85,7 @@
     </div>
 
 
-    <script src="../static/templete_script.js"></script>
-    <script src="../static/syuunouBox.js"></script>
+    <script th:src="@{/templete_script.js}"></script>
+    <script th:src="@{/For-backend-verification/syuunouBox.js}"></script>
 </body>
 </html>

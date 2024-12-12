@@ -1,9 +1,6 @@
 package com.example.demo.damain.service;
 
 import com.example.demo.damain.model.Clothes;
-import com.example.demo.damain.model.Storage;
-import com.example.demo.damain.model.StorageType;
-import com.example.demo.damain.model.User;
 import com.example.demo.damain.repository.ClothesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,7 +62,7 @@ public class ClothesService {
         }
         return clothesList;
     }
-    
-    public void addClothes(Long userId){
+
+    public void addClothes(Long userId) {
     }
 }

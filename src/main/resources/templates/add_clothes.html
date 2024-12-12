@@ -105,7 +105,7 @@
                     <div id="tagListDisplay" class="tag-list"></div>
 
                     <!-- タグ追加ボタン -->
-                    <button id="addTagOpenButton">
+                    <button type="button" id="addTagOpenButton">
                         <span class="material-icons" id="addtag">
                             add_circle_outline
                         </span>
@@ -114,7 +114,7 @@
                     <div class="tagAddButtons">
 
                         <!-- タグ登録ボタン -->
-                        <button id="addButton">登録</button>
+                        <button type ="button"id="addButton">登録</button>
                     </div>
                 </div>
             </div>
@@ -144,7 +144,7 @@
                         </div>
 
                         <!-- 追加ボタン -->
-                        <button type="button" id="addColorBtn" class="add-color-btn">
+                        <button type ="button" id="addColorBtn" class="add-color-btn">
                             <span class="material-icons">
                                 add_circle_outline
                             </span> <!-- ＋ボタン -->
@@ -155,13 +155,13 @@
                     <div id="colorPickerContainer" class="color-picker-container" style="display:none;">
                         <!-- カスタムカラー選択 -->
                         <input type="color" id="customColorPicker" value="#000000">
-                        <button type="button" id="addSelectedColorBtn">
+                        <button type ="button" id="addSelectedColorBtn">
                             色を追加
                         </button>
                     </div>
 
                     <!-- タグ登録ボタン -->
-                    <button id="addTagButton" type="button">登録</button>
+                    <button type ="button" id="addTagButton" >登録</button>
                 </div>
             </div>
 
@@ -169,7 +169,7 @@
 
         <!--登録完了ボタン 確認画面を見れるボタン-->
         <div class="completion">
-            <button id="review-modal-button" class="reviewModalButton" onclick="openReviewModal()">
+            <button type ="button" id="review-modal-button" class="reviewModalButton" onclick="openReviewModal()">
                 完了
             </button>
         </div>
@@ -188,7 +188,7 @@
                 <div id="reviewLocation" class="reviewLocation"></div>
                 <div id="reviewMemo" class="reviewMemo"></div>
                 <!-- 登録ボタン -->
-                <button onclick="registerData()">登録</button>
+                <button type ="button" onclick="registerData()">登録</button>
             </div>
         </div>
 

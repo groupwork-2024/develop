@@ -24,12 +24,11 @@
   display: flex;
   height: 100%;
   width: 40%;
+  padding: 1%;
   justify-content: center;
-  margin: 0 2%;
-  padding: 2% 2%;
   background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 2px solid #2c2c2c;
+  border-radius: 8px;
   cursor: move;
 }
 
@@ -38,10 +37,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
+  flex-basis: 100%;
   height: 100%;
   background-color: #ffffff;
+  border: 2px solid #000;
+  border-radius: 2%;
   cursor: move;
+  padding: auto;
+}
+
+/* 引き出しの最大数のとき、タンスに配置された後の見た目 */
+.drawers-dropped-part{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 100%;
+  height: 100%;
+  width: 100%;
+  background-color: #ffffff;
+  border: 2px solid #000;
+  border-radius: 2%;
+  cursor: move;
+  padding: auto;
 }
 
 /* 各段の文字のレイアウト */
@@ -52,16 +69,13 @@
   height: 20px;
   width: 20px;
   padding: 1%;
-  border: 2px solid #4d4d4d;
-  border-radius: 50%;
   white-space:nowrap;
-  color         : rgba(78, 78, 78, 0.8);
+  color         : rgba(30, 30, 30, 0.8);
 }
 
 /* タンスの形の作成場所 */
 #tansu-container {
   display: flex;
-  flex-direction: row;
   width: 100%;
   min-height: 300px;
   background-color: #fff;
@@ -72,13 +86,13 @@
 /* タンスの各段のレイアウト */
 .tansu-level {
   position: relative;
-  height: 50px;
-  margin:0% 4%;
-  background-color: #f0f0f0;
+  min-height: 30px;
   border: 1px solid #8c8c8c;
+  border-radius: 2px;
   display: flex;
-  align-items: center;
+  flex-basis: 100%;
   justify-content: center;
+  align-items: center;
 }
 
 /* 引き出しのレイアウト */
@@ -87,7 +101,6 @@
   height: 100%;
   width: 100%;
   background-color: #ffffff;
-  border: 2px solid #000;
   border-radius: 8px;
 }
 
@@ -105,71 +118,6 @@
   align-items: center;
   justify-content: center;
 }
-
-/* セレクトボックス関連 */
-.cp_ipselect06 {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  margin: 2em 21px;
-}
-
-.cp_ipselect06 .cp_sl06 {
-  position: relative;
-  width: 130%; /*下線の長さ*/
-  cursor: pointer;
-  z-index: 1;
-  /* 標準のスタイルを無効にしborder-bottomを設定 */
-  border: none;
-  appearance: none;
-  outline: none;
-  background: transparent;
-  border-radius: 0;
-  border-bottom: 1px solid #666666;
-  text-align: center;
-}
-
-/*プルダウンの三角を設定*/
-.cp_ipselect06::after {
-  position: absolute;
-  right: -30%; /*場所の指定*/
-  content: '';
-  width: 14px; /*三角形の形*/
-  height: 8px; /*三角形の形*/
-  background: #666666;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-}
-
-/*選択した際の動き:セレクト下のライン*/
-.cp_sl06_selectbar {
-  position: relative;
-  display: inline-block;
-  width: 130%;
-}
-
-.cp_sl06_selectbar:before,
-.cp_sl06_selectbar:after {
-  bottom: 1px;
-  content: '';
-  width: 0;
-  height: 2px;
-  position: absolute;
-  background: #da3c41;
-  transition: 0.2s ease all;
-}
-
-/*focus時の設定*/
-.cp_ipselect06 .cp_sl06:focus {
-  border-bottom: 1px solid transparent;
-}
-
-.cp_sl06:focus ~ .cp_sl06_selectbar:before,
-.cp_sl06:focus ~ .cp_sl06_selectbar:after {
-  width: 50%;
-}
-
-/* セレクトボックス関連ここまで */
 
 /*確認画面関連*/
 /* モーダルの基本スタイル */
@@ -241,6 +189,59 @@
 /* 登録ボタンの上にカーソルがきたとき */
 .reviewModalContent button:hover {
   background-color: rgb(32, 244, 9);
+}
+
+/* 確認画面のタンスの表示場所 */
+#review-tansu-layout{
+  display: flex;
+  width: 100%;
+  min-height: 200px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+}
+
+/* 確認画面のタンスの各段のレイアウト */
+#review-tansu-layout .tansu-level {
+  position: relative;
+  min-height: 30px;
+  border: 1px solid #707070;
+  border-radius: 2px;
+  display: flex;
+  flex-basis: 100%;
+  margin: 0px;
+  justify-content: center;
+}
+
+/* 確認画面のタンスの素材のレイアウト */
+/* 引き出しの最大数のときのレイアウト */
+#review-tansu-layout .drawers-dropped-part{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 100%;
+  height: 100%;
+  width: 100%;
+  background-color: #ffffff;
+  border: 2px solid #000;
+  border-radius: 2%;
+  cursor: move;
+  margin: 0px;
+}
+
+/* 段数のときのレイアウト */
+#review-tansu-layout .dropped-part{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 100%;
+  height: 100%;
+  width: 100%;
+  background-color: #ffffff;
+  border: 2px solid #000;
+  border-radius: 2%;
+  cursor: move;
+  margin: 0px;
 }
 
 /* 確認画面関連ここまで */
@@ -346,6 +347,43 @@ form input{
   cursor: pointer;
   background-color: transparent;
   filter: brightness(50%) contrast(50%)
+}
+
+/* セレクトボックス関連 */
+.selectbox {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  width: 60%;
+}
+
+/* セレクトボックスの三角の部分 */
+.selectbox::after {
+  position: absolute;
+  right: 5px;
+  width: 10px;
+  height: 7px;
+  background-color: #535353;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  content: '';
+  pointer-events: none;
+}
+
+/* セレクトボックス全体のレイアウト */
+.selectbox select {
+  appearance: none;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid #e7e7e7;
+  background-color: #fff;
+  color: #333333;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.selectbox select:focus {
+  outline: none;
 }
 
 /* フォーム関連ここまで */
