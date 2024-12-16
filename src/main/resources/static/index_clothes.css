@@ -110,7 +110,7 @@
 /* タグの表示エリア */
 .tags{
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   gap: 3%;
   margin-top: 0;
 }

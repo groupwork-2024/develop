@@ -12,9 +12,14 @@ form label {
     margin: 10px 0 5px;
 }
 
+#video{
+    background-color: beige;
+}
+
 /* フォームの入力エリアのスタイル */
 form input{
     width: 100%;
+    border: none;
     padding: 10px;
     resize: none;
     outline: none; 
@@ -24,7 +29,6 @@ form input{
 /* フォーカス時のスタイル（選択時に下線を変更） */
 .input-container:focus-within{
     border: none;
-    width: 100%;
     border-bottom: 2px solid #ea512fce;
     border-radius: 1px; 
     box-shadow: none; /* フォーカス時の影を消す */
@@ -46,9 +50,67 @@ form input{
     gap: 10px; 
 }
 
-/* 入力欄のスタイル */
-form input{
+/* 画像表示コンテナ */
+.image-container {
+    position: relative;
+    display: flex;
+    flex-basis: 50%;
+    align-items: flex-end;
+    margin-bottom: 5%;
+}
+
+/* 画像プレビュー */
+.imagePreviewContainer {
+    position: relative;
+    display: flex;
+    border: 2px solid #606060;
+    border-radius: 8px;  /* 枠線に角を丸める */
+    align-items: center;
+}
+
+/* 写真追加のボタンのスタイル */
+.addPhoto{
+    display: flex;
+    flex-basis: 5%;
+    margin-left: 4%;
+    background-color: transparent;
+    border: none;;
+    cursor: pointer
+}
+
+/* 写真を撮影するボタン関連 */
+.camerabtns{
+    display: flex;
+    flex-direction: column;
+}
+
+/* 写真を撮るボタン */
+.capture{
+    background-color: transparent;
     border: none;
+    display: flex;
+    align-items: center;
+    cursor: pointer
+}
+
+/* 写真を終了するボタン */
+#stopCameraButton{
+    position: absolute;
+    top: 0%;  
+    margin-left: 0%; 
+    background-color: transparent;
+    border: none;
+    display: flex;
+    cursor: pointer
+}
+
+/* ＋ボタンのスタイル */
+.add-image-button {
+    display: flex;
+    flex-basis: 5%;
+    background-color:transparent;
+    border: none;
+    cursor: pointer
 }
 
 /* ?のところ */
@@ -62,57 +124,6 @@ form input{
     filter: brightness(50%) contrast(50%)
 }
 
-/* プレビューエリアのレイアウト */
-.closet-preview {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    border: 1px solid #000;
-    margin: 20px auto;
-    width: 100%;
-    min-height: 200px; /* 最小高さ */
-    padding: 10px;
-}
-
-/* ハンガースタイル */
-.hanger {
-    width: 50px;
-    height: 50px;
-    position: relative;
-    margin: 5px;
-}
-
-/* プレビューエリア */
-.closet-preview {
-    position: relative; /* 絶対配置の基準 */
-    width: 300px;       /* 横幅 */
-    height: 400px;      /* 高さ */
-    border: 1px solid #000;
-    margin: 20px auto;
-    overflow: hidden;   /* はみ出した部分を隠す */
-    background-color: #f9f9f9; /* 背景色 */
-}
-
-/* ハンガー */
-.hanger {
-    position: absolute;
-    width: 120px; /* ハンガー画像の幅 */
-    height: 80px; /* ハンガー画像の高さ */
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-/* 服 */
-.clothes {
-    position: absolute;
-    width: 100px; /* 服画像の幅 */
-    height: 140px; /* 服画像の高さ */
-    background-size: contain;
-    background-repeat: no-repeat;
-    z-index: -1; /* ハンガーの下に配置 */
-}
-
 /*確認画面関連*/
 /* モーダルの基本スタイル */
 .reviewModal {
@@ -124,8 +135,6 @@ form input{
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景 */
     z-index: 1000;
-    justify-content: center;
-    align-items: center;
 }
 
   /* モーダルコンテンツ */
@@ -140,8 +149,6 @@ form input{
     width: 60%;
     height:auto;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    overflow: auto;
-    text-align: center;
 }
 
 /* モーダルを閉じる×ボタン */
@@ -169,6 +176,13 @@ form input{
     text-align: center;
 }
 
+/* 確認画面のラベル的なところのスタイル */
+.reviewModalContent a{
+    font-weight: bold;
+    font-size: 16px;
+    color: #535353;
+}
+
 /* モーダルの中のdivの間隔設定 */
 .reviewModalContent div {
     margin-bottom: 15px;
@@ -187,13 +201,6 @@ form input{
 /* 登録ボタンの上にカーソルがきたとき */
 .reviewModalContent button:hover {
     background-color: rgb(32, 244, 9);
-}
-
-/* クローゼットの画像のサイズを変更 */
-.reviewModalContent img {
-    max-width: 100%;  /* 画像の最大幅を親要素に合わせる */
-    max-height: 70vh; /* 画像の最大高さを画面の70%に制限 */
-    object-fit: contain;  /* 画像のアスペクト比を保ちながら収める */
 }
 
 /* 確認完了後モーダルのスタイル */
@@ -227,117 +234,50 @@ form input{
 /* 登録後のaタグのスタイル */
 .registreContent a{
     text-decoration:underline;
-    color:#000;
-    border-color: #818181;
-}
-
-/* カルーセルコンテナ */
-.closet-carousel-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    margin-top: 20px;
-}
-
-/* カルーセル */
-.closet-carousel {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-/* カルーセルのスライド */
-.closet-slide {
-    min-width: 100%;
-    box-sizing: border-box;
-    text-align: center;
-}
-
-/* 画像のスタイル */
-.closet-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-}
-
-/* 右、左の矢印レイアウト */
-.prev, .next {
-    position: absolute;
-    top: 50%;
-    background-color: transparent;
-    padding: 10px;
+    color:#101010;
     border: none;
-    cursor: pointer;
-    transform: translateY(-50%);
-    z-index: 1;
-}
-
-.prev {
-    left: 10px;
-}
-
-.next {
-    right: 10px;
+    border-bottom: 1px solid #535353;
+    margin-bottom: 2%;
+    font-size: 16px;
+    text-decoration-line: none;
 }
 
 /* セレクトボックス関連 */
-.cp_ipselect06 {
+.selectbox {
+    display: inline-flex;
+    align-items: center;
     position: relative;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin: 2em 21px;
+    width: 60%;
 }
 
-.cp_ipselect06 .cp_sl06 {
-    position: relative;
-    width: 130%; /*下線の長さ*/
-    cursor: pointer;
-    z-index: 1;
-    /* 標準のスタイルを無効にしborder-bottomを設定 */
-    border: none;
-    appearance: none;
-    outline: none;
-    background: transparent;
-    border-radius: 0;
-    border-bottom: 1px solid #666666;
-    text-align: center;
-}
-
-/*プルダウンの三角を設定*/
-.cp_ipselect06::after {
+  /* セレクトボックスの三角の部分 */
+.selectbox::after {
     position: absolute;
-    right: -30%; /*場所の指定*/
-    content: '';
-    width: 14px; /*三角形の形*/
-    height: 8px; /*三角形の形*/
-    background: #666666;
+    right: 5px;
+    width: 10px;
+    height: 7px;
+    background-color: #535353;
     clip-path: polygon(0 0, 100% 0, 50% 100%);
-}
-
-/*選択した際の動き:セレクト下のライン*/
-.cp_sl06_selectbar {
-    position: relative;
-    display: inline-block;
-    width: 130%;
-}
-
-.cp_sl06_selectbar:before,
-.cp_sl06_selectbar:after {
-    bottom: 1px;
     content: '';
-    width: 0;
-    height: 2px;
-    position: absolute;
-    background: #da3c41;
-    transition: 0.2s ease all;
+    pointer-events: none;
 }
 
-/*focus時の設定*/
-.cp_ipselect06 .cp_sl06:focus {
-    border-bottom: 1px solid transparent;
+/* セレクトボックス全体のレイアウト */
+.selectbox select {
+    appearance: none;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #e7e7e7;
+    background-color: #fff;
+    color: #333333;
+    font-size: 1em;
+    cursor: pointer;
 }
 
-.cp_sl06:focus ~ .cp_sl06_selectbar:before,
-.cp_sl06:focus ~ .cp_sl06_selectbar:after {
-    width: 50%;
+.selectbox select:focus {
+    outline: none;
 }
+
+/* セレクトボックス関連ここまで */
+/* フォーム関連ここまで */
