@@ -16,7 +16,7 @@
 <div class="header">
     <!--戻るのところ-->
     <button class="left-button" onclick="history.back()()"><span class="material-icons">arrow_back_ios_new</span></button>
-    <a href="home.html" class="title-button">No Name</a>
+    <a href="home.html" class="title-button">Fuku Log</a>
     <a class="right_area">　</a>
 </div>
 <!-- メインコンテンツエリア -->
@@ -35,12 +35,12 @@
     <span class="material-icons">delete</span>
   </div>
 </div>
-<div class="main-content" id="storageList">
-  <!-- コンテンツをここに追加 -->
+<div class="main-content">
+    <div class="storageList" id="storageList">
         <div th:each="storage : ${storages}" class="clothse_button" th:id="${storage.id}">
             <a th:href="@{/section/{userId}/storages/{storageId}(userId=${userId}, storageId=${storage.id},storageType=${storage.storageType})}"
                class="detail_url">
-            <figure class="clothes_img">
+                <figure class="clothes_img">
                     <img th:src="'data:image/   png;base64,' + ${storage.imageDataString}" alt="clothes img">
                     <div class="detail">
                         <br>名前: <span th:text="${storage.name}"></span></br>
@@ -48,6 +48,7 @@
                 </figure>
             </a>
         </div>
+    </div>
 </div>
 
 <script th:src="@{/templete_script.js}"></script>

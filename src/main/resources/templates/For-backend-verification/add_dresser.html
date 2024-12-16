@@ -49,24 +49,36 @@
         </button>
       </div>
 
-      <label for="drawer_max">引き出しの最大数</label>
+      <label for="storageType" class="selectbox">
+        <select id="storageType" name="storageType">
+          <option value="levels">段数</option>
+          <option value="drawers">引き出しの最大数</option>
+        </select>
+      </label>
       <div class="input-container">
-        <input type="number" id="drawer_max" name="drawer_max" min="1" max="5">
-        <button type="button" class="info-button">
-          <span class="material-icons">
-            help_outline
-          </span>
+        <input type="number" id="levels" name="levels" min="1" max="10">
+        <button type="button" class="info-button" id="infoButton-levels">
+            <span class="material-icons">
+              help_outline
+            </span>
         </button>
       </div>
 
       <!--タンスのレイアウト位置-->
       <div class="design-section">
-        <!--素材のエリア-->
+        <!--素材とごみ箱表示位置-->
         <div id="parts-container">
-          <div class="part" draggable="true" data-type="square">
+          <div class="part" draggable="true" data-type="square" id="square-item">
             <span class="square">
               　　
             </span>
+          </div>
+
+          <!--ごみ箱-->
+          <div id="trash" class="trash">
+              <span class="material-icons">
+                delete
+              </span>
           </div>
         </div>
 
@@ -74,25 +86,24 @@
         <div id="tansu-container"></div>
       </div>
 
-      <div id="trash" class="trash">ゴミ箱</div>
-
       <!--登録完了ボタン 確認画面を見れるボタン-->
       <div class="completion">
-        <button id="review-modal-button" class="reviewModalButton" onclick="openReviewModal()">
+        <button type="button" id="review-modal-button" class="reviewModalButton" >
           完了
         </button>
       </div>
     </form>
 
-    <!-- 確認画面の表示 -->
+  <!-- 確認画面の表示 -->
     <div id="reviewModal" class="reviewModal">
       <div class="reviewModalContent">
         <span id="reviwCloseBtn">&times;</span>
         <h3>確認画面</h3>
         <div id="reviewName" class="reviewName"></div>
         <div id="reviewLevel" class="reviewLevel"></div>
+        <div id="reviewlayout" class="reviewlayout"></div>
         <!-- 登録ボタン -->
-        <button onclick="registerData()">登録</button>
+        <button type="button" onclick="registerData()">登録</button>
       </div>
     </div>
 
@@ -103,22 +114,21 @@
         <a href="choice_storage.html">続けて収納を登録</a>
 
         <!--セレクトボックス-->
-        <div class="cp_ipselect06">
-          <select class="cp_sl06" required>
+        <div class="select">
+          <select id="selectOption">
             <option value="1" selected>洋服を収納　</option>
             <option value="2">新規洋服登録　</option>
             <option value="3">既存洋服登録　</option>
           </select>
-          <span class="cp_sl06_selectbar"></span>
         </div>
-        
+
         <a href="home.html">ホームへ</a>
       </div>
     </div>
 
   </div>
 
-<script th:src="@{/templete_script.js}"></script>
-<script th:src="@{/For-backend-verification/tansu_regist.js}"></script>
+  <script th:src="@{/templete_script.js}"></script>
+  <script th:src="@{/For-backend-verification/tansu_regist.js}"></script>
 </body>
 </html>

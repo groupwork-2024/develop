@@ -22,7 +22,7 @@
 
     <div class="main-content">
         <!--フォーム-->
-        <form action="register/{userId}/submitClothes" method="post" id="reviewForm">
+        <form action="register/{userId}/submitClothes" method="post" onsubmit="return false; id="reviewForm">
             <!--名前-->
             <label for="name">名前</label>
             <input type="text" id="name" name="name">
@@ -112,12 +112,17 @@
                     <!--タグ表示画面-->
                     <div id="tagListDisplay" class="tag-list"></div>
 
-                    <div class="tagAddButtons">
-                        <!-- タグ登録ボタン -->
-                        <button id="addButton">登録</button>
+                <!-- タグ追加ボタン -->
+                    <button type="button" id="addTagOpenButton">
+                            <span class="material-icons" id="addtag">
+                                add_circle_outline
+                            </span>
+                    </button>
 
-                        <!-- タグ追加ボタン -->
-                        <button id="addTagOpenButton">追加</button>
+                    <div class="tagAddButtons">
+
+                        <!-- タグ登録ボタン -->
+                        <button type ="button"id="addButton">登録</button>
                     </div>
                 </div>
             </div>
@@ -164,7 +169,7 @@
                     </div>
 
                     <!-- タグ登録ボタン -->
-                    <button id="addTagButton" type="button">登録</button>
+                    <button type ="button" id="addTagButton" >登録</button>
                 </div>
             </div>
 
