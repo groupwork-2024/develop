@@ -124,15 +124,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
-// Initialize the carousel when the DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  const carouselElement = document.querySelector('.carousel');
-  new Carousel(carouselElement);
-});
-
-
-
 //検索
 // 検索履歴をローカルストレージに保存する関数
 function getSearchHistory() {
