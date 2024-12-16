@@ -10,13 +10,13 @@ import software.amazon.awssdk.services.s3.S3Client;
 
 @Configuration
 public class S3ClothesConfig {
-    @Value("${aws.access-key}")
+    @Value("${cloud.aws.credentials.accessKey}")
     private String accessKey;
 
-    @Value("${aws.secret-key}")
+    @Value("${cloud.aws.credentials.secretKey}")
     private String secretKey;
 
-    @Value("${aws.region}")
+    @Value("${cloud.aws.region.static}")
     private String region;
 
     @Bean
