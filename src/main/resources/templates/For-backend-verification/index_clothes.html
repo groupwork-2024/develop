@@ -33,7 +33,7 @@
     <!-- コンテンツをここに追加 -->
     <div th:each="clothes : ${clothesList}" class="clothse_button">
         <figure class="clothes_img">
-            <img th:src="'data:image/png;base64,' + ${clothes.imageDataString}" alt="clothes img">
+            <img th:src="${clothes.imageUrl}" alt="clothes img">
             <div class="detail">
                 <br>名前: <span th:text="${clothes.name}"></span></br>
                 <br>収納場所: <span th:text="${clothes.storage.name}"></span></br>

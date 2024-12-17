@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 : "ハンガーの個数を入力してください。";
             alert(message);
         });
+         const registerButton = document.getElementById("registerButton");
     });
 
     const hangerInput = document.getElementById("hanger-count");
@@ -35,14 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });    
 
 // 完了ボタンが押された時にモーダルを表示し、フォームデータを表示する
-window.openReviewModal = function () {
+function openReviewModal() {
     // フォームのデータを取得
     console.log("確認モーダルを開きました");
     const name = document.getElementById('name').value;
     const hangerCount = document.getElementById('hanger-count').value;
     const selectedCloset = document.querySelectorAll('.closet-slide')[currentSlideIndex];
     const closetImage = selectedCloset.querySelector('img').src;
-    
+
     // モーダルの中にデータを埋め込む
     document.getElementById('reviewName').innerText = `名前: ${name}`;
     document.getElementById('reviewHangerCount').innerText = `ハンガーの個数:${hangerCount}`;
@@ -62,48 +63,51 @@ span.onclick = function() {
     reviwModal.style.display = "none";
 }
 
-// モーダルの範囲外が押された場合も閉じる
-window.onclick = function(event) {
-    if (event.target == reviwModal) {
-        reviwModal.style.display = "none";
-    }
-}
-
 //完了確認メッセージ関連
 // 登録データを登録後に完了メッセージを表示
-function registerData() {
-    const reviewModal = document.getElementById('reviewModal');
-    const registerModal = document.getElementById('registerModal');
+   registerButton.addEventListener("click", () => {
+    console.log("registerData関数が呼び出されました");
+    const userId = document.getElementById('userId').value;
 
+    // データの準備
+    const formData = new FormData();
+    const name = document.getElementById("name").value;
+    const hangerCount = document.getElementById("hanger-count").value;
+    const imgElement = document.querySelector("#reviewLayout img");
 
-    const userId = document.getElementById('userId').value;  
-  
-    //送信データをオブジェクト化  
-    const addStorage = {  
-        name:document.getElementById('name').value,  
-        hanger_count:document.getElementById('hanger-count').value,  
-        imageData:"C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/clothes.png", 
-    };
-//サーバーに送信  
-fetch(`/register/${userId}/storages/closet`, {  
-         method: 'POST',  
-         headers: { 'Content-Type': 'application/json' },  
-         body: JSON.stringify(addStorage),  
-    })  
-     .then(response => {  
-            if (response.ok) {  
-                // 確認画面を非表示にする  
-                reviewModal.style.display = 'none';  
-  
-                // 登録完了メッセージを表示  
-                registerModal.style.display = 'flex';  
-                console.log('登録が完了しました');  
-            } else {  
-                console.log('エラーが発生しました');  
-            }  
-        })  
-        .catch(error => console.error('Error:', error));
-}
+// imgElement.src のURLからバイナリデータに変換
+fetch(imgElement.src)
+  .then(response => response.blob()) // Blobに変換
+  .then(blob => {
+    formData.append("image", blob, "image.png"); // ファイル名も指定する
+    formData.append("name", name);
+    formData.append("hanger_count", hangerCount);
+
+    // fetchでデータを送信
+    fetch(`/register/${userId}/storages/closet`, {
+      method: "POST",
+      body: formData
+    })
+    .then(response => {
+      if (response.ok) {
+       // 確認画面を非表示にする
+        reviewModal.style.display = 'none';
+
+                      // 登録完了メッセージを表示
+        registerModal.style.display = 'flex';
+
+        console.log("データ送信成功");
+      } else {
+        console.error("データ送信中にエラーが発生しました");
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+  })
+  .catch(error => console.error("Blob変換エラー:", error));
+});
+
 // 「登録完了」メッセージを閉じて、次の画面に移動
 function closeRegisterModal() {
     const registerModal = document.getElementById('registerModal');
