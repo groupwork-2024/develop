@@ -10,12 +10,12 @@
     <link rel="stylesheet" th:href="@{/back&completion.css}">
 </head>
 <body>
-    <!--ヘッダー部分-->
-    <div class="header">
-        <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
-        <a class="title-button">クローゼット登録</a>
-        <a class="right_area">　</a>
-    </div>
+<!--ヘッダー部分-->
+<div class="header">
+    <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
+    <a class="title-button">クローゼット登録</a>
+    <a class="right_area">　</a>
+</div>
 
     <!--メインの部分-->
     <div class="container">
@@ -28,88 +28,88 @@
                     <span class="material-icons">
                         help_outline
                     </span>
-                </button>
-            </div>
-                
-            <label for="hanger-count">ハンガーの個数</label>
-            <div class="input-container">
-                <input type="number" id="hanger-count" name="hanger-count" required min="1">
-                <button type="button" class="info-button">
+            </button>
+        </div>
+
+        <label for="hanger-count">ハンガーの個数</label>
+        <div class="input-container">
+            <input type="number" id="hanger-count" name="hanger-count" required min="1">
+            <button type="button" class="info-button">
                     <span class="material-icons">
                         help_outline
                     </span>
-                </button>
-            </div>
+            </button>
+        </div>
 
-            <!--クローゼットの基本レイアウト一覧-->
-            <div class="closet-carousel-container">
-                <div class="closet-carousel">
-                    <div class="closet-slide">
-                        <img th:src="@{/img/clothes.png}" alt="クローゼット1" class="closet-image">
-                    </div>
-                    <div class="closet-slide">
-                        <img th:src="@{/img/clothes2.png}" alt="クローゼット2" class="closet-image">
-                    </div>
-                    <div class="closet-slide">
-                        <img th:src="@{/img/clothes3.jpg}" alt="クローゼット3" class="closet-image">
-                    </div>
-                    <!-- 追加のクローゼットデザインをここに入れる -->
+        <!--クローゼットの基本レイアウト一覧-->
+        <div class="closet-carousel-container">
+            <div class="closet-carousel">
+                <div class="closet-slide">
+                    <img th:src="@{/img/clothes.png}" alt="クローゼット1" class="closet-image">
                 </div>
-                <button class="prev" onclick="moveSlide(-1)">
+                <div class="closet-slide">
+                    <img th:src="@{/img/clothes2.png}" alt="クローゼット2" class="closet-image">
+                </div>
+                <div class="closet-slide">
+                    <img th:src="@{/img/clothes3.jpg}" alt="クローゼット3" class="closet-image">
+                </div>
+                <!-- 追加のクローゼットデザインをここに入れる -->
+            </div>
+            <button type="button" class="prev" onclick="moveSlide(-1)">
                     <span class="material-icons" style="font-size: 50px;">
                         arrow_circle_left
                     </span>
-                </button>
-                
-                <button class="next" onclick="moveSlide(1)">
+            </button>
+
+            <button type="button" class="next" onclick="moveSlide(1)">
                     <span class="material-icons" style="font-size: 50px;">
                         arrow_circle_right
                     </span>
-                </button>
-            </div>
-            
-        </form>
-
-        <!--登録完了ボタン 確認画面を見れるボタン-->
-        <div class="completion">
-            <button id="review-modal-button" class="reviewModalButton" onclick="openReviewModal()">
-                完了
             </button>
         </div>
-        
-        <!-- 確認画面の表示 -->
-        <div id="reviewModal" class="reviewModal" style="display: none;">
-            <div class="reviewModalContent">
-                <span id="reviwCloseBtn">&times;</span>
-                <h3>確認画面</h3>
-                <div id="reviewName" class="reviewName"></div>
-                <div id="reviewHangerCount" class="reviewHangerCount"></div>
-                <div id="reviewLayout" class="reviewLayout"></div>
-                <button onclick="registerData()">登録</button>
-            </div>
-        </div>
-        
-        <!-- 登録完了メッセージ -->
-        <div id="registerModal" class="registerModal" style="display:none;">
-            <div class="registreContent">
-                <h3>登録が完了しました</h3>
-                <a href="choice_storage.html">続けて収納を登録</a>
 
-                <!--セレクトボックス-->
-                <div class="cp_ipselect06">
-                    <select class="cp_sl06" required>
-                        <option value="1" selected>洋服を収納　</option>
-                        <option value="2">新規洋服登録　</option>
-                        <option value="3">既存洋服登録　</option>
-                    </select>
-                    <span class="cp_sl06_selectbar"></span>
-                </div>
-                <a href="home.html">ホームへ</a>
-            </div>
+    </form>
+
+    <!--登録完了ボタン 確認画面を見れるボタン-->
+    <div class="completion">
+        <button id="review-modal-button" class="reviewModalButton" onclick="openReviewModal()">
+            完了
+        </button>
+    </div>
+
+    <!-- 確認画面の表示 -->
+    <div id="reviewModal" class="reviewModal" style="display: none;">
+        <div class="reviewModalContent">
+            <span id="reviwCloseBtn">&times;</span>
+            <h3>確認画面</h3>
+            <div id="reviewName" class="reviewName"></div>
+            <div id="reviewHangerCount" class="reviewHangerCount"></div>
+            <div id="reviewLayout" class="reviewLayout"></div>
+            <button id="registerButton">登録</button>
         </div>
     </div>
-    
-    <script th:src="@{/For-backend-verification/closet.js}"></script>
-    <script th:src="@{/templete_script.js}"></script>
+
+    <!-- 登録完了メッセージ -->
+    <div id="registerModal" class="registerModal" style="display:none;">
+        <div class="registreContent">
+            <h3>登録が完了しました</h3>
+            <a href="choice_storage.html">続けて収納を登録</a>
+
+            <!--セレクトボックス-->
+            <div class="cp_ipselect06">
+                <select class="cp_sl06" required>
+                    <option value="1" selected>洋服を収納　</option>
+                    <option value="2">新規洋服登録　</option>
+                    <option value="3">既存洋服登録　</option>
+                </select>
+                <span class="cp_sl06_selectbar"></span>
+            </div>
+            <a href="home.html">ホームへ</a>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/For-backend-verification/closet.js}"></script>
+<script th:src="@{/templete_script.js}"></script>
 </body>
 </html>

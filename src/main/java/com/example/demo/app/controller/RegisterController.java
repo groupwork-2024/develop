@@ -5,16 +5,15 @@ import com.example.demo.app.dto.DtoDresser;
 import com.example.demo.app.dto.DtoStorage;
 import com.example.demo.damain.model.*;
 import com.example.demo.damain.service.ClothesService;
+import com.example.demo.damain.service.S3StorageService;
 import com.example.demo.damain.service.StorageService;
 import com.example.demo.damain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -29,6 +28,9 @@ public class RegisterController {
 
     @Autowired
     ClothesService clothesService;
+
+    @Autowired
+    S3StorageService s3StorageService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String sectionMenu(@PathVariable Long userId,
@@ -102,27 +104,20 @@ public class RegisterController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/storages/closet")
-    public ResponseEntity<Void> addCloset(@PathVariable Long userId,
-                                          Model model,
-                                          @RequestBody DtoCloset closet) {
-        //Userオブジェクト取得
-        User user = userService.findById(userId);
+    public ResponseEntity<Void> addCloset(
+            @PathVariable Long userId,
+            @RequestParam("name") String name,
+            @RequestParam("hanger_count") int hangerCount,
+            @RequestParam("image") MultipartFile file) {
+        try {
+            // Service層でビジネスロジックを処理
+            storageService.addCloset(userId, name, hangerCount, file);
+            return ResponseEntity.ok().build();
 
-        //Storageエンティティに値をセット
-        Storage storage = new Storage();
-        storage.setName(closet.getName());
-        storage.setStorageType(StorageType.CLOSET);
-        storage.setImageData(closet.getImageData());
-        storage.setUser(user);
-        Storage saveStorage = storageService.saveStorage(storage);
-
-        //DresserStorageエンティティに値をセット
-        ClosetStorage closetStorage = new ClosetStorage();
-        closetStorage.setStorage(saveStorage);
-        closetStorage.setHanger_count(closet.getHangerCount());
-        storageService.saveClosetStorage(closetStorage);
-
-        return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/storages/bags")
