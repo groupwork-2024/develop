@@ -4,6 +4,7 @@ import com.example.demo.damain.model.Clothes;
 import com.example.demo.damain.repository.ClothesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Base64;
 import java.util.List;
@@ -64,5 +65,10 @@ public class ClothesService {
     }
 
     public void addClothes(Long userId) {
+    }
+
+    @Transactional
+    public void saveClothes(Clothes clothes) {
+        clothesRepository.save(clothes);
     }
 }

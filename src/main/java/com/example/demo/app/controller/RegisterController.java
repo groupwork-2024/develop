@@ -4,6 +4,7 @@ import com.example.demo.app.dto.DtoCloset;
 import com.example.demo.app.dto.DtoDresser;
 import com.example.demo.app.dto.DtoStorage;
 import com.example.demo.damain.model.*;
+import com.example.demo.damain.service.ClothesService;
 import com.example.demo.damain.service.StorageService;
 import com.example.demo.damain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class RegisterController {
     @Autowired
     StorageService storageService;
 
+    @Autowired
+    ClothesService clothesService;
+
     @RequestMapping(method = RequestMethod.GET)
     public String sectionMenu(@PathVariable Long userId,
                               Model model) {
@@ -41,15 +45,17 @@ public class RegisterController {
         return "/For-backend-verification/add_clothes";
     }
 
-    //@RequestMapping(method = RequestMethod.POST, value="/clothes")
-    //public ResponseEntity<Void> addClothes(@PathVariable Long userId,
-    //                                       @RequestBody Clothes clothes,
-    //                                       Model model){
-    //    model.addAttribute("userId", userId);
-    //
-    //}
-    @RequestMapping(method = RequestMethod.POST, value = "/clothes")
-    public void addClothes(@PathVariable Long userId) {
+    @RequestMapping(method = RequestMethod.POST, value="/clothes")
+    public ResponseEntity<Void> addClothes(@PathVariable Long userId,
+                                           @RequestBody Clothes clothes,
+                                           Model model){
+        User user = userService.findById(userId);
+        clothes.setUser(user);
+
+        clothesService.saveClothes(clothes);
+        return ResponseEntity.ok().build();
+
+
 
     }
 

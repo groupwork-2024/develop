@@ -53,19 +53,51 @@ function iconImage(event) {
 
 // カラーボタンがクリックされたときのイベント
 document.querySelectorAll('.color-btn').forEach(button => {
-    button.addEventListener('click', event => {
-      // クリックされたボタンのデータ属性から色を取得
+  button.addEventListener('click', event => {
+      // すべてのカラーボタンからselectedクラスを削除
+      document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('selected'));
+      
+      // クリックされたボタンにselectedクラスを追加
       const selectedColor = event.target.getAttribute('data-color');
-  
-      // すべてのタブアイコンの色を変更
-      document.querySelectorAll('#icon').forEach(icon => {
-        icon.style.color = selectedColor; // タブの色を選択された色に変更
-      });
+      event.target.classList.add('selected'); // クリックしたボタンに選択状態を追加
 
-      //アイコン写真の＋ボタンの色を変える
-      document.querySelectorAll('.plus-buttom').forEach(plus => {
-        plus.style.backgroundColor = selectedColor; // タブの色を選択された色に変更
-      });
-    });
+      // モードに応じた処理
+      switch (selectedColor) {
+        case 'white':
+          //ヘッダーの色
+          document.querySelectorAll('.header').forEach(header => {
+              header.style.backgroundColor = '#f0f0f0'; 
+          });
+          //ヘッダーの文字色
+          document.querySelectorAll('.header a,.header button').forEach(header1 => {
+            header1.style.color = 'darkblue'; 
+          });
+          break;
+
+        case 'black':
+          //ヘッダーの色
+          document.querySelectorAll('.header').forEach(header => {
+              header.style.backgroundColor = '#333'; 
+          });
+          //ヘッダーの文字色
+          document.querySelectorAll('.header a,.header button').forEach(header1 => {
+            header1.style.color = 'white'; 
+          });
+          break;
+
+        case 'natural':
+          //ヘッダーの色
+          document.querySelectorAll('.header').forEach(header => {
+              header.style.backgroundColor = '#f5deb3';
+          });
+          //ヘッダーの文字色
+          document.querySelectorAll('.header a,.header button').forEach(header1 => {
+            header1.style.color = '#8b4513'; 
+          });
+          break;
+
+        default:
+          break;
+      }
   });
-  
+});
