@@ -26,7 +26,7 @@ body, html {
   border: none;
   background: none;
   cursor: pointer;
-  color: #007BFF; /* ボタンの色 */
+  color: darkblue; /* ボタンの色 */
   text-decoration: none; /* 下線を消す */
 }
 
@@ -36,11 +36,11 @@ body, html {
   border: none;
   background: none; /* ボタン背景を消去 */
   cursor: pointer;
-  color: #007BFF; /* アイコンの色 */
+  color: darkblue; /* アイコンの色 */
 }
 
 .left-button, .right_area:hover {
-  color: #0056b3; /* ホバー時の色変更 */
+  color: #333; /* ホバー時の色変更 */
 }
 
 /* .completionが完了のボタン関連のcss */

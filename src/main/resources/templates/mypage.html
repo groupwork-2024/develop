@@ -46,14 +46,13 @@
                 </div>
                 <!--その他ユーザー名など-->
                 <div class="profile-others">
-                    <p>ユーザー名：</p>
+                    <p>ユーザー名：神戸電子太郎</p>
                     <p>フレームカラー</p>
                     <!--色の選択-->
                     <div class="select-color">
-                        <button class="color-btn red" data-color="red"></button>
-                        <button class="color-btn orange" data-color="orange"></button>
-                        <button class="color-btn yellow" data-color="yellow"></button>
-                        <button class="color-btn blue" data-color="blue"></button>
+                        <button class="color-btn white selected" data-color="white" onclick="changeColor('white')"></button>
+                        <button class="color-btn black" data-color="black" onclick="changeColor('black')"></button>
+                        <button class="color-btn natural" data-color="natural" onclick="changeColor('natural')"></button>
                     </div>
                 </div>
             </section>
@@ -162,5 +161,6 @@
 
         <script src="../static/templete_script.js"></script>
         <script src="../static/mypage.js"></script>
+        <script src="../static/frame_color.js"></script>
     </body>
 </html>

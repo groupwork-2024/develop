@@ -1,7 +1,7 @@
 /*ボタン開始*/
 /* ボタンのスタイル */
 html {
-  background-color: rgb(231, 230, 230);
+  background-color: #fcfcfc;
 }
 
 .main-content {
@@ -21,9 +21,9 @@ html {
   margin-top: 40px;
   border-radius: 5px;
   box-shadow: 0 7px 10px rgb(0 0 0 / 10%);
-  background-color: white;
-  color: #333;
-  font-size: 15px;
+  background-color: #f0f0f0;
+  color: darkblue;
+  font-size: 16px;
   text-decoration: none;
   border-radius: 50px;
 }

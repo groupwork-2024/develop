@@ -24,12 +24,12 @@ body, html {
   border: none;
   background: none;
   cursor: pointer;
-  color: #007BFF; /* ボタンの色 */
+  color: darkblue; /* ボタンの色 */
   text-decoration: none; /* 下線を消す */
 }
 
-.title-button:hover {
-  color: #0056b3; /* ホバー時の色変更 */
+.title-button:hover ,.title-button:active{
+  color: #333; /* ホバー時の色変更 */
   text-decoration: none; /* ホバー時に下線を消す */
 }
 
@@ -39,11 +39,11 @@ body, html {
   border: none;
   background: none; /* ボタン背景を消去 */
   cursor: pointer;
-  color: #007BFF; /* アイコンの色 */
+  color: darkblue; /* アイコンの色 */
 }
 
 .left-button:hover, .right-button:hover {
-  color: #0056b3; /* ホバー時の色変更 */
+  color: #333; /* ホバー時の色変更 */
 }
 
 .sidebar {
@@ -72,7 +72,7 @@ body, html {
   text-decoration: none; /* 下線を消す */
 }
 
-.sidebar ul li a:hover {
+.sidebar ul li a:hover a:active {
   background-color: #575757; /* ホバー時の背景色 */
 }
 
