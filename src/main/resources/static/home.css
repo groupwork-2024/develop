@@ -19,7 +19,7 @@
   white-space: nowrap; /*折り返ししない*/
   font-weight: bold;  /*太文字に*/
   color: #333;
-  border-bottom: 2px solid red; /* 下線を追加 */
+  border-bottom: 2px solid darkblue; /* 下線を追加 */
   width: fit-content; /* テキスト幅に合わせて下線の長さを調整 */
 }
 
