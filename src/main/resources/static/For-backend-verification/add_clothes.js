@@ -193,6 +193,11 @@ addTagOpenButton.addEventListener('click', function(event) {
     closeModal('tagListmodal');
     openModal('tagmodal', false);  // 完了ボタンを無効化
 });
+addTagOpenButton.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+    }
+});
 
 // タグ追加モーダルを閉じる
 closeModalButton.addEventListener('click', function() {
@@ -334,6 +339,7 @@ function openReviewModal() {
     const brand = document.getElementById('brand').value;
     const locationSelect = document.getElementById('location');
     const locationText = locationSelect.options[locationSelect.selectedIndex].text;
+    const locationId = locationSelect.value;
     const memo = document.getElementById('memo').value;
     const imagePreviewModal = document.getElementById('reviewImage');
     const tags = Array.from(labelDisplay.children).map(tag => {
@@ -348,6 +354,35 @@ function openReviewModal() {
     document.getElementById('reviewBrand').innerHTML = `ブランド<br>${brand}`;
     document.getElementById('reviewLocation').innerHTML = `収納場所<br>${locationText}`;
     document.getElementById('reviewMemo').innerHTML = `メモ<br>${memo}`;
+
+    // formの値をjson化
+    const postClothesData = {
+        storage: locationId,
+        name: name,
+        brandName: brand,
+        description: memo,
+        imageData: imageFile
+    };
+
+    fetch(`/register/${userId}/clothes`, {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify(postClothesData),
+    })
+     .then(response => {
+            if (response.ok) {
+             // 確認画面を非表示にする
+                reviewModal.style.display = 'none';
+
+                // 登録完了メッセージを表示
+                registerModal.style.display = 'flex';
+                alert('登録が完了しました');
+            } else {
+                alert('エラーが発生しました');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
 
     // 画像の表示
     if (imageFile) {
