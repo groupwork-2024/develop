@@ -12,22 +12,19 @@
 </head>
 <body>
 
-<div class="header">
-    <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
-    <a href="home.html" class="title-button">No Name</a>
-    <a class="right_area">　</a>
-</div>
+    <div class="header">
+        <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
+        <a href="home.html" class="title-button">あれドコ?</a>
+        <a class="right_area">　</a>
+    </div>
 
-<!-- メインコンテンツエリア -->
-<div class="main-content">
-    <a th:href="@{/register/{userId}/storages/dresser(userId=${userId})}" class="button">タンス</a>
-    <br><br>
-    <a th:href="@{/register/{userId}/storages/closet(userId=${userId})}" class="button">クローゼット</a>
-    <br><br>
-    <a th:href="@{/register/{userId}/storages/bags(userId=${userId})}" class="button">収納袋</a>
-    <br><br>
-</div>
+    <!-- メインコンテンツエリア -->
+    <div class="main-content">
+        <a th:href="@{/register/{userId}/storages/dresser(userId=${userId})}" class="button">タンス</a>
+        <a th:href="@{/register/{userId}/storages/closet(userId=${userId})}" class="button">クローゼット</a>
+        <a th:href="@{/register/{userId}/storages/bags(userId=${userId})}" class="button">収納袋</a>
+    </div>
 
-<script th:src="@{/templete_script.js}"></script>
+    <script th:src="@{/templete_script.js}"></script>
 </body>
 </html>

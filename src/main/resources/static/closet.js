@@ -1,3 +1,4 @@
+let ImageContent = '';
 // 情報ボタンを押したときの処理
 // 名前フィールドの情報ボタン
 document.getElementById('closetName').addEventListener('click', function() {
@@ -17,6 +18,9 @@ function openReviewModal() {
     const hangerCount = document.getElementById('hanger-count').value;
     const imageFile = document.getElementById('image').files[0];
     const imagePreviewModal = document.getElementById('reviewImage');
+    const canvas = document.getElementById('imagePreview');
+
+    ImageContent = canvas.src;
 
     // 入力欄に空白がないかチェック
     if (name === "" || hangerCount === "" || imageFile === "") {
@@ -29,18 +33,7 @@ function openReviewModal() {
     document.getElementById('reviewHangerCount').innerHTML = `<a>ハンガーの個数</a><br>${hangerCount}`;
 
     // 画像の表示
-    if (imageFile) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            imagePreviewModal.innerHTML = `<img src="${e.target.result}" alt="画像" style="max-width: 100%; max-height: 200px;">`;
-        }
-        reader.readAsDataURL(imageFile);
-    } else {
-        //dimagePreviewModal.innerHTML = '画像なし';
-        alert("すべての項目を入力してください");
-        return;  // 空欄があれば処理を中止
-    }
-    
+    imagePreviewModal.innerHTML = `<img src="${ImageContent}" alt="画像" style="max-width: 100%; max-height: 200px;">`;
 
     // モーダルを表示
     document.getElementById('reviewModal').style.display = 'flex';
@@ -77,6 +70,7 @@ function closeRegisterModal() {
 
 // 画像関連
 // 画像プレビューを表示する関数
+
 function previewImage() {
     const file = document.getElementById('image').files[0];  // 選択されたファイル
     const preview = document.getElementById('imagePreview');  // 画像プレビュー用のimgタグ

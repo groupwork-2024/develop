@@ -20,7 +20,7 @@
     <!--メインの部分-->
     <div class="container">
         <input type="hidden" id="userId" th:value="${userId}">
-        <form id="closetForm">
+        <form onsubmit="return false;" id="closetForm">
             <label for="name">名前</label>
             <div class="input-container">
                 <input type="text" id="name" name="name" required>

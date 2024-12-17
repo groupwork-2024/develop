@@ -12,30 +12,30 @@
 </head>
 <body>
 
-<div class="header">
-    <button class="left-button" onclick="toggleSidebar()"><span class="material-icons">menu_open</span></button>
-    <a href="home.html" class="title-button">No Name</a>
-    <button class="right-button" onclick="notice_transition()"><span class="material-icons">notifications</span></button>
-</div>
+    <div class="header">
+        <button class="left-button" onclick="toggleSidebar()"><span class="material-icons">menu_open</span></button>
+        <a href="home.html" class="title-button">あれドコ?</a>
+        <button class="right-button" onclick="notice_transition()"><span class="material-icons">notifications</span></button>
+    </div>
 
-<!-- サイドバー -->
-<div id="sidebar" class="sidebar">
-    <button class="close-btn" onclick="toggleSidebar()">×</button>
-    <ul>
-        <li><a th:href="@{/register/{userId}(userId=${userId})}">登録</a></li>
-        <li><a th:href="@{/others/{userId}/search(userId=${userId})}">検索</a></li>
-        <li><a th:href="@{/others/{userId}/my-page(userId=${userId})}">マイページ</a></li>
-        <li><a th:href="@{/others/{userId}/favorite(userId=${userId})}">いいね</a></li>
-        <li><a th:href="@{/others/{userId}/inquiry(userId=${userId})}">お問合わせ</a></li>
-    </ul>
-</div>
+    <!-- サイドバー -->
+    <div id="sidebar" class="sidebar">
+        <button class="close-btn" onclick="toggleSidebar()">×</button>
+        <ul>
+            <li><a th:href="@{/register/{userId}(userId=${userId})}">登録</a></li>
+            <li><a th:href="@{/others/{userId}/search(userId=${userId})}">検索</a></li>
+            <li><a th:href="@{/others/{userId}/my-page(userId=${userId})}">マイページ</a></li>
+            <li><a th:href="@{/others/{userId}/favorite(userId=${userId})}">いいね</a></li>
+            <li><a th:href="@{/others/{userId}/inquiry(userId=${userId})}">お問合わせ</a></li>
+        </ul>
+    </div>
 
-<!-- メインコンテンツエリア -->
-<div class="main-content">
-    <!-- コンテンツをここに追加 -->
-    <h1>お問い合わせ</h1>
-</div>
+    <!-- メインコンテンツエリア -->
+    <div class="main-content">
+        <!-- コンテンツをここに追加 -->
+        <h1>お問い合わせ</h1>
+    </div>
 
-<script th:src="@{/templete_script.js}"></script>
+    <script th:src="@{/templete_script.js}"></script>
 </body>
 </html>

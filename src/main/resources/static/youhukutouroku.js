@@ -25,6 +25,7 @@ const colorDisplayArea = document.getElementById('colorDisplayArea');
 // タグの選択
 let selectedTag = null;
 let selectedColor = null;
+let ImageContent = '';
 
 // モーダルを開く共通
 function openModal(modalId, reviewButton) {
@@ -332,7 +333,7 @@ document.getElementById('addImageButton').addEventListener('click', function() {
 // モーダル内に画像を表示
 function openReviewModal() {
     const name = document.getElementById('name').value;
-    const imageFile = document.getElementById('image').files[0];
+    const imageFile = document.getElementById('imagePreview');
     const brand = document.getElementById('brand').value;
     const location = document.getElementById('location').value;
     const memo = document.getElementById('memo').value;
@@ -343,6 +344,8 @@ function openReviewModal() {
             color: tag.style.backgroundColor  // 色も取得
         };
     });
+    const canvas = document.getElementById('imagePreview');
+    ImageContent = canvas.src;
 
     // 入力欄に空白がないかチェック
     if (name === "" || imageFile === "" || brand === "" || location === " " || memo === "" || tags.length===0) {
@@ -357,17 +360,7 @@ function openReviewModal() {
     document.getElementById('reviewMemo').innerHTML = `<a>メモ</a><br>${memo}`;
 
     // 画像の表示
-    if (imageFile) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            imagePreviewModal.innerHTML = `<img src="${e.target.result}" alt="画像" style="max-width: 100%; max-height: 200px;">`;
-        }
-        reader.readAsDataURL(imageFile);
-    } else {
-        //dimagePreviewModal.innerHTML = '画像なし';
-        alert("すべての項目を入力してください");
-        return;  // 空欄があれば処理を中止
-    }
+    imagePreviewModal.innerHTML = `<img src="${ImageContent}" alt="画像" style="max-width: 100%; max-height: 200px;">`;
 
 
     // タグの表示
@@ -537,18 +530,4 @@ function stopCamera() {
     addPhotoButton.disabled = false;
     fileInput.style.display='flex';
     addPhotoButton.style.display='flex';
-}
-
-// 画像を選択した際のプレビュー
-function previewImage() {
-    const file = document.getElementById('image').files[0];
-    const preview = document.getElementById('imagePreview');
-    
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            preview.src = e.target.result;
-        }
-        reader.readAsDataURL(file);
-    }
 }
