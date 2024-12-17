@@ -39,8 +39,32 @@ const clothesArray = [
 const clothesListContainer = document.getElementById('clothseListDisplay');
 clothesListContainer.innerHTML = ''; // 先にリストをクリア
 
+// URLのクエリパラメーターからtagのパラメーターを取得
+const params = new URLSearchParams(window.location.search);
+const searchTagName = params.get('tag');
+console.log(searchTagName);
+const searchTagColor = params.get('color');
+console.log(searchTagColor);
+
+//左上にタグの名前を表示
+const ScreenName = document.getElementById('list_name');
+ScreenName.innerText=`${searchTagName}`;
+ScreenName.style.borderBottom=`double 5px ${searchTagColor}`;
+
+// タグ名と色の両方が一致する洋服をフィルタリング
+const filteredClothes = clothesArray.filter(item =>
+  item.tags.some(tag => tag.name === searchTagName && tag.color === searchTagColor.toLocaleUpperCase())
+);
+
+console.log(filteredClothes);
+
+// 該当するものがなかったら
+if(filteredClothes.length === 0){
+  clothesListContainer.innerHTML='該当するものはありません'
+}
+
 // 洋服の情報をリストとして表示
-clothesArray.forEach((clothes) => {
+filteredClothes.forEach((clothes) => {
   // 洋服詳細、個々の表示域
   const clothesItem = document.createElement('div');
   clothesItem.classList.add('clothse_button');
