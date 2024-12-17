@@ -8,6 +8,7 @@ import com.example.demo.damain.service.ClothesService;
 import com.example.demo.damain.service.S3StorageService;
 import com.example.demo.damain.service.StorageService;
 import com.example.demo.damain.service.UserService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -128,15 +129,17 @@ public class RegisterController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/storages/bags")
     public ResponseEntity<Void> addBags(@PathVariable Long userId,
-                                        @RequestBody Storage storage,
+                                        @RequestParam ("name") String name,
+                                        @RequestParam("image") MultipartFile file,
                                         Model model) {
-        //Userオブジェクト取得
-        User user = userService.findById(userId);
-        storage.setUser(user);
-        storage.setStorageType(StorageType.STORAGE_BAG);
+        try {
+            // Service層でビジネスロジックを処理
+            storageService.addBags(userId, name, file);
+            return ResponseEntity.ok().build();
 
-        //収納袋登録
-        storageService.saveStorage(storage);
-        return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).build();
+        }
     }
 }
