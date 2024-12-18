@@ -79,7 +79,7 @@ span.onclick = function() {
 fetch(imgElement.src)
   .then(response => response.blob()) // Blobに変換
   .then(blob => {
-    formData.append("image", blob, "image.png"); // ファイル名も指定する
+    formData.append("image", blob); // ファイル名も指定する
     formData.append("name", name);
     formData.append("hanger_count", hangerCount);
 
