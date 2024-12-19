@@ -76,26 +76,19 @@ public class RegisterController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/storages/dresser")
     public ResponseEntity<Void> addDresser(@PathVariable Long userId,
-                                           @RequestBody DtoDresser dresser,
+                                           @RequestParam("name") String name,
+                                           @RequestParam("drawer-count") Integer drawerCount,
+                                           @RequestParam("image") MultipartFile file,
                                            Model model) {
-        //Userオブジェクト取得
-        User user = userService.findById(userId);
+        try {
+            // Service層でビジネスロジックを処理
+            storageService.addDresser(userId, name, drawerCount, file);
+            return ResponseEntity.ok().build();
 
-        //Storageエンティティに値をセット
-        Storage storage = new Storage();
-        storage.setName(dresser.getName());
-        storage.setStorageType(StorageType.DRESSER);
-        storage.setImageData(dresser.getImageData());
-        storage.setUser(user);
-        Storage saveStorage = storageService.saveStorage(storage);
-
-        //DresserStorageエンティティに値をセット
-        DresserStorage dresserStorage = new DresserStorage();
-        dresserStorage.setStorage(saveStorage);
-        dresserStorage.setDrawerCount(dresser.getDrawerCount());
-        storageService.saveDresserStorage(dresserStorage);
-
-        return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/storages/closet")

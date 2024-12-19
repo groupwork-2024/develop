@@ -110,4 +110,26 @@ public class StorageService {
         storage.setUser(user);
         saveStorage(storage);
     }
+
+    public void addDresser(Long userId, String name, Integer drawerCount, MultipartFile file) throws IOException {
+        // ユーザー情報を取得
+        User user = userService.findById(userId);
+
+        // ファイルをS3にアップロード
+        String imageUrl = s3StorageService.uploadFile("storage", file);
+
+        // Storageエンティティを作成して保存
+        Storage storage = new Storage();
+        storage.setName(name);
+        storage.setStorageType(StorageType.DRESSER);
+        storage.setImageUrl(imageUrl);
+        storage.setUser(user);
+        Storage savedStorage = saveStorage(storage);
+
+        //DresserStorageエンティティを作成して保存
+        DresserStorage dresserStorage = new DresserStorage();
+        dresserStorage.setStorage(savedStorage);
+        dresserStorage.setDrawerCount(drawerCount);
+        saveDresserStorage(dresserStorage);
+    }
 }
