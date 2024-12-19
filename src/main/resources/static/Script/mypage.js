@@ -1,4 +1,72 @@
-// 初期状態の設定
+//アイコンに画像を設定
+function iconImage(event) {
+  const file = event.target.files[0]; // 選択されたファイル
+  if (file) {
+    const reader = new FileReader(); // ファイルを読み込むオブジェクト
+    reader.onload = function (e) {
+      const profileImage = document.getElementById('profile-image');
+      profileImage.src = e.target.result; // 読み込んだ画像のURLを設定
+      profileImage.style.display = 'block'; // 画像を表示
+    };
+    reader.readAsDataURL(file); // ファイルをデータURLとして読み込む
+  }
+}  
+
+
+// カラーボタンがクリックされたときのイベント
+document.querySelectorAll('.color-btn').forEach(button => {
+button.addEventListener('click', event => {
+    // すべてのカラーボタンからselectedクラスを削除
+    document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('selected'));
+    
+    // クリックされたボタンにselectedクラスを追加
+    const selectedColor = event.target.getAttribute('data-color');
+    event.target.classList.add('selected'); // クリックしたボタンに選択状態を追加
+
+    // モードに応じた処理
+    switch (selectedColor) {
+      case 'white':
+        //ヘッダーの色
+        document.querySelectorAll('.header').forEach(header => {
+            header.style.backgroundColor = '#f0f0f0'; 
+        });
+        //ヘッダーの文字色
+        document.querySelectorAll('.header a,.header button').forEach(header1 => {
+          header1.style.color = 'darkblue'; 
+        });
+        break;
+
+      case 'black':
+        //ヘッダーの色
+        document.querySelectorAll('.header').forEach(header => {
+            header.style.backgroundColor = '#333'; 
+        });
+        //ヘッダーの文字色
+        document.querySelectorAll('.header a,.header button').forEach(header1 => {
+          header1.style.color = 'white'; 
+        });
+        break;
+
+      case 'natural':
+        //ヘッダーの色
+        document.querySelectorAll('.header').forEach(header => {
+            header.style.backgroundColor = '#f5deb3';
+        });
+        //ヘッダーの文字色
+        document.querySelectorAll('.header a,.header button').forEach(header1 => {
+          header1.style.color = '#8b4513'; 
+        });
+        break;
+
+      default:
+        break;
+    }
+});
+});
+
+
+
+// 一覧初期状態の設定
 window.addEventListener('DOMContentLoaded', () => {
     //すべての一覧を非表示にする
     document.querySelectorAll('.item-grid').forEach(section => section.style.display = 'none');
@@ -36,7 +104,7 @@ document.querySelectorAll('.tab').forEach(tab => {
 });
 
 
-//洋服写真を格納する配列
+//洋服写真を格納する配列（洋服一覧）
 const clothesArray=[
   {
     name:'洋服1',
@@ -92,69 +160,59 @@ clothesArray.forEach((clothes)=>{
   clothesListContainer.appendChild(linkElement);
 });
 
+//収納写真を格納する配列（収納一覧）
+const strageArray=[
+  {
+    name:'収納1',
+    image:'../img/clothes.png'
+  },
+  {
+    name:'収納2',
+    image:'../img/clothes.png'
+  },
+  {
+    name:'収納3',
+    image:'../img/clothes.png'
+  },
+  {
+    name:'収納4',
+    image:'../img/clothes.png'
+  },
+  {
+    name:'収納5',
+    image:'../img/clothes.png'
+  },
+  {
+    name:'収納6',
+    image:'../img/clothes.png'
+  },
+];
 
-//アイコンに画像を設定
-function iconImage(event) {
-    const file = event.target.files[0]; // 選択されたファイル
-    if (file) {
-      const reader = new FileReader(); // ファイルを読み込むオブジェクト
-      reader.onload = function (e) {
-        const profileImage = document.getElementById('profile-image');
-        profileImage.src = e.target.result; // 読み込んだ画像のURLを設定
-        profileImage.style.display = 'block'; // 画像を表示
-      };
-      reader.readAsDataURL(file); // ファイルをデータURLとして読み込む
-    }
-}  
+// 収納一覧を表示する場所を取得
+const stragesListContainer = document.getElementById('closet-grid');
+stragesListContainer.innerHTML = ''; // 先にリストをクリア
 
+//収納画像を表示
+strageArray.forEach((strage)=>{
+  // <a> タグを作成
+  const linkElement = document.createElement('a');
+  linkElement.href = ''; // リンク先の URL を設定
 
-// カラーボタンがクリックされたときのイベント
-document.querySelectorAll('.color-btn').forEach(button => {
-  button.addEventListener('click', event => {
-      // すべてのカラーボタンからselectedクラスを削除
-      document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('selected'));
-      
-      // クリックされたボタンにselectedクラスを追加
-      const selectedColor = event.target.getAttribute('data-color');
-      event.target.classList.add('selected'); // クリックしたボタンに選択状態を追加
+  // 収納詳細、個々の表示域
+  const strageItem = document.createElement('div');
+  strageItem.classList.add('closet-item'); 
 
-      // モードに応じた処理
-      switch (selectedColor) {
-        case 'white':
-          //ヘッダーの色
-          document.querySelectorAll('.header').forEach(header => {
-              header.style.backgroundColor = '#f0f0f0'; 
-          });
-          //ヘッダーの文字色
-          document.querySelectorAll('.header a,.header button').forEach(header1 => {
-            header1.style.color = 'darkblue'; 
-          });
-          break;
+  // 画像表示
+  const imageElement = document.createElement('img');
+  imageElement.src = strage.image;
+  imageElement.alt = strage.name;
 
-        case 'black':
-          //ヘッダーの色
-          document.querySelectorAll('.header').forEach(header => {
-              header.style.backgroundColor = '#333'; 
-          });
-          //ヘッダーの文字色
-          document.querySelectorAll('.header a,.header button').forEach(header1 => {
-            header1.style.color = 'white'; 
-          });
-          break;
+  strageItem.appendChild(imageElement);
+  stragesListContainer.appendChild(strageItem);
 
-        case 'natural':
-          //ヘッダーの色
-          document.querySelectorAll('.header').forEach(header => {
-              header.style.backgroundColor = '#f5deb3';
-          });
-          //ヘッダーの文字色
-          document.querySelectorAll('.header a,.header button').forEach(header1 => {
-            header1.style.color = '#8b4513'; 
-          });
-          break;
-
-        default:
-          break;
-      }
-  });
+  // <a> タグに strageItem を追加
+  linkElement.appendChild(strageItem);
+  // 最後にstragesListContainerにlinkElement を追加
+  stragesListContainer.appendChild(linkElement);
 });
+

@@ -123,8 +123,8 @@ body{
     border-radius: 8px; /* 角を丸くする（オプション） */
 }
 
-/*洋服一覧全体に対して*/
-#youhuku-grid{
+/*洋服・収納一覧全体に対して*/
+#youhuku-grid,#closet-grid{
     display: grid;  /*グリッドレイアウトにする*/
     grid-template-columns: repeat(4,1fr);   /*4列ずつ1frの間隔をあけて表示*/
     gap:10px;
@@ -132,8 +132,8 @@ body{
     background-color:#ddd;
 }
 
-/*洋服一つ一つに対して*/
-.youhuku-item{
+/*アイテム一つ一つに対して*/
+.youhuku-item,.closet-item{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -144,37 +144,9 @@ body{
     border-radius: 10px;    /*角丸*/
 }
 
-/*アイテム写真の大きさ*/
-.youhuku-item img{
+/*洋服・収納のアイテム画像の大きさ*/
+.youhuku-item img,.closet-item img{
     max-width: 90%;    /*画像の幅を調整*/
     max-height: 90%;   /*画像の高さを調整*/
     object-fit: contain;    /*画像の比率を保持*/
-}
-
-/* 収納一覧全体に対して */
-#closet-grid {
-    display: grid; /* グリッドレイアウトを使用 */
-    grid-template-columns: repeat(4, 1fr); /* 4列表示 */
-    gap: 10px; /* アイテム間の余白 */
-    padding: 20px;
-    background-color: #ddd /* 背景色 */
-}
-
-  /* 収納アイテム個別に対するスタイル */
-.closet-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    border: 1px solid #ccc; /* 枠線 */
-    border-radius: 10px; /* 角を丸くする */
-}
-
-/* 収納アイテムの画像サイズ調整 */
-.closet-item img {
-    max-width: 90%; /* 幅を最大90%に調整 */
-    max-height: 100%; /* 高さを最大90%に調整 */
-    object-fit: contain; /* 画像の比率を保持して調整 */
 }
