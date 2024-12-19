@@ -365,11 +365,11 @@ function openReviewModal() {
     };
 
     fetch(`/register/${userId}/clothes`, {
-         method: 'POST',
-         headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify(postClothesData),
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(postClothesData),
     })
-     .then(response => {
+    .then(response => {
             if (response.ok) {
              // 確認画面を非表示にする
                 reviewModal.style.display = 'none';
@@ -381,8 +381,7 @@ function openReviewModal() {
                 alert('エラーが発生しました');
             }
         })
-        .catch(error => console.error('Error:', error));
-    }
+    .catch(error => console.error('Error:', error));
 
     // 画像の表示
     if (imageFile) {

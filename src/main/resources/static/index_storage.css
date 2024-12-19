@@ -1,0 +1,118 @@
+.cp_ipselect06 {
+  position: relative;
+  display: flex;
+  flex-basis: 20%;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: -20%;
+  margin-left: auto;
+}
+.cp_ipselect06 .cp_sl06 {
+  position: relative;
+  width: 135%; /*下線の長さ*/
+  height: 40px;/*高さ*/
+  cursor: pointer;
+  z-index: 1;
+  /* 標準のスタイルを無効にしborder-bottomを設定 */
+  border: none;
+  appearance: none;
+  outline: none;
+  background: transparent;
+  border-radius: 0;
+  border-bottom: 1px solid #666666;
+  text-align: center;
+}
+/*プルダウンの三角を設定*/
+.cp_ipselect06::after {
+  position: absolute;
+  right: -30%; /*場所の指定*/
+  content: '';
+  width: 14px; /*三角形の形*/
+  height: 8px; /*三角形の形*/
+  background: #666666;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+/*選択した際の動き:セレクト下のライン*/
+.cp_sl06_selectbar {
+  position: relative;
+  display: inline-block;
+  width: 133%;
+}
+.cp_sl06_selectbar:before,
+.cp_sl06_selectbar:after {
+  bottom: 1px;
+  content: '';
+  width: 0;
+  height: 2px;
+  position: absolute;
+  background: #da3c41;
+  transition: 0.2s ease all;
+}
+.cp_sl06_selectbar:before {
+  left: 50%;
+}
+.cp_sl06_selectbar:after {
+  right: 50%;
+}
+/*focus時の設定*/
+.cp_ipselect06 .cp_sl06:focus {
+  border-bottom: 1px solid transparent;
+}
+.cp_sl06:focus ~ .cp_sl06_selectbar:before,
+.cp_sl06:focus ~ .cp_sl06_selectbar:after {
+  width: 50%;
+}
+
+.icons{
+  display: flex;
+  flex-basis: 10%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  white-space: nowrap; /*文字の折り返しをさせない*/
+  margin-left:auto;
+  margin-right: 10px;
+  justify-content: center;
+}
+
+.list_name{
+  /*線の種類（二重線）太さ 色*/
+  display: flex;
+  flex-basis: 20%;
+  text-align: center;
+  justify-content: center;
+  white-space: nowrap;
+  font-size: 20px;
+  margin: 0% 3%;
+  padding: 1% 2%;
+  border-bottom: double 5px #FFC778;
+}
+
+.list_header{
+  display: flex;
+  flex-basis: 100%;
+  align-items: flex-end;
+  justify-items: center;
+  text-align: center;
+  padding-top: 2%;
+}
+
+.clothes_img img{
+  width: 180px;
+  height: 150px;
+  object-fit:contain;
+}
+
+.clothes_img{
+  border: none;
+  display: flex;
+  margin: auto;
+  padding: 0;
+}
+
+
+
+
+
+
