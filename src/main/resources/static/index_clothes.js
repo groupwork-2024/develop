@@ -7,7 +7,7 @@ const clothesArray = [
     location: 'クローゼット1段目',
     memo: '夏に最適なTシャツ',
     tags: [
-      { name: '夏', color: '#FF5733' },  // 色を追加
+      { name: '夏', color: '#FF6347' },  // 色を追加
       { name: 'カジュアル', color: '#33FF57' }
     ]
   },
