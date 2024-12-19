@@ -18,7 +18,7 @@
     </div>
 
     <!--メインの部分-->
-    <div class="container">
+    <div class="main-content">
         <form onsubmit="return false;" id="closetForm">
             <label for="name">名前</label>
             <div class="input-container">
@@ -84,7 +84,17 @@
 
                 <!-- カメラを表示するためのビデオとキャンバス -->
                 <canvas id="canvas" style="display: none;"></canvas>
-                
+            </div>
+
+            <!--メモ-->
+            <label for="memo">メモ</label>
+            <div class='input-container'>
+                <textarea id="memo" name="memo" rows="1" cols="50" maxlength="150" placeholder="例:寝室 子供部屋"></textarea>
+                <button type="button" class="info-button" id="closetMemo">
+                    <span class="material-icons">
+                        help_outline
+                    </span>
+                </button>
             </div>
             
         </form>

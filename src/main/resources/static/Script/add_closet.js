@@ -2,12 +2,17 @@ let ImageContent = '';
 // 情報ボタンを押したときの処理
 // 名前フィールドの情報ボタン
 document.getElementById('closetName').addEventListener('click', function() {
-    alert("クローゼットに名前を付けることができます。\n例: 寝室のクローゼット");
+    alert("クローゼットに名前を入力してください。\n例: 寝室のクローゼット");
 });
 
 // ハンガーの個数の情報ボタン
 document.getElementById('hangerCount').addEventListener('click', function() {
-    alert("クローゼットに収めるハンガーの個数を入力してください\nハンガーの個数は1から99の範囲で指定できます。");
+    alert("クローゼットに収めるハンガーの個数を入力してください。\nハンガーの個数は1から99の範囲で指定できます。");
+});
+
+//メモの情報ボタン
+document.getElementById('closetMemo').addEventListener('click', function() {
+    alert("配置している場所や収納している物についての詳細を書き留めることができます。\n例:寝室のクローゼット コート類");
 });
 
 // 完了ボタンが押された時にモーダルを表示し、フォームデータを表示する

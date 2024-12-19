@@ -75,6 +75,17 @@
         <div id="tansu-container"></div>
       </div>
 
+      <!--メモ-->
+      <label for="memo">メモ</label>
+      <div class='input-container'>
+          <textarea id="memo" name="memo" rows="1" cols="50" maxlength="150" placeholder="例:寝室 子供部屋"></textarea>
+          <button type="button" class="info-button" id="DresserMemo">
+              <span class="material-icons">
+                  help_outline
+              </span>
+          </button>
+      </div>
+
       <!--登録完了ボタン 確認画面を見れるボタン-->
       <div class="completion">
         <button type="button" id="review-modal-button" class="reviewModalButton" >
@@ -91,6 +102,7 @@
         <div id="reviewName" class="reviewName"></div>
         <div id="reviewLevel" class="reviewLevel"></div>
         <div id="reviewlayout" class="reviewlayout"></div>
+        <div id="reviewMemo" class="reviewMemo"></div>
         <!-- 登録ボタン -->
         <button type="button" onclick="registerData()">登録</button>
       </div>

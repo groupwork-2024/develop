@@ -103,9 +103,9 @@ form label {
 }
 
 /* フォームの入力エリアのスタイル */
-form input{
-    border: none;
+form input, form textarea{
     width: 100%;
+    border: none;
     padding: 10px;
     resize: none;
     outline: none; 

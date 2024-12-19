@@ -33,7 +33,12 @@ function handleStorageTypeInput(storageType) {
 
 // 名前フィールドの情報ボタン
 document.getElementById('infoButton-name').addEventListener('click', function() {
-  alert("タンスに名前を付けることができます。\n例: 下着, 靴下, 肌着");
+  alert("タンスの名前を入力してください。\n例: 寝室");
+});
+
+// 名前フィールドの情報ボタン
+document.getElementById('DresserMemo').addEventListener('click', function() {
+  alert("配置している場所や収納している物についての詳細を書き留めることができます。\n例:寝室のタンス 靴下");
 });
 
 // ボタンのクリックイベント: 情報ボタンをクリックしたときの動作
@@ -52,7 +57,6 @@ document.getElementById('infoButton-levels').addEventListener('click', function(
 function handlePartClick() {
   console.log(`Selected item with ID: ${singleItemId}`);
 }
-
 
 // 段か追加されたとき、素材も追加する処理
 function FarstPart(targetLevel,levelIndex) {
@@ -265,6 +269,7 @@ reviewOpenButton.onclick = function(event){
   const levels = document.getElementById("levels").value;
   const tansuContainer = document.getElementById("tansu-container"); // タンスのレイアウト
   const tansuLayout = tansuContainer.cloneNode(true);  // 複製
+  const memo = document.getElementById("memo").value;
 
   // 入力欄に空白がないかチェック
   if (name === "" || levels === "" || tansuContainer === "") {
@@ -280,6 +285,9 @@ reviewOpenButton.onclick = function(event){
   document.getElementById("reviewName").innerHTML = `<a>名前</a><br>${name}`;
   document.getElementById("reviewLevel").innerHTML = `<a>段数</a><br>${levels}`;
   document.getElementById("reviewlayout").innerHTML = `<a>レイアウト</a><br>`;
+  document.getElementById("reviewMemo").innerHTML = `<a>メモ</a><br><div class="reviewMemoContent">${memo}</div>`;
+
+  console.log(memo);
 
   // モーダルにレイアウトを追加
   const reviewLayout = document.getElementById("reviewlayout");

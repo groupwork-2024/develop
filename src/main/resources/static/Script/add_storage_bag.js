@@ -105,7 +105,12 @@ function closeRegisterModal() {
 
 // ボタンのクリックイベント: 情報ボタンをクリックしたときの動作
 document.getElementById('infoButton').addEventListener('click', function() {
-    alert("収納ケースに名前を付けることができます。\n例:季節物 夏服用 冬物衣類");
+    alert("収納ケースに名前を入力してください。\n例:季節物 夏服用 冬物衣類");
+});
+
+// ボタンのクリックイベント: 情報ボタンをクリックしたときの動作
+document.getElementById('StorageBoxMemo').addEventListener('click', function() {
+    alert("配置している場所や収納している物についての詳細を書き留めることができます。\n例:季節物 夏服用 \n　 12/1に衣替えした");
 });
 
 // セレクトボックスで選んだものによって遷移先を変更させる
