@@ -18,15 +18,16 @@
         <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
         <a href="home.html" class="title-button">あれどこ？</a>
         <a class="right_area">　</a>
+
     </div>
 
     <!-- メインコンテンツエリア -->
     <div class="list_header">
         <figure class="clothes_img">
-            <img th:src="'data:image/png;base64,' + ${storage.imageDataString}" alt="storage img">
+            <img th:src="${storage.imageUrl}" alt="clothes img">
         </figure>
         <div class="container">
-            <br class="heder_name">名前:<span th:text="${storage.name}"></span></br>
+            <a class="heder_name" th:text="${storage.name}">名前</a>
         </div>
         <!--ごみ箱、ソートアイコン-->
         <a class="icons">
@@ -38,7 +39,7 @@
         <!-- コンテンツをここに追加 -->
         <div th:each="clothes : ${clothesList}" class="clothse_button">
             <figure class="clothes_img">
-                <img th:src="'data:image/png;base64,' + ${clothes.imageDataString}" alt="clothes img">
+                <img th:src="${clothes.imageUrl}" alt="clothes img">
                 <div class="detail">
                     <br>名前: <span th:text="${clothes.name}"></span></br>
                     <br>収納場所: <span th:text="${clothes.storage.name}"></span></br>

@@ -42,9 +42,6 @@ public class Storage {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Transient
-    private String imageDataString;
-
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
