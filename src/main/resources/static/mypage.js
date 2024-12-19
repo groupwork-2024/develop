@@ -36,6 +36,63 @@ document.querySelectorAll('.tab').forEach(tab => {
 });
 
 
+//洋服写真を格納する配列
+const clothesArray=[
+  {
+    name:'洋服1',
+    image:'../img/youfuku_test.png'
+  },
+  {
+    name:'洋服2',
+    image:'../img/youfuku_test.png'
+  },
+  {
+    name:'洋服3',
+    image:'../img/youfuku_test.png'
+  },
+  {
+    name:'洋服4',
+    image:'../img/youfuku_test.png'
+  },
+  {
+    name:'洋服5',
+    image:'../img/youfuku_test.png'
+  },
+  {
+    name:'洋服6',
+    image:'../img/youfuku_test.png'
+  },
+];
+
+// 洋服一覧を表示する場所を取得
+const clothesListContainer = document.getElementById('youhuku-grid');
+clothesListContainer.innerHTML = ''; // 先にリストをクリア
+
+//洋服画像を表示
+clothesArray.forEach((clothes)=>{
+  // <a> タグを作成
+  const linkElement = document.createElement('a');
+  linkElement.href = ''; // リンク先の URL を設定
+
+  // 洋服詳細、個々の表示域
+  const clothesItem = document.createElement('div');
+  clothesItem.classList.add('youhuku-item'); 
+
+  // 画像表示
+  const imageElement = document.createElement('img');
+  imageElement.src = clothes.image;
+  imageElement.alt = clothes.name;
+
+  clothesItem.appendChild(imageElement);
+  clothesListContainer.appendChild(clothesItem);
+
+  // <a> タグに clothesItem を追加
+  linkElement.appendChild(clothesItem);
+  // 最後にclothesListContainerにlinkElement を追加
+  clothesListContainer.appendChild(linkElement);
+});
+
+
 //アイコンに画像を設定
 function iconImage(event) {
     const file = event.target.files[0]; // 選択されたファイル
