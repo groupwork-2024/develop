@@ -45,37 +45,3 @@ a.tag{
   border-bottom: 20px solid transparent;/* 下の辺 */
   border-right: 15px solid #4CAF50 ; /* 矢印の色をここで変更 */
 }
-
-.icons{
-  display: flex;
-  flex-basis: 10%;
-  border: none;
-  background: none;
-  cursor: pointer;
-  white-space: nowrap; /*文字の折り返しをさせない*/
-  margin-left:auto;
-  margin-right: 10px;
-  justify-content: center;
-}
-
-.list_name{
-  /*線の種類（二重線）太さ 色*/
-  display: flex;
-  flex-basis: 20%;
-  text-align: center;
-  justify-content: center;
-  white-space: nowrap;
-  font-size: 20px;
-  margin: 0% 3%;
-  padding: 1% 2%;
-  border-bottom: double 5px #FFC778;
-}
-
-.list_header{
-  display: flex;
-  flex-basis: 100%;
-  align-items: flex-end;
-  justify-items: center;
-  text-align: center;
-  padding-top: 2%;
-}
