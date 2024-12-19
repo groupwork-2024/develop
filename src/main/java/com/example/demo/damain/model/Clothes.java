@@ -50,9 +50,6 @@ public class Clothes {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Transient
-    private String imageDataString; // Base64エンコード用の一時フィールド
-
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();

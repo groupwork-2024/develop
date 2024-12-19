@@ -40,13 +40,6 @@ public class StorageService {
 
     public List<Storage> getStoragesByUserAndType(StorageType storageType, Long userId) {
         List<Storage> storagesList = storageRepository.findAllByUserIdAndStorageType(userId, storageType);
-
-        for (Storage storages : storagesList) {
-            if (storages.getImageData() != null) {
-                // エンコードして文字列として設定
-                storages.setImageDataString(Base64.getEncoder().encodeToString(storages.getImageData()));
-            }
-        }
         return storagesList;
     }
 
@@ -54,9 +47,6 @@ public class StorageService {
         Optional<Storage> optionalStorage = storageRepository.findStorageByUserIdAndId(userId, storageId);
         Storage storage = optionalStorage.orElseThrow(() ->
                 new NoSuchElementException("Storage not found for userId: " + userId + ", storageId: " + storageId));
-        if (storage.getImageData() != null) {
-            storage.setImageDataString(Base64.getEncoder().encodeToString(storage.getImageData()));
-        }
         return storage;
     }
 

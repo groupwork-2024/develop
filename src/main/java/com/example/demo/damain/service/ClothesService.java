@@ -17,50 +17,22 @@ public class ClothesService {
     // 服一覧参照
     public List<Clothes> findAllClothesByUserId(Long userId) {
         List<Clothes> clothesList = clothesRepository.findAllByUserId(userId);
-
-        // 画像データをBase64エンコード
-        for (Clothes clothes : clothesList) {
-            if (clothes.getImageData() != null) {
-                // エンコードして文字列として設定
-                clothes.setImageDataString(Base64.getEncoder().encodeToString(clothes.getImageData()));
-            }
-        }
         return clothesList;
     }
 
     public List<Clothes> getClothesSortedByCreateAtAsc(Long userId) {
         List<Clothes> clothesList = clothesRepository.findAllByUserIdOrderByCreatedAtAsc(userId);
 
-        // 画像データをBase64エンコード
-        for (Clothes clothes : clothesList) {
-            if (clothes.getImageData() != null) {
-                // エンコードして文字列として設定
-                clothes.setImageDataString(Base64.getEncoder().encodeToString(clothes.getImageData()));
-            }
-        }
         return clothesList;
     }
 
     public List<Clothes> getClothesSortedByCreatedAtDesc(Long userId) {
         List<Clothes> clothesList = clothesRepository.findAllByUserIdOrderByCreatedAtDesc(userId);
-        // 画像データをBase64エンコード
-        for (Clothes clothes : clothesList) {
-            if (clothes.getImageData() != null) {
-                // エンコードして文字列として設定
-                clothes.setImageDataString(Base64.getEncoder().encodeToString(clothes.getImageData()));
-            }
-        }
         return clothesList;
     }
 
     public List<Clothes> findAllByUserIdAndStorageId(Long userId, Long storageId) {
         List<Clothes> clothesList = clothesRepository.findAllByUserIdAndStorageId(userId, storageId);
-        for (Clothes clothes : clothesList) {
-            if (clothes.getImageData() != null) {
-                // エンコードして文字列として設定
-                clothes.setImageDataString(Base64.getEncoder().encodeToString(clothes.getImageData()));
-            }
-        }
         return clothesList;
     }
 
