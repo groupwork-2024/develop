@@ -20,6 +20,7 @@
 
     <!-- メインコンテンツエリア -->
     <div class="main-content">
+        <input type="hidden" id="userId" th:value="${userId}">
         <form onsubmit="return false;" id="syunouForm">
             <label for="name">名前</label>
             <div class="input-container">
@@ -62,7 +63,7 @@
                 <h3>確認画面</h3>
                 <div id="reviewName" class="reviewName"></div>
                 <div id="reviewSyunouImage" class="reviewSyunouImage"></div>
-                <button type="button" onclick="registerData()">登録</button>
+                <button id="registerButton">登録</button>
             </div>
         </div>
 
@@ -86,7 +87,7 @@
     </div>
 
 
-    <script src="../static/templete_script.js"></script>
-    <script src="../static/syuunouBox.js"></script>
+    <script th:src="@{/templete_script.js}"></script>
+    <script th:src="@{/For-backend-verification/syuunouBox.js}"></script>
 </body>
 </html>

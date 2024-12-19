@@ -94,4 +94,20 @@ public class StorageService {
         closetStorage.setHanger_count(hangerCount);
         saveClosetStorage(closetStorage);
     }
+
+    public void addBags(Long userId, String name, MultipartFile file) throws IOException {
+        // ユーザー情報を取得
+        User user = userService.findById(userId);
+
+        // ファイルをS3にアップロード
+        String imageUrl = s3StorageService.uploadFile("storage", file);
+
+        // Storageエンティティを作成して保存
+        Storage storage = new Storage();
+        storage.setName(name);
+        storage.setStorageType(StorageType.STORAGE_BAG);
+        storage.setImageUrl(imageUrl);
+        storage.setUser(user);
+        saveStorage(storage);
+    }
 }
