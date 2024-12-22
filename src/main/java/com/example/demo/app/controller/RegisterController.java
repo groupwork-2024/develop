@@ -77,7 +77,7 @@ public class RegisterController {
     @RequestMapping(method = RequestMethod.POST, value = "/storages/dresser")
     public ResponseEntity<Void> addDresser(@PathVariable Long userId,
                                            @RequestParam("name") String name,
-                                           @RequestParam("drawer-count") Integer drawerCount,
+                                           @RequestParam("drawer-count") int drawerCount,
                                            @RequestParam("image") MultipartFile file,
                                            Model model) {
         try {

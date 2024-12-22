@@ -111,7 +111,7 @@ public class StorageService {
         saveStorage(storage);
     }
 
-    public void addDresser(Long userId, String name, Integer drawerCount, MultipartFile file) throws IOException {
+    public void addDresser(Long userId, String name, int drawerCount, MultipartFile file) throws IOException {
         // ユーザー情報を取得
         User user = userService.findById(userId);
 

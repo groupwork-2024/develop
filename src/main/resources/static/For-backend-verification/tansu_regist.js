@@ -294,16 +294,60 @@ span.onclick = function() {
   reviewModal.style.display = "none";
 }
 
-// 登録データを保存し、完了メッセージを表示
-function registerData() {
-  const registerModal = document.getElementById('registerModal');
+//完了確認メッセージ関連
+// 登録データを登録後に完了メッセージを表示
+registerButton.addEventListener("click", () => {
+    console.log("registerData関数が呼び出されました");
+    const userId = document.getElementById('userId').value;
 
-  // モーダルを非表示に
-  reviewModal.style.display = 'none';
+    // データの準備
+    const formData = new FormData();
+    const name = document.getElementById("name").value;
 
-  // 登録完了メッセージを表示
-  registerModal.style.display = 'flex';
-}
+    const storageType = document.getElementById("storageType").value; // "levels"または"drawers"
+    let drawerCount;
+    if (storageType === "levels") {
+      drawerCount = parseInt(document.getElementById("levels").value, 10); // 段数を取得
+    } else if (storageType === "drawers") {
+      drawerCount = parseInt(document.getElementById("levels").value, 10); // 引き出しの数を取得
+    }
+    // 画像要素を生成
+    let imgElement = document.createElement("img");
+    imgElement.src = "/img/clothes.png";
+
+// imgElement.src のURLからバイナリデータに変換
+fetch(imgElement.src)
+  .then(response => response.blob()) // Blobに変換
+  .then(blob => {
+    formData.append("image", blob); // ファイル名も指定する
+    formData.append("name", name);
+    formData.append("drawer-count", drawerCount);
+
+    // fetchでデータを送信
+    fetch(`/register/${userId}/storages/dresser`, {
+      method: "POST",
+      body: formData
+    })
+    .then(response => {
+    console.log(response);
+      if (response.ok) {
+       // 確認画面を非表示にする
+        reviewModal.style.display = 'none';
+
+                      // 登録完了メッセージを表示
+        registerModal.style.display = 'flex';
+
+        console.log("データ送信成功");
+      } else {
+        console.error("データ送信中にエラーが発生しました");
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+  })
+  .catch(error => console.error("Blob変換エラー:", error));
+});
 
 // セレクトボックスで選んだものによって遷移先を変更させる
 const selectOption = document.getElementById('selectOption');
