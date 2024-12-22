@@ -8,9 +8,9 @@
     <title>Webアプリ画面</title>
     <!-- google fonts,css等の読み込み -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/back&completion.css}">
-    <link rel="stylesheet" th:href="@{/list.css}">
-</head>
+    <link rel="stylesheet" th:href="@{/stylesheet/back_completion.css}">
+    <link rel="stylesheet" th:href="@{/stylesheet/index_clothes.css}">
+    <link rel="stylesheet" th:href="@{/stylesheet/index_heder.css}">
 <body>
 <input type="hidden" id="userId" th:value="${userId}">
 <div class="header">
@@ -51,7 +51,7 @@
     </div>
 </div>
 
-<script th:src="@{/templete_script.js}"></script>
-<script th:src="@{/storage_list.js}"></script>
+<script th:src="@{/Script/templete_script.js}"></script>
+<script th:src="@{/Script/index_storage.js}"></script>
 </body>
 </html>

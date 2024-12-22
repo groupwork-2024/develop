@@ -7,8 +7,8 @@
     <title>収納袋登録</title>
     <!-- google fonts,css等の読み込み -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/back&completion.css}">
-    <link rel="stylesheet" th:href="@{/syuunouBox.css}">
+    <link rel="stylesheet" th:href="@{/stylesheet/back_completion.css}">
+    <link rel="stylesheet" th:href="@{/stylesheet/add_storage_bag.css}">
 </head>
 <body>
 
@@ -81,13 +81,13 @@
                         <option value="3">既存洋服登録　</option>
                     </select>
                 </div>
-                <a href="home.html">ホームへ</a>
+                <a th:href="@{/home/{userId}(userId=${userId})}">ホームへ</a>
             </div>
         </div>
     </div>
 
 
-    <script th:src="@{/templete_script.js}"></script>
+    <script th:src="@{/Script/templete_script.js}"></script>
     <script th:src="@{/For-backend-verification/syuunouBox.js}"></script>
 </body>
 </html>
