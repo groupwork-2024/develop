@@ -2,6 +2,10 @@
 .clothes_img img{
   min-width: 190px;
   min-height: 190px;
+  width: 190px; /* 幅を固定 */
+  height: 190px; /* 高さを固定 */
+  max-width: 190px;
+  min0-height: 190px;
   object-fit:cover;
 }
 

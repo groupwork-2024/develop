@@ -1,5 +1,5 @@
 const cp_sl06 = document.querySelector(".cp_sl06"); //最初のclassの取得
-const clothes = document.querySelectorAll(".clothse_button");
+const clothes = document.querySelectorAll(".clothse_button"); 
 const detail =  document.querySelector(".detail");
 const userId = document.getElementById('userId').value;
 
@@ -48,9 +48,4 @@ function ProcessingInstruction() {
             selectedContent.style.display = "block"; // 選択された要素を表示
         }
     }
-}
-  //収納をクリックするとページを背にする処理
-  function goToClothesPage(name,storage_type){
-    storage_type=storage_type.toLowerCase();
-    window.location.href = `detail_${storage_type}.html?name=${name}`;
 }
