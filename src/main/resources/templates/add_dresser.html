@@ -28,9 +28,9 @@
   <!-- メインコンテンツエリア -->
   <div id="content">
     <form onsubmit="return false;" id="closetForm">
-      <label for="name">名前</label>
+      <label for="name">タンスの名前</label>
       <div class="input-container">
-        <input type="text" id="name" name="name">
+        <input type="text" id="name" name="name" placeholder="例:寝室 子供部屋">
         <button type="button" class="info-button" id="infoButton-name">
           <span class="material-icons">
             help_outline
@@ -45,7 +45,7 @@
         </select>
       </label>
       <div class="input-container">
-        <input type="number" id="levels" name="levels" min="1" max="10">
+        <input type="number" id="levels" name="levels" min="1" max="10" placeholder="例:1">
         <button type="button" class="info-button" id="infoButton-levels">
           <span class="material-icons">
             help_outline
@@ -78,7 +78,7 @@
       <!--メモ-->
       <label for="memo">メモ</label>
       <div class='input-container'>
-          <textarea id="memo" name="memo" rows="1" cols="50" maxlength="150" placeholder="例:寝室 子供部屋"></textarea>
+          <textarea id="memo" name="memo" rows="1" cols="50" maxlength="150" placeholder="自由記載"></textarea>
           <button type="button" class="info-button" id="DresserMemo">
               <span class="material-icons">
                   help_outline
