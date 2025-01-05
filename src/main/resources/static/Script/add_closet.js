@@ -34,7 +34,7 @@ function openReviewModal() {
     }
     
     // モーダルの中にデータを埋め込む
-    document.getElementById('reviewName').innerHTML = `<a>名前</a><br>${name}`;
+    document.getElementById('reviewName').innerHTML = `<a>クローゼットの名前</a><br>${name}`;
     document.getElementById('reviewHangerCount').innerHTML = `<a>ハンガーの個数</a><br>${hangerCount}`;
 
     // 画像の表示

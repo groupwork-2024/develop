@@ -22,7 +22,7 @@
         <form onsubmit="return false;" id="closetForm">
             <label for="name">名前</label>
             <div class="input-container">
-                <input type="text" id="name" name="name">
+                <input type="text" id="name" name="name" placeholder="例:寝室 子供部屋">
                 <button type="button" class="info-button" id="closetName">
                     <span class="material-icons">
                         help_outline
@@ -32,7 +32,7 @@
                 
             <label for="hanger-count">ハンガーの個数</label>
             <div class="input-container">
-                <input type="number" id="hanger-count" name="hanger-count" min="1" max="99">
+                <input type="number" id="hanger-count" name="hanger-count" min="1" max="99" placeholder="例:1">
                 <button type="button" class="info-button" id="hangerCount">
                     <span class="material-icons">
                         help_outline
@@ -89,7 +89,7 @@
             <!--メモ-->
             <label for="memo">メモ</label>
             <div class='input-container'>
-                <textarea id="memo" name="memo" rows="1" cols="50" maxlength="150" placeholder="例:寝室 子供部屋"></textarea>
+                <textarea id="memo" name="memo" rows="1" cols="50" maxlength="150" placeholder="自由記載"></textarea>
                 <button type="button" class="info-button" id="closetMemo">
                     <span class="material-icons">
                         help_outline
