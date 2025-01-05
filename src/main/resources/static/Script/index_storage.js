@@ -3,34 +3,46 @@ const cp_sl06 = document.querySelector(".cp_sl06"); //最初のclassの取得
 // 収納を格納する配列を仮定
 const storageArray = [
   {
+    id:'1',
     name: '寝室',
     storage_type: 'DRESSER',
     image: '../img/DRESSER1.png',
+    memo: '衣類や小物を収納'
   },
   {
-    name: '寝室',
+    id:'2',
+    name: 'リビングルーム',
     storage_type: 'DRESSER',
     image: '../img/DRESSER2.png',
+    memo: 'ハンカチなどの小物を収納'
   },
   {
+    id:'3',
     name: '寝室',
     storage_type: 'STORAGE_BAG',
     image: '../img/storagebox.png',
+    memo: '季節物の収納場所 11/20に衣替えを実施'
   },
   {
+    id:'4',
     name: '寝室',
     storage_type: 'STORAGE_BAG',
     image: '../img/storagebox2.png',
+    memo: '毛布の収納場所'
   },
   {
-    name: '寝室',
+    id:'5',
+    name: '子供部屋',
     storage_type: 'CLOSET',
     image: '../img/clothes.png',
+    memo: 'コート類'
   },
   {
-    name: '寝室',
+    id:'6',
+    name: '夫婦部屋',
     storage_type: 'CLOSET',
     image: '../img/clothes2.png',
+    memo: 'スーツ類'
   }
 ];
 
@@ -82,12 +94,22 @@ function updateStorageList(filteredStorage){
 
     const clothesDetail = document.createElement('div');
     clothesDetail.innerHTML = 
-      `<strong>名前</strong><br>${storage.name}`;
+      `<a>
+        <strong>名前</strong>
+        ${storage.name}
+      </a>
+      <a>
+        <strong>メモ</strong>
+        ${storage.memo}
+      </a>
+      `;
+    
+      clothesDetail.classList.add('storageDetail');
 
     // クリックしたときの処理
     clothesContent.addEventListener('click', function(event) {
       event.preventDefault();  // ページ遷移を防止（動的遷移に変更するため）
-      goToClothesPage(storage.name,storage.storage_type,);  // ページ遷移
+      goToClothesPage(storage);  // ページ遷移
   });
 
     clothesFigure.appendChild(clothesDetail);
@@ -96,9 +118,11 @@ function updateStorageList(filteredStorage){
   });
 
   //収納をクリックするとページを背にする処理
-  function goToClothesPage(name,storage_type){
-    storage_type=storage_type.toLowerCase();
-    window.location.href = `detail_${storage_type}.html?name=${name}`;
+  function goToClothesPage(storage){
+    storage_type=storage.storage_type.toLowerCase();
+    // storageオブジェクトをJSON形式でエンコード
+    const storageString = encodeURIComponent(JSON.stringify(storage));
+    window.location.href = `detail_${storage_type}.html?location=${storageString}`;
   } 
 }
 
