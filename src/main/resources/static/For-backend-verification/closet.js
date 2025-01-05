@@ -59,7 +59,7 @@ registerButton.addEventListener("click", () => {
     const formData = new FormData();
     const name = document.getElementById("name").value;
     const hangerCount = document.getElementById("hanger-count").value;
-    const imgElement = document.querySelector("#reviewLayout img");
+    const imgElement = document.querySelector("#reviewImage img");
 
 // imgElement.src のURLからバイナリデータに変換
 fetch(imgElement.src)

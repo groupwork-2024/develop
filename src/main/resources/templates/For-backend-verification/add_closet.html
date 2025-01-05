@@ -6,8 +6,8 @@
     <title>クローゼット登録</title>
     <!-- google fonts,css等の読み込み -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/closet.css}">
-    <link rel="stylesheet" th:href="@{/back&completion.css}">
+    <link rel="stylesheet" th:href="@{/stylesheet/add_closet.css}">
+    <link rel="stylesheet" th:href="@{/stylesheet/back_completion.css}">
 </head>
 <body>
 <!--ヘッダー部分-->
@@ -124,12 +124,12 @@
                     <option value="3">既存洋服登録　</option>
                 </select>
             </div>
-            <a href="home.html">ホームへ</a>
+            <a th:href="@{/home/{userId}(userId=${userId})}">ホームへ</a>
         </div>
     </div>
 </div>
 
 <script th:src="@{/For-backend-verification/closet.js}"></script>
-<script th:src="@{/templete_script.js}"></script>
+<script th:src="@{/Script/templete_script.js}"></script>
 </body>
 </html>

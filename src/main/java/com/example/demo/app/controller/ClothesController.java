@@ -65,7 +65,6 @@ public class ClothesController {
         model.addAttribute("clothesList", getStorageByClothes);
         model.addAttribute("storage", getStorage);
 
-
         // storageTypeに基づいて表示するテンプレートを切り替える
         switch (storageType) {
             case "DRESSER":
