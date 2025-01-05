@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
-body{
+body {
     margin: 0;
 }
 
 /*プロフィール部分全体*/
-.profile-section{
+.profile-section {
     display: flex;
     align-items: center;
     padding: 20px;
@@ -13,55 +13,62 @@ body{
 }
 
 /*プロフィールアイコン*/
-.profile-circle{
+.profile-circle {
     width: 80px;
     height: 80px;
     background-color: #ddd;
-    border-radius: 50%;    /*丸に表示するため*/
-    position: relative;    /*要素の位置を基準として変更するためのもの(親要素)*/
+    border-radius: 50%;
+    /*丸に表示するため*/
+    position: relative;
+    /*要素の位置を基準として変更するためのもの(親要素)*/
 }
 
-#profile-image{
+#profile-image {
     display: none;
 }
 
 /* プロフィール画像 */
 .profile-circle img {
-    width: 100%; /* 親要素に合わせる */
-    height: 100%; /* 親要素に合わせる */
-    border-radius: 50%; /* 丸い形にする */
-    object-fit: cover; /* コンテナに収まるようトリミング */
-} 
+    width: 100%;
+    /* 親要素に合わせる */
+    height: 100%;
+    /* 親要素に合わせる */
+    border-radius: 50%;
+    /* 丸い形にする */
+    object-fit: cover;
+    /* コンテナに収まるようトリミング */
+}
 
 /*アイコンの＋ボタン*/
-.plus-buttom{
-    position: absolute;    /*親要素を基準の配置*/
-    bottom:0;
+.plus-buttom {
+    position: absolute;
+    /*親要素を基準の配置*/
+    bottom: 0;
     right: 0;
     width: 24px;
     height: 24px;
     border: none;
     border-radius: 50%;
-    background-color:#575757;
+    background-color: #575757;
     color: #fff;
     cursor: pointer;
 }
 
 /*プロフィールその他のアイテム*/
-.profile-others{
+.profile-others {
     margin-left: 20px;
 }
 
 /*色の選択*/
-.select-color{
+.select-color {
     display: flex;
     gap: 5px;
     margin-top: 10px;
-    justify-content:center;
+    justify-content: center;
 }
 
 /*色を選択するボタン全部に対して*/
-.color-btn{
+.color-btn {
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -70,28 +77,34 @@ body{
     border: 1px solid #ccc;
 }
 
-/* 選択された色ボタンに外枠をつける */
-.color-btn.selected {
-    border: 2px solid #ccc;
+/*色ボタンそれぞれの設定*/
+.color-btn.white {
+    background-color: snow;
 }
 
-/*色ボタンそれぞれの設定*/
-.color-btn.white{background-color: snow;}
-.color-btn.black{background-color: #333;}
-.color-btn.natural{background-color: wheat;}
+.color-btn.black {
+    background-color: #333;
+}
+
+.color-btn.natural {
+    background-color: wheat;
+}
+
 
 /*一覧表示選択ボタン*/
-.tab-list{
+.tab-list {
     display: flex;
-    justify-content: space-around;    /*コンテンツを均等に並べる*/
+    justify-content: space-around;
+    /*コンテンツを均等に並べる*/
     background-color: #fff;
-    border-top: 2px solid #ccc;     /*上と下にボーダーを引く*/
+    border-top: 2px solid #ccc;
+    /*上と下にボーダーを引く*/
     border-bottom: 2px solid #ccc;
     padding: 10px 0;
 }
 
 /*一覧アイコンボタンの設定*/
-.tab{
+.tab {
     background: none;
     border: none;
     font-size: 18px;
@@ -111,42 +124,70 @@ body{
 
 
 /*選択されているボタンに下線*/
-.active.tab{
+.active.tab {
     border-bottom: 2px solid rgb(154, 135, 93);
 }
 
 /* 全ての一覧対して画像のサイズを一定に保つ */
 .item-grid img {
-    width: 150px; /* 固定した幅を指定 */
-    height: 80px; /* 固定した高さを指定 */
-    object-fit: cover; /* 画像を切り取ってコンテナにフィットさせる */
-    border-radius: 8px; /* 角を丸くする（オプション） */
+    width: 150px;
+    /* 固定した幅を指定 */
+    height: 80px;
+    /* 固定した高さを指定 */
+    object-fit: cover;
+    /* 画像を切り取ってコンテナにフィットさせる */
+    border-radius: 8px;
+    /* 角を丸くする（オプション） */
 }
 
 /*洋服・収納一覧全体に対して*/
-#youhuku-grid,#closet-grid{
-    display: grid;  /*グリッドレイアウトにする*/
-    grid-template-columns: repeat(4,1fr);   /*4列ずつ1frの間隔をあけて表示*/
-    gap:10px;
+#youhuku-grid,
+#closet-grid {
+    display: grid;
+    /*グリッドレイアウトにする*/
+    grid-template-columns: repeat(4, 1fr);
+    /*4列ずつ1frの間隔をあけて表示*/
+    gap: 10px;
     padding: 20px;
-    background-color:#ddd;
+    background-color: #ddd;
 }
 
 /*アイテム一つ一つに対して*/
-.youhuku-item,.closet-item{
+.youhuku-item,
+.closet-item {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
     background-color: #fff;
-    border: 1px solid #ccc; /*枠線*/
-    border-radius: 10px;    /*角丸*/
+    border: 1px solid #ccc;
+    /*枠線*/
+    border-radius: 10px;
+    /*角丸*/
 }
 
 /*洋服・収納のアイテム画像の大きさ*/
-.youhuku-item img,.closet-item img{
-    max-width: 90%;    /*画像の幅を調整*/
-    max-height: 90%;   /*画像の高さを調整*/
-    object-fit: contain;    /*画像の比率を保持*/
+.youhuku-item img,
+.closet-item img {
+    max-width: 90%;
+    /*画像の幅を調整*/
+    max-height: 90%;
+    /*画像の高さを調整*/
+    object-fit: contain;
+    /*画像の比率を保持*/
+}
+
+
+/* 画面の色（モード）を反映 */
+.white {
+    background-color: #f0f0f0;
+}
+
+.black {
+    background-color: #333;
+}
+
+.natural {
+    background-color: wheat;
 }
