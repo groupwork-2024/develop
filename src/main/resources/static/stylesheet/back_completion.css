@@ -13,7 +13,7 @@ body, html {
   justify-content: space-between; /* 子要素を左右の端に配置 */
   align-items: center; /* 子要素を垂直中央に配置 */
   padding: 10px 20px;
-  background-color: #f0f0f0;
+  background-color: #e7e5e3;
   border-bottom: 1px solid #ccc;
   text-decoration: none; /* 下線を消す */
 }
@@ -26,7 +26,7 @@ body, html {
   border: none;
   background: none;
   cursor: pointer;
-  color: darkblue; /* ボタンの色 */
+  color: #526d98; /* ボタンの色 */
   text-decoration: none; /* 下線を消す */
 }
 
@@ -36,7 +36,7 @@ body, html {
   border: none;
   background: none; /* ボタン背景を消去 */
   cursor: pointer;
-  color: darkblue; /* アイコンの色 */
+  color: #526d98; /* アイコンの色 */
 }
 
 .left-button, .right_area:hover {
@@ -54,7 +54,7 @@ body, html {
   flex-basis: 100%;
   text-decoration: none; /* ホバー時に下線を消す */
   text-align:center;
-  background: #eee;
+  background: #e7e5e3;
   border-radius: 3px;
   position: relative;
   display: flex;
@@ -104,11 +104,11 @@ body, html {
 /* 画面の色（モード）を反映 */
 /* whiteモード */
 .header.white { /*ヘッダー背景色*/
-  background-color: #f0f0f0;
+  background-color: #e7e5e3;
 }
 .title-button.white,.left-button.white,.right-button.white
 {   /*ヘッダーボタン色*/
-  color: darkblue;
+  color: #526d98;
 }
 body.white{  /*背景色*/
   background-color: white;
@@ -125,7 +125,6 @@ body.white{  /*背景色*/
 body.black{  /*背景色*/
   background-color: white;
 }
-
 
 /* naturalモード */
 .header.natural {   /*ヘッダー背景色*/

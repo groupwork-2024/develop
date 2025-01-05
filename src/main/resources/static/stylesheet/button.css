@@ -41,3 +41,23 @@ html {
   box-shadow: 0 7px 10px rgb(0 0 0 / 15%); /* 影の強さを強くして、ボタンが浮き上がった感じにする */
   transition: transform .3s, box-shadow .3s;
 }/*ボタン終了*/
+
+
+/* 画面の色（モード）を反映 */
+/* whiteモード */
+.white.button{  /*ボタン（登録・一覧）の色*/
+  background-color: #f0f0f0;
+  color: darkblue;
+}
+
+/* blackモード */
+.black.button{  /*ボタン（登録・一覧）の色*/
+  background-color: #555;
+  color: white;
+}
+
+/* naturalモード */
+.natural.button{  /*ボタン（登録・一覧）の色*/
+  background-color: wheat;
+  color: saddlebrown;
+}

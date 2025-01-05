@@ -3,7 +3,7 @@
 // 失敗時にはエラー処理関数(showError)を呼び出す。
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(showPosition, showError);
-} 
+}
 else {
   // Geolocation APIがサポートされていない場合に警告を表示
   alert("Geolocation APIがサポートされていない");
@@ -82,11 +82,9 @@ function getWeatherIcon(code) {
 }
 
 //カルーセル
-//カルーセル
-//カルーセル
 // 変数の初期化
 let currentSlideIndex = 0;  // スライドのインデックス
-const slideInterval=5000;   //5秒間隔
+const slideInterval = 5000;   //5秒間隔
 
 // カルーセル
 function moveSlide(step) {
@@ -98,10 +96,10 @@ function moveSlide(step) {
 
   // インデックスが範囲外にならないように調整
   if (currentSlideIndex < 0) {
-      currentSlideIndex = totalSlides - 1;
-  } 
+    currentSlideIndex = totalSlides - 1;
+  }
   else if (currentSlideIndex >= totalSlides) {
-      currentSlideIndex = 0;
+    currentSlideIndex = 0;
   }
 
   // スライドを動かす
@@ -116,7 +114,7 @@ document.querySelector('.next').addEventListener('click', (event) => moveSlide(0
 // 初期設定で最初のスライドを表示
 document.addEventListener("DOMContentLoaded", () => {
   moveSlide(0); // 最初のスライドを表示
-  
+
   // 自動的にスライドを進める
   setInterval(() => {
     moveSlide(1);  // 次のスライドに進む
@@ -140,43 +138,43 @@ function displaySearchHistory() {
   historyContainer.innerHTML = "";
 
   searchHistory.forEach((historyItem) => {
-      const listItem = document.createElement("li");
-      listItem.textContent = historyItem;
-      listItem.classList.add("dropdown-item");
+    const listItem = document.createElement("li");
+    listItem.textContent = historyItem;
+    listItem.classList.add("dropdown-item");
 
-      // クリック時に入力欄に履歴をセット
-      listItem.addEventListener("click", function() {
-          document.getElementById("searchInput").value = historyItem;
-          document.getElementById("dropdown").style.display = "none"; // プルダウンを非表示
-      });
+    // クリック時に入力欄に履歴をセット
+    listItem.addEventListener("click", function () {
+      document.getElementById("searchInput").value = historyItem;
+      document.getElementById("dropdown").style.display = "none"; // プルダウンを非表示
+    });
 
-      historyContainer.appendChild(listItem);
+    historyContainer.appendChild(listItem);
   });
 
   // 履歴が存在しない場合は非表示
   if (searchHistory.length > 0) {
-      document.getElementById("dropdown").style.display = "block";
+    document.getElementById("dropdown").style.display = "block";
   } else {
-      document.getElementById("dropdown").style.display = "none";
+    document.getElementById("dropdown").style.display = "none";
   }
 }
 
 // 検索履歴の追加と更新
-document.getElementById("searchInput").addEventListener("input", function() {
+document.getElementById("searchInput").addEventListener("input", function () {
   const query = document.getElementById("searchInput").value.trim();
 
   if (query !== "") {
-      // 既存の履歴を取得
-      let searchHistory = getSearchHistory();
+    // 既存の履歴を取得
+    let searchHistory = getSearchHistory();
 
-      // 履歴が既に存在しない場合は新しい履歴を追加
-      if (!searchHistory.includes(query)) {
-          searchHistory.unshift(query); // 新しい履歴を先頭に追加
-          if (searchHistory.length > 5) {
-              searchHistory.pop(); // 5件以上の履歴は削除
-          }
-          localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+    // 履歴が既に存在しない場合は新しい履歴を追加
+    if (!searchHistory.includes(query)) {
+      searchHistory.unshift(query); // 新しい履歴を先頭に追加
+      if (searchHistory.length > 5) {
+        searchHistory.pop(); // 5件以上の履歴は削除
       }
+      localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+    }
   }
 
   // プルダウンに履歴を表示
@@ -184,19 +182,19 @@ document.getElementById("searchInput").addEventListener("input", function() {
 });
 
 // ページ読み込み時に履歴を表示しないようにする
-window.onload = function() {
+window.onload = function () {
   document.getElementById("dropdown").style.display = "none"; // ページ読み込み時にプルダウンを非表示にする
 };
 
 // 検索欄をクリックしたときにプルダウンを表示/非表示
-document.getElementById("searchInput").addEventListener("click", function(event) {
+document.getElementById("searchInput").addEventListener("click", function (event) {
   const dropdown = document.getElementById("dropdown");
-  
+
   // 既に表示されていれば非表示にし、非表示であれば表示
   if (dropdown.style.display === "block") {
-      dropdown.style.display = "none";
+    dropdown.style.display = "none";
   } else {
-      dropdown.style.display = "block";
+    dropdown.style.display = "block";
   }
 
   // イベントの伝播を停止して、他のクリックイベントが発生しないようにする
@@ -204,12 +202,33 @@ document.getElementById("searchInput").addEventListener("click", function(event)
 });
 
 // ページ上の他の部分をクリックしたらプルダウンが閉じる
-document.addEventListener("click", function(event) {
+document.addEventListener("click", function (event) {
   const searchInput = document.getElementById("searchInput");
   const dropdown = document.getElementById("dropdown");
 
   // クリックした場所が検索欄またはその内部であれば、プルダウンを表示し続ける
   if (!searchInput.contains(event.target) && !dropdown.contains(event.target)) {
-      dropdown.style.display = "none";
+    dropdown.style.display = "none";
   }
 });
+
+
+//画面の色（モード）を反映
+// 保存されたクラス名を取得してMypageに適用
+var savedClass = localStorage.getItem('colorClass');
+if (savedClass) {
+  //ログ
+  console.log('クラス取得できたよ', savedClass);
+
+  //ラベルに適用
+  const label = document.getElementById('label');
+  label.classList.add(savedClass);
+  //ボタンに適用（登録・一覧）
+  const buttons = document.querySelectorAll('.button');
+  buttons.forEach(button => {
+    button.classList.add(savedClass);
+  });
+  //検索バー
+  const search = document.querySelector('.search-container');
+  search.classList.add(savedClass);
+}

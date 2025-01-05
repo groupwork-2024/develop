@@ -38,7 +38,7 @@ function back(){
 
 //画面の色（モード）を反映
 // 保存されたクラス名を取得してMypageに適用
-const savedClass = localStorage.getItem('colorClass');
+var savedClass = localStorage.getItem('colorClass');
 if (savedClass) {
   //ログ
   console.log('クラス取得できたよ', savedClass);
