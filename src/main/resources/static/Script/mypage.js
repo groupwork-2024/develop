@@ -194,16 +194,3 @@ strageArray.forEach((strage)=>{
   // 最後にstragesListContainerにlinkElement を追加
   stragesListContainer.appendChild(linkElement);
 });
-
-
-//画面の色（モード）を反映
-// 保存されたクラス名を取得してMypageに適用
-const savedClass = localStorage.getItem('colorClass');
-if (savedClass) {
-  //ログ
-  console.log('クラス取得できたよ', savedClass);
-  //ヘッダーに適用
-  const header = document.querySelector('.header');
-  header.classList.add(savedClass);
-  console.log('ヘッダーの色：', savedClass);
-}

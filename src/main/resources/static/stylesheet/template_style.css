@@ -92,3 +92,34 @@ body, html {
   text-align: center;
 }
 
+
+/* 画面の色（モード）を反映 */
+/* whiteモード */
+.header.white { /*ヘッダー背景色*/
+  background-color: #f0f0f0;
+}
+
+.title-button.white,.left-button.white,.right-button.white
+{   /*ヘッダーボタン色*/
+  color: darkblue;
+}
+
+
+/* blackモード */
+.header.black {/*ヘッダー背景色*/
+  background-color: #333;
+}
+.title-button.black,.left-button.black,.right-button.black
+{   /*ヘッダーボタン色*/
+  color:#fff;
+}
+
+
+/* naturalモード */
+.header.natural {   /*ヘッダー背景色*/
+  background-color: wheat;
+}
+.title-button.natural,.left-button.natural,.right-button.natural
+{   /*ヘッダーボタン色*/
+  color:saddlebrown;
+}

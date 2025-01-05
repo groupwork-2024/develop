@@ -177,17 +177,3 @@ body {
     object-fit: contain;
     /*画像の比率を保持*/
 }
-
-
-/* 画面の色（モード）を反映 */
-.white {
-    background-color: #f0f0f0;
-}
-
-.black {
-    background-color: #333;
-}
-
-.natural {
-    background-color: wheat;
-}
