@@ -37,8 +37,12 @@
 
 /* 洋服の写真のレイアウト */
 .clothes_img img{
-  min-width: 190px;
-  min-height: 190px;
+  min-width: 225px;
+  min-height: 225px;
+  width: 225px;
+  height: 225px
+  max-width:225px;
+  max-height:225px;
   object-fit:cover;
 }
 
