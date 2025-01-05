@@ -11,6 +11,7 @@
     <link rel="stylesheet" th:href="@{/stylesheet/back_completion.css}">
     <link rel="stylesheet" th:href="@{/stylesheet/list.css}">
     <link rel="stylesheet" th:href="@{/stylesheet/search.css}">
+    <link rel="stylesheet" th:href="@{/stylesheet/index_tag.css}">
     <link rel="stylesheet" th:href="@{/stylesheet/template_style.css}">
 </head>
 <body>
@@ -37,10 +38,10 @@
         </div>
     </div>
     <div class="cp_ipselect06"> <!--セレクトボックス-->
-        <select class="cp_sl06" required>
-            <option value="1" selected>洋服　　</option>
-            <option value="2">収納　　</option>
-            <option value="3">タグ　　</option>
+        <select class="cp_sl06" id="categorySelect" required>
+            <option value="clothes" selected>洋服</option>
+            <option value="storage">収納</option>
+            <option value="tags">タグ</option>
         </select>
         <span class="cp_sl06_selectbar"></span>
     </div>
@@ -49,12 +50,23 @@
         <span class="material-icons">swap_vert</span>
     </div>
 </div>
-<div class="main-content" id="itemsList">
-    <!--アイテムがここに表示-->
+<input type="hidden" id="userId" th:value="${userId}">
+<div id="itemsList" class="main-content">
+    <!-- 動的に更新される -->
+    <div th:if="${category == 'clothes'}" >
+        <div th:each="item : ${items}"class="clothse_button">
+            <figure class="clothes_img">
+                <img th:src="${item.imageUrl}" alt="画像">
+            <div class="detail">
+                <h3 th:text="${item.name}">アイテム名</h3>
+                <p th:text="'ブランド: ' + ${item.brandName}">ブランド</p>
+            </div>
+        </div>
+        </figure>
+    </div>
 </div>
 
 <script th:src="@{/Script/templete_script.js}"></script>
-<script th:src="@{/Script/storage_list.js}"></script>
-<script th:src="@{/Script/searhc.js}"></script>
+<script th:src="@{/For-backend-verification/searhc.js}"></script>
 </body>
 </html>

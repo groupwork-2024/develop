@@ -34,10 +34,6 @@ public class Clothes {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Lob
-    @Column(name = "image_data", columnDefinition = "LONGBLOB")
-    private byte[] imageData;
-
     @Column(name = "image_url", length = 255)
     private String imageUrl;
 
