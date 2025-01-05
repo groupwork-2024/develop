@@ -21,9 +21,9 @@
     <!-- メインコンテンツエリア -->
     <div class="main-content">
         <form onsubmit="return false;" id="syunouForm">
-            <label for="name">名前</label>
+            <label for="name">収納袋の名前</label>
             <div class="input-container">
-                <input type="text" id="name" name="name">
+                <input type="text" id="name" name="name" placeholder="例:季節物 冬物">
                 <button type="button" class="info-button" id="infoButton">
                     <span class="material-icons">
                         help_outline
@@ -50,7 +50,7 @@
             <!--メモ-->
             <label for="memo">メモ</label>
             <div class='input-container'>
-                <textarea id="memo" name="memo" rows="1" cols="50" maxlength="150" placeholder="例:寝室 子供部屋"></textarea>
+                <textarea id="memo" name="memo" rows="1" cols="50" maxlength="150" placeholder="例:自由記載"></textarea>
                 <button type="button" class="info-button" id="StorageBoxMemo">
                     <span class="material-icons">
                         help_outline

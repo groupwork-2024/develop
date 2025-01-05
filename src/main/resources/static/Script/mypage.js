@@ -14,56 +14,36 @@ function iconImage(event) {
 
 
 // カラーボタンがクリックされたときのイベント
-document.querySelectorAll('.color-btn').forEach(button => {
-button.addEventListener('click', event => {
-    // すべてのカラーボタンからselectedクラスを削除
-    document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('selected'));
-    
-    // クリックされたボタンにselectedクラスを追加
-    const selectedColor = event.target.getAttribute('data-color');
-    event.target.classList.add('selected'); // クリックしたボタンに選択状態を追加
+// クラス名をlocalStorageに保存
+function saveClassToLocalStorage(event) {
+  // クリックされたボタン要素を取得
+  const target = event.target;
+  // data-color属性の値を取得
+  const selectedColor = target.getAttribute('data-color');
+  // 値を確認 (デバッグ用)
+  console.log('選択されたモード：', selectedColor);
+  
+  //追加したいクラス名を入れるclassName
+  let className='';
 
-    // モードに応じた処理
-    switch (selectedColor) {
-      case 'white':
-        //ヘッダーの色
-        document.querySelectorAll('.header').forEach(header => {
-            header.style.backgroundColor = '#f0f0f0'; 
-        });
-        //ヘッダーの文字色
-        document.querySelectorAll('.header a,.header button').forEach(header1 => {
-          header1.style.color = 'darkblue'; 
-        });
-        break;
-
-      case 'black':
-        //ヘッダーの色
-        document.querySelectorAll('.header').forEach(header => {
-            header.style.backgroundColor = '#333'; 
-        });
-        //ヘッダーの文字色
-        document.querySelectorAll('.header a,.header button').forEach(header1 => {
-          header1.style.color = 'white'; 
-        });
-        break;
-
-      case 'natural':
-        //ヘッダーの色
-        document.querySelectorAll('.header').forEach(header => {
-            header.style.backgroundColor = '#f5deb3';
-        });
-        //ヘッダーの文字色
-        document.querySelectorAll('.header a,.header button').forEach(header1 => {
-          header1.style.color = '#8b4513'; 
-        });
-        break;
-
-      default:
-        break;
+  switch(selectedColor){
+    case 'white':
+      className = 'white'; // 追加したいクラス名
+      break;
+    case 'black':
+      className = 'black'; // 追加したいクラス名
+      break;
+    case 'natural':
+      className = 'natural'; // 追加したいクラス名
+      break;  
     }
-});
-});
 
+  // クラス名をlocalStorageに保存
+  localStorage.setItem('colorClass', className);
+  
+  // ページをリロードして、すぐに反映させる
+  location.reload();  // ページをリロード
+}
 
 
 // 一覧初期状態の設定
@@ -73,7 +53,6 @@ window.addEventListener('DOMContentLoaded', () => {
     //洋服一覧のみを表示する
     document.getElementById('youhuku-grid').style.display = 'grid';
   });
-  
 
 // タブ切り替え（クリックイベント）
 document.querySelectorAll('.tab').forEach(tab => {
@@ -216,3 +195,15 @@ strageArray.forEach((strage)=>{
   stragesListContainer.appendChild(linkElement);
 });
 
+
+//画面の色（モード）を反映
+// 保存されたクラス名を取得してMypageに適用
+const savedClass = localStorage.getItem('colorClass');
+if (savedClass) {
+  //ログ
+  console.log('クラス取得できたよ', savedClass);
+  //ヘッダーに適用
+  const header = document.querySelector('.header');
+  header.classList.add(savedClass);
+  console.log('ヘッダーの色：', savedClass);
+}

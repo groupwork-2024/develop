@@ -212,3 +212,17 @@ background-color: #f0f0f0;
   box-shadow: 0 7px 10px rgb(0 0 0 / 15%); /* 影の強さを強くして、ボタンが浮き上がった感じにする */
   transition: transform .3s, box-shadow .3s;
 }/*ボタン終了*/
+
+
+/* 画面の色（モード）を反映 */
+.white {
+  background-color: #f0f0f0;
+}
+
+.black {
+  background-color: #333;
+}
+
+.natural {
+  background-color: wheat;
+}

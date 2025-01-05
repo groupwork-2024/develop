@@ -11,38 +11,10 @@
   justify-content: center;
 }
 
-/* ○○一覧のスタイル */
-.list_name{
-  /*線の種類（二重線）太さ 色*/
-  display: flex;
-  flex-basis: 20%;
-  text-align: center;
-  justify-content: center;
-  white-space: nowrap;
-  font-size: 20px;
-  margin: 0% 3%;
-  padding: 1% 2%;
-  border-bottom: double 5px #FFC778;
-}
-
-/* ヘッダー部分 */
-.list_header{
-  display: flex;
-  flex-basis: 100%;
-  align-items: flex-end;
-  justify-items: center;
-  text-align: center;
-  padding-top: 2%;
-}
-
 /* 洋服の写真のレイアウト */
 .clothes_img img{
-  min-width: 225px;
-  min-height: 225px;
-  width: 225px;
-  height: 225px
-  max-width:225px;
-  max-height:225px;
+  min-width: 190px;
+  min-height: 190px;
   object-fit:cover;
 }
 
@@ -115,7 +87,7 @@
 .tags{
   display: flex;
   flex-wrap: wrap;
-  gap: 3%;
+  gap: 4%;
   margin-top: 0;
 }
 
@@ -155,4 +127,45 @@ a.tag{
   border-top: 20px solid transparent;   /* 上の辺 */
   border-bottom: 20px solid transparent;/* 下の辺 */
   border-right: 15px solid #4CAF50 ; /* 矢印の色をここで変更 */
+}
+
+/* クローゼットの写真表示部分 */
+.storage_img img{
+  width: 200px;
+  height: 200px;
+  object-fit:contain;
+  border: 2px solid #dadada;
+  border-radius: 8px;
+}
+
+/* クローゼットの表示部分全体 */
+.list_header{
+  display: flex;
+  flex-direction:row;
+  margin: 2%;
+}
+
+/* 写真以外の詳細画面 */
+.container{
+  display: flex;
+  height: 200px;
+  flex-direction: column;
+  flex-basis: 100%;
+  padding-top: 2%;
+  color: #1e1e1e;
+}
+
+/* 削除やソートのアイコン */
+.icons{
+  display: flex;
+  margin-top: 140px;
+  color: #373737;
+}
+
+/* 名前の表示部分 */
+.heder{
+  width: 80%;
+  margin-top: 5%;
+  border-bottom: 2px solid #4a4a4a;
+  white-space: nowrap;
 }
