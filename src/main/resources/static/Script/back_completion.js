@@ -13,4 +13,8 @@ if (savedClass) {
     headerbtns.forEach(button => {
         button.classList.add(savedClass);  // 各ボタンにクラスを追加
     });
+    //背景の色変更
+    const body = document.querySelector('body');
+    body.classList.add(savedClass);
+
 }

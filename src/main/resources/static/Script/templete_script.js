@@ -49,6 +49,9 @@ if (savedClass) {
   //ヘッダーに文字適用
   const headerbtns = document.querySelectorAll('.title-button,.left-button,.right-button');
   headerbtns.forEach(button => {
-    button.classList.add(savedClass);  // 各ボタンにクラスを追加
+  button.classList.add(savedClass);  // 各ボタンにクラスを追加
   });
+  //背景の色変更
+  const body = document.querySelector('body');
+  body.classList.add(savedClass);
 }

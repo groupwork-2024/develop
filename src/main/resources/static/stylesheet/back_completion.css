@@ -106,12 +106,13 @@ body, html {
 .header.white { /*ヘッダー背景色*/
   background-color: #f0f0f0;
 }
-
 .title-button.white,.left-button.white,.right-button.white
 {   /*ヘッダーボタン色*/
   color: darkblue;
 }
-
+body.white{  /*背景色*/
+  background-color: white;
+}
 
 /* blackモード */
 .header.black {/*ヘッダー背景色*/
@@ -120,6 +121,9 @@ body, html {
 .title-button.black,.left-button.black,.right-button.black
 {   /*ヘッダーボタン色*/
   color:#fff;
+}
+body.black{  /*背景色*/
+  background-color: white;
 }
 
 
@@ -130,4 +134,7 @@ body, html {
 .title-button.natural,.left-button.natural,.right-button.natural
 {   /*ヘッダーボタン色*/
   color:saddlebrown;
+}
+body.natural{  /*背景色*/
+  background-color: snow;
 }
