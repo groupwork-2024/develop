@@ -8,6 +8,9 @@ import com.example.demo.damain.service.ClothesService;
 import com.example.demo.damain.service.S3StorageService;
 import com.example.demo.damain.service.StorageService;
 import com.example.demo.damain.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +18,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -49,17 +55,22 @@ public class RegisterController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value="/clothes")
-    public ResponseEntity<Void> addClothes(@PathVariable Long userId,
-                                           @RequestBody Clothes clothes,
-                                           Model model){
-        User user = userService.findById(userId);
-        clothes.setUser(user);
+    public ResponseEntity<Clothes> registerClothes(
+            @PathVariable Long userId,
+            @RequestParam("name") String name,
+            @RequestParam("brandName") String brandName,
+            @RequestParam("storageId") Long storageId,
+            @RequestParam("description") String description,
+            @RequestParam(value = "image", required = false) MultipartFile image,
+            @RequestParam("tags") String tagsJson
+    ) throws IOException {
+        // タグのデータをJSONからリストに変換
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<Tag> tags = objectMapper.readValue(tagsJson, new TypeReference<List<Tag>>() {});
 
-        clothesService.saveClothes(clothes);
-        return ResponseEntity.ok().build();
-
-
-
+        // 登録処理
+        Clothes registeredClothes = clothesService.registerClothes(userId, name, brandName, storageId, description, image, tags);
+        return ResponseEntity.ok(registeredClothes);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/storages")

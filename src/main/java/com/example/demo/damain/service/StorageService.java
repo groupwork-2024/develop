@@ -132,4 +132,9 @@ public class StorageService {
         dresserStorage.setDrawerCount(drawerCount);
         saveDresserStorage(dresserStorage);
     }
+
+    public Storage findById(Long storageId) {
+        return storageRepository.findById(storageId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+    }
 }
