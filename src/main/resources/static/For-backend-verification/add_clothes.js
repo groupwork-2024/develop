@@ -21,6 +21,7 @@ const addColorBtn = document.getElementById('addColorBtn');
 const colorPickerContainer = document.getElementById('colorPickerContainer');
 const addSelectedColorBtn = document.getElementById('addSelectedColorBtn');
 const colorDisplayArea = document.getElementById('colorDisplayArea');
+const userId = document.getElementById('userId').value;
 
 // タグの選択
 let selectedTag = null;
@@ -244,30 +245,49 @@ let tags = [
 ];
 
 // タグ登録ボタン
-addTagButton.addEventListener('click', (event) => {
-    event.preventDefault();  // フォーム送信のデフォルト動作を防止
-    event.stopPropagation();  // イベントの伝播を止める
+addTagButton.addEventListener('click', async (event) => {
+    event.preventDefault();
 
-    const tagName = tagInput.value.trim();
-    const finalColor = selectedColor || '';
+    const tagName = tagInput.value.trim(); // タグ名を取得
+    const tagColor = selectedColor; // 選択された色を取得
 
-    if (tagName && selectedColor) {
-        console.log(`タグ名: ${tagName}, 色: ${selectedColor}`);
-        // タグを配列に追加
-        tags.push({ name: tagName, color: finalColor });
+    if (!tagName || !tagColor) {
+        alert('タグ名と色を入力してください。');
+        return;
+    }
 
-        // 新しいタグを画面に追加
-        addTagToList(tagName, finalColor);
+    try {
+        // タグ情報をサーバーに送信
+        const response = await fetch(`/tags/${userId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: tagName, color: tagColor }),
+        });
 
-        //タグ名とカラーのリセット
-        resetTagInput();
+        if (response.ok) {
+            const result = await response.json(); // サーバーからのレスポンス
+            console.log('タグ登録成功:', result);
 
-        // モーダルを閉じる
-        closeModal('tagmodal');
-    } else {
-        alert('タグ名と色を選んでください');
+            // 登録完了後、フロントエンドを更新
+            addTagToList(result.name, result.color);
+
+            // 入力フィールドをリセット
+            resetTagInput();
+
+            // モーダルを閉じる
+            closeModal('tagmodal');
+        } else {
+            const error = await response.json();
+            alert(`タグ登録失敗: ${error.message}`);
+        }
+    } catch (err) {
+        console.error('エラーが発生しました:', err);
+        alert('タグ登録中にエラーが発生しました。');
     }
 });
+
 
 // 色表示エリアを更新
 function updateColorDisplay() {
