@@ -26,6 +26,10 @@ const userId = document.getElementById('userId').value;
 // タグの選択
 let selectedTag = null;
 
+document.addEventListener('DOMContentLoaded', () => {
+    fetchTags(); // タグを取得して表示
+});
+
 // モーダルを開く共通
 function openModal(modalId, reviewButton) {
     const modal = document.getElementById(modalId);
@@ -47,7 +51,7 @@ function closeModal(modalId, reviewButton) {
 // タグ一覧モーダルを開く
 openModalButton.addEventListener('click', function() {
     openModal('tagListmodal', false);  // 完了ボタンを無効化
-    displayTagList();  // タグ一覧を表示
+    displayTagList(tags);  // タグ一覧を表示
 });
 
 // タグ一覧モーダルを閉じる
@@ -61,27 +65,49 @@ window.addEventListener('click', function(event) {
         closeModal('tagListmodal');  // 完了ボタンを有効化
     }
 });
+//tag一覧を取得
+async function fetchTags() {
+    try {
+        const response = await fetch(`/tags/${userId}`);
+        if (!response.ok) {
+            throw new Error('タグの取得に失敗しました');
+        }
+        const tags = await response.json(); // サーバーからのレスポンス
+        displayTagList(tags); // データを渡して描画
+    } catch (error) {
+        console.error('タグ取得エラー:', error);
+        alert('タグを取得できませんでした');
+    }
+}
 
 //タグ一覧を表示する
-function displayTagList(){
-    const tagListDisplay = document.getElementById('tagListDisplay');
-    tagListDisplay.innerHTML = ''; // 一度リセット
+function displayTagList(tags) {
+    console.log('tags:', tags); // デバッグ用
+    if (!tags || !Array.isArray(tags)) {
+        console.error('tagsが正しくありません:', tags);
+        return;
+    }
+    try {
+        const tagListDisplay = document.getElementById('tagListDisplay');
+        tagListDisplay.innerHTML = '';
 
-    // 既存のタグを表示
-    tags.forEach(tag => {
-        const tagElement = document.createElement('div');
-        tagElement.textContent = tag.name;
-        tagElement.style.backgroundColor = tag.color;
-        tagElement.classList.add('tag');
+        tags.forEach(tag => {
+            const tagElement = document.createElement('div');
+            tagElement.textContent = tag.name;
+            tagElement.style.backgroundColor = tag.color;
+            tagElement.classList.add('tag');
 
-        // クリックで選択
-        tagElement.addEventListener('click', () => {
-            selectTag(tagElement, tag);  // タグを選択
+            tagElement.addEventListener('click', () => {
+                selectTag(tagElement, tag);
+            });
+
+            tagListDisplay.appendChild(tagElement);
         });
-
-        tagListDisplay.appendChild(tagElement);
-    });
+    } catch (error) {
+        console.error('タグの描画中にエラーが発生しました:', error);
+    }
 }
+
 
 // 現在選択されているタグ
 function selectTag(tagElement,tag) {
@@ -236,14 +262,6 @@ addSelectedColorBtn.addEventListener('click', () => {
     colorPickerContainer.style.display = 'none'; // カラーパレットを非表示にする
 });
 
-
-// タグを格納する配列を(仮)
-let tags = [
-    { name: '夏', color: '#ff6347' },
-    { name: '冬', color: '#00bfff' },
-    { name: 'ビジネス', color: '#90ee90' }
-];
-
 // タグ登録ボタン
 addTagButton.addEventListener('click', async (event) => {
     event.preventDefault();
@@ -256,36 +274,33 @@ addTagButton.addEventListener('click', async (event) => {
         return;
     }
 
-    try {
-        // タグ情報をサーバーに送信
-        const response = await fetch(`/tags/${userId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ name: tagName, color: tagColor }),
-        });
+try {
+    // タグ情報をサーバーに送信
+    const response = await fetch(`/tags/${userId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: tagName, color: tagColor }),
+    });
 
-        if (response.ok) {
-            const result = await response.json(); // サーバーからのレスポンス
-            console.log('タグ登録成功:', result);
+    if (response.ok) {
+        const result = await response.json(); // サーバーからのレスポンス
+        console.log('タグ登録成功:', result);
 
-            // 登録完了後、フロントエンドを更新
-            addTagToList(result.name, result.color);
 
-            // 入力フィールドをリセット
-            resetTagInput();
+                    closeModal('tagmodal');
 
-            // モーダルを閉じる
-            closeModal('tagmodal');
-        } else {
-            const error = await response.json();
-            alert(`タグ登録失敗: ${error.message}`);
-        }
-    } catch (err) {
-        console.error('エラーが発生しました:', err);
-        alert('タグ登録中にエラーが発生しました。');
+                    // 登録完了後、フロントエンドを更新する処理を追加
+                    addTagToList(tagName, tagColor);
+
+    } else {
+        const error = await response.json();
+        console.error('タグ登録失敗:', error);
     }
+} catch (error) {
+    console.error('タグ登録中にエラーが発生しました:', error);
+}
 });
 
 
@@ -355,11 +370,9 @@ document.getElementById('addImageButton').addEventListener('click', function() {
 // モーダル内に画像を表示
 function openReviewModal() {
     const name = document.getElementById('name').value;
-    const imageFile = document.getElementById('image').files[0];
+    const imageFile = document.getElementById('imagePreview');
     const brand = document.getElementById('brand').value;
-    const locationSelect = document.getElementById('location');
-    const locationText = locationSelect.options[locationSelect.selectedIndex].text;
-    const locationId = locationSelect.value;
+    const location = document.getElementById('location').value;
     const memo = document.getElementById('memo').value;
     const imagePreviewModal = document.getElementById('reviewImage');
     const tags = Array.from(labelDisplay.children).map(tag => {
@@ -368,51 +381,24 @@ function openReviewModal() {
             color: tag.style.backgroundColor  // 色も取得
         };
     });
+    const canvas = document.getElementById('imagePreview');
+    ImageContent = canvas.src;
+
+    // 入力欄に空白がないかチェック
+    if (name === "" || imageFile === "" || brand === "" || location === " " || memo === "" || tags.length===0) {
+        alert("すべての項目を入力してください");
+        return;  // 空欄があれば処理を中止
+        }
 
     // フォームの内容をモーダルに表示
-    document.getElementById('reviewName').innerHTML = `名前<br>${name}`;
-    document.getElementById('reviewBrand').innerHTML = `ブランド<br>${brand}`;
-    document.getElementById('reviewLocation').innerHTML = `収納場所<br>${locationText}`;
-    document.getElementById('reviewMemo').innerHTML = `メモ<br>${memo}`;
-
-    // formの値をjson化
-    const postClothesData = {
-        storage: locationId,
-        name: name,
-        brandName: brand,
-        description: memo,
-        imageData: imageFile
-    };
-
-    fetch(`/register/${userId}/clothes`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(postClothesData),
-    })
-    .then(response => {
-            if (response.ok) {
-             // 確認画面を非表示にする
-                reviewModal.style.display = 'none';
-
-                // 登録完了メッセージを表示
-                registerModal.style.display = 'flex';
-                alert('登録が完了しました');
-            } else {
-                alert('エラーが発生しました');
-            }
-        })
-    .catch(error => console.error('Error:', error));
+    document.getElementById('reviewName').innerHTML = `<a>名前</a><br>${name}`;
+    document.getElementById('reviewBrand').innerHTML = `<a>ブランド</a><br>${brand}`;
+    document.getElementById('reviewLocation').innerHTML = `<a>収納場所</a><br>${location}`;
+    document.getElementById('reviewMemo').innerHTML = `<a>メモ</a><br>${memo}`;
 
     // 画像の表示
-    if (imageFile) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            imagePreviewModal.innerHTML = `<img src="${e.target.result}" alt="画像" style="max-width: 100%; max-height: 200px;">`;
-        }
-        reader.readAsDataURL(imageFile);
-    } else {
-        imagePreviewModal.innerHTML = '画像なし';
-    }
+    imagePreviewModal.innerHTML = `<img src="${ImageContent}" alt="画像" style="max-width: 100%; max-height: 200px;">`;
+
 
     // タグの表示
     const reviewTagsContainer = document.getElementById('reviewTags');
@@ -475,18 +461,55 @@ function closeReviewModal() {
 
 //完了確認メッセージ関連
 // 登録データを登録後に完了メッセージを表示
-function registerData() {
-    const reviewModal = document.getElementById('reviewModal');
-    const registerModal = document.getElementById('registerModal');
+registerButton.addEventListener("click", async () => {
+const formData = new FormData();
+formData.append("name", document.getElementById("reviewName").textContent.replace("名前", "").trim());
+formData.append("brandName", document.getElementById("reviewBrand").textContent.replace("ブランド", "").trim());
+formData.append("description", document.getElementById("reviewMemo").textContent.replace("メモ", "").trim());
+formData.append("storageId", document.getElementById("location").value);
 
-    // 確認画面を非表示にする
-    reviewModal.style.display = 'none';
 
-    // 登録完了メッセージを表示
-    registerModal.style.display = 'flex';
+const tags = Array.from(document.querySelectorAll(".rvtag")).map(tag => ({
+    id: tag.dataset.id,
+    name: tag.textContent.trim()
+}));
+formData.append("tags", JSON.stringify(tags));
 
-    resetForm();
+const imgElement = document.querySelector("#reviewImage img");
+const imgResponse = await fetch(imgElement.src);
+if (imgResponse.ok) {
+    const imgBlob = await imgResponse.blob();
+    formData.append("image", imgBlob);
+} else {
+    console.error("画像の取得に失敗しました");
+    return;
 }
+console.log("User ID:", userId);
+try {
+    const response = await fetch(`/register/${userId}/clothes`, {
+        method: "POST",
+        body: formData,
+    });
+
+    if (response.ok) {
+        const result = await response.json();
+        console.log("服の登録成功:", result);
+        // 確認画面を非表示にする
+            reviewModal.style.display = 'none';
+
+            // 登録完了メッセージを表示
+            registerModal.style.display = 'flex';
+    } else {
+        const error = await response.json();
+        console.error("服の登録失敗:", error);
+    }
+} catch (error) {
+    console.error("登録中にエラーが発生:", error);
+}
+  resetForm();
+});
+
+
 
 // 「登録完了」メッセージを閉じて、次の画面に移動
 function closeRegisterModal() {

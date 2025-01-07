@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/tags/{userId}")
 public class TagController {
@@ -25,5 +27,11 @@ public class TagController {
         tagRequest.setUser(user);
         Tag newTag = tagService.createTag(tagRequest);
         return ResponseEntity.ok(newTag);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Tag>> getTagsByUserId(@PathVariable Long userId) {
+        List<Tag> tags = tagService.findAllTagByUserId(userId);
+        return ResponseEntity.ok(tags);
     }
 }

@@ -22,7 +22,6 @@ public class TagService {
         tag.setName(tagRequest.getName());
         tag.setUser(tagRequest.getUser());
         tag.setColor(tagRequest.getColor());
-        tag.setCreatedAt(LocalDateTime.now());
         return tagRepository.save(tag);
     }
 }

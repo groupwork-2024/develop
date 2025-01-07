@@ -1,11 +1,15 @@
 package com.example.demo.damain.service;
 
-import com.example.demo.damain.model.Clothes;
+import com.example.demo.damain.model.*;
 import com.example.demo.damain.repository.ClothesRepository;
+import com.example.demo.damain.repository.ClothesTagsRepository;
+import com.example.demo.damain.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
@@ -13,6 +17,23 @@ import java.util.List;
 public class ClothesService {
     @Autowired
     ClothesRepository clothesRepository;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    StorageService storageService;
+
+    @Autowired
+    ClothesTagsRepository clothesTagsRepository;
+
+    @Autowired
+    TagRepository tagRepository;
+
+    @Autowired
+    S3StorageService s3StorageService;
+
+
 
     // 服一覧参照
     public List<Clothes> findAllClothesByUserId(Long userId) {
@@ -22,7 +43,6 @@ public class ClothesService {
 
     public List<Clothes> getClothesSortedByCreateAtAsc(Long userId) {
         List<Clothes> clothesList = clothesRepository.findAllByUserIdOrderByCreatedAtAsc(userId);
-
         return clothesList;
     }
 
@@ -42,5 +62,40 @@ public class ClothesService {
     @Transactional
     public void saveClothes(Clothes clothes) {
         clothesRepository.save(clothes);
+    }
+
+    @Transactional
+    public Clothes registerClothes(Long userId, String name, String brandName, Long storageId, String description, MultipartFile image, List<Tag> tags) throws IOException {
+        // ユーザー情報を取得
+        User user = userService.findById(userId);
+
+        //収納情報を取得
+        Storage storage = storageService.findById(storageId);
+
+        // ファイルをS3にアップロード
+        String imageUrl = s3StorageService.uploadFile("clothes", image);
+
+        // Clothesエンティティを作成
+        Clothes clothes = new Clothes();
+        clothes.setUser(user);
+        clothes.setStorage(storage);
+        clothes.setName(name);
+        clothes.setBrandName(brandName);
+        clothes.setDescription(description);
+        clothes.setImageUrl(imageUrl);
+
+        Clothes savedClothes = clothesRepository.save(clothes);
+
+        // 中間テーブルに登録
+        for (Tag tag : tags) {
+            System.out.println("Processing tag: ID=" + tag.getId() + ", Name=" + tag.getName());
+            tag = tagRepository.findByName(tag.getName());
+            ClothesTag clothesTags = new ClothesTag();
+            clothesTags.setClothes(savedClothes);
+            clothesTags.setTag(tag);
+            clothesTagsRepository.save(clothesTags);
+        }
+
+        return savedClothes;
     }
 }
