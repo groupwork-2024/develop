@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "clothes")
@@ -39,6 +40,14 @@ public class Clothes {
 
     @Column(nullable = false)
     private Boolean favorite = false;
+
+    @ManyToMany
+    @JoinTable(
+            name = "clothes_tags",
+            joinColumns = @JoinColumn(name = "clothes_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private List<Tag> tags;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;

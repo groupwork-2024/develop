@@ -1,0 +1,68 @@
+<!-- タグごとに登録されているもの詳細画面 -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webアプリ画面</title>
+    <!-- google fonts,css等の読み込み -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/stylesheet/back_completion.css}">
+    <link rel="stylesheet" th:href="@{/For-backend-verification/detaile_tag.css}">
+</head>
+<body class="natural">
+
+<div class="header natural">
+    <!--戻るのところ-->
+    <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
+    <a th:href="@{/home/{userId}(userId=${userId})}" class="title-button">あれどこ？</a>
+    <a class="right_area">　</a>
+</div>
+
+<!-- メインコンテンツエリア -->
+<div class="list_header">
+    <a class="list_name" id="list_name" th:text="${tagName}" th:style="'border-bottom: double 5px ' + ${tagColor}"></a>
+    <!--ごみ箱、ソートアイコン-->
+    <a class="icons">
+    <span class="material-icons">swap_vert</span>
+    <span class="material-icons">delete</span>
+    </a>
+</div>
+
+<div class="main-content">
+    <!-- コンテンツをここに追加 -->
+    <div class="clothseListDisplay" id="clothseListDisplay">
+        <!-- 洋服リスト -->
+        <div th:each="clothes : ${clothesList}" class="clothse_button">
+            <!-- 画像と詳細情報 -->
+                <figure class="clothes_img">
+                    <img th:src="${clothes.imageUrl}" th:alt="${clothes.name}">
+                    <div class="detail">
+                        <strong>名前 </strong><span th:text="${clothes.name}"></span><br>
+                        <strong>場所 </strong><span th:text="${clothes.storage.name}"></span><br>
+                        <strong>タグ </strong><br>
+                        <div class="tags">
+                            <div th:each="tag : ${clothes.tags}" class="tag" th:style="'background-color: ' + ${tag.color}">
+                                <span th:text="${tag.name}"></span>
+                                <div class="arrow" th:style="'border-right-color: ' + ${tag.color}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </figure>
+
+            <!-- 詳細情報の非表示部分 -->
+            <div class="detail_en">
+                <strong>ブランド </strong><br><span th:text="${clothes.brandName}"></span><br>
+                <strong>メモ </strong><br><span th:text="${clothes.description}"></span><br>
+                <button class="delete_button" type="button">削除</button>
+                <a href=".html">編集</a>
+            </div>
+        </div>
+        </div>
+</div>
+
+<script th:src="@{/Script/templete_script.js}"></script>
+<script th:src="@{/For-backend-verification/detaile_tag.js}"></script>
+</body>
+</html>

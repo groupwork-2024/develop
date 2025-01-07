@@ -25,7 +25,7 @@
 <div class="main-content">
     <a class="button" th:href="@{/section/{userId}/clothes (userId=${userId})}">洋服</a>
     <a class="button" th:href="@{/section/{userId}/storages (userId=${userId})}">収納</a>
-    <a class="button" href="tagu_list.html">タグ</a>
+    <a class="button" th:href="@{/section/{userId}/tag (userId=${userId})}">タグ</a>
 </div>
 <script th:src="@{/Script/templete_script.js}"></script>
 </body>
