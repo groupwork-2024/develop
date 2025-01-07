@@ -24,4 +24,8 @@ public class TagService {
         tag.setColor(tagRequest.getColor());
         return tagRepository.save(tag);
     }
+
+    public Tag findById(Long tagId) {
+        return tagRepository.findById(tagId);
+    }
 }

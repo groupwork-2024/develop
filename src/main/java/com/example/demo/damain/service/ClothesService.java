@@ -30,6 +30,8 @@ public class ClothesService {
     @Autowired
     TagRepository tagRepository;
 
+
+
     @Autowired
     S3StorageService s3StorageService;
 
@@ -97,5 +99,9 @@ public class ClothesService {
         }
 
         return savedClothes;
+    }
+
+    public List<Clothes> findClothesByUserIdAndTagId(Long userId, Long tagId) {
+        return clothesTagsRepository.findClothesByUserIdAndTagIdWithAllTags(userId, tagId);
     }
 }
