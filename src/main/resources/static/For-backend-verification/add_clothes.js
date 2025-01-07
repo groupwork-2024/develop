@@ -370,11 +370,9 @@ document.getElementById('addImageButton').addEventListener('click', function() {
 // モーダル内に画像を表示
 function openReviewModal() {
     const name = document.getElementById('name').value;
-    const imageFile = document.getElementById('image').files[0];
+    const imageFile = document.getElementById('imagePreview');
     const brand = document.getElementById('brand').value;
-    const locationSelect = document.getElementById('location');
-    const locationText = locationSelect.options[locationSelect.selectedIndex].text;
-    const locationId = locationSelect.value;
+    const location = document.getElementById('location').value;
     const memo = document.getElementById('memo').value;
     const imagePreviewModal = document.getElementById('reviewImage');
     const tags = Array.from(labelDisplay.children).map(tag => {
@@ -383,51 +381,24 @@ function openReviewModal() {
             color: tag.style.backgroundColor  // 色も取得
         };
     });
+    const canvas = document.getElementById('imagePreview');
+    ImageContent = canvas.src;
+
+    // 入力欄に空白がないかチェック
+    if (name === "" || imageFile === "" || brand === "" || location === " " || memo === "" || tags.length===0) {
+        alert("すべての項目を入力してください");
+        return;  // 空欄があれば処理を中止
+        }
 
     // フォームの内容をモーダルに表示
-    document.getElementById('reviewName').innerHTML = `名前<br>${name}`;
-    document.getElementById('reviewBrand').innerHTML = `ブランド<br>${brand}`;
-    document.getElementById('reviewLocation').innerHTML = `収納場所<br>${locationText}`;
-    document.getElementById('reviewMemo').innerHTML = `メモ<br>${memo}`;
-
-    // formの値をjson化
-    const postClothesData = {
-        storage: locationId,
-        name: name,
-        brandName: brand,
-        description: memo,
-        imageData: imageFile
-    };
-
-    fetch(`/register/${userId}/clothes`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(postClothesData),
-    })
-    .then(response => {
-            if (response.ok) {
-             // 確認画面を非表示にする
-                reviewModal.style.display = 'none';
-
-                // 登録完了メッセージを表示
-                registerModal.style.display = 'flex';
-                alert('登録が完了しました');
-            } else {
-                alert('エラーが発生しました');
-            }
-        })
-    .catch(error => console.error('Error:', error));
+    document.getElementById('reviewName').innerHTML = `<a>名前</a><br>${name}`;
+    document.getElementById('reviewBrand').innerHTML = `<a>ブランド</a><br>${brand}`;
+    document.getElementById('reviewLocation').innerHTML = `<a>収納場所</a><br>${location}`;
+    document.getElementById('reviewMemo').innerHTML = `<a>メモ</a><br>${memo}`;
 
     // 画像の表示
-    if (imageFile) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            imagePreviewModal.innerHTML = `<img src="${e.target.result}" alt="画像" style="max-width: 100%; max-height: 200px;">`;
-        }
-        reader.readAsDataURL(imageFile);
-    } else {
-        imagePreviewModal.innerHTML = '画像なし';
-    }
+    imagePreviewModal.innerHTML = `<img src="${ImageContent}" alt="画像" style="max-width: 100%; max-height: 200px;">`;
+
 
     // タグの表示
     const reviewTagsContainer = document.getElementById('reviewTags');
@@ -491,63 +462,53 @@ function closeReviewModal() {
 //完了確認メッセージ関連
 // 登録データを登録後に完了メッセージを表示
 registerButton.addEventListener("click", async () => {
-    const userId = document.getElementById('userId').value;
-    const reviewModal = document.getElementById('reviewModal');
-    const registerModal = document.getElementById('registerModal');
-    const registerButton = document.getElementById("registerButton");
+const formData = new FormData();
+formData.append("name", document.getElementById("reviewName").textContent.replace("名前", "").trim());
+formData.append("brandName", document.getElementById("reviewBrand").textContent.replace("ブランド", "").trim());
+formData.append("description", document.getElementById("reviewMemo").textContent.replace("メモ", "").trim());
+formData.append("storageId", document.getElementById("location").value);
 
-    const formData = new FormData();
-    const name = document.getElementById("reviewName").textContent.trim();
-    const brandName = document.getElementById("reviewBrand").textContent.trim();
-    const storageId = document.getElementById("reviewLocation").value; // 収納ID
-    const description = document.getElementById("reviewMemo").textContent.trim();
-    const imgElement = document.querySelector("#reviewImage img");
-    const tags = Array.from(document.querySelectorAll(".rvtag")).map(tag => ({
-        id: tag.dataset.id, // タグのIDを取得
-        name: tag.textContent
-    }));
 
-    try {
-        // 画像を取得してBlobに変換
-        const imgResponse = await fetch(imgElement.src);
-        if (!imgResponse.ok) {
-            throw new Error("画像の取得に失敗しました");
-        }
-        const imgBlob = await imgResponse.blob();
+const tags = Array.from(document.querySelectorAll(".rvtag")).map(tag => ({
+    id: tag.dataset.id,
+    name: tag.textContent.trim()
+}));
+formData.append("tags", JSON.stringify(tags));
 
-        // フォームデータに必要な値を追加
-        formData.append("name", name);
-        formData.append("image", imgBlob);
-        formData.append("brandName", brandName);
-        formData.append("storageId", storageId);
-        formData.append("description", description);
-        formData.append("tags", JSON.stringify(tags));
+const imgElement = document.querySelector("#reviewImage img");
+const imgResponse = await fetch(imgElement.src);
+if (imgResponse.ok) {
+    const imgBlob = await imgResponse.blob();
+    formData.append("image", imgBlob);
+} else {
+    console.error("画像の取得に失敗しました");
+    return;
+}
+console.log("User ID:", userId);
+try {
+    const response = await fetch(`/register/${userId}/clothes`, {
+        method: "POST",
+        body: formData,
+    });
 
-        // 服の登録リクエストを送信
-        const response = await fetch(`register/${userId}/clothes`, {
-            method: "POST",
-            body: formData,
-        });
-
-        if (response.ok) {
-            const result = await response.json();
-            console.log("服の登録成功:", result);
-
-            // 確認画面を非表示にする
+    if (response.ok) {
+        const result = await response.json();
+        console.log("服の登録成功:", result);
+        // 確認画面を非表示にする
             reviewModal.style.display = 'none';
 
             // 登録完了メッセージを表示
             registerModal.style.display = 'flex';
-
-            resetForm(); // フォームをリセット
-        } else {
-            const error = await response.json();
-            console.error("服の登録失敗:", error);
-        }
-    } catch (err) {
-        console.error("エラーが発生しました:", err);
+    } else {
+        const error = await response.json();
+        console.error("服の登録失敗:", error);
     }
+} catch (error) {
+    console.error("登録中にエラーが発生:", error);
+}
+  resetForm();
 });
+
 
 
 // 「登録完了」メッセージを閉じて、次の画面に移動

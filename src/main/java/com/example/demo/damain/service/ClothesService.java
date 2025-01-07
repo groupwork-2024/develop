@@ -3,6 +3,7 @@ package com.example.demo.damain.service;
 import com.example.demo.damain.model.*;
 import com.example.demo.damain.repository.ClothesRepository;
 import com.example.demo.damain.repository.ClothesTagsRepository;
+import com.example.demo.damain.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,9 @@ public class ClothesService {
 
     @Autowired
     ClothesTagsRepository clothesTagsRepository;
+
+    @Autowired
+    TagRepository tagRepository;
 
     @Autowired
     S3StorageService s3StorageService;
@@ -60,6 +64,7 @@ public class ClothesService {
         clothesRepository.save(clothes);
     }
 
+    @Transactional
     public Clothes registerClothes(Long userId, String name, String brandName, Long storageId, String description, MultipartFile image, List<Tag> tags) throws IOException {
         // ユーザー情報を取得
         User user = userService.findById(userId);
@@ -83,6 +88,8 @@ public class ClothesService {
 
         // 中間テーブルに登録
         for (Tag tag : tags) {
+            System.out.println("Processing tag: ID=" + tag.getId() + ", Name=" + tag.getName());
+            tag = tagRepository.findByName(tag.getName());
             ClothesTag clothesTags = new ClothesTag();
             clothesTags.setClothes(savedClothes);
             clothesTags.setTag(tag);

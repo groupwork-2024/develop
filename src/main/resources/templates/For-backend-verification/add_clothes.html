@@ -80,7 +80,6 @@
 
         <label for="location">収納場所</label>
         <select id="location" name="location" required>
-            <option value="">--Select--</option>
             <!-- データベースから取得したclothesのリストをループ -->
             <option th:each="item:${items}"
                     th:value="${item.id}"
@@ -195,7 +194,7 @@
             <div id="reviewLocation" class="reviewLocation"></div>
             <div id="reviewMemo" class="reviewMemo"></div>
             <!-- 登録ボタン -->
-            <button type ="button" onclick="registerData()">登録</button>
+            <button type ="button" id="registerButton">登録</button>
         </div>
     </div>
 
@@ -203,8 +202,8 @@
     <div id="registerModal" class="registerModal" style="display:none;">
         <div class="registreContent">
             <h3>登録が完了しました</h3>
-            <a href="add_clothes.html">続けて登録</a>
-            <a href="home.html">ホームへ</a>
+            <a th:href="@{/register/{userId}/clothes(userId=${userId})}">続けて登録</a>
+            <a th:href="@{/home/{userId}(userId=${userId})}">ホームへ</a>
         </div>
     </div>
 </div>

@@ -13,6 +13,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,13 +65,29 @@ public class RegisterController {
             @RequestParam(value = "image", required = false) MultipartFile image,
             @RequestParam("tags") String tagsJson
     ) throws IOException {
-        // タグのデータをJSONからリストに変換
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<Tag> tags = objectMapper.readValue(tagsJson, new TypeReference<List<Tag>>() {});
+        // デバッグログを追加
+        System.out.println("User ID: " + userId);
+        System.out.println("Name: " + name);
+        System.out.println("Brand Name: " + brandName);
+        System.out.println("Storage ID: " + storageId);
+        System.out.println("Description: " + description);
+        System.out.println("Tags JSON: " + tagsJson);
+        if (image != null) {
+            System.out.println("Image: " + image.getOriginalFilename());
+        } else {
+            System.out.println("Image: null");
+        }
 
-        // 登録処理
-        Clothes registeredClothes = clothesService.registerClothes(userId, name, brandName, storageId, description, image, tags);
-        return ResponseEntity.ok(registeredClothes);
+        // 例外をキャッチして詳細をログに記録
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            List<Tag> tags = objectMapper.readValue(tagsJson, new TypeReference<List<Tag>>() {});
+            Clothes registeredClothes = clothesService.registerClothes(userId, name, brandName, storageId, description, image, tags);
+            return ResponseEntity.ok(registeredClothes);
+        } catch (Exception e) {
+            e.printStackTrace(); // 詳細な例外情報をログに出力
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/storages")
