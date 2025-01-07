@@ -1,0 +1,158 @@
+/* 削除のアイコン */
+.icons{
+  display: flex;
+  flex-basis: 10%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  white-space: nowrap; /*文字の折り返しをさせない*/
+  margin-left:auto;
+  margin-right: 10px;
+  justify-content: center;
+}
+
+/* ○○一覧のスタイル */
+.list_name{
+  /*線の種類（二重線）太さ 色*/
+  display: flex;
+  flex-basis: 20%;
+  text-align: center;
+  justify-content: center;
+  white-space: nowrap;
+  font-size: 20px;
+  margin: 0% 3%;
+  padding: 1% 2%;
+}
+
+/* ヘッダー部分 */
+.list_header{
+  display: flex;
+  flex-basis: 100%;
+  align-items: flex-end;
+  justify-items: center;
+  text-align: center;
+  padding-top: 2%;
+}
+
+/* 洋服の写真のレイアウト */
+.clothes_img img{
+  width: 230px;
+  height: 230px;
+  max-width: 230px;
+  max-height: 230px;
+  min-width: 230px;
+  min-height: 230px;
+
+  object-fit:cover;
+}
+
+.clothes_img{
+  border: none;
+  display: flex;
+  margin: auto;
+  padding: 0;
+}
+
+/* つねに表示させる部分 */
+.detail{
+  white-space: nowrap; /*文字の折り返しをさせない*/
+  width: 70%;
+  min-height: 40%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-left: 5%;
+  cursor: default;
+}
+
+/* クリックしたら表示される部分 */
+.detail_en{
+  white-space: nowrap; /*文字の折り返しをさせない*/
+  width: 70%;
+  min-height: 10%;
+  height: auto;
+  text-align: left;
+  margin: 5%;
+  display: none; /* 非表示設定 */
+  cursor: default; 
+}
+
+/* 編集/削除ボタンのレイアウト */
+.detail_en button, .detail_en a {
+  color: black;
+  font-size: 16px;
+  background-color: #e7e7e7;
+  border: none;
+  text-decoration: none;
+  padding: 8px 12px; /* paddingを少し大きく */
+  margin-left: 20px; /* ボタンとリンクの間にスペース */
+  margin-top: 10px;
+  cursor: pointer; 
+}
+
+.detail_en a {
+  display: inline-block; /* リンクをボックスとして扱う */
+}
+
+/* 通常表示エリアのスタイル */
+.clothse_button{
+  padding: 10px 20px;
+  background-color: #f7f7f7;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 2%;
+}
+
+.detail_url{
+  cursor: pointer; /* カーソルをポインタに */
+  border: none;
+  text-decoration: none;
+  color: black;
+}
+
+/* タグの表示エリア */
+.tags{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3%;
+  margin-top: 0;
+}
+
+/* 登録画面の各タグに対するもの */
+.tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2%;
+  padding: 10px 20px;  /* タグのサイズ */
+  color: white;
+  font-size: 16px;      /* フォントサイズ */
+  border-radius: 4px;
+  position: relative;
+  padding-left: 30px;  /* 矢印のスペースを確保 */
+  box-sizing: border-box; /* パディングとボーダーをサイズに含める */
+  height: 40px;           /* タグの高さを一定に設定 */
+  white-space: nowrap;
+  cursor: default;
+  width: 40%;
+}
+
+/* 各タグの文字のスタイル */
+a.tag{
+  border: none;
+  text-decoration:none;
+  white-space: nowrap;
+}
+
+/* 矢印部分を作成 */
+.tag .arrow {
+  content: '';
+  position: absolute;
+  left: -13px;  /* 矢印がタグの左側に出るように */
+  top: 50%;
+  transform: translateY(-50%);  /* 垂直方向に中央揃え */
+  border-top: 20px solid transparent;   /* 上の辺 */
+  border-bottom: 20px solid transparent;/* 下の辺 */
+  border-right: 15px solid #4CAF50 ; /* 矢印の色をここで変更 */
+}

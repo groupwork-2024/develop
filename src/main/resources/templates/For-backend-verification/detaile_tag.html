@@ -9,7 +9,7 @@
     <!-- google fonts,css等の読み込み -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/stylesheet/back_completion.css}">
-    <link rel="stylesheet" th:href="@{/stylesheet/detaile_tag.css}">
+    <link rel="stylesheet" th:href="@{/For-backend-verification/detaile_tag.css}">
 </head>
 <body class="natural">
 
@@ -53,8 +53,8 @@
 
             <!-- 詳細情報の非表示部分 -->
             <div class="detail_en">
-                <strong>ブランド </strong><span th:text="${clothes.brandName}"></span><br>
-                <strong>メモ </strong><span th:text="${clothes.description}"></span><br>
+                <strong>ブランド </strong><br><span th:text="${clothes.brandName}"></span><br>
+                <strong>メモ </strong><br><span th:text="${clothes.description}"></span><br>
                 <button class="delete_button" type="button">削除</button>
                 <a href=".html">編集</a>
             </div>
