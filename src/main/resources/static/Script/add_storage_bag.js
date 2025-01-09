@@ -1,8 +1,8 @@
 // 写真リスト
 const photos = [
-    "https://www.komeri.com/images/goods/014/396/16/1439616.jpg",
-    "https://cdn.askul.co.jp/img/product/3L1/502432_3L1.jpg", 
-    "https://jp.daisonet.com/cdn/shop/products/4549131611052_10.jpg?v=1640581210"
+    "../static/img/strage-bag1.png",
+    "../static/img/strage-bag2.png", 
+    "../static/img/strage-bag3.png"
 ];
 let currentPhotoIndex = 0;
 
