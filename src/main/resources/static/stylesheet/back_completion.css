@@ -28,6 +28,7 @@ body, html {
   cursor: pointer;
   color: #526d98; /* ボタンの色 */
   text-decoration: none; /* 下線を消す */
+  font-weight: bold;
 }
 
 .left-button , .right_area{
