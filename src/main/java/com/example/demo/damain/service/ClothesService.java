@@ -104,4 +104,18 @@ public class ClothesService {
     public List<Clothes> findClothesByUserIdAndTagId(Long userId, Long tagId) {
         return clothesTagsRepository.findClothesByUserIdAndTagIdWithAllTags(userId, tagId);
     }
+
+    public boolean deleteClothesById(Long id) {
+        try {
+            if (clothesRepository.existsById(id)) {
+                clothesRepository.deleteById(id); // 削除実行
+                return true; // 削除成功
+            }
+            return false; // 削除対象が存在しない
+        } catch (Exception e) {
+            // 必要に応じてログを記録する
+            System.err.println("削除に失敗しました: " + e.getMessage());
+            return false; // 削除失敗
+        }
+    }
 }
