@@ -72,15 +72,19 @@ const storageArray = [
 ];
 
 //初期値の設定
-const startfilteredStorage = storageArray.filter(item => item.storage_type === 'CLOSET');
+const cp_sl06Value = cp_sl06.value;
+const selectValue = cp_sl06Value.toUpperCase();
+
+const startfilteredStorage = storageArray.filter(item => item.storage_type === selectValue);
+
 // storageListを更新する処理
 updateStorageList(startfilteredStorage);
-
 
 //セレクトボックスが変更されたときの処理
 cp_sl06.addEventListener('change', function() {
   const selectedValue = cp_sl06.value;
   const filteredStorage = storageArray.filter(item => item.storage_type === selectedValue.toUpperCase());
+
   // storageListを更新する処理
   updateStorageList(filteredStorage);
 });
@@ -256,6 +260,8 @@ function updateStorageList(filteredStorage){
     // クリックしたときの処理
     clothesContent.addEventListener('click', function(event) {
       event.preventDefault();  // ページ遷移を防止（動的遷移に変更するため）
+      cp_sl06.value = 0;
+      console.log(cp_sl06.value);
       goToClothesPage(storage);  // ページ遷移
   });
 
