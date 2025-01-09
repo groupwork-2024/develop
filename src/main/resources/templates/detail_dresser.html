@@ -9,7 +9,7 @@
     <!-- google fonts,css等の読み込み -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../static/stylesheet/back_completion.css">
-    <link rel="stylesheet" href="../static/stylesheet/list.css">
+    <link rel="stylesheet" href="../static/stylesheet/detaile_dresser.css">
 </head>
 <body>
 
@@ -22,77 +22,29 @@
 
 <!-- メインコンテンツエリア -->
 <div class="list_header">
-    <figure class="clothes_img">
-        <img src="../img/youfuku_test.png" alt="clothes img">
-    </figure>
-    <div class="container">
-        <a class="heder_name">名前</a>
-        <div class="cp_ipselect06"> <!--セレクトボックス-->
-            <select class="cp_sl06" required>
-                <option value="1" selected>1　</option>
-                <option value="2">2　</option>
-                <option value="3">3　</option>
-            </select>
-            <span class="cp_sl06_selectbar"></span>
-        </div>
+    <div class="dresserShapeErea" id="dresserShapeErea">
+        <!--タンスの形を表示-->
     </div>
-    <!--ごみ箱、ソートアイコン-->
-    <a class="icons">
-    <span class="material-icons">swap_vert</span>
-    <span class="material-icons">delete</span>
+    <div class="container" id="container">
+        <a class="heder" id="heder_name"></a>
+        <a class="heder" id="heder_level"></a>
+        <a class="heder" id="heder_memo"></a>
+    </div>
+    <a class="icons" id="icons">
+        <span class="material-icons">swap_vert</span>
+        <span class="material-icons">delete</span>
     </a>
 </div>
+
+<!--登録されている洋服が表示されるところ-->
 <div class="main-content">
     <!-- コンテンツをここに追加 -->
-    <div class="clothse_button">
-        <figure class="clothes_img">
-            <img src="../img/youfuku_test.png" alt="clothes img">
-            <div class="detail"> <!--詳細-->
-                <br>名前:</br>
-                <br>収納場所:</br>
-                <br>
-                    <div class="tag">
-                        <a>タグ表示部分</a>
-                    </div>
-                </br>
-            </div>
-        </figure>
-        <div class="detail_en">
-            <br>ブランド名:</br>
-            <br>メモ:</br>
-            <div>
-                <button class="delete_button">削除</button>
-                <a href=".html">編集</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="clothse_button">
-        <figure class="clothes_img">
-            <img src="../img/youfuku_test.png" alt="clothes img">
-            <div class="detail"> <!--詳細-->
-                <br>名前:</br>
-                <br>収納場所:</br>
-                <br>
-                    <div class="tag">
-                        <a>タグ表示部分</a>
-                    </div>
-                </br>
-            </div>
-        </figure>
-        <div class="detail_en">
-            <br>ブランド名:</br>
-            <br>メモ:</br>
-            <div>
-                <button class="delete_button">削除</button>
-                <a href=".html">編集</a>
-            </div>
-        </div>
+    <div class="clothseListDisplay" id="clothseListDisplay">
+        <!--登録されている洋服がここに表示される-->
     </div>
 </div>
 
-
 <script src="../static/Script/templete_script.js"></script>
-<script src="../static/Script/list.js"></script>
+<script src="../static/Script/detaile_dresser.js"></script>
 </body>
 </html>

@@ -221,7 +221,9 @@ addSelectedColorBtn.addEventListener('click', () => {
 let tags = [
     { name: '夏', color: '#ff6347' },
     { name: '冬', color: '#00bfff' },
-    { name: 'ビジネス', color: '#90ee90' }
+    { name: '長袖', color: '#923940' },
+    { name: 'タートルネック', color: '#2F2F82' },
+    { name: 'カジュアル', color: '#33FF57' },
 ];
 
 // タグ登録ボタン
@@ -348,7 +350,7 @@ function openReviewModal() {
     ImageContent = canvas.src;
 
     // 入力欄に空白がないかチェック
-    if (name === "" || imageFile === "" || brand === "" || location === " " || memo === "" || tags.length===0) {
+    if (name === "" || imageFile === "" || brand === "" || location === " " || tags.length===0) {
         alert("すべての項目を入力してください");
         return;  // 空欄があれば処理を中止
         }

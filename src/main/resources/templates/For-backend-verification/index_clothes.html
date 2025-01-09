@@ -41,10 +41,12 @@
                 <br>名前: <span th:text="${clothes.name}"></span></br>
                 <br>収納場所: <span th:text="${clothes.storage.name}"></span></br>
                 <br>
-                <div class="tag">
-                    <a>タグ表示部分</a>
+                <div class="tags">
+                    <div th:each="tag : ${clothes.tags}" class="tag" th:style="'background-color:' + ${tag.color}">
+                        <span th:text="${tag.name}"></span>
+                        <div class="arrow" th:style="'border-right-color:' + ${tag.color}"></div>
+                    </div>
                 </div>
-                </br>
             </div>
         </figure>
         <div class="detail_en">
@@ -52,7 +54,7 @@
             <br>説明: <span th:text="${clothes.description}"></span></br>
             <div>
                 <button class="delete_button" th:attr="data-id=${clothes.id}">削除</button>
-                <a th:href="@{/clothes/edit/{id}(id=${clothes.id})}">編集</a>
+                <button class="editBtn" type="button" th:attr="data-id=${clothes.id}">編集</button>
             </div>
         </div>
     </div>

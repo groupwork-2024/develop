@@ -30,12 +30,8 @@ public class ClothesService {
     @Autowired
     TagRepository tagRepository;
 
-
-
     @Autowired
     S3StorageService s3StorageService;
-
-
 
     // 服一覧参照
     public List<Clothes> findAllClothesByUserId(Long userId) {
@@ -44,13 +40,11 @@ public class ClothesService {
     }
 
     public List<Clothes> getClothesSortedByCreateAtAsc(Long userId) {
-        List<Clothes> clothesList = clothesRepository.findAllByUserIdOrderByCreatedAtAsc(userId);
-        return clothesList;
+        return clothesRepository.findClothesWithTagsByUserIdAsc(userId);
     }
 
     public List<Clothes> getClothesSortedByCreatedAtDesc(Long userId) {
-        List<Clothes> clothesList = clothesRepository.findAllByUserIdOrderByCreatedAtDesc(userId);
-        return clothesList;
+        return clothesRepository.findClothesWithTagsByUserIdDesc(userId);
     }
 
     public List<Clothes> findAllByUserIdAndStorageId(Long userId, Long storageId) {

@@ -177,3 +177,50 @@ body {
     object-fit: contain;
     /*画像の比率を保持*/
 }
+
+
+/* 画面の色（モード）を反映 */
+/* whiteモード */
+#youhuku-grid.white,#closet-grid.white{ /*一覧背景*/
+    background-color: #e0e5e8;
+}
+.profile-circle.white{ /*ユーザーアイコン色*/
+    background-color: #c9d6dd;
+}
+.plus-buttom.white{ /*＋ボタン*/
+    background-color: #5b50a4;
+}
+#icon.white{ /*タブのアイコン*/
+    color: #5b50a4;
+}
+
+/* blackモード */
+#youhuku-grid.black,#closet-grid.black{ /*一覧背景*/
+    background-color: #555;
+}
+.profile-circle.black{ /*ユーザーアイコン色*/
+    background-color: #ddd;
+}
+.plus-buttom.black{ /*＋ボタン*/
+    background-color: #575757;
+}
+#icon.black{ /*タブのアイコン*/
+    color: #333;
+}
+
+/* naturalモード */
+#youhuku-grid.natural,#closet-grid.natural{ /*一覧背景*/
+    background-color: rgb(247, 229, 203);
+}
+.profile-circle.natural{ /*ユーザーアイコン色*/
+    background-color: #ecca9f;
+}
+.plus-buttom.natural{ /*＋ボタン*/
+    background-color: saddlebrown;
+}
+#icon.natural{ /*タブのアイコン*/
+    color: saddlebrown;
+}
+.tab-list.natural{ /*タブの背景色*/
+    background-color: snow;
+}
