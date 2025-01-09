@@ -3,8 +3,10 @@ package com.example.demo.app.controller;
 import com.example.demo.damain.model.Clothes;
 import com.example.demo.damain.model.Storage;
 import com.example.demo.damain.model.StorageType;
+import com.example.demo.damain.model.Tag;
 import com.example.demo.damain.service.ClothesService;
 import com.example.demo.damain.service.StorageService;
+import com.example.demo.damain.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,9 @@ public class ClothesController {
 
     @Autowired
     StorageService storageService;
+
+    @Autowired
+    TagService tagService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String sectionMenu(@PathVariable Long userId,
@@ -39,6 +44,7 @@ public class ClothesController {
         else {
             clothesList = clothesService.getClothesSortedByCreatedAtDesc(userId);
         }
+        model.addAttribute("userId", userId);
         model.addAttribute("clothesList", clothesList);
         model.addAttribute("order", order);
         System.out.println("Storages returned: " + clothesList);
@@ -78,4 +84,31 @@ public class ClothesController {
         }
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "tag")
+    public String getTag(@PathVariable Long userId,
+                         Model model) {
+        List<Tag> tagList = tagService.findAllTagByUserId(userId);
+        model.addAttribute("userId", userId);
+        model.addAttribute("tagList", tagList);
+
+        return "/For-backend-verification/index_tag";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/tag/{tagId}")
+    public String getClothesByUserAndTag(@PathVariable Long userId, @PathVariable Long tagId, Model model) {
+        Tag tag = tagService.findById(tagId);
+        model.addAttribute("tagName", tag.getName());
+        model.addAttribute("tagColor", tag.getColor());
+
+        List<Clothes> clothesList = clothesService.findClothesByUserIdAndTagId(userId, tagId);
+        model.addAttribute("clothesList", clothesList);
+        model.addAttribute("userId", userId);
+        model.addAttribute("tagId", tagId);
+
+        System.out.println("Clothes List Size: " + clothesList.size());
+        for (Clothes clothes : clothesList) {
+            System.out.println("Clothes Name: " + clothes.getName());
+        }
+        return "/For-backend-verification/detaile_tag"; // 表示するテンプレート名
+    }
 }

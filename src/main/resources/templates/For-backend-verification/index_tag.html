@@ -1,0 +1,53 @@
+<!-- タグ一覧画面 -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webアプリ画面</title>
+    <!-- google fonts,css等の読み込み -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/stylesheet/back_completion.css}">
+    <link rel="stylesheet" th:href="@{/stylesheet/index_tag.css}">
+    <link rel="stylesheet" th:href="@{/stylesheet/index_heder.css}">
+</head>
+<body>
+
+<div class="header">
+    <!--戻るのところ-->
+    <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
+    <a th:href="@{/home/{userId}(userId=${userId})}" class="title-button">あれどこ？</a>
+    <a class="right_area">　</a>
+
+</div>
+<!-- メインコンテンツエリア -->
+<div class="list_header">
+    <a class="list_name">タグ一覧</a>
+    <!--ごみ箱、ソートアイコン-->
+    <a class="icons">
+    <span class="material-icons">swap_vert</span>
+    <span class="material-icons">delete</span>
+    </a>
+</div>
+<div class="main-content">
+    <!-- コンテンツをここに追加 -->
+    <div id="tagListDisplay">
+        <div th:each="tag : ${tagList}">
+            <a th:href="@{/section/{userId}/tag/{tagId}(userId=${userId}, tagId=${tag.id})}"
+               th:style="'background-color:' + ${tag.color}"
+               class="tag">
+                <span th:text="${tag.name}"></span>
+                <!-- 矢印部分 -->
+                <div class="arrow"
+                     th:style="'border-right-color:' + ${tag.color}">
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/Script/templete_script.js}"></script>
+<script th:src="@{/For-backend-verification/index_tag.js}"></script>
+</body>
+</html>

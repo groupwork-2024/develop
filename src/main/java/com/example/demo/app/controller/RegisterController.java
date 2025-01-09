@@ -8,14 +8,21 @@ import com.example.demo.damain.service.ClothesService;
 import com.example.demo.damain.service.S3StorageService;
 import com.example.demo.damain.service.StorageService;
 import com.example.demo.damain.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -49,17 +56,38 @@ public class RegisterController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value="/clothes")
-    public ResponseEntity<Void> addClothes(@PathVariable Long userId,
-                                           @RequestBody Clothes clothes,
-                                           Model model){
-        User user = userService.findById(userId);
-        clothes.setUser(user);
+    public ResponseEntity<Clothes> registerClothes(
+            @PathVariable Long userId,
+            @RequestParam("name") String name,
+            @RequestParam("brandName") String brandName,
+            @RequestParam("storageId") Long storageId,
+            @RequestParam("description") String description,
+            @RequestParam(value = "image", required = false) MultipartFile image,
+            @RequestParam("tags") String tagsJson
+    ) throws IOException {
+        // デバッグログを追加
+        System.out.println("User ID: " + userId);
+        System.out.println("Name: " + name);
+        System.out.println("Brand Name: " + brandName);
+        System.out.println("Storage ID: " + storageId);
+        System.out.println("Description: " + description);
+        System.out.println("Tags JSON: " + tagsJson);
+        if (image != null) {
+            System.out.println("Image: " + image.getOriginalFilename());
+        } else {
+            System.out.println("Image: null");
+        }
 
-        clothesService.saveClothes(clothes);
-        return ResponseEntity.ok().build();
-
-
-
+        // 例外をキャッチして詳細をログに記録
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            List<Tag> tags = objectMapper.readValue(tagsJson, new TypeReference<List<Tag>>() {});
+            Clothes registeredClothes = clothesService.registerClothes(userId, name, brandName, storageId, description, image, tags);
+            return ResponseEntity.ok(registeredClothes);
+        } catch (Exception e) {
+            e.printStackTrace(); // 詳細な例外情報をログに出力
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/storages")

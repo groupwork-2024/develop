@@ -194,3 +194,32 @@ strageArray.forEach((strage)=>{
   // 最後にstragesListContainerにlinkElement を追加
   stragesListContainer.appendChild(linkElement);
 });
+
+
+//画面の色（モード）を反映
+// 保存されたクラス名を取得してMypageに適用
+var savedClass = localStorage.getItem('colorClass');
+if (savedClass) {
+  //ログ
+  console.log('クラス取得できたよ', savedClass);
+
+  //一覧背景色
+  const grids = document.querySelectorAll('#closet-grid,#youhuku-grid');
+  grids.forEach(grid => {
+  grid.classList.add(savedClass);
+  //ユーザーアイコン
+  const circle=document.querySelector('.profile-circle');
+  circle.classList.add(savedClass);
+  });
+  //＋ボタン
+  const plus=document.querySelector('.plus-buttom');
+  plus.classList.add(savedClass);
+  //タブのアイコン
+  const icons= document.querySelectorAll('#icon');
+  icons.forEach(icon=>{
+    icon.classList.add(savedClass);
+  })
+  //タブの背景
+  const tab=document.querySelector('.tab-list');
+  tab.classList.add(savedClass);
+}

@@ -1,5 +1,8 @@
 package com.example.demo.app.controller;
 
+import com.example.demo.app.dto.ClothesResponse;
+import com.example.demo.app.dto.StorageResponse;
+import com.example.demo.app.dto.TagResponse;
 import com.example.demo.damain.model.Clothes;
 import com.example.demo.damain.model.Storage;
 import com.example.demo.damain.model.Tag;
@@ -28,21 +31,58 @@ public class OthersController {
     TagService tagService;
 
     @RequestMapping(method = RequestMethod.GET, value ="my-page")
-    public String getMyPage(@PathVariable Long userId,
-                            Model model) {
+    public String getMyPage(@PathVariable Long userId, Model model,
+                            @RequestParam(required = false) String clothes,
+                            @RequestParam(required = false) String storage,
+                            @RequestParam(required = false) String tag) {
+        model.addAttribute("userId", userId);
+        if (clothes != null) {
+            List<Clothes> clothesList = clothesService.findAllClothesByUserId(userId);
+            model.addAttribute("clothes", clothesList);
+        }
+        else if(storage != null) {
+            List<Storage> storageList = storageService.findAllStorageByUserId(userId);
+            model.addAttribute("storage", storageList);
+        }
+        else if(tag != null) {
+            List<Tag> tagList = tagService.findAllTagByUserId(userId);
+            model.addAttribute("tag", tagList);
+        }
+        else {
+            List<Clothes> clothesList = clothesService.findAllClothesByUserId(userId);
+            model.addAttribute("clothes", clothesList);
+        }
         return "/For-backend-verification/mypage";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/ajax/clothes")
+    public List<ClothesResponse> getClothes(@PathVariable Long userId) {
+        return clothesService.findAllClothesByUserId(userId)
+                .stream()
+                .map(clothes -> new ClothesResponse(clothes.getName(), clothes.getImageUrl()))
+                .toList();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/ajax/storage")
+    public List<StorageResponse> getCloset(@PathVariable Long userId) {
+        return storageService.findAllStorageByUserId(userId)
+                .stream()
+                .map(closet -> new StorageResponse(closet.getName(), closet.getImageUrl()))
+                .toList();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/ajax/tag")
+    public List<TagResponse> getTags(@PathVariable Long userId) {
+        return tagService.findAllTagByUserId(userId)
+                .stream()
+                .map(tag -> new TagResponse(tag.getName(), tag.getColor()))
+                .toList();
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "favorite")
     public String getFavorite(@PathVariable Long userId,
                               Model model) {
         return "/For-backend-verification/nice";
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "inquiry")
-    public String getInquiry(@PathVariable Long userId,
-                             Model model) {
-        return "/For-backend-verification/enquiry";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "search")
@@ -68,6 +108,4 @@ public class OthersController {
             default -> throw new IllegalArgumentException("Invalid category");
         };
     }
-
-
 }
