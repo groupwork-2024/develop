@@ -44,6 +44,7 @@ public class ClothesController {
         else {
             clothesList = clothesService.getClothesSortedByCreatedAtDesc(userId);
         }
+        model.addAttribute("userId", userId);
         model.addAttribute("clothesList", clothesList);
         model.addAttribute("order", order);
         System.out.println("Storages returned: " + clothesList);
