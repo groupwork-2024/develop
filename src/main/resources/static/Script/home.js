@@ -1,20 +1,32 @@
-// Geolocation APIが使用可能か確認
-// 現在地情報を取得し、成功時には位置情報を処理する関数(showPosition)を呼び出し、
-// 失敗時にはエラー処理関数(showError)を呼び出す。
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(showPosition, showError);
+var lat = sessionStorage.getItem('lat');
+if (lat) {
+  getWeather(); // 天気情報を取得する関数を呼び出し
 }
 else {
-  // Geolocation APIがサポートされていない場合に警告を表示
-  alert("Geolocation APIがサポートされていない");
+  // Geolocation APIが使用可能か確認
+  // 現在地情報を取得し、成功時には位置情報を処理する関数(showPosition)を呼び出し、
+  // 失敗時にはエラー処理関数(showError)を呼び出す。
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition, showError);
+  }
+  else {
+    // Geolocation APIがサポートされていない場合に警告を表示
+    alert("Geolocation APIがサポートされていない");
+  }
 }
+
 
 // 現在地取得が成功した場合に実行される関数
 // 緯度(latitude)と経度(longitude)を取得し、天気情報を取得する関数(getWeather)に渡す。
 function showPosition(position) {
   const lat = position.coords.latitude; // 緯度を取得
   const lon = position.coords.longitude; // 経度を取得
-  getWeather(lat, lon); // 天気情報を取得する関数を呼び出し
+
+  //sessionStorageに緯度、経度を保存
+  sessionStorage.setItem('lat', lat);
+  sessionStorage.setItem('lon', lon);
+
+  getWeather(); // 天気情報を取得する関数を呼び出し
 }
 
 // 現在地取得が失敗した場合に実行されるエラー処理関数
@@ -38,7 +50,9 @@ function showError(error) {
 
 // 天気情報を取得する関数
 // 引数として緯度(lat)と経度(lon)を受け取り、Open-Meteo APIを使用して天気データを取得する。
-function getWeather(lat, lon) {
+function getWeather() {
+  var lat = sessionStorage.getItem('lat');
+  var lon = sessionStorage.getItem('lon');
   const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`; // APIのエンドポイントを生成
 
   // fetchを使用してAPIリクエストを送信
