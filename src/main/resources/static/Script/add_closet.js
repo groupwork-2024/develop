@@ -17,21 +17,26 @@ function openReviewModal() {
     const name = document.getElementById('name').value;
     const imageFile = document.getElementById('image').files[0];
     const imagePreviewModal = document.getElementById('reviewImage');
+    const memo = document.getElementById('memo').value;
     const canvas = document.getElementById('imagePreview');
 
     ImageContent = canvas.src;
 
     // 入力欄に空白がないかチェック
-    if (name === "" || imageFile === "") {
-        alert("すべての項目を入力してください");
-        return;  // 空欄があれば処理を中止
-    }
+    // if (name === "" || imageFile === "") {
+    //     alert("すべての項目を入力してください");
+    //     return;  // 空欄があれば処理を中止
+    // }
     
     // モーダルの中にデータを埋め込む
     document.getElementById('reviewName').innerHTML = `<a>クローゼットの名前</a><br>${name}`;
 
+    document.getElementById('reviewMemo').innerHTML = `<a>メモ</a>
+    <textarea placeholder="メモなし" readonly>${memo}</textarea>`;
+
     // 画像の表示
-    imagePreviewModal.innerHTML = `<img src="${ImageContent}" alt="画像" style="max-width: 100%; max-height: 200px;">`;
+    imagePreviewModal.innerHTML = `<a>写真</a>
+    <img src="${ImageContent}" alt="画像" style="max-width: 100%; max-height: 200px;">`;
 
     // モーダルを表示
     document.getElementById('reviewModal').style.display = 'flex';
