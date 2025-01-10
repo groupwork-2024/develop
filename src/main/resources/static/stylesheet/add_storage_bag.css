@@ -280,3 +280,20 @@ form input, form textarea{
     margin-bottom: 6px;
     font-size: 16px;
 }
+
+
+/* 画面の色（モード）を反映 */
+/* whiteモード */
+.input-container.natural{ /*入力欄*/
+    background-color: white;
+  }
+  
+  /* blackモード */
+  .input-container.natural{ /*入力欄*/
+    background-color: white;
+  }
+  
+  /* naturalモード */
+  .input-container.natural{ /*入力欄*/
+    background-color: white;
+  }  

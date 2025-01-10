@@ -411,5 +411,21 @@ form input{
 .selectbox select:focus {
   outline: none;
 }
-
 /* フォーム関連ここまで */
+
+
+/* 画面の色（モード）を反映 */
+/* whiteモード */
+.input-container.natural{ /*入力欄*/
+  background-color: white;
+}
+
+/* blackモード */
+.input-container.natural{ /*入力欄*/
+  background-color: white;
+}
+
+/* naturalモード */
+.input-container.natural{ /*入力欄*/
+  background-color: white;
+}

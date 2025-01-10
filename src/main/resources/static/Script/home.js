@@ -245,4 +245,10 @@ if (savedClass) {
   //検索バー
   const search = document.querySelector('.search-container');
   search.classList.add(savedClass);
+  //検索欄
+  const searches = document.querySelectorAll('.searchForm,.search-input');
+  searches.forEach(search => {
+    search.classList.add(savedClass);
+  });
+
 }
