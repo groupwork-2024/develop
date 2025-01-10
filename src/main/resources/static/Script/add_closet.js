@@ -5,11 +5,6 @@ document.getElementById('closetName').addEventListener('click', function() {
     alert("クローゼットに名前を入力してください。\n例: 寝室のクローゼット");
 });
 
-// ハンガーの個数の情報ボタン
-document.getElementById('hangerCount').addEventListener('click', function() {
-    alert("クローゼットに収めるハンガーの個数を入力してください。\nハンガーの個数は1から99の範囲で指定できます。");
-});
-
 //メモの情報ボタン
 document.getElementById('closetMemo').addEventListener('click', function() {
     alert("配置している場所や収納している物についての詳細を書き留めることができます。\n例:寝室のクローゼット コート類");
@@ -20,7 +15,6 @@ function openReviewModal() {
     // フォームのデータを取得
     console.log("確認モーダルを開きました");
     const name = document.getElementById('name').value;
-    const hangerCount = document.getElementById('hanger-count').value;
     const imageFile = document.getElementById('image').files[0];
     const imagePreviewModal = document.getElementById('reviewImage');
     const canvas = document.getElementById('imagePreview');
@@ -28,14 +22,13 @@ function openReviewModal() {
     ImageContent = canvas.src;
 
     // 入力欄に空白がないかチェック
-    if (name === "" || hangerCount === "" || imageFile === "") {
+    if (name === "" || imageFile === "") {
         alert("すべての項目を入力してください");
         return;  // 空欄があれば処理を中止
     }
     
     // モーダルの中にデータを埋め込む
     document.getElementById('reviewName').innerHTML = `<a>クローゼットの名前</a><br>${name}`;
-    document.getElementById('reviewHangerCount').innerHTML = `<a>ハンガーの個数</a><br>${hangerCount}`;
 
     // 画像の表示
     imagePreviewModal.innerHTML = `<img src="${ImageContent}" alt="画像" style="max-width: 100%; max-height: 200px;">`;
@@ -75,7 +68,6 @@ function closeRegisterModal() {
 
 // 画像関連
 // 画像プレビューを表示する関数
-
 function previewImage() {
     const file = document.getElementById('image').files[0];  // 選択されたファイル
     const preview = document.getElementById('imagePreview');  // 画像プレビュー用のimgタグ
