@@ -46,7 +46,6 @@ const storageArray = [
     name: '子供部屋',
     storage_type: 'CLOSET',
     image: '../img/clothes.png',
-    hangcount: '5',
     memo: 'コート類'
   },
   {
@@ -54,7 +53,6 @@ const storageArray = [
     name: '夫婦部屋',
     storage_type: 'CLOSET',
     image: '../img/clothes2.png',
-    hangcount: '10',
     memo: 'スーツ類'
   },
   {
@@ -238,10 +236,6 @@ function updateStorageList(filteredStorage){
         `<a>
           <strong>名前</strong>
           ${storage.name}
-        </a>
-        <a>
-          <strong>ハンガーの個数</strong>
-          ${storage.hangcount}
         </a>
         <a>
           <strong>メモ</strong>
