@@ -226,6 +226,9 @@ background-color: #f0f0f0;
 .search-container.natural{  /*検索欄の下線色*/
   border-bottom: 2px solid darkblue;
 }
+.searchForm.white,.search-input.white{ /*検索欄*/
+  background-color: white;
+}
 
 /* blackモード */
 #label.black{ /*おすすめコーデの下線色*/
@@ -236,7 +239,10 @@ background-color: #f0f0f0;
   color: white;
 }
 .search-container.black{  /*検索欄の下線色*/
-  border-bottom: 2px solid #333;
+  border-bottom: 2px solid #222;
+}
+.searchForm.black,.search-input.black{ /*検索欄*/
+  background-color: white;
 }
 
 /* naturalモード */
@@ -249,4 +255,7 @@ background-color: #f0f0f0;
 }
 .search-container.natural{  /*検索欄の下線色*/
   border-bottom: 2px solid saddlebrown;
+}
+.searchForm.natural,.search-input.natural{ /*検索欄*/
+  background-color: white;
 }

@@ -1,13 +1,13 @@
 // 写真リスト
 const photos = [
     "../static/img/strage-bag1.png",
-    "../static/img/strage-bag2.png", 
+    "../static/img/strage-bag2.png",
     "../static/img/strage-bag3.png"
 ];
 let currentPhotoIndex = 0;
 
 // 初期表示時に最初の画像をアクティブにする
-window.onload = function() {
+window.onload = function () {
     showPhoto(currentPhotoIndex);
 };
 
@@ -53,7 +53,7 @@ var closeBtn = document.getElementById("reviwCloseBtn");
 // モーダルを開くボタン
 var reviewOpenButton = document.getElementById("review-modal-button");
 
-reviewOpenButton.onclick = function(event){
+reviewOpenButton.onclick = function (event) {
     event.preventDefault();  // フォーム送信のデフォルト動作を防止
     event.stopPropagation();  // イベントの伝播を止める
     const name = document.getElementById('name').value;
@@ -63,8 +63,8 @@ reviewOpenButton.onclick = function(event){
 
     // 入力欄に空白がないかチェック
     if (name === "") {
-    alert("すべての項目を入力してください");
-    return;  // 空欄があれば処理を中止
+        alert("すべての項目を入力してください");
+        return;  // 空欄があれば処理を中止
     }
 
     // フォームの内容をモーダルに表示
@@ -104,12 +104,12 @@ function closeRegisterModal() {
 }
 
 // ボタンのクリックイベント: 情報ボタンをクリックしたときの動作
-document.getElementById('infoButton').addEventListener('click', function() {
+document.getElementById('infoButton').addEventListener('click', function () {
     alert("収納ケースに名前を入力してください。\n例:季節物 夏服用 冬物衣類");
 });
 
 // ボタンのクリックイベント: 情報ボタンをクリックしたときの動作
-document.getElementById('StorageBoxMemo').addEventListener('click', function() {
+document.getElementById('StorageBoxMemo').addEventListener('click', function () {
     alert("配置している場所や収納している物についての詳細を書き留めることができます。\n例:季節物 夏服用 \n　 12/1に衣替えした");
 });
 
@@ -117,15 +117,30 @@ document.getElementById('StorageBoxMemo').addEventListener('click', function() {
 const selectOption = document.getElementById('selectOption');
 
 // セレクトボックスの選択肢が変更されたときの処理
-selectOption.addEventListener('change', function() {
+selectOption.addEventListener('change', function () {
     const selectedValue = selectOption.value;
 
-    setTimeout(function() {
+    setTimeout(function () {
         if (selectedValue === '2') {
-            window.location.href = 'add_clothes.html'; 
-        } 
+            window.location.href = 'add_clothes.html';
+        }
         else if (selectedValue === '3') {
             window.location.href = 'index_clothes.html';
         }
     }, 800); // （0.8秒）後に遷移
 });
+
+
+//画面の色（モード）を反映
+// 保存されたクラス名を取得してMypageに適用
+var savedClass = localStorage.getItem('colorClass');
+if (savedClass) {
+    //ログ
+    console.log('クラス取得できたよ', savedClass);
+
+    //ボタンに適用（登録・一覧）
+    const inputs = document.querySelectorAll('.input-container');
+    inputs.forEach(input => {
+        input.classList.add(savedClass);
+    });
+}

@@ -24,7 +24,7 @@ body, html {
   border: none;
   background: none;
   cursor: pointer;
-  color: darkblue; /* ボタンの色 */
+  color: #526d98; /* ボタンの色 */
   text-decoration: none; /* 下線を消す */
   font-weight: bold;
 }
@@ -40,7 +40,7 @@ body, html {
   border: none;
   background: none; /* ボタン背景を消去 */
   cursor: pointer;
-  color: darkblue; /* アイコンの色 */
+  color: #526d98; /* アイコンの色 */
 }
 
 .left-button:hover, .right-button:hover {
@@ -101,7 +101,7 @@ body, html {
 }
 .title-button.white,.left-button.white,.right-button.white
 {   /*ヘッダーボタン色*/
-  color: darkblue;
+  color: #526d98;
 }
 body.white{  /*背景色*/
   background-color: white;
