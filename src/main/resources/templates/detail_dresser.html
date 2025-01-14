@@ -31,6 +31,7 @@
         <a class="heder" id="heder_memo"></a>
     </div>
     <a class="icons" id="icons">
+        <span class="material-icons">edit</span>
         <span class="material-icons">swap_vert</span>
         <span class="material-icons">delete</span>
     </a>
@@ -41,6 +42,160 @@
     <!-- コンテンツをここに追加 -->
     <div class="clothseListDisplay" id="clothseListDisplay">
         <!--登録されている洋服がここに表示される-->
+    </div>
+
+        <!-- 編集フォーム(モーダル) -->
+        <div id="editModal" class="editModal" style="display: none;">
+            <div id="editContent" class="editContent">
+                <span class="editClose" id='editClose' aria-label="Close">
+                    &times;
+                </span>
+                <form onsubmit="return false;" id="reviewForm">
+                    <label for="name">洋服の名前</label>
+                    <input type="text" id="name" name="name"placeholder="例:もこもこパジャマ ワンピース">
+    
+                    <!-- 写真 -->
+                    <label for="image">写真</label>
+                    <div class="image-container">
+                        <!--ファイル選択-->
+                        <input type="file" id="image" name="image" accept="image/*" capture="camera" onchange="previewImage()" style="display: none;">
+    
+                        <!--画像プレビュー-->
+                        <div class="imagePreviewContainer">
+                            <!-- 初期画像を指定 -->
+                            <img id="imagePreview" src="../img/youfuku_test.png" alt="画像プレビュー" style="max-width: 100%; max-height: 200px;">
+                            <!--写真撮影のときの画面-->
+                            <video id="video" style="display: none; max-width: 100%; height:200px;" autoplay></video>
+                        </div>
+                        <div class="camerabtns">
+                            <!-- カメラ停止用の×ボタン -->
+                            <button type="button" id="stopCameraButton" style="display: none;" onclick="stopCamera()">
+                                <span class="material-icons">
+                                    cancel
+                                </span>
+                            </button>
+                            <!--撮影をするボタン-->
+                            <button type="button" id="capture" class="capture" style="display: none;" onclick="captureImage()">
+                                <span class="material-icons">
+                                    camera
+                                </span>
+                            </button>
+                        </div>
+    
+                        <!--写真を起動するボタン-->
+                        <button type="button" id="addPhoto" class="addPhoto" aria-label="カメラを起動" onclick="openCamera()">
+                            <span class="material-icons">
+                                add_a_photo
+                            </span>
+                        </button>
+    
+                        <!-- ＋ボタン -->
+                        <button type="button" id="addImageButton" class="add-image-button">
+                            <span class="material-icons">
+                                add_circle_outline
+                            </span>
+                        </button>
+    
+                        <!-- カメラを表示するためのビデオとキャンバス -->
+                        <canvas id="canvas" style="display: none;"></canvas>
+                    </div>
+    
+                    <!--その他詳細情報-->
+                    <label for="brand">ブランド</label>
+                    <input type="text" id="brand" name="brand" placeholder="例:GU ユニクロ">
+    
+                    <label for="location">収納場所</label>
+                    <input type="text" id="location" name="location">
+    
+                    <label for="memo">メモ</label>
+                    <textarea id="memo" name="memo" rows="1" cols="50" maxlength="150" placeholder="自由記載"></textarea>
+    
+                    <label for="tags">タグ</label>
+                    <div class="label-container">
+                        <div class="label-display" id="labelDisplay">
+                            <!--ここの部分にタグが表示される-->
+                        </div>
+                        <span class="material-icons" id="tagOpenButton">
+                            add_circle_outline
+                        </span>
+                    </div>
+    
+                    <!--タグ一覧のモーダル-->
+                    <div id="tagListmodal" class="tagListmodal" role="dialog" aria-labelledby="tagListModalTitle">
+                        <div class="tagListmodalContent">
+                            <span class="TagListClose" id='TagListClose' aria-label="Close">
+                                &times;
+                            </span>
+                            <h2>タグ一覧</h2>
+    
+                            <!--タグ表示画面-->
+                            <div id="tagListDisplay" class="tag-list"></div>
+    
+                            <!-- タグ追加ボタン -->
+                            <button type="button" id="addTagOpenButton">
+                                <span class="material-icons" id="addtag">
+                                    add_circle_outline
+                                </span>
+                            </button>
+    
+                            <div class="tagAddButtons">
+    
+                                <!-- タグ登録ボタン -->
+                                <button type ="button"id="addButton">登録</button>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!--タグ追加のモーダル-->
+                    <div id="tagmodal" class="tagmodal" role="dialog" aria-labelledby="modalTitle">
+                        <div class="tagModalContent">
+                            <span class="TagClose" id="TagCloseModalButton" aria-label="Close">&times;</span>
+    
+                            <h2>タグ追加登録</h2>
+    
+                            <!-- タグ名入力フィールド -->
+                            <label for="TagName">タグの名前</label>
+                            <input type="text" id="tagInput" placeholder="例:お気に入り">
+    
+                            <h3>色を選択</h3>
+    
+                            <!-- プリセットカラー -->
+                            <div id="colorPalette" class="color-palette">
+                            <!-- プリセットカラーが並ぶエリア -->
+                                <div class="color-btn" style="background-color: #FF6347;" data-color="#FF6347"></div> 
+                                <div class="color-btn" style="background-color: #4682B4;" data-color="#4682B4"></div> 
+                                <div class="color-btn" style="background-color: #32CD32;" data-color="#32CD32"></div> 
+                                <div class="color-btn" style="background-color: #FFD700;" data-color="#FFD700"></div>
+                                <div id="colorDisplayArea" class="colorDisplayArea">
+                                <!-- ここに色が表示される -->
+                                </div>
+    
+                                <!-- 追加ボタン -->
+                                <button type ="button" id="addColorBtn" class="add-color-btn">
+                                    <span class="material-icons">
+                                        add_circle_outline
+                                    </span> <!-- ＋ボタン -->
+                                </button>
+                            </div>
+    
+                            <!-- カラーパレット表示エリア（隠れている） -->
+                            <div id="colorPickerContainer" class="color-picker-container" style="display:none;">
+                                <!-- カスタムカラー選択 -->
+                                <input type="color" id="customColorPicker" value="#000000">
+                                <button type ="button" id="addSelectedColorBtn">
+                                    色を追加
+                                </button>
+                            </div>
+    
+                            <!-- タグ登録ボタン -->
+                            <button type ="button" id="addTagButton" >登録</button>
+                        </div>
+                    </div>
+    
+                    <button type="button" id="saveButton" class="editBtn">保存</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
