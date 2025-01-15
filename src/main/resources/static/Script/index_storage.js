@@ -31,22 +31,22 @@ const storageArray = [
     id:'3',
     name: '寝室',
     storage_type: 'STORAGE_BAG',
-    image: '../img/storagebox.png',
+    image: '../static/img/strage-bag1.png',
     memo: '季節物の収納場所'
   },
   {
     id:'4',
     name: '寝室',
     storage_type: 'STORAGE_BAG',
-    image: '../img/storagebox2.png',
-    memo: '毛布の収納場所'
+    image: '../static/img/strage-bag2.png',
+    memo: '夏服の収納場所\n24.11に衣替えを実施'
   },
   {
     id:'5',
     name: '子供部屋',
     storage_type: 'CLOSET',
     image: '../img/clothes.png',
-    memo: 'コート類'
+    memo: '上着\n長袖\n制服'
   },
   {
     id:'6',
@@ -182,9 +182,9 @@ function updateStorageList(filteredStorage){
           <strong>${type}</strong>
           ${storage.shape.length}
         </a>
-        <a>
+        <a class="storageMemo">
           <strong>メモ</strong>
-          ${storage.memo}
+          <textarea placeholder="メモなし" readonly>${storage.memo}</textarea>
         </a>
       `;
 
@@ -210,9 +210,9 @@ function updateStorageList(filteredStorage){
           <strong>名前</strong>
           ${storage.name}
         </a>
-        <a>
+        <a class="storageMemo">
           <strong>メモ</strong>
-          ${storage.memo}
+          <textarea placeholder="メモなし" readonly>${storage.memo}</textarea>
         </a>
       `;
 
@@ -237,9 +237,9 @@ function updateStorageList(filteredStorage){
           <strong>名前</strong>
           ${storage.name}
         </a>
-        <a>
+        <a class="storageMemo">
           <strong>メモ</strong>
-          ${storage.memo}
+          <textarea placeholder="メモなし" readonly>${storage.memo}</textarea>
         </a>
       `;
 

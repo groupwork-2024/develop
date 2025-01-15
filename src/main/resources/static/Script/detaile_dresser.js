@@ -125,7 +125,7 @@ const storageIcons = document.getElementById('icons');
 
 storageName.innerHTML = `<strong style="font-size:20px;">名前</strong>　${storage.name}`;
 storageLevel.innerHTML = `<strong style="font-size:20px;">${type}</strong>　${storage.shape.length}`;
-storageMemo.innerHTML = `<strong style="font-size:20px;">メモ</strong>　${storage.memo}`;
+storageMemo.innerHTML = `<strong style="font-size:20px;">メモ</strong>　<textarea placeholder="メモなし" readonly>${storage.memo}</textarea>`;
 
 // 洋服一覧を表示する場所を取得
 const clothesListContainer = document.getElementById('clothseListDisplay');
