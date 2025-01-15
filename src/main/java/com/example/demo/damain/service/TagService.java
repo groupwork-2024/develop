@@ -4,6 +4,7 @@ import com.example.demo.damain.model.Tag;
 import com.example.demo.damain.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,6 +18,7 @@ public class TagService {
         return tagRepository.findAllByUserId(userId);
     }
 
+    @Transactional
     public Tag createTag(Tag tagRequest) {
         Tag tag = new Tag();
         tag.setName(tagRequest.getName());

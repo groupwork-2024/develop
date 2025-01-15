@@ -18,4 +18,9 @@ public interface ClothesTagsRepository extends JpaRepository<ClothesTag, Integer
 """)
     List<Clothes> findClothesByUserIdAndTagIdWithAllTags(@Param("userId") Long userId, @Param("tagId") Long tagId);
 
+    void deleteByClothes(Clothes clothes);
+
+    List<ClothesTag> findByClothes(Clothes clothes);
+
+    void deleteByClothesId(Long clothesId);
 }
