@@ -12,6 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ClothesService {
@@ -84,7 +87,6 @@ public class ClothesService {
 
         // 中間テーブルに登録
         for (Tag tag : tags) {
-            System.out.println("Processing tag: ID=" + tag.getId() + ", Name=" + tag.getName());
             tag = tagRepository.findByName(tag.getName());
             ClothesTag clothesTags = new ClothesTag();
             clothesTags.setClothes(savedClothes);
@@ -112,4 +114,55 @@ public class ClothesService {
             return false; // 削除失敗
         }
     }
+
+    public Clothes getClothesById(Long userId, Long clothesId) {
+        return clothesRepository.findByUserIdAndId(userId, clothesId)
+                .orElseThrow(() -> new IllegalArgumentException("指定されたデータが見つかりません"));
+    }
+
+    @Transactional
+    public Clothes editClothes(Long userId, Long clothesId, String name, String brandName, Long storageId, String description, MultipartFile image, List<Tag> tags) throws IOException {
+        Clothes clothes = clothesRepository.findById(clothesId)
+                .orElseThrow(() -> new RuntimeException("該当する洋服が見つかりません"));
+
+        // 収納情報を取得
+        Storage storage;
+        try {
+            storage = storageService.findById(storageId);
+        } catch (Exception e) {
+            throw new RuntimeException("ストレージ情報が見つかりません: " + storageId, e);
+        }
+        clothes.setStorage(storage);
+
+
+        // 画像が変更されている場合のみ処理
+        if (image != null && !image.isEmpty()) {
+            if (clothes.getImageUrl() != null && !clothes.getImageUrl().isEmpty()) {
+                s3StorageService.deleteFile(clothes.getImageUrl()); // 古い画像を削除
+            }
+            String imageUrl = s3StorageService.uploadFile("clothes", image);
+            clothes.setImageUrl(imageUrl);
+        }
+
+        clothes.setName(name);
+        clothes.setBrandName(brandName);
+        clothes.setDescription(description);
+
+        Clothes savedClothes = clothesRepository.save(clothes);
+
+        // タグの更新処理
+        clothesTagsRepository.deleteByClothesId(clothesId);
+
+        for (Tag tag : tags) {
+            Tag existingTag = tagRepository.findByNameAndUserId(tag.getName(),userId);
+            ClothesTag clothesTag = new ClothesTag();
+            clothesTag.setClothes(clothes);
+            clothesTag.setTag(existingTag);
+            clothesTagsRepository.save(clothesTag);
+        }
+
+        return savedClothes;
+    }
+
+
 }
