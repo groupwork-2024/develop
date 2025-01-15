@@ -34,7 +34,7 @@
     <input type="hidden" id="userId" th:value="${userId}">
     <!-- コンテンツをここに追加 -->
     <div class="clothseListDisplay" id="clothseListDisplay">
-    <div th:each="clothes : ${clothesList}" class="clothse_button">
+        <div th:each="clothes : ${clothesList}" class="clothse_button">
         <figure class="clothes_img">
             <img th:src="${clothes.imageUrl}" alt="clothes img">
             <div class="detail">
@@ -118,8 +118,12 @@
                 <label for="brand">ブランド</label>
                 <input type="text" id="brand" name="brand" placeholder="例:GU ユニクロ">
 
-                <label for="location">収納場所</label>
-                <input type="text" id="location" name="location">
+                <select id="location" name="location" required>
+                    <!-- データベースから取得したclothesのリストをループ -->
+                    <option th:each="item:${items}"
+                            th:value="${item.id}"
+                            th:text="${item.name}">
+                    </option></select>
 
                 <label for="memo">メモ</label>
                 <textarea id="memo" name="memo" rows="1" cols="50" maxlength="150" placeholder="自由記載"></textarea>
@@ -146,7 +150,7 @@
                         <div id="tagListDisplay" class="tag-list"></div>
 
                         <!-- タグ追加ボタン -->
-                        <button type="button" xid="addTagOpenButton">
+                        <button type="button" id="addTagOpenButton">
                             <span class="material-icons" id="addtag">
                                 add_circle_outline
                             </span>

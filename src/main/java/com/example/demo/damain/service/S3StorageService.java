@@ -7,7 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.sync.RequestBody;
 
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+
 
 import java.io.IOException;
 import java.util.UUID;
@@ -41,4 +43,38 @@ public class S3StorageService {
         // アップロードされたファイルのURLを返す
         return String.format("https://%s.s3.amazonaws.com/%s", bucketName, uniqueFileName);
     }
+
+    private String extractKeyFromUrl(String fileUrl) {
+        // S3のURLのプレフィックス
+        String bucketUrl = "https://" + bucketName + ".s3.amazonaws.com/";
+
+        // URLがバケットURLで始まるか確認
+        if (fileUrl.startsWith(bucketUrl)) {
+            return fileUrl.substring(bucketUrl.length()); // プレフィックスを除外してキー部分を返す
+        }
+        throw new IllegalArgumentException("無効なS3 URL: " + fileUrl);
+    }
+
+    public void deleteFile(String imageUrl) {
+        try {
+            // URLからS3のキーを抽出
+            String key = extractKeyFromUrl(imageUrl);
+            System.out.println("Deleting S3 Key: " + key);
+
+            // S3削除リクエストの作成
+            DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
+                    .bucket(bucketName) // バケット名を設定
+                    .key(key)           // キーを設定
+                    .build();
+
+            // S3からファイルを削除
+            s3Client.deleteObject(deleteObjectRequest);
+
+            System.out.println("S3ファイル削除成功: " + key);
+        } catch (Exception e) {
+            System.err.println("S3ファイル削除失敗: " + imageUrl);
+            throw new RuntimeException("S3ファイルの削除中にエラーが発生しました", e);
+        }
+    }
+
 }

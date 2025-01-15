@@ -1,5 +1,6 @@
 package com.example.demo.app.controller;
 
+import com.example.demo.app.dto.DtoStorage;
 import com.example.demo.damain.model.Clothes;
 import com.example.demo.damain.model.Storage;
 import com.example.demo.damain.model.StorageType;
@@ -33,20 +34,25 @@ public class ClothesController {
         return "For-backend-verification/index_choice";
     }
 
-    @RequestMapping(method = RequestMethod.GET, value="/clothes")
+    @RequestMapping(method = RequestMethod.GET, value = "/clothes")
     public String getUserClothes(@PathVariable Long userId,
                                  @RequestParam(value = "order", defaultValue = "desc") String order,
                                  Model model) {
         List<Clothes> clothesList;
+
         if ("asc".equals(order)) {
             clothesList = clothesService.getClothesSortedByCreateAtAsc(userId);
-        }
-        else {
+        } else {
             clothesList = clothesService.getClothesSortedByCreatedAtDesc(userId);
         }
+
+        List<DtoStorage> items = storageService.getUserStorage(userId);
+
         model.addAttribute("userId", userId);
         model.addAttribute("clothesList", clothesList);
+        model.addAttribute("items", items);
         model.addAttribute("order", order);
+
         System.out.println("Storages returned: " + clothesList);
         return "For-backend-verification/index_clothes";
     }

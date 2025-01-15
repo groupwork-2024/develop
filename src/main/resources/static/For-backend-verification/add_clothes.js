@@ -473,6 +473,7 @@ const tags = Array.from(document.querySelectorAll(".rvtag")).map(tag => ({
     id: tag.dataset.id,
     name: tag.textContent.trim()
 }));
+console.log("Final tags data:", JSON.stringify(tags)); // 最終的に送信するデータを確認
 formData.append("tags", JSON.stringify(tags));
 
 const imgElement = document.querySelector("#reviewImage img");

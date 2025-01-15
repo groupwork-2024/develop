@@ -9,15 +9,19 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ClothesRepository extends JpaRepository<Clothes,Long> {
     List<Clothes> findAllByUserId(Long userId);
 
-    List<Clothes> findAllByUserIdOrderByCreatedAtAsc(Long userId);
+    @Query("SELECT c FROM Clothes c LEFT JOIN FETCH c.tags WHERE c.user.id = :userId ORDER BY c.createdAt DESC")
+    List<Clothes> findClothesWithTagsByUserIdDesc(@Param("userId") Long userId);
 
-    List<Clothes> findAllByUserIdOrderByCreatedAtDesc(Long userId);
+    @Query("SELECT c FROM Clothes c LEFT JOIN FETCH c.tags WHERE c.user.id = :userId ORDER BY c.createdAt ASC")
+    List<Clothes> findClothesWithTagsByUserIdAsc(@Param("userId") Long userId);
 
     List<Clothes> findAllByUserIdAndStorageId(Long userId, Long storageId);
 
+    Optional<Clothes> findByUserIdAndId(Long userId, Long clothesId);
 }
