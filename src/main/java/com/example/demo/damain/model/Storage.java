@@ -32,6 +32,9 @@ public class Storage {
     @Column(name = "image_url", length = 255)
     private String imageUrl;
 
+    @Column(name = "memo", columnDefinition = "TEXT")
+    private String memo;
+
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 

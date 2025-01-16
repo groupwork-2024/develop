@@ -23,10 +23,6 @@ body {
     /*要素の位置を基準として変更するためのもの(親要素)*/
 }
 
-#profile-image {
-    display: none;
-}
-
 /* プロフィール画像 */
 .profile-circle img {
     width: 100%;
@@ -223,4 +219,50 @@ body {
 }
 .tab-list.natural{ /*タブの背景色*/
     background-color: snow;
+}
+
+/*タグ*/
+.tag_list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  color: white;
+  font-size: 16px;
+  border-radius: 4px;
+  position: relative;
+  padding-left: 30px;
+  box-sizing: border-box;
+  height: 40px;
+  width:1200px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+a.tag_list,
+a.tag_list:visited,
+a.tag_list:hover,
+a.tag_list:focus,
+a.tag_list:active {
+  text-decoration: none; /* 下線を削除 */
+  outline: none; /* フォーカス枠を削除 */
+  color: inherit; /* 文字色を継承 */
+}
+
+a {
+  text-decoration: none !important; /* 強制的に下線を削除 */
+  outline: none !important; /* フォーカス枠を削除 */
+}
+
+
+/* 矢印部分のスタイル */
+.tag_list .arrow {
+  content: '';
+  position: absolute;
+  left: -13px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-right: 15px solid #4CAF50;
 }

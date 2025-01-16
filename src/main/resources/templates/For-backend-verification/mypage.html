@@ -41,13 +41,13 @@
     <section class="profile-section">
         <!--アイコン部分-->
         <div class="profile-circle">
-            <img id="profile-image" src="" alt="プロフィール画像">
+            <img id="profile-image" th:src="${user.userIcon}" th:alt="${user.name}" alt="プロフィール画像">
             <button class="plus-buttom" onclick="document.getElementById('file-input').click()">＋</button>
             <input id="file-input" type="file" accept="image/*" style="display: none;" onchange="iconImage(event)">
         </div>
         <!--その他ユーザー名など-->
         <div class="profile-others">
-            <p>ユーザー名：神戸電子太郎</p>
+            <p>ユーザー名：<span th:text="${user.name}">電子太郎</span></p>
             <p>フレームカラー</p>
             <!--色の選択-->
             <div class="select-color">
@@ -66,14 +66,16 @@
     </nav>
 
     <!----------------洋服・収納・タグの一覧------------------->
-    <section id="clothes-grid" class="item-grid">
+    <section id="youhuku-grid" class="item-grid">
         <!-- 初期データをサーバーサイドでレンダリング -->
-        <div th:each="clothes : ${clothes}" class="youhuku-item">
-            <img th:src="${clothes.imageUrl}" th:alt="${clothes.name}">
-        </div>
+        <a th:href="@{/clothes/detail/{id}(id=${clothes.id})}" th:each="clothes : ${clothes}">
+            <div class="youhuku-item">
+                <img th:src="${clothes.imageUrl}" th:alt="${clothes.name}">
+            </div>
+        </a>
     </section>
 
-    <section id="storage-grid" class="item-grid">
+    <section id="closet-grid" class="item-grid">
         <!--収納の一覧を表示-->
     </section>
 
