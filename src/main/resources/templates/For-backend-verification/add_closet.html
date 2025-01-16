@@ -4,109 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>クローゼット登録</title>
-    <!-- google fonts,css等の読み込み -->
+    <!-- google fonts, css読み込み -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/stylesheet/add_closet.css}">
     <link rel="stylesheet" th:href="@{/stylesheet/back_completion.css}">
 </head>
 <body>
-<!--ヘッダー部分-->
+<!-- ヘッダー部分 -->
 <div class="header">
-    <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
+    <button class="left-button" onclick="history.back()">
+        <span class="material-icons">arrow_back_ios_new</span>
+    </button>
     <a class="title-button">クローゼット登録</a>
     <a class="right_area">　</a>
 </div>
 
-<!--メインの部分-->
+<!-- メインコンテンツ -->
 <div class="container">
     <input type="hidden" id="userId" th:value="${userId}">
     <form onsubmit="return false;" id="closetForm">
+        <!-- 名前フィールド -->
         <label for="name">名前</label>
         <div class="input-container">
-            <input type="text" id="name" name="name">
+            <input type="text" id="name" name="name" placeholder="例: 寝室 子供部屋">
             <button type="button" class="info-button" id="closetName">
-                    <span class="material-icons">
-                        help_outline
-                    </span>
+                <span class="material-icons">help_outline</span>
             </button>
         </div>
 
+        <!-- ハンガー数 -->
         <label for="hanger-count">ハンガーの個数</label>
         <div class="input-container">
             <input type="number" id="hanger-count" name="hanger-count" min="1" max="99">
             <button type="button" class="info-button" id="hangerCount">
-                    <span class="material-icons">
-                        help_outline
-                    </span>
+                <span class="material-icons">help_outline</span>
             </button>
         </div>
 
         <!-- 写真 -->
         <label for="image">写真</label>
         <div class="image-container">
-            <!--ファイル選択-->
             <input type="file" id="image" name="image" accept="image/*" capture="camera" onchange="previewImage()" style="display: none;">
-
-            <!--画像プレビュー-->
             <div class="imagePreviewContainer">
-                <!-- 初期画像を指定 -->
-                <img id="imagePreview" th:src="@{/img/clothes.png}"
-                     alt="画像プレビュー" style="max-width: 100%; max-height: 200px;">
-                <!--写真撮影のときの画面-->
-                <video id="video" style="display: none; max-width: 100%; height:200px;" autoplay></video>
+                <img id="imagePreview" th:src="@{/img/clothes.png}" alt="画像プレビュー" style="max-width: 100%; max-height: 200px;">
+                <video id="video" style="display: none; max-width: 100%; height: 200px;" autoplay></video>
             </div>
             <div class="camerabtns">
-                <!-- カメラ停止用の×ボタン -->
                 <button type="button" id="stopCameraButton" style="display: none;" onclick="stopCamera()">
-                        <span class="material-icons">
-                            cancel
-                        </span>
+                    <span class="material-icons">cancel</span>
                 </button>
-                <!--撮影をするボタン-->
                 <button type="button" id="capture" class="capture" style="display: none;" onclick="captureImage()">
-                        <span class="material-icons">
-                            camera
-                        </span>
+                    <span class="material-icons">camera</span>
                 </button>
             </div>
-
-            <!--写真を起動するボタン-->
             <button type="button" id="addPhoto" class="addPhoto" aria-label="カメラを起動" onclick="openCamera()">
-                    <span class="material-icons">
-                        add_a_photo
-                    </span>
+                <span class="material-icons">add_a_photo</span>
             </button>
-
-            <!-- ＋ボタン -->
             <button type="button" id="addImageButton" class="add-image-button">
-                    <span class="material-icons">
-                        add_circle_outline
-                    </span>
+                <span class="material-icons">add_circle_outline</span>
             </button>
-
-            <!-- カメラを表示するためのビデオとキャンバス -->
             <canvas id="canvas" style="display: none;"></canvas>
-
         </div>
 
+        <!-- メモ -->
+        <label for="memo">メモ</label>
+        <div class='input-container'>
+            <textarea id="memo" name="memo" rows="1" cols="50" maxlength="150" placeholder="自由記載"></textarea>
+            <button type="button" class="info-button" id="closetMemo">
+                <span class="material-icons">help_outline</span>
+            </button>
+        </div>
     </form>
 
-    <!--登録完了ボタン 確認画面を見れるボタン-->
+    <!-- 完了ボタン -->
     <div class="completion">
-        <button id="review-modal-button" class="reviewModalButton" onclick="openReviewModal()">
-            完了
-        </button>
+        <button id="review-modal-button" class="reviewModalButton" onclick="openReviewModal()">完了</button>
     </div>
 
-    <!-- 確認画面の表示 -->
+    <!-- 確認画面 -->
     <div id="reviewModal" class="reviewModal" style="display: none;">
         <div class="reviewModalContent">
             <span id="reviwCloseBtn">&times;</span>
             <h3>確認画面</h3>
-            <div id="reviewName" class="reviewName"></div>
-            <div id="reviewHangerCount" class="reviewHangerCount"></div>
+            <div id="reviewName" class="review"></div>
+            <div id="reviewHangerCount" class="review"></div>
             <div id="reviewImage" class="reviewImage"></div>
-            <button id="registerButton">登録</button>
+            <div id="reviewMemo" class="review"></div>
+            <button onclick="registerData()">登録</button>
         </div>
     </div>
 
@@ -115,13 +99,11 @@
         <div class="registreContent">
             <h3>登録が完了しました</h3>
             <a href="choice_storage.html">続けて収納を登録</a>
-
-            <!--セレクトボックス-->
             <div class="select">
                 <select id="selectOption">
-                    <option value="1" selected>洋服を収納　</option>
-                    <option value="2">新規洋服登録　</option>
-                    <option value="3">既存洋服登録　</option>
+                    <option value="1" selected>洋服を収納</option>
+                    <option value="2">新規洋服登録</option>
+                    <option value="3">既存洋服登録</option>
                 </select>
             </div>
             <a th:href="@{/home/{userId}(userId=${userId})}">ホームへ</a>
@@ -129,7 +111,7 @@
     </div>
 </div>
 
-<script th:src="@{/For-backend-verification/closet.js}"></script>
-<script th:src="@{/Script/templete_script.js}"></script>
+<script th:src="@{/script/add_closet.js}"></script>
+<script th:src="@{/script/templete_script.js}"></script>
 </body>
 </html>

@@ -29,9 +29,8 @@ public class User {
     @Column(length = 50)
     private String body_type;
 
-    @Lob
-    @Column(name = "user_icon",columnDefinition = "LONGBLOB")
-    private byte[] userIcon;
+    @Column(name = "user_icon", length = 255)
+    private String userIcon;
 
     private Integer age;
 

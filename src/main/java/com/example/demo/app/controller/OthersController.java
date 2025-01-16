@@ -6,9 +6,11 @@ import com.example.demo.app.dto.TagResponse;
 import com.example.demo.damain.model.Clothes;
 import com.example.demo.damain.model.Storage;
 import com.example.demo.damain.model.Tag;
+import com.example.demo.damain.model.User;
 import com.example.demo.damain.service.ClothesService;
 import com.example.demo.damain.service.StorageService;
 import com.example.demo.damain.service.TagService;
+import com.example.demo.damain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,9 @@ import java.util.List;
 public class OthersController {
 
     @Autowired
+    UserService userService;
+
+    @Autowired
     ClothesService clothesService;
 
     @Autowired
@@ -31,27 +36,13 @@ public class OthersController {
     TagService tagService;
 
     @RequestMapping(method = RequestMethod.GET, value ="my-page")
-    public String getMyPage(@PathVariable Long userId, Model model,
-                            @RequestParam(required = false) String clothes,
-                            @RequestParam(required = false) String storage,
-                            @RequestParam(required = false) String tag) {
+    public String getMyPage(@PathVariable Long userId, Model model) {
         model.addAttribute("userId", userId);
-        if (clothes != null) {
+            User user = userService.findById(userId);
             List<Clothes> clothesList = clothesService.findAllClothesByUserId(userId);
             model.addAttribute("clothes", clothesList);
-        }
-        else if(storage != null) {
-            List<Storage> storageList = storageService.findAllStorageByUserId(userId);
-            model.addAttribute("storage", storageList);
-        }
-        else if(tag != null) {
-            List<Tag> tagList = tagService.findAllTagByUserId(userId);
-            model.addAttribute("tag", tagList);
-        }
-        else {
-            List<Clothes> clothesList = clothesService.findAllClothesByUserId(userId);
-            model.addAttribute("clothes", clothesList);
-        }
+            model.addAttribute("user", user);
+
         return "/For-backend-verification/mypage";
     }
 
