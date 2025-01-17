@@ -1254,3 +1254,26 @@ cp_sl06.addEventListener('change', function(event) {
   }
   
 });
+
+
+//画面の色（モード）を反映
+// 保存されたクラス名を取得してMypageに適用
+var savedClass = localStorage.getItem('colorClass');
+if (savedClass) {
+  //ログ
+  console.log('クラス取得できたよ', savedClass);
+
+  //検索バー
+  const search = document.querySelector('.search-container');
+  search.classList.add(savedClass);
+  //検索欄
+  const searches = document.querySelectorAll('.search-button,.search-input');
+  searches.forEach(search => {
+    search.classList.add(savedClass);
+  });
+  //表示種類
+  const sectionNames = document.querySelectorAll('.sectionName');
+  sectionNames.forEach( sectionName=> {
+    sectionName.classList.add(savedClass);
+  });
+}
