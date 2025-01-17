@@ -223,7 +223,7 @@ background-color: #f0f0f0;
   background-color: #f0f0f0;
   color: darkblue;
 }
-.search-container.natural{  /*検索欄の下線色*/
+.search-container.white{  /*検索欄の下線色*/
   border-bottom: 2px solid darkblue;
 }
 .searchForm.white,.search-input.white{ /*検索欄*/

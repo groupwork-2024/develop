@@ -905,3 +905,38 @@ a.displayTag{
   border-bottom: dashed 2px #000000;
   cursor: default;
 }
+
+
+/* 画面の色（モード）を反映 */
+/* whiteモード */
+.search-container.white{  /*検索欄の下線色*/
+  border-bottom: 2px solid darkblue;
+}
+.search-button.white,.search-input.white{ /*検索欄*/
+  background-color: white;
+}
+.sectionName.white{ /*表示種類の下線色*/
+  border-bottom: dashed 2px darkblue;
+}
+
+/* blackモード */
+.search-container.black{  /*検索欄の下線色*/
+  border-bottom: 2px solid #222;
+}
+.search-button.black,.search-input.black{ /*検索欄*/
+  background-color: white;
+}
+.sectionName.black{ /*表示種類の下線色*/
+  border-bottom: dashed 2px #333;
+}
+
+/* naturalモード */
+.search-container.natural{  /*検索欄の下線色*/
+  border-bottom: 2px solid brown;
+}
+.search-button.natural,.search-input.natural{ /*検索欄*/
+  background-color: white;
+}
+.sectionName.natural{ /*表示種類の下線色*/
+  border-bottom: dashed 2px brown;
+}
