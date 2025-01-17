@@ -1015,6 +1015,7 @@ function displayTagItems(filteredItems) {
 function filterItems() {
     // 検索の値を変数に代入
     const searchTerm = document.getElementById('searchInput').value;
+
     console.log(searchTerm);
     console.log(closetItems);
 
@@ -1068,7 +1069,7 @@ function filterItems() {
           displayTagItems(tagFilteredItems);
         }  
     }
-    else{
+    else if(searchTerm == null || listCount == 0){
         console.log('配列の要素ないよ');
         const itemsListContainer = document.getElementById('itemsList');
         itemsListContainer.innerHTML = '';
@@ -1088,10 +1089,11 @@ function filterItems() {
 
 // 検索キーワードがURLパラメータにある場合、検索ボックスに表示
 if (searchTermFromUrl) {
-    document.getElementById('searchInput').value = searchTermFromUrl;
-    filterItems(); // URLパラメータに基づきフィルタリング
+  document.getElementById('searchInput').value = searchTermFromUrl;
+  filterItems();
 } else {
-    displayClothesItems(filterItems); // 初期状態で全アイテムを表示
+  document.getElementById('searchInput').value = ' ';
+  filterItems();
 }
 
 // ローカルストレージから履歴を取得、ない場合は空の配列
