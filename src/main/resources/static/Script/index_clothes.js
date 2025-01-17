@@ -2,20 +2,20 @@
 const clothesArray = [
   {
     id: '1',
-    name: 'Tシャツ',
-    image: '../img/youfuku_test.png',
-    brand: 'ユニクロ',
-    location: 'クローゼット1段目',
-    memo: '夏に最適なTシャツ',
+    name: '襟付きシャツ',
+    image: '../img/youfuku1.png',
+    brand: 'CHIP CLIP',
+    location: 'タンス',
+    memo: '薄手の襟付きシャツ',
     tags: [
-      { name: '夏', color: '#FF6347' },
-      { name: 'カジュアル', color: '#33FF57' }
+      { name: 'カジュアル', color: '#33FF57' },
+      { name: '長袖', color: '#923940' }
     ]
   },
   {
     id: '2',
     name: 'ジーンズ',
-    image: '../img/youfuku_test.png',
+    image: '../img/clothesTest.jpg',
     brand: 'Levi\'s',
     location: 'クローゼット2段目',
     memo: '定番のジーンズ',
@@ -26,25 +26,26 @@ const clothesArray = [
   },
   {
     id: '3',
-    name: 'ジャケット',
-    image: '../img/youfuku_test.png',
-    brand: 'ZARA',
-    location: 'クローゼット3段目',
-    memo: '秋冬用ジャケット',
+    name: '裾ボタン付きタートルネック',
+    image: '../img/youfuku2.png',
+    brand: 'Java',
+    location: 'タンス',
+    memo: 'ちょっと生地薄め',
     tags: [
-      { name: '秋冬', color: '#FF4500' },
-      { name: 'フォーマル', color: '#4B0082' }
+      { name: '長袖', color: '#923940' },
+      { name: 'タートルネック', color: '#2F2F82' },
     ]
   },
   {
     id : '4',
-    name: 'ワンピース',
-    image: '../img/youfuku_test.png',
-    brand: 'classicalelf',
+    name: 'ニット',
+    image: '../img/youfuku3.png',
+    brand: 'Java',
     location: 'クローゼット',
-    memo: '長袖 秋・春用',
+    memo: '',
     tags: [
-      { name: '春', color: '#FFCCEF' }
+      { name: '長袖', color: '#923940' },
+      { name: 'タートルネック', color: '#2F2F82' }
     ]
   }
 ];
@@ -688,4 +689,17 @@ function stopCamera() {
   addPhotoButton.disabled = false;
   fileInput.style.display='flex';
   addPhotoButton.style.display='flex';
+}
+
+
+//画面の色（モード）を反映
+// 保存されたクラス名を取得してMypageに適用
+var savedClass = localStorage.getItem('colorClass');
+if (savedClass) {
+  //ログ
+  console.log('クラス取得できたよ', savedClass);
+
+  //ラベルに適用
+  const name = document.querySelector('.list_name');
+  name.classList.add(savedClass);
 }

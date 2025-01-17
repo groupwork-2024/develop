@@ -40,3 +40,19 @@ a {
   outline: none; /* フォーカス枠を削除 */
   color: inherit; /* 文字色を継承 */
 }
+
+/* 画面の色（モード）を反映 */
+/* whiteモード */
+.list_name.white{
+  border-bottom: double 5px darkblue;
+}
+
+/* blackモード */
+.list_name.black{
+  border-bottom: double 5px #333;
+}
+
+/* naturalモード */
+.list_name.natural{
+  border-bottom: double 5px brown;
+}

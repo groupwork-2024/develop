@@ -13,7 +13,7 @@ const clothesArray = [
   },
   {
     name: 'ジーンズ',
-    image: '../img/youfuku_test.png',
+    image: '../img/clothesTest.jpg',
     brand: 'Levi\'s',
     location_id:'1',
     memo: '定番のジーンズ',

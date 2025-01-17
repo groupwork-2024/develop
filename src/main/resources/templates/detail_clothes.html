@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クローゼット登録</title>
+    <!-- google fonts,css等の読み込み -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../static/stylesheet/detail_closet.css">
+    <link rel="stylesheet" href="../static/stylesheet/back_completion.css">
+</head>
+<body>
+    <!--ヘッダー部分-->
+    <div class="header">
+        <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
+        <a class="title-button">クローゼット登録</a>
+        <a class="right_area">　</a>
+    </div>
+
+    <!--メインの部分-->
+    <div class="main-content">
+        <form onsubmit="return false;" id="closetForm">
+            <label for="name">名前</label>
+            <div class="input-container">
+                <input type="text" id="name" name="name" placeholder="例:寝室 子供部屋">
+                <button type="button" class="info-button" id="closetName">
+                    <span class="material-icons">
+                        help_outline
+                    </span>
+                </button>
+            </div>
+
+            <!-- 写真 -->
+            <label for="image">写真</label>
+            <div class="image-container">
+                <!--ファイル選択-->
+                <input type="file" id="image" name="image" accept="image/*" capture="camera" onchange="previewImage()" style="display: none;">
+
+                <!--画像プレビュー-->
+                <div class="imagePreviewContainer">
+                    <!-- 初期画像を指定 -->
+                    <img id="imagePreview" src="../img/clothes.png" alt="画像プレビュー" style="max-width: 100%; max-height: 200px;">
+                    <!--写真撮影のときの画面-->
+                    <video id="video" style="display: none; max-width: 100%; height:200px;" autoplay></video>
+                </div>
+                <div class="camerabtns">
+                    <!-- カメラ停止用の×ボタン -->
+                    <button type="button" id="stopCameraButton" style="display: none;" onclick="stopCamera()">
+                        <span class="material-icons">
+                            cancel
+                        </span>
+                    </button>
+                    <!--撮影をするボタン-->
+                    <button type="button" id="capture" class="capture" style="display: none;" onclick="captureImage()">
+                        <span class="material-icons">
+                            camera
+                        </span>
+                    </button>
+                </div>
+
+                <!--写真を起動するボタン-->
+                <button type="button" id="addPhoto" class="addPhoto" aria-label="カメラを起動" onclick="openCamera()">
+                    <span class="material-icons">
+                        add_a_photo
+                    </span>
+                </button>
+
+                <!-- ＋ボタン -->
+                <button type="button" id="addImageButton" class="add-image-button">
+                    <span class="material-icons">
+                        add_circle_outline
+                    </span>
+                </button>
+
+                <!-- カメラを表示するためのビデオとキャンバス -->
+                <canvas id="canvas" style="display: none;"></canvas>
+            </div>
+
+            <!--メモ-->
+            <label for="memo">メモ</label>
+            <div class='input-container'>
+                <textarea id="memo" name="memo" rows="1" cols="50" maxlength="150" placeholder="自由記載"></textarea>
+                <button type="button" class="info-button" id="closetMemo">
+                    <span class="material-icons">
+                        help_outline
+                    </span>
+                </button>
+            </div>
+            
+        </form>
+    </div>
+    
+    <script src="../static/Script/detail_closet.js"></script>
+    <script src="../static/Script/templete_script.js"></script>
+</body>
+</html>

@@ -223,3 +223,5 @@ if (savedClass) {
   const tab=document.querySelector('.tab-list');
   tab.classList.add(savedClass);
 }
+
+// 洋服の遷移先
