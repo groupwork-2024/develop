@@ -22,7 +22,7 @@ public class ImageProxyController {
 
             // レスポンスヘッダーにContent-Typeを設定
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.IMAGE_JPEG); // JPEGとして扱う（適切なMIMEタイプに変更）
+            headers.setContentType(MediaType.IMAGE_PNG); // JPEGとして扱う（適切なMIMEタイプに変更）
 
             return ResponseEntity.ok()
                     .headers(headers)

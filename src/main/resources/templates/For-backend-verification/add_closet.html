@@ -32,15 +32,6 @@
             </button>
         </div>
 
-        <!-- ハンガー数 -->
-        <label for="hanger-count">ハンガーの個数</label>
-        <div class="input-container">
-            <input type="number" id="hanger-count" name="hanger-count" min="1" max="99">
-            <button type="button" class="info-button" id="hangerCount">
-                <span class="material-icons">help_outline</span>
-            </button>
-        </div>
-
         <!-- 写真 -->
         <label for="image">写真</label>
         <div class="image-container">
@@ -78,7 +69,7 @@
 
     <!-- 完了ボタン -->
     <div class="completion">
-        <button id="review-modal-button" class="reviewModalButton" onclick="openReviewModal()">完了</button>
+        <button type="button" id="review-modal-button" class="reviewModalButton" onclick="openReviewModal()">完了</button>
     </div>
 
     <!-- 確認画面 -->
@@ -90,7 +81,7 @@
             <div id="reviewHangerCount" class="review"></div>
             <div id="reviewImage" class="reviewImage"></div>
             <div id="reviewMemo" class="review"></div>
-            <button onclick="registerData()">登録</button>
+            <button id="registerButton">登録</button>
         </div>
     </div>
 
@@ -111,7 +102,7 @@
     </div>
 </div>
 
-<script th:src="@{/script/add_closet.js}"></script>
-<script th:src="@{/script/templete_script.js}"></script>
+<script th:src="@{/For-backend-verification/closet.js}"></script>
+<script th:src="@{/Script/templete_script.js}"></script>
 </body>
 </html>

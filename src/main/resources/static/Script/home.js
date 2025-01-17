@@ -87,12 +87,12 @@ function displayWeather(temp, weatherCode) {
 // 天気コードに基づいて天気アイコンのURLを返す関数
 function getWeatherIcon(code) {
   const iconMap = {
-    0: "../img/icons/kaisei.png",   // 天気コード0: 快晴アイコン
-    1: "../img/icons/hare.png",    // 天気コード1: 晴れアイコン
-    2: "../img/icons/kumori.png",  // 天気コード2: 曇りアイコン
-    3: "../img/icons/ame.png",     // 天気コード3: 雨アイコン
+    0: "https://aws-infra-group2024.s3.ap-northeast-1.amazonaws.com/weatherIcons/kaisei.png",   // 天気コード0: 快晴アイコン
+    1: "https://aws-infra-group2024.s3.ap-northeast-1.amazonaws.com/weatherIcons/hare.png",    // 天気コード1: 晴れアイコン
+    2: "https://aws-infra-group2024.s3.ap-northeast-1.amazonaws.com/weatherIcons/kumori.png",  // 天気コード2: 曇りアイコン
+    3: "https://aws-infra-group2024.s3.ap-northeast-1.amazonaws.com/weatherIcons/ame.png",     // 天気コード3: 雨アイコン
   };
-  return iconMap[code] || "../img/icons/hare.png"; // 指定されたコードが存在しない場合は晴れアイコンを返す
+  return iconMap[code] || "https://aws-infra-group2024.s3.ap-northeast-1.amazonaws.com/weatherIcons/hare.png"; // 指定されたコードが存在しない場合は晴れアイコンを返す
 }
 
 //カルーセル

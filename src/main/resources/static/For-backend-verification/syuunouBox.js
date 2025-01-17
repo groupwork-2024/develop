@@ -1,8 +1,8 @@
 // 写真リスト
 const photos = [
-    "https://www.komeri.com/images/goods/014/396/16/1439616.jpg",
-    "https://cdn.askul.co.jp/img/product/3L1/502432_3L1.jpg",
-    "https://jp.daisonet.com/cdn/shop/products/4549131611052_10.jpg?v=1640581210"
+    "https://aws-infra-group2024.s3.ap-northeast-1.amazonaws.com/storagebag/strage-bag3.png",
+    "https://aws-infra-group2024.s3.ap-northeast-1.amazonaws.com/storagebag/strage-bag2.png",
+    "https://aws-infra-group2024.s3.ap-northeast-1.amazonaws.com/storagebag/strage-bag3.png"
 ];
 let currentPhotoIndex = 0;
 
@@ -86,54 +86,60 @@ function closeReviewModal() {
 
 //完了確認メッセージ関連
 // 登録データを登録後に完了メッセージを表示
-registerButton.addEventListener("click", () => {
+registerButton.addEventListener("click", async () => {
     const reviewModal = document.getElementById('reviewModal');
     const registerModal = document.getElementById('registerModal');
     const userId = document.getElementById('userId').value;
 
-    // データの準備
-    const name = document.getElementById("name").value;
-    const imgElement = document.querySelector("#reviewSyunouImage img");
-    const imageUrl = imgElement.src; // 画像のURLを取得
+    try {
+        // データの準備
+        const name = document.getElementById("name").value;
+        const memo = document.getElementById("memo").value;
+        const imgElement = document.querySelector("#reviewSyunouImage img");
 
-    fetch(`/proxy/image?imageUrl=${encodeURIComponent(imageUrl)}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("画像取得に失敗しました");
-            }
-            return response.blob(); // Blobに変換
-        })
-        .then(blob => {
-            const fileName = imageUrl.split('/').pop().split('?')[0]; // ファイル名をURLから取得
+        if (!imgElement || !imgElement.src) {
+            console.error("画像が選択されていません");
+            return;
+        }
 
-            // BlobをFileオブジェクトに変換
-            const file = new File([blob], fileName, { type: blob.type });
+        const imageUrl = imgElement.src;
 
-            // FormDataを作成し、Fileオブジェクトとその他のデータを追加
-            const formData = new FormData();
-            formData.append("image", file); // ファイルデータ
-            formData.append("name", name); // 名前データ
+        // プロキシ経由で画像を取得
+        const imgResponse = await fetch(`/proxy/image?imageUrl=${encodeURIComponent(imageUrl)}`);
+        if (!imgResponse.ok) {
+            throw new Error("画像取得に失敗しました");
+        }
 
-            // fetchでサーバーにデータを送信
-            return fetch(`/register/${userId}/storages/bags`, {
-                method: "POST",
-                body: formData
-            });
-        })
-        .then(response => {
-            if (response.ok) {
-                // 成功時の処理
-                reviewModal.style.display = 'none';
-                registerModal.style.display = 'flex';
-                console.log("データ送信成功");
-            } else {
-                throw new Error("サーバーでエラーが発生しました");
-            }
-        })
-        .catch(error => {
-            console.error("エラー:", error);
+        const imgBlob = await imgResponse.blob(); // Blobに変換
+        const fileName = imageUrl.split('/').pop().split('?')[0]; // ファイル名をURLから取得
+        const file = new File([imgBlob], fileName, { type: imgBlob.type }); // BlobをFileオブジェクトに変換
+
+        // フォームデータの作成
+        const formData = new FormData();
+        formData.append("image", file);
+        formData.append("name", name); // 名前データ
+        formData.append("memo", memo);
+
+        // fetchでサーバーにデータを送信
+        const response = await fetch(`/register/${userId}/storages/bags`, {
+            method: "POST",
+            body: formData
         });
+
+        if (response.ok) {
+            // 成功時の処理
+            reviewModal.style.display = 'none';
+            registerModal.style.display = 'flex';
+            console.log("データ送信成功");
+        } else {
+            throw new Error("サーバーでエラーが発生しました");
+        }
+    } catch (error) {
+        console.error("エラー:", error);
+    }
 });
+
+
 
 
 // 「登録完了」メッセージを閉じて、次の画面に移動

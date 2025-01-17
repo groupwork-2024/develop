@@ -21,6 +21,7 @@
 </div>
 <!-- メインコンテンツエリア -->
 <div class="list_header">
+    <a class="list_name">収納一覧</a>
   <div class="cp_ipselect06"> <!--セレクトボックス-->
       <select class="cp_sl06" id="storageTypeSelect" required>
           <option value="DRESSER" th:selected="${selectedStorageType == 'DRESSER'}">タンス</option>
@@ -37,19 +38,26 @@
 </div>
 <div class="main-content">
     <div class="storageList" id="storageList">
-        <div th:each="storage : ${storages}" class="clothse_button" th:id="${storage.id}">
-            <a th:href="@{/section/{userId}/storages/{storageId}(userId=${userId}, storageId=${storage.id},storageType=${storage.storageType})}"
-               class="detail_url">
-            <figure class="clothes_img">
-                <img th:src="${storage.imageUrl}" alt="storage img">
-                    <div class="detail">
-                        <br>名前: <span th:text="${storage.name}"></span></br>
+        <div th:each="storage : ${storages}" class="storage" th:id="${storage.id}">
+            <a th:href="@{/section/{userId}/storages/{storageId}(userId=${userId}, storageId=${storage.id}, storageType=${storage.storageType})}">
+                <figure class="clothes_img">
+                    <img th:src="${storage.imageUrl}" alt="storage img">
+                    <div class="storageDetail">
+                        <p>
+                            <strong>名前</strong><br>
+                            <span th:text="${storage.name}"></span>
+                        </p>
+                        <div class="storageMemo">
+                            <strong>メモ</strong><br>
+                            <textarea th:text="${storage.memo}"></textarea>
+                        </div>
                     </div>
                 </figure>
             </a>
         </div>
     </div>
 </div>
+
 
 <script th:src="@{/Script/templete_script.js}"></script>
 <script th:src="@{/For-backend-verification/index_storage.js}"></script>

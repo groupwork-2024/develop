@@ -129,11 +129,11 @@ public class RegisterController {
     public ResponseEntity<Void> addCloset(
             @PathVariable Long userId,
             @RequestParam("name") String name,
-            @RequestParam("hanger_count") int hangerCount,
+            @RequestParam("memo") String memo,
             @RequestParam("image") MultipartFile file) {
         try {
             // Service層でビジネスロジックを処理
-            storageService.addCloset(userId, name, hangerCount, file);
+            storageService.addCloset(userId, name, memo, file);
             return ResponseEntity.ok().build();
 
         } catch (Exception e) {
@@ -151,11 +151,12 @@ public class RegisterController {
     @RequestMapping(method = RequestMethod.POST, value = "/storages/bags")
     public ResponseEntity<Void> addBags(@PathVariable Long userId,
                                         @RequestParam ("name") String name,
+                                        @RequestParam("memo") String memo,
                                         @RequestParam("image") MultipartFile file,
                                         Model model) {
         try {
             // Service層でビジネスロジックを処理
-            storageService.addBags(userId, name, file);
+            storageService.addBags(userId, name, memo, file);
             return ResponseEntity.ok().build();
 
         } catch (Exception e) {

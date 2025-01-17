@@ -1,13 +1,14 @@
 let ImageContent = '';
+const registerButton = document.getElementById('registerButton');
 // 情報ボタンを押したときの処理
 // 名前フィールドの情報ボタン
 document.getElementById('closetName').addEventListener('click', function() {
     alert("クローゼットに名前を付けることができます。\n例: 寝室のクローゼット");
 });
 
-// ハンガーの個数の情報ボタン
-document.getElementById('hangerCount').addEventListener('click', function() {
-    alert("クローゼットに収めるハンガーの個数を入力してください\nハンガーの個数は1から99の範囲で指定できます。");
+//メモの情報ボタン
+document.getElementById('closetMemo').addEventListener('click', function() {
+    alert("配置している場所や収納している物についての詳細を書き留めることができます。\n例:寝室のクローゼット コート類");
 });
 
 // 完了ボタンが押された時にモーダルを表示し、フォームデータを表示する
@@ -15,22 +16,17 @@ function openReviewModal() {
     // フォームのデータを取得
     console.log("確認モーダルを開きました");
     const name = document.getElementById('name').value;
-    const hangerCount = document.getElementById('hanger-count').value;
     const imageFile = document.getElementById('image').files[0];
     const imagePreviewModal = document.getElementById('reviewImage');
+     const memo = document.getElementById('memo').value;
     const canvas = document.getElementById('imagePreview');
 
     ImageContent = canvas.src;
 
-    // 入力欄に空白がないかチェック
-    if (name === "" || hangerCount === "" || imageFile === "") {
-        alert("すべての項目を入力してください");
-        return;  // 空欄があれば処理を中止
-    }
-
     // モーダルの中にデータを埋め込む
     document.getElementById('reviewName').innerHTML = `<a>名前</a><br>${name}`;
-    document.getElementById('reviewHangerCount').innerHTML = `<a>ハンガーの個数</a><br>${hangerCount}`;
+     document.getElementById('reviewMemo').innerHTML = `<a>メモ</a>
+        <textarea placeholder="メモなし" readonly>${memo}</textarea>`;
 
     // 画像の表示
     imagePreviewModal.innerHTML = `<img src="${ImageContent}" alt="画像" style="max-width: 100%; max-height: 200px;">`;
@@ -58,7 +54,7 @@ registerButton.addEventListener("click", () => {
     // データの準備
     const formData = new FormData();
     const name = document.getElementById("name").value;
-    const hangerCount = document.getElementById("hanger-count").value;
+    const memo = document.getElementById("memo").value;
     const imgElement = document.querySelector("#reviewImage img");
 
 // imgElement.src のURLからバイナリデータに変換
@@ -67,7 +63,7 @@ fetch(imgElement.src)
   .then(blob => {
     formData.append("image", blob); // ファイル名も指定する
     formData.append("name", name);
-    formData.append("hanger_count", hangerCount);
+    formData.append("memo", memo);
 
     // fetchでデータを送信
     fetch(`/register/${userId}/storages/closet`, {

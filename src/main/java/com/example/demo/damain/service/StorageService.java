@@ -73,7 +73,7 @@ public class StorageService {
         dresserStorageRepository.save(dresserStorage);
     }
 
-    public void addCloset(Long userId, String name, int hangerCount, MultipartFile file) throws IOException {
+    public void addCloset(Long userId, String name, String memo, MultipartFile file) throws IOException {
         // ユーザー情報を取得
         User user = userService.findById(userId);
 
@@ -83,19 +83,14 @@ public class StorageService {
         // Storageエンティティを作成して保存
         Storage storage = new Storage();
         storage.setName(name);
+        storage.setMemo(memo);
         storage.setStorageType(StorageType.CLOSET);
         storage.setImageUrl(imageUrl);
         storage.setUser(user);
-        Storage savedStorage = saveStorage(storage);
-
-        // ClosetStorageエンティティを作成して保存
-        ClosetStorage closetStorage = new ClosetStorage();
-        closetStorage.setStorage(savedStorage);
-        closetStorage.setHanger_count(hangerCount);
-        saveClosetStorage(closetStorage);
+        saveStorage(storage);
     }
 
-    public void addBags(Long userId, String name, MultipartFile file) throws IOException {
+    public void addBags(Long userId, String name, String memo, MultipartFile file) throws IOException {
         // ユーザー情報を取得
         User user = userService.findById(userId);
 
@@ -105,6 +100,7 @@ public class StorageService {
         // Storageエンティティを作成して保存
         Storage storage = new Storage();
         storage.setName(name);
+        storage.setMemo(memo);
         storage.setStorageType(StorageType.STORAGE_BAG);
         storage.setImageUrl(imageUrl);
         storage.setUser(user);

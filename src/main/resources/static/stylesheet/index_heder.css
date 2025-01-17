@@ -34,3 +34,9 @@
   margin-right: 10px;
   justify-content: center;
 }
+
+a {
+ text-decoration: none; /* 下線を削除 */
+  outline: none; /* フォーカス枠を削除 */
+  color: inherit; /* 文字色を継承 */
+}

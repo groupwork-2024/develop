@@ -22,7 +22,7 @@
     <div class="main-content">
         <input type="hidden" id="userId" th:value="${userId}">
         <form onsubmit="return false;" id="syunouForm">
-            <label for="name">名前</label>
+            <label for="name">収納袋の名前</label>
             <div class="input-container">
                 <input type="text" id="name" name="name">
                 <button type="button" class="info-button" id="infoButton">
@@ -43,9 +43,20 @@
 
             <!--サンプルの画像の表示-->
             <div class="thumbnail-buttons">
-                <button type="button" onclick="selectPhoto(0)"><img src="https://www.komeri.com/images/goods/014/396/16/1439616.jpg" alt="Photo 1"></button>
-                <button type="button" onclick="selectPhoto(1)"><img src="https://cdn.askul.co.jp/img/product/3L1/502432_3L1.jpg" alt="Photo 2"></button>
-                <button type="button" onclick="selectPhoto(2)"><img src="https://jp.daisonet.com/cdn/shop/products/4549131611052_10.jpg?v=1640581210" alt="Photo 3"></button>
+                <button type="button" onclick="selectPhoto(0)"><img th:src="@{/img/strage-bag1.png}" alt="Photo 1"></button>
+                <button type="button" onclick="selectPhoto(1)"><img th:src="@{/img/strage-bag2.png}" alt="Photo 2"></button>
+                <button type="button" onclick="selectPhoto(2)"><img th:src="@{/img/strage-bag3.png}" alt="Photo 3"></button>
+            </div>
+
+            <!--メモ-->
+            <label for="memo">メモ</label>
+            <div class='input-container'>
+                <textarea id="memo" name="memo" rows="1" cols="50" maxlength="150" placeholder="例:自由記載"></textarea>
+                <button type="button" class="info-button" id="StorageBoxMemo">
+                    <span class="material-icons">
+                        help_outline
+                    </span>
+                </button>
             </div>
 
         <!--登録完了ボタン 確認画面を見れるボタン-->
