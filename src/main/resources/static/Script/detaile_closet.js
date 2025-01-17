@@ -13,7 +13,7 @@ const clothesArray = [
   },
   {
     name: 'ジーンズ',
-    image: '../img/youfuku_test.png',
+    image: '../img/clothesTest.jpg',
     brand: 'Levi\'s',
     location_id:'6',
     memo: '定番のジーンズ',
@@ -239,6 +239,7 @@ function showEditForm(index) {
   const clothes = clothesArray[index];
   console.log(clothesArray[index]);
   editNameInput.value = clothes.name;
+  editImageInput.image = clothes.image;
   editBrandInput.value = clothes.brand;
   editLocationInput.value = storageName.textContent.substring(3);
   editMemoInput.value = clothes.memo;
@@ -246,7 +247,7 @@ function showEditForm(index) {
   const labelDisplay = document.getElementById('labelDisplay');
   labelDisplay.innerHTML = ''; // 一度リセット
 
-  console.log(editTags);
+  console.log(clothes);
 
   //登録されているタグを表示
   editTags.forEach((tag,index) => {
@@ -255,6 +256,8 @@ function showEditForm(index) {
 
   // 画像のプレビューを設定
   const imagePreview = document.getElementById('imagePreview');
+
+  console.log(imagePreview);
 
   //画像が無かったらデフォルトにする
   imagePreview.src = clothes.image || "../img/youfuku_test.png"; 

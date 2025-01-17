@@ -15,6 +15,8 @@
 .clothes_img img{
   min-width: 190px;
   min-height: 190px;
+  max-width: 190px;
+  max-height: 190px;
   object-fit:cover;
 }
 
