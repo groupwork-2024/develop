@@ -1,0 +1,2 @@
+ALTER TABLE users
+MODIFY COLUMN user_icon VARCHAR(255);

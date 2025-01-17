@@ -1,17 +1,43 @@
 const userId = document.getElementById('userId').value;
-//アイコンに画像を設定
-function iconImage(event) {
+async function iconImage(event) {
   const file = event.target.files[0]; // 選択されたファイル
-  if (file) {
-    const reader = new FileReader(); // ファイルを読み込むオブジェクト
-    reader.onload = function (e) {
-      const profileImage = document.getElementById('profile-image');
-      profileImage.src = e.target.result; // 読み込んだ画像のURLを設定
-      profileImage.style.display = 'block'; // 画像を表示
-    };
-    reader.readAsDataURL(file); // ファイルをデータURLとして読み込む
+  const profileImage = document.getElementById('profile-image');
+
+  if (!file) {
+    console.error("ファイルが選択されていません");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("image", file); // 選択した画像をフォームデータに追加
+
+  // サーバーに画像をアップロード
+  try {
+    const response = await fetch(`/my_page/${userId}/icon`, {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to upload user icon');
+    }
+
+    const data = await response.json();
+    console.log('User icon uploaded successfully:', data);
+
+    if (data.url) {
+      // 新しい画像URLを即時設定し、キャッシュを回避
+      profileImage.src = `${data.url}?timestamp=${new Date().getTime()}`;
+      profileImage.style.display = 'block'; // 非表示を解除
+    } else {
+      console.error("サーバーから新しい画像のURLが返されませんでした");
+    }
+  } catch (error) {
+    console.error('Error uploading user icon:', error);
   }
 }
+
+
 
 
 // カラーボタンがクリックされたときのイベント
@@ -25,9 +51,9 @@ function saveClassToLocalStorage(event) {
   console.log('選択されたモード：', selectedColor);
 
   //追加したいクラス名を入れるclassName
-  let className='';
+  let className = '';
 
-  switch(selectedColor){
+  switch (selectedColor) {
     case 'white':
       className = 'white'; // 追加したいクラス名
       break;
@@ -37,7 +63,7 @@ function saveClassToLocalStorage(event) {
     case 'natural':
       className = 'natural'; // 追加したいクラス名
       break;
-    }
+  }
 
   // クラス名をlocalStorageに保存
   localStorage.setItem('colorClass', className);
@@ -47,191 +73,159 @@ function saveClassToLocalStorage(event) {
 }
 
 
-// ページロード時に初期設定
+// 一覧初期状態の設定
 window.addEventListener('DOMContentLoaded', () => {
-    // タブのクリックイベントを設定
-    document.querySelectorAll('.tab').forEach(tab => {
-        tab.addEventListener('click', () => handleTabClick(tab));
-    });
-
-    // URLクエリパラメータから初期表示を設定
-    const params = new URLSearchParams(window.location.search);
-    const view = params.get('view') || 'clothes'; // デフォルトは 'clothes'
-    showSection(view); // 初期表示
+  //すべての一覧を非表示にする
+  document.querySelectorAll('.item-grid').forEach(section => section.style.display = 'none');
+  //洋服一覧のみを表示する
+  document.getElementById('youhuku-grid').style.display = 'grid';
 });
 
-// タブクリック時の処理
-function handleTabClick(tab) {
-    // すべてのタブを非アクティブ化
+// タブ切り替え（クリックイベント）
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    // すべての一覧のアクティブ状態を解除
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    // クリックされたタブをアクティブ化
+    // クリックされた一覧をアクティブにする
     tab.classList.add('active');
 
-    // 対応するセクションIDを取得
-    let sectionId = '';
+    // すべての一覧を非表示にする
+    document.querySelectorAll('.item-grid').forEach(section => section.style.display = 'none');
+
+    // ユーザーIDを取得（動的に設定可能）
+    const userId = document.getElementById('userId').value;
+
+    // タブに応じてfetchでデータを取得し、対応するセクションを表示
     if (tab.classList.contains('youhuku')) {
-        sectionId = 'youhuku-grid';
+      fetchData(`/my_page/${userId}`, 'youhuku-grid', 'clothes');
     } else if (tab.classList.contains('closet')) {
-        sectionId = 'closet-grid';
+      fetchData(`/my_page/${userId}`, 'closet-grid', 'closet');
     } else if (tab.classList.contains('tag')) {
-        sectionId = 'tag-grid';
+      fetchData(`/my_page/${userId}`, 'tag-grid', 'tags');
     }
+  });
+});
 
-    // セクションを表示切り替え
-    showSection(sectionId.replace('-grid', ''));
-}
+function fetchData(baseApiUrl, gridId, resourceType) {
+  const apiUrl = `${baseApiUrl}/${resourceType}`;
 
-// 指定したセクションを表示し、それ以外を非表示
-function showSection(section) {
-    // すべてのセクションを非表示
-    document.querySelectorAll('.item-grid').forEach(grid => {
-        grid.style.display = 'none';
-    });
+  fetch(apiUrl)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('データの取得に失敗しました: ' + response.status);
+      }
+      return response.json();
+    })
+    .then(data => {
+      const grid = document.getElementById(gridId);
+      grid.innerHTML = ''; // 既存の内容をクリア
 
-    // 対応するセクションを表示
-    const activeGrid = document.getElementById(`${section}-grid`);
-    if (activeGrid) {
-        activeGrid.style.display = 'grid';
-    }
+      if (resourceType === "clothes") {
+        // 洋服データを表示
+        data.forEach(item => {
+          const link = document.createElement('a');
+          link.href = `/clothes/detail/${item.id}`;
 
-    // データ取得（必要に応じて実行）
-    if (section === 'youhuku') {
-        fetchClothesList();
-    } else if (section === 'closet') {
-        fetchClosetList();
-    } else if (section === 'tag') {
-        fetchTagList();
-    }
+          const div = document.createElement('div');
+          div.classList.add('youhuku-item');
 
-    // クエリパラメータを更新（ブラウザのアドレスバー）
-    history.replaceState(null, '', `${window.location.pathname}?view=${section}`);
-}
+          const img = document.createElement('img');
+          img.src = item.imageUrl;
+          img.alt = item.name;
 
-// サーバーから洋服データを取得
-function fetchClothesList() {
-    fetch(`/others/{userId}/ajax/clothes`) // 必要に応じてURLやuserIdを動的に変更
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('サーバーエラー: ' + response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
-            renderClothesList(data); // データを描画
-        })
-        .catch(error => {
-            console.error('データ取得エラー:', error);
+          div.appendChild(img);
+          link.appendChild(div);
+          grid.appendChild(link);
         });
-}
+      } else if (resourceType === "closet") {
+        // 収納データを表示
+        data.forEach(item => {
+          // ルーティングURLを動的に生成
+          const storageUrl = `/section/${userId}/storages/${item.id}?storageType=${item.storageType}`;
+          // <a>タグを生成
+          const link = document.createElement('a');
+          link.href = storageUrl; // ルーティング用のリンク
+          link.classList.add('storage-link'); // 必要に応じてCSSクラスを追加
 
-// サーバーから収納データを取得
-function fetchClosetList() {
-    fetch(`/others/{userId}/ajax/storage`) // 必要に応じてURLやuserIdを動的に変更
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('サーバーエラー: ' + response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
-            renderClosetList(data); // データを描画
-        })
-        .catch(error => {
-            console.error('データ取得エラー:', error);
+          const div = document.createElement('div');
+          div.classList.add('youhuku-item');
+
+          const img = document.createElement('img');
+          img.src = item.imageUrl;
+          img.alt = item.name;
+
+          div.appendChild(img);
+          link.appendChild(div);
+          grid.appendChild(link);
         });
-}
+      } else if (resourceType === "tags") {
+        data.forEach(item => {
+          // 外部リンクを作成
+          const link = document.createElement('a');
+          link.href = `/section/${userId}/tag/${item.id}`; // タグの詳細ページリンク
 
-// サーバーからタグデータを取得
-function fetchTagList() {
-    fetch(`/others/{userId}/ajax/tag`) // 必要に応じてURLやuserIdを動的に変更
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('サーバーエラー: ' + response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
-            renderTagList(data); // データを描画
-        })
-        .catch(error => {
-            console.error('データ取得エラー:', error);
+          // 外部リンク内のラッパー（youhuku-item）を作成
+          const div = document.createElement('div');
+          div.classList.add('youhuku-item');
+
+          // タグとして表示する部分を作成
+          const tag = document.createElement('div');
+          tag.classList.add('tag_list'); // タグのスタイルを適用
+          tag.textContent = item.name; // タグ名を設定
+          tag.style.backgroundColor = item.color || '#4CAF50'; // サーバーから取得した色を適用
+
+          // 矢印部分
+          const arrow = document.createElement('div');
+          arrow.classList.add('arrow');
+          arrow.style.borderRightColor = item.color || '#4CAF50'; // 矢印の色を設定
+
+          // タグに矢印を追加
+          tag.appendChild(arrow);
+
+          // タグをyouhuku-item内に追加
+          div.appendChild(tag);
+
+          // youhuku-itemをリンクに追加
+          link.appendChild(div);
+
+          // リンクをグリッドに追加
+          grid.appendChild(link);
         });
-}
+      }
 
-// 洋服データを描画
-function renderClothesList(clothesArray) {
-    const container = document.getElementById('youhuku-grid');
-    container.innerHTML = ''; // 現在の表示をクリア
-
-    clothesArray.forEach(clothes => {
-        const item = document.createElement('div');
-        item.classList.add('youhuku-item');
-
-        const img = document.createElement('img');
-        img.src = clothes.image;
-        img.alt = clothes.name;
-
-        const name = document.createElement('p');
-        name.textContent = clothes.name;
-
-        item.appendChild(img);
-        item.appendChild(name);
-        container.appendChild(item);
+      grid.style.display = 'grid'; // セクションを表示
+    })
+    .catch(error => {
+      console.error('エラー:', error);
     });
 }
 
-// 収納データを描画
-function renderClosetList(closetArray) {
-    const container = document.getElementById('closet-grid');
-    container.innerHTML = ''; // 現在の表示をクリア
 
-    closetArray.forEach(closet => {
-        const item = document.createElement('div');
-        item.classList.add('closet-item');
-
-        const img = document.createElement('img');
-        img.src = closet.image;
-        img.alt = closet.name;
-
-        const name = document.createElement('p');
-        name.textContent = closet.name;
-
-        item.appendChild(img);
-        item.appendChild(name);
-        container.appendChild(item);
-    });
-}
-
-// タグデータを描画
-function renderTagList(tagArray) {
-    const container = document.getElementById('tag-grid');
-    container.innerHTML = ''; // 現在の表示をクリア
-
-    tagArray.forEach(tag => {
-        const item = document.createElement('div');
-        item.classList.add('tag-item');
-
-        const color = document.createElement('div');
-        color.style.backgroundColor = tag.color;
-        color.classList.add('tag-color');
-
-        const name = document.createElement('p');
-        name.textContent = tag.name;
-
-        item.appendChild(color);
-        item.appendChild(name);
-        container.appendChild(item);
-    });
-}
 
 //画面の色（モード）を反映
 // 保存されたクラス名を取得してMypageに適用
-const savedClass = localStorage.getItem('colorClass');
+var savedClass = localStorage.getItem('colorClass');
 if (savedClass) {
   //ログ
   console.log('クラス取得できたよ', savedClass);
-  //ヘッダーに適用
-  const header = document.querySelector('.header');
-  header.classList.add(savedClass);
-  console.log('ヘッダーの色：', savedClass);
+
+  //一覧背景色
+  const grids = document.querySelectorAll('#closet-grid,#youhuku-grid');
+  grids.forEach(grid => {
+    grid.classList.add(savedClass);
+    //ユーザーアイコン
+    const circle = document.querySelector('.profile-circle');
+    circle.classList.add(savedClass);
+  });
+  //＋ボタン
+  const plus = document.querySelector('.plus-buttom');
+  plus.classList.add(savedClass);
+  //タブのアイコン
+  const icons = document.querySelectorAll('#icon');
+  icons.forEach(icon => {
+    icon.classList.add(savedClass);
+  })
+  //タブの背景
+  const tab = document.querySelector('.tab-list');
+  tab.classList.add(savedClass);
 }
