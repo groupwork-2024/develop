@@ -1,0 +1,653 @@
+/* タグ一覧画面関連 */
+.tagListmodal{
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* タグ一覧モーダル */
+.tagListmodalContent{
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 8px;
+  width: 60%;
+  height:auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color:white; /* 半透明の背景 */
+}
+
+/* タグ一覧モーダル閉じるボタンのスタイル */
+.TagListClose{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #FFF;
+  top:-5%;
+  right: -5%;
+  width: 40px;
+  height: 40px;
+  background-color: #333;
+  border: #333;
+  border-radius: 50%;
+}
+
+/* タグ一覧のボタンがあるところ */
+.tagAddButtons{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content:right;
+}
+
+/* タグ登録ボタン */
+#addButton{
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 3% 2%;
+}
+
+/* タグ登録ボタンにカーソルが来たとき */
+#addButton:hover {
+  background-color: rgb(32, 244, 9);
+}
+
+/* タグ追加ボタン */
+#addTagOpenButton{
+  background-color: transparent;
+  border: none;
+  width: 10%;
+  cursor: pointer;
+}
+
+/* タグ表示エリア */
+.tagList{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* タグ一覧の各タグのスタイル */
+.tag {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  font-size: 14px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  width: auto;
+  white-space: nowrap;
+}
+
+/* タグが選択された状態 */
+.selected {
+  border: 1px solid #ebebeb68;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .5);
+}
+
+/* 登録画面のタグ部分 */
+.label-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* 登録画面のタグのところ */
+#labelDisplay {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  height: auto; /* 高さを自動調整 */
+  min-height: 50px;  /* 最低限の高さを設定 */
+  width: 100%; /* 幅を100%に */
+  box-sizing: border-box;  
+}
+
+/* 登録画面の各タグに対するもの */
+.addtag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  padding: 10px 20px;  /* タグのサイズ */
+  color: white;
+  font-size: 16px;      /* フォントサイズ */
+  border-radius: 4px;
+  position: relative;
+  padding-left: 30px;  /* 矢印のスペースを確保 */
+  box-sizing: border-box; /* パディングとボーダーをサイズに含める */
+  height: 40px;           /* タグの高さを一定に設定 */
+  white-space: nowrap;
+}
+
+/* 矢印部分を作成 */
+.addtag .arrow {
+  content: '';
+  position: absolute;
+  left: -13px;  /* 矢印がタグの左側に出るように */
+  top: 50%;
+  transform: translateY(-50%);  /* 垂直方向に中央揃え */
+  border-top: 20px solid transparent;   /* 上の辺 */
+  border-bottom: 20px solid transparent;/* 下の辺 */
+  border-right: 15px solid #4CAF50 ; /* 矢印の色をここで変更 */
+}
+
+/* 確認画面のタグ表示部分 */
+.reviewTags{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 5px;
+  padding-right: 20px;
+  height: auto; /* 高さを自動調整 */
+  min-height: 20px;  /* 最低限の高さを設定 */
+  width: 100%; /* 幅を100%に */
+  box-sizing: border-box;  
+}
+
+/* 確認画面のタグ部分 */
+.rvtag{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  padding: 5px 10px;  /* タグのサイズ */
+  color: white;
+  font-size: 16px;      /* フォントサイズ */
+  border-radius: 4px;
+  position: relative;
+  padding-left: 10px;  /* 矢印のスペースを確保 */
+  box-sizing: border-box; /* パディングとボーダーをサイズに含める */
+  height: 40px;           /* タグの高さを一定に設定 */
+  white-space: nowrap;
+}
+
+/* 確認画面のタグの矢印部分 */
+.rvarrow{
+  content: '';
+  position: absolute;
+  left: -13px;  /* 矢印がタグの左側に出るように */
+  top: 50%;
+  transform: translateY(-50%);  /* 垂直方向に中央揃え */
+  border-top: 20px solid transparent;   /* 上の辺 */
+  border-bottom: 20px solid transparent;/* 下の辺 */
+  border-right: 15px solid #4CAF50 ; /* 矢印の色をここで変更 */
+}
+
+/* 削除ボタン */
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+/* タグ一覧画面関連 ここまで*/
+
+/* タグ追加画面関連 */
+.tagmodal{
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* タグ追加の+のボタンレイアウト */
+#tagOpenButton{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* タグ追加モーダルのスタイル */
+.tagModalContent{
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 8px;
+  width: 60%;
+  height:auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color:white; /* 半透明の背景 */
+}
+
+/* タグ追加モーダル内のスタイル */
+#tagInput{
+  display: flex;
+  flex-basis: 80%;
+  width: 90%;
+}
+
+/* タグ追加モーダル閉じるボタンのスタイル */
+.TagClose{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #FFF;
+  top:-5%;
+  right: -5%;
+  width: 40px;
+  height: 40px;
+  background-color: #333;
+  border: #333;
+  border-radius: 50%;
+}
+
+/* プリセットカラー全体のスタイル */
+.color-palette{
+  display: flex;
+  flex-direction: row;
+  justify-content:left;
+  width: 100%;
+  height: 40px;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* 各カラーのボタン */
+.color-btn{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 2%;
+  cursor: pointer;          /* ポインターカーソル */
+  transition: all 0.3s ease;  /* ホバー時のトランジション */
+}
+
+/* カラーボタンにホバーしたときのエフェクト */
+.color-btn:hover {
+  transform: scale(1.1);  /* ボタンが少し大きくなる */
+  border-color: #000;  /* ホバー時に枠線が黒くなる */
+}
+
+/* カラーパレットのスタイル */
+#colorPickerContainer {
+  display: none; /* 最初は非表示 */
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  z-index: 10;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+/* 色追加ボタン */
+#addColorBtn{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;  /* 背景色を淡いグレーに */
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* 追加ボタンにホバーしたときのエフェクト */
+#addColorBtn:hover {
+  transform: scale(1.1);  /* ボタンが少し大きくなる */
+  border-color: #000;  /* 枠線が黒くなる */
+}
+
+/* カラーパレットに色が追加された時の表示 */
+.color-picker-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  background-color: transparent;
+}
+
+/* カスタムカラー選択のスタイル */
+input[type="color"] {
+  width: 100%;
+  height: 100px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+/* 色追加ボタン */
+#addSelectedColorBtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* 色追加ボタンにホバーしたときのエフェクト */
+#addSelectedColorBtn:hover {
+  background-color: #45a049;  /* ボタンの色が少し変わる */
+}
+
+/* 今選んでる色が出るところ */
+#colorDisplayArea{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: none;
+  margin-right: 2%;
+  cursor: pointer;          /* ポインターカーソル */
+  transition: all 0.3s ease;  /* ホバー時のトランジション */
+}
+
+/* 色ボックス */
+.color-box {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  margin-right: 2%;
+  cursor: pointer;          /* ポインターカーソル */
+  transition: all 0.3s ease;  /* ホバー時のトランジション */
+}
+
+/* 色ボックスにホバーしたときのエフェクト */
+.color-box:hover {
+  transform: scale(1.1);  /* ボタンが少し大きくなる */
+  border-color: #000;  /* ホバー時に枠線が黒くなる */
+}
+
+/* 登録ボタン */
+#addTagButton {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#addTagButton:hover {
+  background-color: #45a049;
+}
+
+/*確認画面関連*/
+/* モーダルの基本スタイル */
+.reviewModal {
+  display: none;          /* 初期状態では非表示 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景 */
+  z-index: 1000;
+}
+
+/* モーダルコンテンツ */
+.reviewModalContent {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 60%;
+  height:auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+/* モーダルを閉じる×ボタン */
+#reviwCloseBtn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #FFF;
+  top:-5%;
+  right: -5%;
+  width: 40px;
+  height: 40px;
+  background-color: #333;
+  border: #333;
+  border-radius: 50%;
+}
+
+/* "確認画面"のレイアウト */
+.reviewModalContent h3 {
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+/* タグと画像を横並びにするコンテナ */
+.reviewContent {
+  display: flex;  /* 横並びにする */
+  align-items: center;  /* 画像とタグを垂直方向で中央揃え */
+  margin-bottom: 10px;
+}
+
+/* 確認画面のラベル的なところのスタイル */
+.reviewModalContent a{
+  font-weight: bold;
+  font-size: 16px;
+  color: #535353;
+}
+
+
+/* 画像部分 */
+.reviewImage {
+  margin-right: 15px;  /* 画像とタグの間隔 */
+  max-width: 150px;  /* 画像の最大幅を指定 */
+}
+
+.reviewImage img {
+  max-width: 100%;
+  max-height: 150px;  /* 画像の最大高さを指定 */
+}
+
+/* タグ部分 */
+.reviewTags {
+  font-size: 16px;
+  color: #333;
+  display: flex;
+  flex-wrap: wrap;  /* 複数タグがある場合に折り返し */
+}
+
+/* モーダルの中のdivの間隔設定 */
+.reviewModalContent div {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+/* モーダルの中の登録ボタン */
+.reviewModalContent button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* 登録ボタンの上にカーソルがきたとき */
+.reviewModalContent button:hover {
+  background-color: rgb(32, 244, 9);
+}
+
+/* フォームのスタイル */
+form {
+  max-width: 70%;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+  text-align: left;
+}
+
+/* フォームのラベルのスタイル */
+form label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+#video{
+  background-color: beige;
+}
+
+/* フォームの入力エリアのスタイル */
+form input, form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: none;
+  border-bottom: 1.5px solid #929292;
+  border-radius: 1px;
+  resize: none;
+  outline: none; 
+}
+
+/* フォーカス時のスタイル（選択時に下線を変更） */
+form input:focus, form textarea:focus {
+  border: none;
+  border-bottom: 2px solid #ea512fce;
+  border-radius: 1px; 
+  box-shadow: none; /* フォーカス時の影を消す */
+  outline: none; /* フォーカス時のアウトラインも消す */
+}
+
+/* 画像表示コンテナ */
+.image-container {
+  position: relative;
+  display: flex;
+  flex-basis: 50%;
+  align-items: flex-end;
+  margin-bottom: 5%;
+}
+
+/* 画像プレビュー */
+.imagePreviewContainer {
+  position: relative;
+  display: flex;
+  border: 2px solid #606060;
+  border-radius: 8px;  /* 枠線に角を丸める */
+  align-items: center;
+}
+
+/* 写真追加のボタンのスタイル */
+.addPhoto{
+  display: flex;
+  flex-basis: 5%;
+  margin-left: 4%;
+  background-color: transparent;
+  border: none;;
+  cursor: pointer
+}
+
+/* 写真を撮影するボタン関連 */
+.camerabtns{
+  display: flex;
+  flex-direction: column;
+}
+
+/* 写真を撮るボタン */
+.capture{
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer
+}
+
+/* 写真を終了するボタン */
+#stopCameraButton{
+  position: absolute;
+  top: 0%;  
+  margin-left: 0%; 
+  background-color: transparent;
+  border: none;
+  display: flex;
+  cursor: pointer
+}
+
+/* ＋ボタンのスタイル */
+.add-image-button {
+  display: flex;
+  flex-basis: 5%;
+  background-color:transparent;
+  border: none;
+  cursor: pointer
+}
+
+/* 確認完了後モーダルのスタイル */
+.registerModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+/* 確認完了後モーダルの中のスタイル */
+.registreContent {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 60%;
+  height:auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 登録後のaタグのスタイル */
+.registreContent a{
+  text-decoration:underline;
+  color:#000;
+  border-color: #818181;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+/* キャンセルと保存ボタンのcss */
+.completion{
+  margin: 3%;
+}
