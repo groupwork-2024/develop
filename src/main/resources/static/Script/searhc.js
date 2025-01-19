@@ -136,7 +136,9 @@ const tagItems = [
     { name: 'カジュアル', color: '#33FF57' },
     { name: 'ジーンズ', color: '#00509E' },
     { name: '秋冬', color: '#FF4500' },
-    { name: 'フォーマル', color: '#4B0082' }
+    { name: 'フォーマル', color: '#4B0082' },
+    { name: '長袖', color: '#923940' },
+    { name: 'タートルネック', color: '#2F2F82' },
 ];
 
 // 該当する洋服を表示する関数
