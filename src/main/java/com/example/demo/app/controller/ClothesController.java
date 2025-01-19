@@ -1,11 +1,9 @@
 package com.example.demo.app.controller;
 
 import com.example.demo.app.dto.DtoStorage;
-import com.example.demo.damain.model.Clothes;
-import com.example.demo.damain.model.Storage;
-import com.example.demo.damain.model.StorageType;
-import com.example.demo.damain.model.Tag;
+import com.example.demo.damain.model.*;
 import com.example.demo.damain.service.ClothesService;
+import com.example.demo.damain.service.DresserService;
 import com.example.demo.damain.service.StorageService;
 import com.example.demo.damain.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +25,9 @@ public class ClothesController {
 
     @Autowired
     TagService tagService;
+
+    @Autowired
+    DresserService dresserService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String sectionMenu(@PathVariable Long userId,
@@ -74,12 +75,16 @@ public class ClothesController {
                                    Model model) {
         List<Clothes> getStorageByClothes = clothesService.findAllByUserIdAndStorageId(userId, storageId);
         Storage getStorage = storageService.findStorageByUserIdAndStorageId(userId, storageId);
+      //  DresserStorage getDresser = dresserService.findById(storageId);
         model.addAttribute("clothesList", getStorageByClothes);
+       // model.addAttribute("dresser", getDresser);
         model.addAttribute("storage", getStorage);
 
         // storageTypeに基づいて表示するテンプレートを切り替える
         switch (storageType) {
             case "DRESSER":
+                DresserStorage getDresser = dresserService.findById(storageId);
+                model.addAttribute("dresser", getDresser);
                 return "For-backend-verification/detail_dresser"; // タンス用HTML
             case "CLOSET":
                 return "For-backend-verification/detail_closet"; // クローゼット用HTML
