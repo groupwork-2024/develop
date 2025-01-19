@@ -165,4 +165,7 @@ public class ClothesService {
     }
 
 
+    public List<Clothes> getClothesSortedByCreateAtDescBystorageId(Long userId, Long storageId) {
+        return clothesRepository.findByUserIdAndStorageIdOrderByCreatedAtDesc(userId, storageId);
+    }
 }
