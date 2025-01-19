@@ -372,7 +372,8 @@ function openReviewModal() {
     const name = document.getElementById('name').value;
     const imageFile = document.getElementById('imagePreview');
     const brand = document.getElementById('brand').value;
-    const location = document.getElementById('location').value;
+      const locationSelect = document.getElementById('location');
+       const locationName = locationSelect.options[locationSelect.selectedIndex].text;
     const memo = document.getElementById('memo').value;
     const imagePreviewModal = document.getElementById('reviewImage');
     const tags = Array.from(labelDisplay.children).map(tag => {
@@ -393,7 +394,7 @@ function openReviewModal() {
     // フォームの内容をモーダルに表示
     document.getElementById('reviewName').innerHTML = `<a>名前</a><br>${name}`;
     document.getElementById('reviewBrand').innerHTML = `<a>ブランド</a><br>${brand}`;
-    document.getElementById('reviewLocation').innerHTML = `<a>収納場所</a><br>${location}`;
+      document.getElementById('reviewLocation').innerHTML = `<a>収納場所</a><br>${locationName}`;
     document.getElementById('reviewMemo').innerHTML = `<a>メモ</a><br>${memo}`;
 
     // 画像の表示

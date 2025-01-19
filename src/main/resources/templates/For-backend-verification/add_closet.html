@@ -89,7 +89,7 @@
     <div id="registerModal" class="registerModal" style="display:none;">
         <div class="registreContent">
             <h3>登録が完了しました</h3>
-            <a href="choice_storage.html">続けて収納を登録</a>
+            <a th:href="@{/register/{userId}/storages(userId=${userId})}">続けて収納を登録</a>
             <div class="select">
                 <select id="selectOption">
                     <option value="1" selected>洋服を収納</option>
