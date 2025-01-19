@@ -86,29 +86,53 @@ document.querySelectorAll('.tab').forEach(tab => {
 //洋服写真を格納する配列（洋服一覧）
 const clothesArray=[
   {
-    name:'洋服1',
-    image:'../img/youfuku_test.png'
+    id: '1',
+    name: '襟付きシャツ',
+    image: '../img/youfuku1.png',
+    brand: 'CHIP CLIP',
+    location: 'タンス',
+    memo: '薄手の襟付きシャツ',
+    tags: [
+      { name: 'カジュアル', color: '#33FF57' },
+      { name: '長袖', color: '#923940' }
+    ]
   },
   {
-    name:'洋服2',
-    image:'../img/youfuku_test.png'
+    id: '2',
+    name: 'ジーンズ',
+    image: '../img/clothesTest.jpg',
+    brand: 'Levi\'s',
+    location: 'クローゼット2段目',
+    memo: '定番のジーンズ',
+    tags: [
+      { name: 'ジーンズ', color: '#00509E' },
+      { name: 'カジュアル', color: '#33FF57' }
+    ]
   },
   {
-    name:'洋服3',
-    image:'../img/youfuku_test.png'
+    id: '3',
+    name: '裾ボタン付きタートルネック',
+    image: '../img/youfuku2.png',
+    brand: 'Java',
+    location: 'タンス',
+    memo: 'ちょっと生地薄め',
+    tags: [
+      { name: '長袖', color: '#923940' },
+      { name: 'タートルネック', color: '#2F2F82' },
+    ]
   },
   {
-    name:'洋服4',
-    image:'../img/youfuku_test.png'
-  },
-  {
-    name:'洋服5',
-    image:'../img/youfuku_test.png'
-  },
-  {
-    name:'洋服6',
-    image:'../img/youfuku_test.png'
-  },
+    id : '4',
+    name: 'ニット',
+    image: '../img/youfuku3.png',
+    brand: 'Java',
+    location: 'クローゼット',
+    memo: '',
+    tags: [
+      { name: '長袖', color: '#923940' },
+      { name: 'タートルネック', color: '#2F2F82' }
+    ]
+  }
 ];
 
 // 洋服一覧を表示する場所を取得
@@ -119,7 +143,7 @@ clothesListContainer.innerHTML = ''; // 先にリストをクリア
 clothesArray.forEach((clothes)=>{
   // <a> タグを作成
   const linkElement = document.createElement('a');
-  linkElement.href = ''; // リンク先の URL を設定
+  linkElement.href = '#'; // リンク先の URL を設定
 
   // 洋服詳細、個々の表示域
   const clothesItem = document.createElement('div');
@@ -135,8 +159,16 @@ clothesArray.forEach((clothes)=>{
 
   // <a> タグに clothesItem を追加
   linkElement.appendChild(clothesItem);
+
+  // クリックされたときの処理
+  linkElement.addEventListener('click',function(event){
+    event.preventDefault();  // ページ遷移を防止（動的遷移に変更するため）
+    goTodetaileClothes(clothes);
+  });
+
   // 最後にclothesListContainerにlinkElement を追加
   clothesListContainer.appendChild(linkElement);
+
 });
 
 //収納写真を格納する配列（収納一覧）
@@ -225,3 +257,7 @@ if (savedClass) {
 }
 
 // 洋服の遷移先
+function goTodetaileClothes(clothes){
+  const clothesString = encodeURIComponent(JSON.stringify(clothes));
+  window.location.href = `detail_clothes.html?location=${clothesString}`;
+}
