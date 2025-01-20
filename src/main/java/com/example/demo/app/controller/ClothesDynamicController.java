@@ -25,6 +25,12 @@ public class ClothesDynamicController {
         return clothesService.getClothesSortedByCreatedAtDesc(userId);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/{userId}/storage/{storageId}")
+    public  List<Clothes> getStorageClothes(@PathVariable Long userId,
+                                            @PathVariable Long storageId) {
+        return clothesService.getClothesSortedByCreateAtDescBystorageId(userId, storageId);
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/{id}")
     public ResponseEntity<Void> deleteClothes(@PathVariable Long id) {
         boolean isDeleted = clothesService.deleteClothesById(id);

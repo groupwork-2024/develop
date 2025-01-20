@@ -9,7 +9,7 @@
     <!-- google fonts,css等の読み込み -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/stylesheet/back_completion.css}">
-    <link rel="stylesheet" th:href="@{/stylesheet/index_storage.css}">
+    <link rel="stylesheet" th:href="@{/For-backend-verification/index_storage.css}">
     <link rel="stylesheet" th:href="@{/stylesheet/index_heder.css}">
 <body>
 <input type="hidden" id="userId" th:value="${userId}">
@@ -43,12 +43,10 @@
                 <figure class="clothes_img">
                     <img th:src="${storage.imageUrl}" alt="storage img">
                     <div class="storageDetail">
-                        <p>
-                            <strong>名前</strong><br>
-                            <span th:text="${storage.name}"></span>
-                        </p>
+                            <strong>名前</strong>
+                            <p th:text="${storage.name}"></p>
                         <div class="storageMemo">
-                            <strong>メモ</strong><br>
+                            <strong>メモ</strong>
                             <textarea th:text="${storage.memo}"></textarea>
                         </div>
                     </div>
@@ -59,7 +57,7 @@
 </div>
 
 
-<script th:src="@{/Script/templete_script.js}"></script>
+<script th:src="@{/Script/back_completion.js}"></script>
 <script th:src="@{/For-backend-verification/index_storage.js}"></script>
 </body>
 </html>

@@ -156,16 +156,16 @@ document.getElementById('infoButton').addEventListener('click', function() {
 // セレクトボックスで選んだものによって遷移先を変更させる
 const selectOption = document.getElementById('selectOption');
 
-// セレクトボックスの選択肢が変更されたときの処理
 selectOption.addEventListener('change', function() {
     const selectedValue = selectOption.value;
+    const userId = document.getElementById('userId').value;
 
     setTimeout(function() {
         if (selectedValue === '2') {
-            window.location.href = 'add_clothes.html';
+            window.location.href = `http://localhost:8080/register/${userId}/clothes`;
         }
         else if (selectedValue === '3') {
-            window.location.href = 'index_clothes.html';
+            window.location.href = `http://localhost:8080/section/${userId}/clothes`;
         }
     }, 800); // （0.8秒）後に遷移
 });

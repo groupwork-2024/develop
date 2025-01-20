@@ -1,0 +1,191 @@
+.cp_ipselect06 {
+  position: relative;
+  display: flex;
+  flex-basis: 20%;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: -20%;
+  margin-left: auto;
+}
+.cp_ipselect06 .cp_sl06 {
+  position: relative;
+  width: 135%; /*下線の長さ*/
+  height: 40px;/*高さ*/
+  cursor: pointer;
+  z-index: 1;
+  /* 標準のスタイルを無効にしborder-bottomを設定 */
+  border: none;
+  appearance: none;
+  outline: none;
+  background: transparent;
+  border-radius: 0;
+  border-bottom: 1px solid #666666;
+  text-align: center;
+}
+/*プルダウンの三角を設定*/
+.cp_ipselect06::after {
+  position: absolute;
+  right: -30%; /*場所の指定*/
+  content: '';
+  width: 14px; /*三角形の形*/
+  height: 8px; /*三角形の形*/
+  background: #666666;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+/*選択した際の動き:セレクト下のライン*/
+.cp_sl06_selectbar {
+  position: relative;
+  display: inline-block;
+  width: 133%;
+}
+.cp_sl06_selectbar:before,
+.cp_sl06_selectbar:after {
+  bottom: 1px;
+  content: '';
+  width: 0;
+  height: 2px;
+  position: absolute;
+  background: #da3c41;
+  transition: 0.2s ease all;
+}
+.cp_sl06_selectbar:before {
+  left: 50%;
+}
+.cp_sl06_selectbar:after {
+  right: 50%;
+}
+/*focus時の設定*/
+.cp_ipselect06 .cp_sl06:focus {
+  border-bottom: 1px solid transparent;
+}
+.cp_sl06:focus ~ .cp_sl06_selectbar:before,
+.cp_sl06:focus ~ .cp_sl06_selectbar:after {
+  width: 50%;
+}
+
+/* 各収納の画像のスタイル */
+.clothes_img img{
+  width: 170px;
+  height: 170px;
+  background-color: white;
+  object-fit:cover;
+}
+
+/* 各収納の画像を表示させるエリア */
+.clothes_img{
+  border: none;
+  display: flex;
+  margin: auto;
+  padding: 0;
+}
+
+/* アイコンのレイアウト */
+.icons{
+  display: flex;
+  align-items:flex-end;
+  margin-bottom: 1%;
+}
+
+/* 各収納の詳細画面のレイアウト */
+.storage{
+  padding: 10px 20px;
+  background-color: #f7f7f7;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 2%;
+}
+
+.storageDetail{
+  white-space: nowrap; /*文字の折り返しをさせない*/
+  width: 70%;
+  min-height: 40%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-left: 5%;
+  cursor: default;
+  margin-top: 2%;
+  gap: 1%;
+}
+
+.storageDetail a{
+  display: flex;
+  flex-direction: column;
+}
+
+/* タンスの表示関連 */
+/* タンスの形を表示するところ */
+.dresserShapeErea{
+  min-width: 150px;
+  min-height: 150px;
+  display: flex;
+  margin: 2%;
+  background-color: white;
+}
+
+/* 実際の形 */
+.dresserShape{
+  display: flex;
+  width: 150px;
+  height: 150px;
+  object-fit:contain;
+  border: 2px solid #dadada;
+  border-radius: 8px;
+}
+
+/* 各段のレイアウト */
+.dresserPart{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 100%;
+  height: 100%;
+  width: 0;
+  background-color: #ffffff;
+  border: 2px solid #000;
+  border-radius: 2%;
+  padding: auto;
+}
+
+/* 引き出しのレイアウト */
+#square{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 100%;
+  height: 100%;
+  width: 100%;
+  background-color: #ffffff;
+  border: 2px solid #000;
+  border-radius: 2%;
+  margin: 0px;
+}
+
+/* メモのスタイル */
+.storageMemo{
+  display: flex;
+  flex-direction: column;
+  cursor: default;
+}
+
+.storageMemo textarea{
+  resize: none;
+  width:100%;
+  height:150%;
+  border:none;
+  cursor: pointer;
+  outline:none;
+  font-size:16px;
+  cursor: default;
+  background-color: transparent;
+}
+
+.storageDetail a{
+  margin-bottom: 1%;
+}
+
+.storageDetail p {
+    margin: 0px 0px 8px 0px; /* 必要な間隔 */
+}

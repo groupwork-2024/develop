@@ -72,7 +72,8 @@ public class ClothesService {
         Storage storage = storageService.findById(storageId);
 
         // ファイルをS3にアップロード
-        String imageUrl = s3StorageService.uploadFile("clothes", image);
+        try {
+            String imageUrl = s3StorageService.uploadFile("clothes", image);
 
         // Clothesエンティティを作成
         Clothes clothes = new Clothes();
@@ -82,6 +83,7 @@ public class ClothesService {
         clothes.setBrandName(brandName);
         clothes.setDescription(description);
         clothes.setImageUrl(imageUrl);
+
 
         Clothes savedClothes = clothesRepository.save(clothes);
 
@@ -95,6 +97,12 @@ public class ClothesService {
         }
 
         return savedClothes;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("画像のアップロード中にエラーが発生しました", e);
+        }
+
     }
 
     public List<Clothes> findClothesByUserIdAndTagId(Long userId, Long tagId) {
@@ -165,4 +173,7 @@ public class ClothesService {
     }
 
 
+    public List<Clothes> getClothesSortedByCreateAtDescBystorageId(Long userId, Long storageId) {
+        return clothesRepository.findByUserIdAndStorageIdOrderByCreatedAtDesc(userId, storageId);
+    }
 }
