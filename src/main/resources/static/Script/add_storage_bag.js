@@ -58,19 +58,25 @@ reviewOpenButton.onclick = function (event) {
     event.stopPropagation();  // イベントの伝播を止める
     const name = document.getElementById('name').value;
     const reviewSyunouImage = document.getElementById('reviewSyunouImage');
+    const memo = document.getElementById('memo').value
 
     var selectedImageSrc = photos[currentPhotoIndex];
 
-    // 入力欄に空白がないかチェック
-    if (name === "") {
-        alert("すべての項目を入力してください");
-        return;  // 空欄があれば処理を中止
-    }
+    // // 入力欄に空白がないかチェック
+    // if (name === "") {
+    //     alert("すべての項目を入力してください");
+    //     return;  // 空欄があれば処理を中止
+    // }
 
     // フォームの内容をモーダルに表示
     document.getElementById('reviewName').innerHTML = `<a>名前</a><br>${name}`;
 
-    reviewSyunouImage.innerHTML = `<img src="${selectedImageSrc}" alt="Selected Image" class="storageBoxImage">`;
+    reviewSyunouImage.innerHTML = `<a>写真</a><img src="${selectedImageSrc}" alt="Selected Image" class="storageBoxImage">`;
+
+    //メモ
+    const reviewmemo = memo.replace(' ','\n');
+    console.log(reviewmemo);
+    document.getElementById('reviewMemo').innerHTML = `<a>メモ</a><textarea>${reviewmemo}</textarea>`;
 
     // モーダルを表示
     reviewModal.style.display = 'flex';
