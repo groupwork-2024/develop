@@ -129,8 +129,13 @@
                    <label for="brand">ブランド</label>
                    <input type="text" id="brand" name="brand" placeholder="例:GU ユニクロ">
 
-                   <label for="location">収納場所</label>
-                   <input type="text" id="location" name="location">
+                   <label for="location" class="selectbox-5">収納場所</label>
+                   <select id="location" name="location" required>
+                       <option th:each="item : ${items}"
+                               th:value="${item.id}"
+                               th:text="${item.name}">
+                       </option>
+                   </select>
 
                    <label for="memo">メモ</label>
                    <textarea id="memo" name="memo" rows="1" cols="50" maxlength="150" placeholder="自由記載"></textarea>

@@ -326,6 +326,7 @@ function addTagToList(tagName, tagColor) {
     // タグがクリックされたときに選択できるようにする
     tagElement.addEventListener('click', () => {
         console.log(`選択されたタグ: ${tagName}`);
+        selectTag(tagElement, { name: tagName, color: tagColor });
     });
 
     // 作成したタグをタグリストに追加

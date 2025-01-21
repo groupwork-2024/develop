@@ -60,7 +60,7 @@ public class ClothesController {
 
     @RequestMapping(method = RequestMethod.GET, value="/storages")
     public String getUserStorage(@PathVariable Long userId,
-                                 @RequestParam(required = false, defaultValue = "DRESSER") StorageType storageType,
+                                 @RequestParam(required = false, defaultValue = "CLOSET") StorageType storageType,
                                  Model model) {
         List<Storage> storagesByType = storageService.getStoragesByUserAndType(storageType, userId);
         model.addAttribute("storages", storagesByType);
