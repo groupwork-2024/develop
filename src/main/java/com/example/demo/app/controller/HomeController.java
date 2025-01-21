@@ -18,4 +18,11 @@ public class HomeController {
         model.addAttribute("userId", userId);
         return "For-backend-verification/home";
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/recommendation")
+    public String osusume(@PathVariable Long userId,
+                          Model model) {
+        model.addAttribute("userId", userId);
+        return "/For-backend-verification/osusume";
+    }
 }

@@ -4,7 +4,7 @@ const detail =  document.querySelector(".detail");
 const userId = document.getElementById('userId').value;
 
 document.addEventListener("DOMContentLoaded", function () {
-    fetchData("DRESSER"); // デフォルトでクローゼットを表示
+    fetchData("CLOSET"); // デフォルトでクローゼットを表示
 });
 
     document.getElementById("storageTypeSelect").addEventListener("change", function () {

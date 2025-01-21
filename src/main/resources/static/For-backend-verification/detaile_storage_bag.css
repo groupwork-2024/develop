@@ -766,3 +766,22 @@ form input:focus, form textarea:focus {
 #editClose:hover {
   background-color: #555; /* ホバー時の色変更 */
 }
+
+select {
+    width: 390px; /* フォーム入力フィールドと同じ幅 */
+    padding: 10px; /* 入力フィールドと一致するパディング */
+    margin-bottom: 15px; /* 他の要素とのスペース */
+    border: none;
+    border-bottom: 1.5px solid #929292; /* 同じ下線スタイル */
+    border-radius: 1px; /* 入力フィールドと統一 */
+    background: #fff;
+    font-size: 1em;
+    color: #333;
+    outline: none;
+    box-sizing: border-box; /* パディングを含めた幅 */
+}
+
+select:focus {
+    border-bottom: 2px solid #ea512f; /* フォーカス時のスタイル */
+    outline: none;
+}

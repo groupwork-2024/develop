@@ -1,0 +1,88 @@
+<!-- ホーム画面 -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おすすめコーデ</title>
+    <!-- google fonts,css等の読み込み -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/stylesheet/template_style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/stylesheet/osusume.css}">
+</head>
+<body>
+
+    <!--ヘッダー部分-->
+    <div class="header">
+        <button class="left-button" onclick="history.back()"><span class="material-icons">arrow_back_ios_new</span></button>
+        <a th:href="@{/home/{userId}(userId=${userId})}" class="title-button">あれどこ？</a>
+        <a class="right_area">　</a>
+    </div>
+
+<!-- サイドバー -->
+<div id="sidebar" class="sidebar">
+    <button class="close-btn" onclick="toggleSidebar()">×</button>
+    <ul>
+        <li><a th:href="@{/register/{userId}(userId=${userId})}">登録</a></li>
+        <li><a th:href="@{/others/{userId}/search(userId=${userId})}">検索</a></li>
+        <li><a th:href="@{/others/{userId}/my-page(userId=${userId})}">マイページ</a></li>
+    </ul>
+</div>
+
+<!-- メインコンテンツエリア -->
+<div class="main-content">
+    <!-- コンテンツをここに追加 -->
+    <!-- 上部の写真 -->
+    <div class="photo-grid">
+        <div class="photo">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Fashion Model 1">
+        </div>
+    </div>
+
+    <!-- アイテム一覧表示 -->
+    <div class="item-grid">
+        <!-- トップス -->
+        <div class="item">
+            <img src="https://www.angeliebe.co.jp/html/upload/save_image/product/29837/29837-500_h.jpg" alt="トップス" class="item-img"></a>                
+            <p class="brand">ZARA</p>
+            <div class="details">
+                <p>ホワイトブラウス</p>
+                <p>¥5,990</p>
+            </div>
+        </div>
+        <!-- ボトムス -->
+        <div class="item">
+            <img th:src="@{/img/youfuku_test.png}" alt="ボトムス" class="item-img"></a>
+            <p class="brand">Levi's</p>
+            <div class="details">
+                <p>ブラックジーンズ</p>
+                <p>¥12,800</p>
+            </div>
+        </div>
+        <!-- シューズ -->
+        <div class="item">
+            <img th:src="@{/img/youfuku_test.png}" alt="シューズ" class="item-img"></a>
+            <p class="brand">Nike</p>
+            <div class="details">
+                <p>エアマックス</p>
+                <p>¥15,000</p>
+            </div>
+        </div>
+        <!-- アクセサリー -->
+        <div class="item">
+            <img th:src="@{/img/youfuku_test.png}" alt="アクセサリー" class="item-img"></a>
+            <p class="brand">Ray-Ban</p>
+            <div class="details">
+                <p>サングラス</p>
+                <p>¥18,500</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script th:src="@{/Script/templete_script.js}"></script>
+
+</body>
+</html>
