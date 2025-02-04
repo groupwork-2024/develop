@@ -75,10 +75,12 @@ public class ClothesController {
                                    Model model) {
         List<Clothes> getStorageByClothes = clothesService.findAllByUserIdAndStorageId(userId, storageId);
         Storage getStorage = storageService.findStorageByUserIdAndStorageId(userId, storageId);
+        List<DtoStorage> items = storageService.getUserStorage(userId);
       //  DresserStorage getDresser = dresserService.findById(storageId);
         model.addAttribute("clothesList", getStorageByClothes);
        // model.addAttribute("dresser", getDresser);
         model.addAttribute("storage", getStorage);
+        model.addAttribute("items", items);
 
         // storageTypeに基づいて表示するテンプレートを切り替える
         switch (storageType) {

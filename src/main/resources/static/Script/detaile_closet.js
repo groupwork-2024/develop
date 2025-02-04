@@ -445,9 +445,9 @@ function displayLabelInMain(tagName,tagColor,tagIndex) {
   // メイン画面に表示するタグを作成
   const labelElement = document.createElement('div');
   // タグの名前を設定
-  labelElement.textContent = tagName;  
+  labelElement.textContent = tagName;
   // 必要に応じてクラスを追加
-  labelElement.classList.add('addtag');    
+  labelElement.classList.add('addtag');
   // タグの背景色を設定
   labelElement.style.backgroundColor = tagColor;
 
@@ -456,7 +456,7 @@ function displayLabelInMain(tagName,tagColor,tagIndex) {
   // 矢印専用のクラスを追加
   arrowElement.classList.add('arrow');  
   // 矢印の色をタグの色に
-  arrowElement.style.borderRightColor = tagColor;   
+  arrowElement.style.borderRightColor = tagColor;
 
   // 削除ボタンを作成 
   const deleteButton = document.createElement('span');

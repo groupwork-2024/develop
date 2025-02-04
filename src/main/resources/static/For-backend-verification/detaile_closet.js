@@ -191,7 +191,8 @@ let originalImageUrl = ''; // 現在の画像URLを保持する変数
 
 async function showEditForm(userId, clothesId) {
     try {
-    editModal.style.display = 'flex';
+        editModal.style.display = 'flex';
+
         // APIにPOSTリクエストを送信
         const response = await fetch('/api/clothes/edit', {
             method: 'POST',
@@ -201,33 +202,24 @@ async function showEditForm(userId, clothesId) {
             body: JSON.stringify({ userId, clothesId }),
         });
 
-        // レスポンスのエラーチェック
         if (!response.ok) {
             throw new Error('データの取得に失敗しました');
         }
 
-        // JSONデータをパース
         const clothes = await response.json();
-
 
         // 現在の画像URLを保存
         originalImageUrl = clothes.imageUrl || '../img/youfuku_test.png';
 
-
         // フォームに値をセット
         editNameInput.value = clothes.name;
-        editBrandInput.value = clothes.brandName; // エンティティでbrandNameになっている
-        editLocationInput.value = clothes.storage?.name || ''; // storageがnullの場合に対応
+        editBrandInput.value = clothes.brandName;
         editMemoInput.value = clothes.description || '';
-        editTags = clothes.tags || []; // nullを防ぐ
 
         // タグ表示
         const labelDisplay = document.getElementById('labelDisplay');
-        if (!labelDisplay) {
-            console.error('labelDisplay 要素が見つかりません');
-            return;
-        }
         labelDisplay.innerHTML = '';
+        editTags = clothes.tags || [];
         editTags.forEach((tag, index) => {
             displayLabelInMain(tag.name, tag.color, index);
         });
@@ -235,11 +227,17 @@ async function showEditForm(userId, clothesId) {
         // 画像プレビューの設定
         const imagePreview = document.getElementById('imagePreview');
         imagePreview.src = clothes.imageUrl || "../img/youfuku_test.png";
-         // 保存ボタンに data-id を設定
-        const saveButton = document.getElementById('saveButton');
-        saveButton.setAttribute('data-id', clothesId);
-        // 編集モーダルを表示
 
+        // 収納場所をセレクトボックスに設定
+        const editLocationInput = document.getElementById('location');
+        if (clothes.storage?.id) {
+            editLocationInput.value = clothes.storage.id; // storageIdを設定
+        } else {
+            editLocationInput.value = ''; // 未設定の場合
+        }
+
+        // 保存ボタンに data-id を設定
+        saveButton.setAttribute('data-id', clothesId);
     } catch (error) {
         console.error('エラー:', error.message);
     }
@@ -333,6 +331,8 @@ function displayLabelInMain(tagName,tagColor,tagIndex) {
   const deleteButton = document.createElement('span');
   // Material Iconsと削除ボタンのクラスを追加
   deleteButton.classList.add('material-icons', 'delete-btn');
+  // アイコン名を設定
+  deleteButton.textContent = 'cancel';
   // サイズを30pxに指定
   deleteButton.style.fontSize = '20px';
 
@@ -356,6 +356,12 @@ function displayLabelInMain(tagName,tagColor,tagIndex) {
   labelDisplay.appendChild(labelElement);
   console.log('タグがメイン画面に追加されました');
 }
+
+// タグ一覧モーダルを閉じる
+tagListClose.addEventListener('click', function() {
+  closeModal('tagListmodal');  // 完了ボタンを有効化
+});
+
 
 // 画像関連
 // 画像プレビューを表示する関数

@@ -23,6 +23,10 @@ body {
     /*要素の位置を基準として変更するためのもの(親要素)*/
 }
 
+#profile-image {
+    display: none;
+}
+
 /* プロフィール画像 */
 .profile-circle img {
     width: 100%;
